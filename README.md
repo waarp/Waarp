@@ -15,16 +15,16 @@ several protocols and to enable dynamic pre or post action on transfer or other 
 Packages
 --------
 
- * [Waarp Digest](http://waarp.github.com/WaarpDigest)
- * [Waarp Common](http://waarp.github.com/WaarpCommon)
- * [Waarp Local Exec](http://waarp.github.com/WaarpLocalExec)
- * [Waarp Snmp](http://waarp.github.com/WaarpSnmp)
- * [Waarp XmlEditor](http://waarp.github.com/WaarpXmlEditor)
- * [Waarp Password Gui](http://waarp.github.com/WaarpPasswordGui)
- * [Waarp R66](http://waarp.github.com/WaarpR66)
- * [Waarp R66 Client GUI](http://waarp.github.com/WaarpR66Gui)
- * [Waarp FTP](http://waarp.github.com/WaarpFtp)
- * [Waarp Gateway FTP (R66 linked)](http://waarp.github.com/WaarpGatewayFtp) 	
+ * [Waarp Digest](http://waarp.github.com/WaarpDigest) [![View on GitHub](/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpDigest)
+ * [Waarp Common](http://waarp.github.com/WaarpCommon) [![View on GitHub](/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpCommon)
+ * [Waarp Local Exec](http://waarp.github.com/WaarpLocalExec) [![View on GitHub](/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpLocalExec)
+ * [Waarp Snmp](http://waarp.github.com/WaarpSnmp) [![View on GitHub](/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpSnmp)
+ * [Waarp XmlEditor](http://waarp.github.com/WaarpXmlEditor) [![View on GitHub](/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpXmlEditor)
+ * [Waarp Password Gui](http://waarp.github.com/WaarpPasswordGui) [![View on GitHub](/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpPasswordGui)
+ * [Waarp R66](http://waarp.github.com/WaarpR66) [![View on GitHub](/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpR66)
+ * [Waarp R66 Client GUI](http://waarp.github.com/WaarpR66Gui) [![View on GitHub](/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpR66Gui)
+ * [Waarp FTP](http://waarp.github.com/WaarpFtp) [![View on GitHub](/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpFtp)
+ * [Waarp Gateway FTP (R66 linked)](http://waarp.github.com/WaarpGatewayFtp) [![View on GitHub](/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpGatewayFtp)
 
 Support
 -------
