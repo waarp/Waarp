@@ -4,7 +4,7 @@ Waarp Central
 You will find in this web site some information on this Open Source project named Waarp,
 fully in Java.
 
-For details, please go to [Waarp Central Site](http://waarp.github.com/Waarp)
+For details, please go to [Waarp Central Site http://waarp.github.com/Waarp](http://waarp.github.com/Waarp)
 
 The global license is GPL V3.
 
