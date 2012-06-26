@@ -361,6 +361,7 @@ It has no influence on the Maven build itself. -->
       	<artifactId>maven-changelog-plugin</artifactId>
       	<version>2.2</version>
       	<configuration>
+      	  <basedir>.</basedir>
           <type>range</type>
           <range>90</range>
         </configuration>
