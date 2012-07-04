@@ -17,10 +17,10 @@ Packages
 
  * [Waarp Digest](http://waarp.github.com/WaarpDigest)
  * [Waarp Common](http://waarp.github.com/WaarpCommon)
- * [Waarp Local Exec](http://waarp.github.com/WaarpLocalExec)
+ * [Waarp Exec](http://waarp.github.com/WaarpExec)
  * [Waarp Snmp](http://waarp.github.com/WaarpSnmp)
  * [Waarp XmlEditor](http://waarp.github.com/WaarpXmlEditor)
- * [Waarp Password Gui](http://waarp.github.com/WaarpPasswordGui)
+ * [Waarp Password](http://waarp.github.com/WaarpPassword)
  * [Waarp R66](http://waarp.github.com/WaarpR66)
  * [Waarp R66 Client GUI](http://waarp.github.com/WaarpR66Gui)
  * [Waarp FTP](http://waarp.github.com/WaarpFtp)
