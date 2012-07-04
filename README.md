@@ -19,10 +19,10 @@ Packages
 
  * [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpDigest) [Waarp Digest](http://waarp.github.com/WaarpDigest)
  * [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpCommon) [Waarp Common](http://waarp.github.com/WaarpCommon)
- * [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpLocalExec) [Waarp Local Exec](http://waarp.github.com/WaarpLocalExec)
+ * [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpExec) [Waarp Exec](http://waarp.github.com/WaarpExec)
  * [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpSnmp) [Waarp Snmp](http://waarp.github.com/WaarpSnmp)
  * [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpXmlEditor) [Waarp XmlEditor](http://waarp.github.com/WaarpXmlEditor)
- * [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpPasswordGui) [Waarp Password Gui](http://waarp.github.com/WaarpPasswordGui)
+ * [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpPassword) [Waarp Password Gui](http://waarp.github.com/WaarpPassword)
  * [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpR66) [Waarp R66](http://waarp.github.com/WaarpR66)
  * [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpR66Gui) [Waarp R66 Client GUI](http://waarp.github.com/WaarpR66Gui)
  * [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/WaarpFtp) [Waarp FTP](http://waarp.github.com/WaarpFtp)
