@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <meta name="description" content="Waarp project" />
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
 <meta name="robots" content="index,follow" />
 <meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <meta http-equiv="imagetoolbar" content="no" />
-<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -24,6 +24,27 @@ a img {
 }
 </style>
 <title>Waarp - Waarp R66-Options</title>
+<script type="text/javascript">
+//<![CDATA[
+	function MHTGetRef(str)
+	{
+		if(document.all)
+			return document.all[str];
+		else
+			return document.getElementById(str);
+	}
+
+	function MHTSetClass(strID, strClass)
+	{
+		var obj = MHTGetRef(strID);
+		if(obj != null && typeof(obj) + "" != "undefined")
+			obj.className = strClass;
+		var obj = MHTGetRef(strID + "_second");
+		if(obj != null && typeof(obj) + "" != "undefined")
+			obj.className = strClass;
+	}
+//]]>
+</script>
 	<script type="text/javascript">
 //<![CDATA[
 	function MHGetRef(str)
@@ -44,54 +65,193 @@ a img {
 	</script>
 <script type="text/javascript">
 //<![CDATA[
-	function mvgGetRef(str)						{ return (document.all) ? document.all[str] : document.getElementById(str); }
-	function mvgSetClass(strId, strClass)		{ var obj = mvgGetRef(strId); if(obj != null && typeof(obj) != "undefined") obj.className = strClass; }
-	function mvgSwitchImage(strId, strFileName)	{ var obj = mvgGetRef(strId); if(obj != null && typeof(obj) != "undefined") obj.src = strFileName; }
+	var g_mhd1strTimeoutId	= "";
+	var g_mhd1strLastOpenId	= "";
+
+	function mhdGetRef(str)
+	{
+		return document.all ? document.all[str] : document.getElementById(str);
+	}
+	function mhdSwitchImage(strId, strFileName)
+	{
+		var obj = mhdGetRef(strId);
+		if(obj == null || typeof(obj) == "undefined" || typeof(obj.src) == "undefined") return;
+		obj.src = strFileName;
+	}
+	function mhdSetClass(strId, strClass)
+	{
+		var obj = mhdGetRef(strId);
+		if(obj == null || typeof(obj) == "undefined" || typeof(obj.className) == "undefined") return;
+		obj.className = strClass;
+	}	
+	function mhdShowHideLayer(strId, bShow)
+	{
+		var obj = mhdGetRef(strId);
+		if(obj == null || typeof(obj) == "undefined" || typeof(obj.style) == "undefined") return;
+		if(bShow && obj.style.display != "block")	{ obj.style.display = "block"; return; }
+		if(!bShow && obj.style.display != "none")	{ obj.style.display = "none"; return; }
+	}
+	function mhdGetSubMenuLevel(strId)
+	{
+		strId += "";
+		var arr = strId.split("_");
+		if(arr.length <= 1) return 0;
+		return arr.length - 1;
+	}
+	function mhdGetIdAtLevel(strId, nLevel)
+	{
+		var strRet = "";
+		var arr = strId.split("_");
+		if(arr.length <= 1 || nLevel <= 0 || nLevel > arr.length) return strRet;
+		for(var i = 0; i <= nLevel; ++i) { 
+			if(i > 0) strRet += "_";
+			strRet += arr[i];
+		}
+		return strRet;
+	}
+	function mhdClearSubMenus(strId)
+	{
+		var nMax = mhdGetSubMenuLevel(strId);
+		for(var n = nMax; n >= 1; --n) {
+			mhdShowHideLayer(mhdGetIdAtLevel(strId, n) + "_c", false);
+		}
+	}
+	function mhd1OnMouseOverItem(strId, strClass)
+	{
+		if(strClass != "") mhdSetClass(strId, strClass)
+		if(g_mhd1strLastOpenId != "") {
+			clearTimeout(g_mhd1strTimeoutId);
+			g_mhd1strTimeoutId = "";
+
+			var nMaxLast = mhdGetSubMenuLevel(g_mhd1strLastOpenId);
+			for(var n = nMaxLast; n >= 1; --n) {
+				if(mhdGetIdAtLevel(g_mhd1strLastOpenId, n) == mhdGetIdAtLevel(strId, n)) break;
+				mhdShowHideLayer(mhdGetIdAtLevel(g_mhd1strLastOpenId, n) + "_c", false);
+			}
+		}
+
+		var nMax = mhdGetSubMenuLevel(strId);
+		for(var n = 0; n <= nMax; ++n) {
+			mhdShowHideLayer(mhdGetIdAtLevel(strId, n) + "_c", true);
+		}
+
+		g_mhd1strLastOpenId = strId;
+	}
+	function mhd1OnMouseOutItem(strId, strClass)
+	{
+		if(strClass != "") mhdSetClass(strId, strClass)
+		g_mhd1strTimeoutId = setTimeout("mhdClearSubMenus('" + strId + "');", 500);
+	}
 //]]>
 </script>
+<style type="text/css">
+	#mhd1 a.submenu1:visited	{ text-decoration:none;color:#333333; }
+	#mhd1 a.submenu1over:hover	{ text-decoration:none;color:#FF0000; }
+
+	#mhd1 a.submenu2:visited	{ text-decoration:none;color:#333333; }
+	#mhd1 a.submenu2over:hover	{ text-decoration:none;color:#FF0000; }
+</style>
 </head>
-<body class="normal" style="margin:0px;padding:0px;background-color:#FFFFFF;background-image:url(gre/gre12340.png);background-position:left top;background-repeat:repeat-y;">
+<body class="normal" style="margin:0px;padding:0px;background-color:#FFFFFF;">
 <div style="text-align:left;">
-<div style="text-align:left;background-color:#EF6D00;"><a href="index.html"><img title="GoldenGate" style="border:none;" alt="GoldenGate" src="res/openlsd/waarp.jpg" width="74" height="49" /></a><img title="Waarp" style="border-top-style:none; border-bottom:#000000 0px solid; border-right-style:none; border-left-style:none;" alt="Waarp" src="gre/gre12341.png" width="99" height="40" /></div>
+<div style="text-align:left;background-color:#EF6D00;"><a href="index.html"><img title="Waarp" style="border:none;" alt="Waarp" src="res/openlsd/waarp.jpg" width="53" height="49" /></a><img title="Waarp" style="border:none;border-top:medium none;border-right:medium none;border-bottom:medium none;border-left:medium none;" alt="Waarp" src="gre/gre17587.png" width="99" height="40" /> 
+<div style="width:80%;position:absolute;float:right;left:160px;z-index:0;top:10px;"><table cellpadding="0" cellspacing="0" border="0" style="width:100%;margin:0;padding:0;border:0 solid none;"><tr><td style="vertical-align:top;"><div>
+<div id="Comp12_MenuHorizontalDynamic" style="text-align:left;"><div id="mhd1" style="text-align:left;"><table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+	<tr>
+		<td>
+<table border="0" cellpadding="0" cellspacing="0" style="margin:0px auto 0px 0px;">
+	<tr>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_0_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_0_0" class="submenu1" href="Roadmap.html" onmouseover="mhd1OnMouseOverItem('mhd1_0_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_0_0', 'submenu1')">Roadmap</a><a style="display:block;" id="mhd1_0_1" class="submenu1" href="ReleaseHistory.html" onmouseover="mhd1OnMouseOverItem('mhd1_0_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_0_1', 'submenu1')">Release History</a><a style="display:block;" id="mhd1_0_2" class="submenu1" href="CrawdUser.html" onmouseover="mhd1OnMouseOverItem('mhd1_0_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_0_2', 'submenu1')">Crawd User</a></div><a href="index.html"><img id="mhd1_img0" src="gre/gre17564.png" width="130" height="31" alt="World of Waarp" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_0', ''); mhdSwitchImage('mhd1_img0', 'gre/gre17566.png');" onmouseout="mhd1OnMouseOutItem('mhd1_0', ''); mhdSwitchImage('mhd1_img0', 'gre/gre17564.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_1_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_1_0" class="submenu1" href="WaarpR66Presentation.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_0', 'submenu1')">Waarp R66-Presentation</a><div style="position:relative;z-index:10;"><div id="mhd1_1_1_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_1_0" class="submenu1" href="WaarpR66Configuration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_0', 'submenu1')">Waarp R66-Configuration</a><div style="position:relative;z-index:11;"><div id="mhd1_1_1_1_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_1_1_0" class="submenu1" href="R66ServerConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_0', 'submenu1')">R66ServerConfig</a><a style="display:block;" id="mhd1_1_1_1_1" class="submenu1" href="R66ClientConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_1', 'submenu1')">R66ClientConfig</a><a style="display:block;" id="mhd1_1_1_1_2" class="submenu1" href="R66ClientNoDbConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_2', 'submenu1')">R66ClientNoDbConfig</a><a style="display:block;" id="mhd1_1_1_1_3" class="submenu1" href="R66ClientSubmitConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_3', 'submenu1')">R66ClientSubmitConfig</a><a style="display:block;" id="mhd1_1_1_1_4" class="submenu1" href="R66LimitConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_4', 'submenu1')">R66LimitConfig</a><a style="display:block;" id="mhd1_1_1_1_5" class="submenu1" href="R66RuleConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_5', 'submenu1')">R66RuleConfig</a><a style="display:block;" id="mhd1_1_1_1_6" class="submenu1" href="R66AuthentConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_6', 'submenu1')">R66AuthentConfig</a><a style="display:block;" id="mhd1_1_1_1_7" class="submenu1" href="R66SnmpConfiguration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_7', 'submenu1')">R66SnmpConfiguration</a></div><a style="display:block;" id="mhd1_1_1_1" class="submenu2" href="WaarpR66XmlConfiguration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1', 'submenu2')">Waarp R66-Xml Config</a>
+</div><a style="display:block;" id="mhd1_1_1_2" class="submenu1" href="WaarpR66Options.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_2', 'submenu1')">Waarp R66-Options</a></div><a style="display:block;" id="mhd1_1_1" class="submenu2" href="WaarpR66Installation.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1', 'submenu2')">Waarp R66-Installation</a>
+</div><div style="position:relative;z-index:10;"><div id="mhd1_1_2_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_2_0" class="submenu1" href="WaarpR66Protocol.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2_0', 'submenu1')">Waarp R66-Protocol</a><a style="display:block;" id="mhd1_1_2_1" class="submenu1" href="WaarpR66FileStatus.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2_1', 'submenu1')">Waarp R66-FileStatus</a><a style="display:block;" id="mhd1_1_2_2" class="submenu1" href="WaarpR66RestAPI.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2_2', 'submenu1')">Waarp R66-Rest-API</a></div><a style="display:block;" id="mhd1_1_2" class="submenu2" href="WaarpR66undertheWood.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2', 'submenu2')">Waarp R66 under the Wood</a>
+</div><div style="position:relative;z-index:10;"><div id="mhd1_1_3_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_3_0" class="submenu1" href="WaarpR66Command.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_0', 'submenu1')">Waarp R66-Command</a><a style="display:block;" id="mhd1_1_3_1" class="submenu1" href="WaarpR66CommandLine.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_1', 'submenu1')">Waarp R66-CommandLine</a><div style="position:relative;z-index:11;"><div id="mhd1_1_3_2_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_3_2_0" class="submenu1" href="TaskFormat.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_0', 'submenu1')">TaskFormat</a><a style="display:block;" id="mhd1_1_3_2_1" class="submenu1" href="LOG.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_1', 'submenu1')">LOG</a><a style="display:block;" id="mhd1_1_3_2_2" class="submenu1" href="SNMP.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_2', 'submenu1')">SNMP</a><a style="display:block;" id="mhd1_1_3_2_3" class="submenu1" href="COPY.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_3', 'submenu1')">COPY</a><a style="display:block;" id="mhd1_1_3_2_4" class="submenu1" href="COPYRENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_4', 'submenu1')">COPYRENAME</a><a style="display:block;" id="mhd1_1_3_2_5" class="submenu1" href="MOVE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_5', 'submenu1')">MOVE</a><a style="display:block;" id="mhd1_1_3_2_6" class="submenu1" href="MOVERENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_6', 'submenu1')">MOVERENAME</a><a style="display:block;" id="mhd1_1_3_2_7" class="submenu1" href="LINKRENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_7', 'submenu1')">LINKRENAME</a><a style="display:block;" id="mhd1_1_3_2_8" class="submenu1" href="RENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_8', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_8', 'submenu1')">RENAME</a><a style="display:block;" id="mhd1_1_3_2_9" class="submenu1" href="DELETE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_9', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_9', 'submenu1')">DELETE</a><a style="display:block;" id="mhd1_1_3_2_10" class="submenu1" href="VALIDFILEPATH.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_10', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_10', 'submenu1')">VALIDFILEPATH</a><a style="display:block;" id="mhd1_1_3_2_11" class="submenu1" href="CHKFILE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_11', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_11', 'submenu1')">CHKFILE</a><a style="display:block;" id="mhd1_1_3_2_12" class="submenu1" href="TRANSCODE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_12', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_12', 'submenu1')">TRANSCODE</a><a style="display:block;" id="mhd1_1_3_2_13" class="submenu1" href="TAR.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_13', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_13', 'submenu1')">TAR</a><a style="display:block;" id="mhd1_1_3_2_14" class="submenu1" href="ZIP.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_14', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_14', 'submenu1')">ZIP</a><a style="display:block;" id="mhd1_1_3_2_15" class="submenu1" href="UNZEROED.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_15', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_15', 'submenu1')">UNZEROED</a><a style="display:block;" id="mhd1_1_3_2_16" class="submenu1" href="CHMOD.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_16', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_16', 'submenu1')">CHMOD</a><a style="display:block;" id="mhd1_1_3_2_17" class="submenu1" href="EXEC.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_17', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_17', 'submenu1')">EXEC</a><a style="display:block;" id="mhd1_1_3_2_18" class="submenu1" href="EXECMOVE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_18', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_18', 'submenu1')">EXECMOVE</a><a style="display:block;" id="mhd1_1_3_2_19" class="submenu1" href="EXECOUTPUT.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_19', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_19', 'submenu1')">EXECOUTPUT</a><a style="display:block;" id="mhd1_1_3_2_20" class="submenu1" href="EXECJAVA.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_20', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_20', 'submenu1')">EXECJAVA</a><a style="display:block;" id="mhd1_1_3_2_21" class="submenu1" href="TRANSFER.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_21', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_21', 'submenu1')">TRANSFER</a><a style="display:block;" id="mhd1_1_3_2_22" class="submenu1" href="RESCHEDULE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_22', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_22', 'submenu1')">RESCHEDULE</a><a style="display:block;" id="mhd1_1_3_2_23" class="submenu1" href="FTP.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_23', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_23', 'submenu1')">FTP</a></div><a style="display:block;" id="mhd1_1_3_2" class="submenu2" href="WaarpR66TaskOptions.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2', 'submenu2')">Waarp R66-TaskOptions</a>
+</div><div style="position:relative;z-index:11;"><div id="mhd1_1_3_3_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_3_3_0" class="submenu1" href="R66Authentication.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_0', 'submenu1')">R66Authentication</a><a style="display:block;" id="mhd1_1_3_3_1" class="submenu1" href="R66CentralizationLogs.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_1', 'submenu1')">R66CentralizationLogs</a><a style="display:block;" id="mhd1_1_3_3_2" class="submenu1" href="R66ClusterHA.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_2', 'submenu1')">R66Cluster-HA</a><a style="display:block;" id="mhd1_1_3_3_3" class="submenu1" href="R66DMZ.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_3', 'submenu1')">R66DMZ</a><a style="display:block;" id="mhd1_1_3_3_4" class="submenu1" href="R66Embedded.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_4', 'submenu1')">R66Embedded</a><a style="display:block;" id="mhd1_1_3_3_5" class="submenu1" href="R66OtherProtocols.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_5', 'submenu1')">R66OtherProtocols</a><a style="display:block;" id="mhd1_1_3_3_6" class="submenu1" href="R66Reschedule.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_6', 'submenu1')">R66Reschedule</a><a style="display:block;" id="mhd1_1_3_3_7" class="submenu1" href="R66Definitions.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_7', 'submenu1')">R66Definitions</a><a style="display:block;" id="mhd1_1_3_3_8" class="submenu1" href="PlatformCompatibility.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_8', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_8', 'submenu1')">Platform Compatibility</a></div><a style="display:block;" id="mhd1_1_3_3" class="submenu2" href="WaarpR66Wiki.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3', 'submenu2')">Waarp R66-Wiki</a>
+</div><a style="display:block;" id="mhd1_1_3_4" class="submenu1" href="WaarpR66WebMonitoring.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_4', 'submenu1')">Waarp R66-Web-Monitoring</a><a style="display:block;" id="mhd1_1_3_5" class="submenu1" href="WaarpR66WebAdministration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_5', 'submenu1')">Waarp R66-Web-Administration</a></div><a style="display:block;" id="mhd1_1_3" class="submenu2" href="WaarpR66Howtos.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3', 'submenu2')">Waarp R66 Howtos</a>
+</div><a style="display:block;" id="mhd1_1_4" class="submenu1" href="R66AdministratorGui.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_4', 'submenu1')">R66 Administrator Gui</a><a style="display:block;" id="mhd1_1_5" class="submenu1" href="R66Proxy.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_5', 'submenu1')">R66 Proxy</a><a style="display:block;" id="mhd1_1_6" class="submenu1" href="R66ClientGui.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_6', 'submenu1')">R66 Client Gui</a></div><a href="WaarpR66.html"><img id="mhd1_img1" src="gre/gre17568.png" width="130" height="31" alt="Waarp R66" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_1', ''); mhdSwitchImage('mhd1_img1', 'gre/gre17569.png');" onmouseout="mhd1OnMouseOutItem('mhd1_1', ''); mhdSwitchImage('mhd1_img1', 'gre/gre17568.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_2_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_2_0" class="submenu1" href="WaarpFTPConfiguration.html" onmouseover="mhd1OnMouseOverItem('mhd1_2_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_2_0', 'submenu1')">Waarp-FTP-Configuration</a><a style="display:block;" id="mhd1_2_1" class="submenu1" href="Benchmarks.html" onmouseover="mhd1OnMouseOverItem('mhd1_2_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_2_1', 'submenu1')">Benchmarks</a><a style="display:block;" id="mhd1_2_2" class="submenu1" href="WaarpGatewayFtp.html" onmouseover="mhd1OnMouseOverItem('mhd1_2_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_2_2', 'submenu1')">WaarpGatewayFtp</a></div><a href="WaarpFTP.html"><img id="mhd1_img2" src="gre/gre17570.png" width="130" height="31" alt="Waarp FTP" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_2', ''); mhdSwitchImage('mhd1_img2', 'gre/gre17572.png');" onmouseout="mhd1OnMouseOutItem('mhd1_2', ''); mhdSwitchImage('mhd1_img2', 'gre/gre17570.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_3_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_3_0" class="submenu1" href="Digest.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_0', 'submenu1')">Digest</a><a style="display:block;" id="mhd1_3_1" class="submenu1" href="Common.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_1', 'submenu1')">Common</a><a style="display:block;" id="mhd1_3_2" class="submenu1" href="LocalExec.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_2', 'submenu1')">LocalExec</a><a style="display:block;" id="mhd1_3_3" class="submenu1" href="XmlEditor.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_3', 'submenu1')">XmlEditor</a><a style="display:block;" id="mhd1_3_4" class="submenu1" href="Password.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_4', 'submenu1')">Password</a><a style="display:block;" id="mhd1_3_5" class="submenu1" href="WaarpSNMP.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_5', 'submenu1')">WaarpSNMP</a><a style="display:block;" id="mhd1_3_6" class="submenu1" href="GatewayKernel.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_6', 'submenu1')">Gateway Kernel</a><a style="display:block;" id="mhd1_3_7" class="submenu1" href="Thrift.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_7', 'submenu1')">Thrift</a><a style="display:block;" id="mhd1_3_8" class="submenu1" href="FtpClient.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_8', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_8', 'submenu1')">FtpClient</a><a style="display:block;" id="mhd1_3_9" class="submenu1" href="WaarpGatewayHttp.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_9', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_9', 'submenu1')">WaarpGatewayHttp</a></div><a href="WaarpsFamily.html"><img id="mhd1_img3" src="gre/gre17573.png" width="130" height="31" alt="Waarp's Family" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_3', ''); mhdSwitchImage('mhd1_img3', 'gre/gre17575.png');" onmouseout="mhd1OnMouseOutItem('mhd1_3', ''); mhdSwitchImage('mhd1_img3', 'gre/gre17573.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><a href="APIReferences.html"><img id="mhd1_img4" src="gre/gre17576.png" width="130" height="31" alt="API References" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_4', ''); mhdSwitchImage('mhd1_img4', 'gre/gre17578.png');" onmouseout="mhd1OnMouseOutItem('mhd1_4', ''); mhdSwitchImage('mhd1_img4', 'gre/gre17576.png'); " /></a></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_5_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_5_0" class="submenu1" href="OldGoldenGateDownload.html" onmouseover="mhd1OnMouseOverItem('mhd1_5_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_5_0', 'submenu1')">Old GoldenGate Download</a></div><a href="Downloads.html"><img id="mhd1_img5" src="gre/gre17579.png" width="130" height="31" alt="Downloads" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_5', ''); mhdSwitchImage('mhd1_img5', 'gre/gre17581.png');" onmouseout="mhd1OnMouseOutItem('mhd1_5', ''); mhdSwitchImage('mhd1_img5', 'gre/gre17579.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_6_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_6_0" class="submenu1" href="WaarpDependson.html" onmouseover="mhd1OnMouseOverItem('mhd1_6_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_6_0', 'submenu1')">Waarp Depends on</a><a style="display:block;" id="mhd1_6_1" class="submenu1" href="License.html" onmouseover="mhd1OnMouseOverItem('mhd1_6_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_6_1', 'submenu1')">License</a><a style="display:block;" id="mhd1_6_2" class="submenu1" href="Support.html" onmouseover="mhd1OnMouseOverItem('mhd1_6_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_6_2', 'submenu1')">Support</a></div><a href="About.html"><img id="mhd1_img6" src="gre/gre17582.png" width="130" height="31" alt="About" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_6', ''); mhdSwitchImage('mhd1_img6', 'gre/gre17584.png');" onmouseout="mhd1OnMouseOutItem('mhd1_6', ''); mhdSwitchImage('mhd1_img6', 'gre/gre17582.png'); " /></a>
+</div></td>
+	</tr>
+</table>
+</td>
+	</tr>
+</table>
+</div></div></div></td><td style="height:40px;width:1px;margin:0;padding:0;border:0 solid none;"><div style="height:40px;width:1px;margin:0;padding:0;border:0 solid none;"></div></td></tr></table></div></div>
 <div style="border-right:none;border-left:none;border-bottom:2px solid #FFFFFF;border-top:1px solid #FFFFFF;text-align:left;background-color:#F9DEC7;"><table cellpadding="0" cellspacing="0" border="0" style="width:100%;margin:0;padding:0;border:0 solid none;"><tr><td style="vertical-align:top;"><div></div></td><td style="height:1px;width:1px;margin:0;padding:0;border:0 solid none;"><div style="height:1px;width:1px;margin:0;padding:0;border:0 solid none;"></div></td></tr></table></div>
 <table style="border:none;" cellspacing="0" cellpadding="0" width="100%">
 <tbody>
 <tr>
 <td style="width:100px;vertical-align:top;background-color:#FFFFFF;">&nbsp;</td>
 <td style="width:100%;vertical-align:top;padding-bottom:0px;padding-top:0px;padding-left:5px;padding-right:5px;">
-<div id="Comp4_MenuHorizontal">
+<div id="Comp9_MenuHorizontalText" style="text-align:right;">
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
-	<tr style="background-image:url(gre/gre12309.png);background-repeat:repeat-x;background-position:left top;">
-		<td id="MH1_0"><a href="WaarpR66Presentation.html" onmouseover="MHSwitchImage('MH1_0_img', 'gre/gre12353.png');" onmouseout="MHSwitchImage('MH1_0_img', 'gre/gre12352.png');"><img id="MH1_0_img" src="gre/gre12352.png" width="179" height="26" alt="Waarp R66-Presentation" style="border:none;display:block;" /></a></td>
-		<td></td><td><img src="gre/gre12308.png" height="18" width="1" style="border:none;display:block;" alt="" /></td><td></td>
-		<td id="MH1_1"><a href="WaarpR66Installation.html" onmouseover="MHSwitchImage('MH1_1_img', 'gre/gre12355.png');" onmouseout="MHSwitchImage('MH1_1_img', 'gre/gre12355.png');"><img id="MH1_1_img" src="gre/gre12355.png" width="190" height="26" alt="Waarp R66-Installation" style="border:none;display:block;" /></a></td>
-		<td></td><td><img src="gre/gre12308.png" height="18" width="1" style="border:none;display:block;" alt="" /></td><td></td>
-		<td id="MH1_2"><a href="WaarpR66Technical.html" onmouseover="MHSwitchImage('MH1_2_img', 'gre/gre12357.png');" onmouseout="MHSwitchImage('MH1_2_img', 'gre/gre12356.png');"><img id="MH1_2_img" src="gre/gre12356.png" width="159" height="26" alt="Waarp R66-Technical" style="border:none;display:block;" /></a></td>
-		<td></td><td><img src="gre/gre12308.png" height="18" width="1" style="border:none;display:block;" alt="" /></td><td></td>
-		<td id="MH1_3"><a href="WaarpR66Production.html" onmouseover="MHSwitchImage('MH1_3_img', 'gre/gre12359.png');" onmouseout="MHSwitchImage('MH1_3_img', 'gre/gre12358.png');"><img id="MH1_3_img" src="gre/gre12358.png" width="167" height="26" alt="Waarp R66-Production" style="border:none;display:block;" /></a></td>
-		<td></td><td><img src="gre/gre12308.png" height="18" width="1" style="border:none;display:block;" alt="" /></td><td></td>
-		<td id="MH1_4"><a href="WaarpAdministrator.html" onmouseover="MHSwitchImage('MH1_4_img', 'gre/gre12361.png');" onmouseout="MHSwitchImage('MH1_4_img', 'gre/gre12360.png');"><img id="MH1_4_img" src="gre/gre12360.png" width="156" height="26" alt="Waarp Administrator" style="border:none;display:block;" /></a></td>
-		<td style="width:100%;"><img src="img/space.gif" width="1" height="1" style="border:none;display:block;" alt="" /></td>
-	<td><img src="gre/gre12309.png" height="26" width="1" style="border:none;display:block;" alt="" /></td>
+	<tr>
+		<td class="pathmenu1" style="white-space:nowrap;" valign="top" align="right"><a href="WaarpR66.html" id="MHT1_0_second" class="pathmenu1" onmouseover="MHTSetClass('MHT1_0', 'pathmenu1over');" onmouseout="MHTSetClass('MHT1_0', 'pathmenu1');"><span id="MHT1_0" class="pathmenu1">Waarp R66</span></a><span class="normal"> &gt; </span><a href="WaarpR66Installation.html" id="MHT1_1_second" class="pathmenu1" onmouseover="MHTSetClass('MHT1_1', 'pathmenu1over');" onmouseout="MHTSetClass('MHT1_1', 'pathmenu1');"><span id="MHT1_1" class="pathmenu1">Waarp R66-Installation</span></a><span class="normal"> &gt; </span><span id="MHT1_2" class="pathmenu1sel"><label>Waarp R66-Options</label></span></td>
 	</tr>
 </table>
-</div></td></tr>
+</div>
+<div id="Comp13_MenuHorizontal" style="text-align:left;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td id="MH3_0"><a href="WaarpR66Presentation.html" onmouseover="MHSwitchImage('MH3_0_img', 'gre/gre17613.png');" onmouseout="MHSwitchImage('MH3_0_img', 'gre/gre17611.png');"><img id="MH3_0_img" src="gre/gre17611.png" width="178" height="26" alt="Waarp R66-Presentation" style="border:none;display:block;" /></a></td>
+		<td id="MH3_1"><a href="WaarpR66Installation.html" onmouseover="MHSwitchImage('MH3_1_img', 'gre/gre17616.png');" onmouseout="MHSwitchImage('MH3_1_img', 'gre/gre17615.png');"><img id="MH3_1_img" src="gre/gre17615.png" width="176" height="26" alt="Waarp R66-Installation" style="border:none;display:block;" /></a></td>
+		<td id="MH3_2"><a href="WaarpR66undertheWood.html" onmouseover="MHSwitchImage('MH3_2_img', 'gre/gre17619.png');" onmouseout="MHSwitchImage('MH3_2_img', 'gre/gre17617.png');"><img id="MH3_2_img" src="gre/gre17617.png" width="200" height="26" alt="Waarp R66 under the Wood" style="border:none;display:block;" /></a></td>
+		<td id="MH3_3"><a href="WaarpR66Howtos.html" onmouseover="MHSwitchImage('MH3_3_img', 'gre/gre17622.png');" onmouseout="MHSwitchImage('MH3_3_img', 'gre/gre17620.png');"><img id="MH3_3_img" src="gre/gre17620.png" width="142" height="26" alt="Waarp R66 Howtos" style="border:none;display:block;" /></a></td>
+		<td id="MH3_4"><a href="R66AdministratorGui.html" onmouseover="MHSwitchImage('MH3_4_img', 'gre/gre17625.png');" onmouseout="MHSwitchImage('MH3_4_img', 'gre/gre17623.png');"><img id="MH3_4_img" src="gre/gre17623.png" width="164" height="26" alt="R66 Administrator Gui" style="border:none;display:block;" /></a></td>
+		<td id="MH3_5"><a href="R66Proxy.html" onmouseover="MHSwitchImage('MH3_5_img', 'gre/gre17628.png');" onmouseout="MHSwitchImage('MH3_5_img', 'gre/gre17626.png');"><img id="MH3_5_img" src="gre/gre17626.png" width="85" height="26" alt="R66 Proxy" style="border:none;display:block;" /></a></td>
+		<td id="MH3_6"><a href="R66ClientGui.html" onmouseover="MHSwitchImage('MH3_6_img', 'gre/gre17631.png');" onmouseout="MHSwitchImage('MH3_6_img', 'gre/gre17629.png');"><img id="MH3_6_img" src="gre/gre17629.png" width="113" height="26" alt="R66 Client Gui" style="border:none;display:block;" /></a></td>
+		<td style="width:100%;"><img src="img/space.gif" width="1" height="1" style="border:none;display:block;" alt="" /></td>
+	</tr>
+</table>
+</div>
+<div style="text-align:right;">
+<div id="Comp10_MenuHorizontal" style="text-align:left;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td><img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td>
+		<td id="MH1_0"><a href="WaarpR66Configuration.html" onmouseover="MHSwitchImage('MH1_0_img', 'gre/gre17634.png');" onmouseout="MHSwitchImage('MH1_0_img', 'gre/gre17632.png');"><img id="MH1_0_img" src="gre/gre17632.png" width="153" height="20" alt="Waarp R66-Configuration" style="border:none;display:block;" /></a></td>
+		<td id="MH1_1"><a href="WaarpR66XmlConfiguration.html" onmouseover="MHSwitchImage('MH1_1_img', 'gre/gre17637.png');" onmouseout="MHSwitchImage('MH1_1_img', 'gre/gre17635.png');"><img id="MH1_1_img" src="gre/gre17635.png" width="139" height="20" alt="Waarp R66-Xml Config" style="border:none;display:block;" /></a></td>
+		<td id="MH1_2"><img id="MH1_2_img" src="gre/gre17639.png" width="121" height="20" alt="Waarp R66-Options" style="border:none;display:block;" /></td>
+		<td style="width:100%;"><img src="img/space.gif" width="1" height="1" style="border:none;display:block;" alt="" /></td>
+	</tr>
+</table>
+</div>
+<div id="Comp11_MenuHorizontal" style="text-align:left;"></div></div></td></tr>
 <tr>
-<td style="width:100px;vertical-align:top;">
-<div id="Comp6_MenuVertical" style="text-align:left;"><div id="mvg1"><a href="index.html" onmouseover="mvgSwitchImage('mvg1_0_img', 'gre/gre12312.png');" onmouseout="mvgSwitchImage('mvg1_0_img', 'gre/gre12310.png');"><img id="mvg1_0_img" src="gre/gre12310.png" width="150" height="31" alt="Home" style="display:block;border:none;" /></a>
-<a href="WorldofWaarp.html" onmouseover="mvgSwitchImage('mvg1_1_img', 'gre/gre12315.png');" onmouseout="mvgSwitchImage('mvg1_1_img', 'gre/gre12313.png');"><img id="mvg1_1_img" src="gre/gre12313.png" width="150" height="31" alt="World of Waarp" style="display:block;border:none;" /></a>
-<a href="WaarpR66.html" onmouseover="mvgSwitchImage('mvg1_2_img', 'gre/gre12318.png');" onmouseout="mvgSwitchImage('mvg1_2_img', 'gre/gre12317.png');"><img id="mvg1_2_img" src="gre/gre12317.png" width="150" height="31" alt="Waarp R66" style="display:block;border:none;" /></a>
-<a href="WaarpFTP.html" onmouseover="mvgSwitchImage('mvg1_3_img', 'gre/gre12321.png');" onmouseout="mvgSwitchImage('mvg1_3_img', 'gre/gre12319.png');"><img id="mvg1_3_img" src="gre/gre12319.png" width="150" height="31" alt="Waarp FTP" style="display:block;border:none;" /></a>
-<a href="WaarpGatewayFtp.html" onmouseover="mvgSwitchImage('mvg1_4_img', 'gre/gre12324.png');" onmouseout="mvgSwitchImage('mvg1_4_img', 'gre/gre12322.png');"><img id="mvg1_4_img" src="gre/gre12322.png" width="150" height="31" alt="WaarpGatewayFtp" style="display:block;border:none;" /></a>
-<a href="WaarpGatewayHttp.html" onmouseover="mvgSwitchImage('mvg1_5_img', 'gre/gre12327.png');" onmouseout="mvgSwitchImage('mvg1_5_img', 'gre/gre12325.png');"><img id="mvg1_5_img" src="gre/gre12325.png" width="150" height="31" alt="WaarpGatewayHttp" style="display:block;border:none;" /></a>
-<a href="WaarpCommons.html" onmouseover="mvgSwitchImage('mvg1_6_img', 'gre/gre12330.png');" onmouseout="mvgSwitchImage('mvg1_6_img', 'gre/gre12328.png');"><img id="mvg1_6_img" src="gre/gre12328.png" width="150" height="31" alt="Waarp Commons" style="display:block;border:none;" /></a>
-<a href="APIReferences.html" onmouseover="mvgSwitchImage('mvg1_7_img', 'gre/gre12333.png');" onmouseout="mvgSwitchImage('mvg1_7_img', 'gre/gre12331.png');"><img id="mvg1_7_img" src="gre/gre12331.png" width="150" height="31" alt="API References" style="display:block;border:none;" /></a>
-<a href="Downloads.html" onmouseover="mvgSwitchImage('mvg1_8_img', 'gre/gre12336.png');" onmouseout="mvgSwitchImage('mvg1_8_img', 'gre/gre12334.png');"><img id="mvg1_8_img" src="gre/gre12334.png" width="150" height="31" alt="Downloads" style="display:block;border:none;" /></a>
-<a href="WaarpDependson.html" onmouseover="mvgSwitchImage('mvg1_9_img', 'gre/gre12339.png');" onmouseout="mvgSwitchImage('mvg1_9_img', 'gre/gre12337.png');"><img id="mvg1_9_img" src="gre/gre12337.png" width="150" height="31" alt="Waarp Depends on" style="display:block;border:none;" /></a>
-</div></div></td>
+<td style="width:100px;vertical-align:top;"></td>
 <td style="width:100%;vertical-align:top;padding-bottom:5px;padding-top:5px;padding-left:5px;padding-right:5px;">
 <h1 class="h1">Waarp R66-Options</h1>
-<div id="Comp1_sys_doctext"><h1 class="h1">Limit CPU / Connexion</h1>
+<div id="Comp1_sys_doctext"><p style="text-align:justify;"><span style="font-size:11pt;">This page presents various options on specific commands or parameters of Waarp R66 to tune to fit your needs.</span></p>
+<p style="text-align:justify;">&nbsp;</p>
+<h1 class="h1">Limit CPU / Connexion</h1>
+<blockquote>
 <p style="text-align:justify;"><span style="font-size:10pt;">With these options (<strong>usecpulimit</strong>), Waarp R66 Server can limit the new requests according to a threshold on CPU global usage and on a maximum number of concurrent requests. When one of these limits is exceeded, the request is refused and postponed for a random number proportional to <strong>30 </strong>seconds (option <strong>timeoutcon</strong>). After 3 retries, the request is cancelled.</span></p>
 <p style="text-align:justify;"><span style="font-size:10pt;">These tests are done both on requester and requested side.</span></p>
 <ul>
@@ -100,9 +260,9 @@ a img {
 <li><div style="text-align:justify;"><span style="font-size:10pt;"><strong>usejdkcpulimit</strong>: CPU is computed either with native support from JRE (but not all JRE support this) or either from Java Sysmon library.</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:10pt;"><strong>connlimit</strong>: Value for connexion is starting from 0 where 0 means no limit.</span></div></li></ul>
-<h1 class="h1" style="text-align:justify;">&nbsp;</h1>
+<div style="text-align:justify;"><span style="font-size:10pt;"><strong>connlimit</strong>: Value for connexion is starting from 0 where 0 means no limit.</span></div></li></ul></blockquote>
 <h1 class="h1" style="text-align:justify;">Check of IP on servers and clients</h1>
+<blockquote>
 <p style="text-align:justify;"><span style="font-size:10pt;">By default, real IP address used by the remote host is not compared against the IP (or the resolution given from DNS) stored with the remote HostId. If for security reasons this is required, you can enable this check to be done. When activated in <strong>checkaddress</strong>:</span></p>
 <ul>
 <li><div style="text-align:justify;"><span style="font-size:10pt;">For a server, the test will always be done.</span></div></li>
@@ -113,53 +273,55 @@ a img {
 <li><div style="text-align:justify;"><span style="font-size:10pt;">If the client has an address of "0.0.0.0", then no test is done (this special address is to be used when a lot of remote clients are to be used without high security challenge).</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:10pt;">If not, then the check is done as for&nbsp;a server.</span></div></li></ul></li></ul>
-<h1 class="h1" style="text-align:justify;">&nbsp;</h1>
+<div style="text-align:justify;"><span style="font-size:10pt;">If not, then the check is done as for&nbsp;a server.</span></div></li></ul></li></ul></blockquote>
 <h1 class="h1" style="text-align:justify;">Host as Client</h1>
+<blockquote style="margin-right:0px;" dir="ltr">
 <p style="text-align:justify;"><span style="font-size:10pt;">In version 2.0, a new property is attached to the Host definition: <strong>isclient</strong>. This property stands to recognize remote client to prevent a server to try to initiate a request to this client. Since this client is not a server, it is not listening to incoming requests and therefore cannot be the target of an incoming request.</span></p>
-<p style="text-align:justify;"><span style="font-size:10pt;">The special address "0.0.0.0" can also be used to specify a client but it extends it to not try to check its IP address. It is useful in the situation where you have a lot of clients and you don't want to declare them all in the Host table. All those clients will have to share the ID and the password (and the SSL key in case of strong authentication).</span></p>
-<h1 class="h1" style="text-align:justify;">&nbsp;</h1>
+<p style="text-align:justify;"><span style="font-size:10pt;">The special address "0.0.0.0" can also be used to specify a client but it extends it to not try to check its IP address. It is useful in the situation where you have a lot of clients and you don't want to declare them all in the Host table. All those clients will have to share the ID and the password (and the SSL key in case of strong authentication).</span></p></blockquote>
 <h1 class="h1" style="text-align:justify;">Cryptographic support</h1>
+<blockquote>
 <p style="text-align:justify;"><span style="font-size:10pt;">In version 2.0, many improvements were done on cryptographic side.</span></p>
 <ol>
 <li><div style="text-align:justify;"><span style="font-size:10pt;">SSL: You can now have simple SSL support or even using string authentication of clients using the <strong>trustuseclientauthenticate </strong>option.</span></div></li>
 
-<li><div style="text-align:justify;"><span style="font-size:10pt;">Password: all passwords are crypted using a private DES Key (private to each server but can be the same if you want). The passwords are crypted both on files, database. This key is locally referenced by <strong>cryptokey </strong>option. You have to use the GoldengatePassword tool (see <a href="WaarpCommons.html">GoldenGate Commons</a>) to crypt your passwords (at least for the administrator password) or to use the administration web interface.</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Password: all passwords are crypted using a private DES Key (private to each server but can be the same if you want). The passwords are crypted both on files, database. This key is locally referenced by <strong>cryptokey </strong>option. You have to use the GoldengatePassword tool (see <a href="WaarpsFamily.html">GoldenGate Commons</a>) to crypt your passwords (at least for the administrator password) or to use the administration web interface.</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:10pt;">On the network, a single way crypto key is used, common to all OpenR66 hosts when they need to exchange passwords.</span></div></li></ol>
-<h1 class="h1" style="text-align:justify;">&nbsp;</h1>
-<h1 class="h1" style="text-align:justify;">Store Task saving on XML file for Thin Client</h1>
-<p style="text-align:justify;"><span style="font-size:10pt;">The special option <strong>taskrunnernodb </strong>allows you to have a persistent view of the transfer (the task) for Thin Client without database by using a XML file. It allows to restart a stopped or canceled transfer smoothly without starting a new transfer from the beginning.</span></p>
-<h1 class="h1" style="text-align:justify;">&nbsp;</h1>
+<div style="text-align:justify;"><span style="font-size:10pt;">On the network, a single way crypto key is used, common to all OpenR66 hosts when they need to exchange passwords.</span></div></li></ol></blockquote>
+<h1 class="h1" style="text-align:justify;">Store Tasks&nbsp;within XML files for Thin Client</h1>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">The special option <strong>taskrunnernodb </strong>allows you to have a persistent view of the transfer (the task) for Thin Client without database by using a XML file. It allows to restart a stopped or canceled transfer smoothly without starting a new transfer from the beginning.</span></p></blockquote>
+<h1 class="h1">Usage of&nbsp;No Database for Server</h1>
+<blockquote>
+<p style="text-align:justify;"><span style="font-size:10pt;">For special project where no database is needed, but then loosing the ability to store all transfer status and associated capacity (such as automatic retry if not specified in the rules), the server code now supports to not have any database connections. However it is still possible to store the trace of the transfers within XML files, such that one can automatize some actions in regard to the status of each transfer through file analysis. Note however that some functionality like the monitoring will be limited. The option taskrunnernodb will allow to use XML files support if set to true. If set to false, no information will be retained out of memory of the process.</span>&nbsp;</p></blockquote>
 <h1 class="h1" style="text-align:justify;">Control on restart transfer</h1>
-<p style="text-align:justify;"><span style="font-size:10pt;">Although an interrupted request restarts and each received packet should have been previously validated, the protocol include a backward move on the packet&nbsp;rank in order to ensure the quality of the transfer without doubt. When a transfer is restarted, OpenR66 first checks the receiver rank and takes it as the reference minus&nbsp;a gap. Then it checks the existing file (reception side) and check again against this rank minus a gap.&nbsp;You can control this feature by specifying the block size (<strong>blocksize</strong>) and the gap of rank (<strong>gaprestart</strong>), where the retransmitted byte size will be: block size x rank.</span></p>
-<p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;">&nbsp;</p>
-<h1 class="h1" style="text-align:justify;">Usage GoldenGate LocalExec Daemon</h1>
-<p style="text-align:justify;"><span style="font-size:10pt;">In order to improve the efficiency of external commands execution by preventing the fork of the Waarp R66 JVM process (costly regarding its memory), there is an optional support to execute those commands through a GoldenGate LocalExec Daemon (see in </span><a href="WaarpCommons.html"><span style="font-size:10pt;">GoldenGate Commons</span></a><span style="font-size:10pt;">). To use this support, you have to define the following:</span></p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">Although an interrupted request restarts and each received packet should have been previously validated, the protocol include a backward move on the packet&nbsp;rank in order to ensure the quality of the transfer without doubt. When a transfer is restarted, OpenR66 first checks the receiver rank and takes it as the reference minus&nbsp;a gap. Then it checks the existing file (reception side) and check again against this rank minus a gap.&nbsp;You can control this feature by specifying the block size (<strong>blocksize</strong>) and the gap of rank (<strong>gaprestart</strong>), where the retransmitted byte size will be: block size x rank.</span></p></blockquote>
+<h1 class="h1" style="text-align:justify;">Usage Waarp LocalExec Daemon</h1>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">In order to improve the efficiency of external commands execution by preventing the fork of the Waarp R66 JVM process (costly regarding its memory), there is an optional support to execute those commands through a Waarp LocalExec Daemon (see in </span><a href="WaarpsFamily.html"><span style="font-size:10pt;">Waarp's Family</span></a><span style="font-size:10pt;">). To use this support, you have to define the following:</span></p>
 <ul>
-<li><div style="text-align:justify;"></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;"><strong>uselocalexec</strong> (default="False") to enable the use of LocalExec support</span> </div></li>
 
-<li><span style="font-size:10pt;"><strong>uselocalexec</strong> (default="False") to enable the use of LocalExec support</span> 
-</li><li><span style="font-size:10pt;"><strong>lexecaddr</strong> (optional) which could contains the address (default="127.0.0.1")</span> 
-</li><li><span style="font-size:10pt;"><strong>lexecport</strong> (optional) which could contains the port to be used (default="9999")</span> 
-<div></div></li></ul>
-<p>&nbsp;</p>
+<li><div style="text-align:justify;"><span style="font-size:10pt;"><strong>lexecaddr</strong> (optional) which could contains the address (default="127.0.0.1")</span> </div></li>
+
+<li>
+<div style="text-align:justify;"><span style="font-size:10pt;"><strong>lexecport</strong> (optional) which could contains the port to be used (default="9999")</span> </div></li></ul></blockquote>
 <h1 class="h1">Usage of FastMD5 support</h1>
-<p><span style="font-size:10pt;">In order to improve the efficiency of the computation of MD5 on blocks during file transfer, 3 methods are provided.</span></p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p><span style="font-size:10pt;"><strong>FastMD5 is no longer recommended. </strong>In order to improve the efficiency of the computation of MD5 on blocks during file transfer, 3 methods are provided.</span></p>
 <ol>
 <li><span style="font-size:10pt;"><strong>usefastmd5</strong>=False =&gt; Will use internal JDK support of MD5 computation </span></li>
 <li><span style="font-size:10pt;"><strong>usefastmd5</strong>=True but <strong>fastmd5</strong> not declared or empty =&gt; Will use Java MD5 implementation more efficient than JDK version </span></li>
 <li>
 <div style="text-align:justify;"><span style="font-size:10pt;"><strong>usefastmd5</strong>=True and <strong>fastmd5</strong>=path to SO file or DLL (according to the systems) =&gt; Will use JNI C MD5 implementation suppose to be more efficient than version 2.</span></div></li></ol>
-<p style="text-align:justify;"><span style="font-size:10pt;">However note that the results could depends according to the systems and the JDK. Most of the time, Version 3 is the fastest, but sometime Version 2 is better than Version 3, and always better than Version 1. The efficiency of Version 3 greatly depends on the compilation of the C module. See <a href="WaarpCommons.html">GoldenGate Digest in GoldenGate Commons</a></span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">However note that the results could depends according to the systems and the JDK. Most of the time, Version 3 is the fastest, but sometime Version 2 is better than Version 3, and always better than Version 1. The efficiency of Version 3 greatly depends on the compilation of the C module. See <a href="WaarpsFamily.html">GoldenGate Digest in GoldenGate Commons</a></span></p>
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:justify;"><span style="font-size:11pt;color:#FF0000;">It appears with recent versions of JVM that JDK in server mode is really efficient, almost equivalent to C JNI version. So one might use by default <strong>usefastmd5=False</strong>.</span></p>
 <p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:10pt;">Note also that a new option can specify which kind of digest you want to use (it is for now a global option, not a local option): <strong><span style="color:#FF0000;">digest </span></strong>where values mean: MD5=0, MD2=1, SHA1=2, SHA256=3, SHA384=4, SHA512=5, CRC32=6, ADLER32=7.</span></p>
-<h1 class="h1">&nbsp;</h1>
+<p style="text-align:justify;"><span style="font-size:10pt;">Note also that a new option can specify which kind of digest you want to use (it is for now a global option, not a local option): <strong><span style="color:#FF0000;">digest </span></strong>where values mean: MD5=0, MD2=1, SHA1=2, SHA256=3, SHA384=4, SHA512=5, CRC32=6, ADLER32=7</span></p></blockquote>
 <h1 class="h1">Usage of the same database between several R66 servers</h1>
+<blockquote>
 <p style="text-align:justify;"><span style="font-size:10pt;">In case a database is shared among several R66 servers (with different names, so not in Multiple Monitors support option), the following tables will be totally shared:</span></p>
 <ul>
 <li><p style="text-align:justify;"><span style="font-size:10pt;">Host table: all partners definition, including itself will be shared among all servers. It implies also that the Key used to crypt/uncrypt the password are the same for all servers sharing the database.</span></p></li>
@@ -174,8 +336,9 @@ a img {
 
 <li>
 <p style="text-align:justify;"><span style="font-size:10pt;">MultipleMonitor table: this table is of no use in case of no multiple monitor usage ; in case of multiple monitor usage with several clusters on the same database, each cluster will act as a single host (so sharing or not sharing accordingly) and one line per cluster will be setup in this table.</span></p></li></ul>
-<p style="text-align:justify;"><br /><br /></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">Note that database sharing implies that multiple servers will access to one database through network. The locality (same datacenter at least) is an important property since the implied latency could impact the performance. Moreover the database shall be "string" enough to accept such concurrent accesses (CPU, memory, disk speed, even the database technology, PostgreSQL being recommended for such configuration). Therefore the server hosting the database and the database configuration itself shall be done with this goal in mind.</span></p></blockquote>
 <h1 class="h1">Usage of&nbsp;Multiple Monitors&nbsp;support</h1>
+<blockquote style="margin-right:0px;" dir="ltr">
 <p style="text-align:justify;"><span style="font-size:10pt;">In order to improve reliability of the OpenR66 File Transfer Monitors and the scalability, we propose a new option that allows to spread the load behind a Load Balancer in TCP mode (as HA-Proxy) and a shared storage (as a simple NAS).</span></p>
 <ol>
 <li><p><strong><span style="font-size:10pt;">multiplemonitors</span></strong><span style="font-size:10pt;">=1 =&gt;&nbsp;No multiple monitors will be supported (single instance)&nbsp;</span> </p></li>
@@ -202,9 +365,9 @@ a img {
 <li>
 <p style="text-align:justify;"><span style="font-size:10pt;">A restart on disconnection, even on a crash of the original R66 server, since the new connection will go through the LB algorithm.</span></p></li></ul>
 <p style="text-align:justify;"><span style="font-size:10pt;">Note however that obtaining a HA R66 service does not required absolutely to have this option enabled. Indeed, one could check regularly through a monitoring tool that the service is still responding (using e message for instance), and if not to stop/restart the R66 service accordingly. Since the restart of a request is merely related to the &ldquo;timeout&rdquo; time, a check roughly repeated at that interval should enable a &ldquo;clean&rdquo; HA availability without having the complexity of a LB configuration.</span></p>
-<p style="text-align:justify;"><span style="font-size:10pt;">One could also mixed the two solutions, in order to restart one unresponsive server in the HA pool.</span></p>
-<p style="text-align:justify;"><br /><br /></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">One could also mixed the two solutions, in order to restart one unresponsive server in the HA pool.</span></p></blockquote>
 <h1 class="h1">Usage of&nbsp;Thrift support</h1>
+<blockquote style="margin-right:0px;" dir="ltr">
 <p style="text-align:justify;"><span style="font-size:10pt;">The &ldquo;usethrift&rdquo; option (specifying a port &gt; 0) allows to enable the Thrift server support in one R66 server. Currently only Synchronous Binary thrift protocol is allowed, so a client should use &ldquo;<strong>Tsocket</strong>&rdquo; for its Ttransport and &ldquo;<strong>TbinaryProtocol</strong>&rdquo; for its Tprotocol.</span></p>
 <p style="text-align:justify;"><span style="font-size:10pt;">One example in Java is given in org.waarp.openr66.protocol.test.TestThriftClientExample to show how to interact with the Thrift R66 service.</span></p>
 <p style="text-align:justify;"><span style="font-size:10pt;">This option should enables more capabilities to R66 to be embedded in existing applications, in a more large cover than just Java.</span></p>
@@ -217,11 +380,10 @@ a img {
 <li><p style="text-align:justify;"><span style="font-size:10pt;"><strong>isStillRunning</strong>: allows to quickly have the information on one particular transfer request running status or not</span></p></li>
 
 <li>
-<p style="text-align:justify;"><span style="font-size:10pt;"><strong>infoListQuery</strong>: allows to get the information on file list on the local R66 server</span></p></li></ul>
-<p style="text-align:justify;"><br /><br /></p>
-<p style="text-align:justify;"><span style="font-size:10pt;">Note that <strong>the Thrift service, for security reason, is only opened on 127.0.0.1 address</strong> since no authentication is made, as it stands for a local service.</span></p>
-<p style="text-align:justify;"><br /><br /></p>
+<p style="text-align:justify;"><span style="font-size:10pt;"><strong>infoListQuery</strong>: allows to get the information on file list on the local R66 server</span><br /></p></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;">Note that <strong>the Thrift service, for security reason, is only opened on 127.0.0.1 address</strong> since no authentication is made, as it stands for a local service.</span></p></blockquote>
 <h1 class="h1">Error task on Init step transfer</h1>
+<blockquote style="margin-right:0px;" dir="ltr">
 <p style="text-align:justify;"><span style="font-size:10pt;">In the early stage of the transfer, some tests are made to validate that the request is valid. Among those tests, there are:</span></p>
 <ul>
 <li><p style="text-align:justify;"><span style="font-size:10pt;">unknown rule</span></p></li>
@@ -233,9 +395,9 @@ a img {
 <li>
 <p style="text-align:justify;"><span style="font-size:10pt;">request already started or already totally finished</span></p></li></ul>
 <p style="text-align:justify;"><span style="font-size:10pt;">In those case, previously, no error tasks will run. Now, we decide to enable error tasks to be run, in particular to enable the &ldquo;reschedule&rdquo; task. However, if one is willing to not have such error tasks running (globally for all rules) in such condition (before any pre task is executed), it will have to pass the following option to the R66 server java command:</span></p>
-<p style="text-align:justify;"><span style="color:#2a00ff;"><span style="font-family:courier new, monospace;"><span style="font-size:10pt;"><strong>-Dopenr66.executebeforetransferred=0</strong></span></span></span></p>
-<p style="text-align:justify;"><br /><br /></p>
+<p style="text-align:justify;"><span style="color:#2a00ff;"><span style="font-family:courier new, monospace;"><span style="font-size:10pt;"><strong>-Dopenr66.executebeforetransferred=0</strong></span></span></span></p></blockquote>
 <h1 class="h1">Windows Service support</h1>
+<blockquote style="margin-right:0px;" dir="ltr">
 <p style="text-align:justify;"><span style="font-size:10pt;">With R66, it is possible to instantiate R66 as a Windows service through Apache Commons Daemon.</span></p>
 <p style="text-align:justify;"><span style="font-size:10pt;">In the source of R66, you will find in the directory org.waarp.openr66.service the script <strong>service.bat</strong>. This script has to be updated to reflect your configuration.</span></p>
 <p style="text-align:justify;"><br /><br /></p>
@@ -301,13 +463,9 @@ a img {
 <p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;"><strong>set PRUNSRVEXEC=%EXEC_PATH%\windows\prunsrv.exe</strong></span></span></p>
 <p style="text-align:left;"><br /></p>
 <p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;"><span style="color:#000000;">rem</span> -- <span style="color:#000000;">Loglevel</span> of Daemon between debug, info, warn, error</span></span></p>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;"><strong>set LOGLEVEL=info</strong></span></span></p>
-<p style="text-align:left;"><br /></p>
-<p><br /></p><span>
-<h1 class="h1">Usage of&nbsp;No Database for Server</h1>
-<p style="text-align:justify;"><span style="font-size:10pt;">For special project where no database is needed, but then loosing the ability to store all transfer status and associated capacity (such as automatic retry if not specified in the rules), the server code now supports to not have any database connections. However it is still possible to store the trace of the transfers within XML files, such that one can automatize some actions in regard to the status of each transfer through file analysis. Note however that some functionality like the monitoring will be limited. The option taskrunnernodb will allow to use XML files support if set to true. If set to false, no information will be retained out of memory of the process.&nbsp;</span></p>
-<h1 class="h1">&nbsp;</h1>
+<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;"><strong>set LOGLEVEL=info</strong></span></span></p></blockquote>
 <h1 class="h1">Usage of&nbsp;ExecJava class</h1>
+<blockquote>
 <p style="text-align:justify;"><span style="font-size:10pt;">In order to facilitate the integration in application modules, OpenR66 now supports the ability to run specific Java Class through 3 ways. Note that this functionality is only valid starting <strong>in version 2.3</strong>.</span></p>
 <ul>
 <li><p style="text-align:justify;"><span style="font-size:10pt;">One is through pre or post or error tasks using the EXECJAVA keyword, following by the full class name which must implement the R66Runnable interface.</span></p></li>
@@ -334,320 +492,38 @@ a img {
 
 
 <li>
-<p style="text-align:justify;"><span><span style="font-size:10pt;">Note that to allow a host to call a Business Request, it has to be added in the configuration file as</span> <span style="font-size:8pt;">&lt;business&gt;&lt;businessid&gt;hostname&lt;/businessid&gt;...&lt;/business&gt;</span>. <span style="font-size:10pt;">If not set, the host will not be allow. On EXECJAVA, the security is first that the rule is only local to the host, and second the rule has the possibility to limit the allowed hosts to be partner of it.</span></span></p></li></ul>
-<p style="text-align:justify;"></p>
-<h1 class="h1">Transcode support</h1>
-<p style="text-align:justify;"><span style="font-size:10pt;">With R66, it is possible to transcode one file from one charset to another charset using the TRANSCODE task. This one takes 2 arguments: <span style="font-family:courier new, monospace;">-from fromCharset</span> and <span style="font-family:courier new, monospace;">-to toCharset</span> where <span style="font-family:courier new, monospace;">fromCharset</span> and <span style="font-family:courier new, monospace;">toCharset</span> are string representations of the official charsets in Java. Optional arguments <span style="font-family:courier new, monospace;">-newfile newfilename</span> and <span style="font-family:courier new, monospace;">-extension extension</span> could be added. If <span style="font-family:courier new, monospace;">-newfile</span> is specified, the target filename will be the one specified. If it is not specified, the target filename will be the source filename with as extension either the one specified, or if not specified, the extension &ldquo;.transcode&rdquo;.</span></p>
-<p style="text-align:justify;"><span style="font-size:10pt;">For EBCDIC charsets, see:</span></p>
-<ul>
-<li><p style="text-align:justify;"><span style="font-size:10pt;"><a href="http://www-01.ibm.com/software/globalization/ccsid/ccsid_registered.html">http://www-01.ibm.com/software/globalization/ccsid/ccsid_registered.html</a> </span></p></li>
-
-<li><p style="text-align:justify;"><a href="http://publib.boulder.ibm.com/infocenter/pcomhelp/v5r9/topic/com.ibm.pcomm.doc/reference/html/hcp_reference.htm"><span style="font-size:10pt;">http://publib.boulder.ibm.com/infocenter/pcomhelp/v5r9/topic/com.ibm.pcomm.doc/reference/html/hcp_reference.htm</span></a></p></li>
-
-<li>
-<p style="text-align:justify;"><span style="font-size:10pt;">In particular (but not limited to), one could consider the following charsets (from or to):</span></p>
-<ul>
-<li><p style="text-align:justify;"><span style="font-size:10pt;">France: IBM297 or IBM01147</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:10pt;">Italy: IBM280 or IBM01144</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:10pt;">UK: IBM285 or IBM01146</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:10pt;">International (Switzerland, Belgium): IBM500 or IBM01148</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:10pt;">Austria/Germany: IBM273 or IBM01141</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:10pt;">Spain and Latin America: IBM284 or IBM01145</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:10pt;">Portugal, Brazil, USA, Canada, Netherlands: IBM037 or IBM01140</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:10pt;">Central and Eastern Europe: IBM870</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:10pt;">Cyrillic: x-IBM1025 (x-IBM1381?)</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:10pt;">Turkey: IBM1026</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:10pt;">Cyrillic Ukraine: x-IBM1123</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:10pt;">Denmark, Norway: IBM277 or IBM01142</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:10pt;">Finland or Sweden: IBM278 or IBM01143</span></p></li>
-
-<li>
-<p style="text-align:justify;"><span style="font-size:10pt;">Greece: x-IBM875 or x-IBM1124</span></p></li></ul></li></ul>
-<p style="text-align:justify;"><span style="font-size:10pt;">A convenient method (from Waarp Common) allows to list in html (-html), csv (-csv) or text format (-text) all the supported Charsets from your JVM. To use it, run the following command:</span></p>
-<p style="text-align:justify;"><span style="font-size:10pt;font-family:courier new, monospace;"><strong>java -cp WaarpCommon-1.2.7.jar org.waarp.common.transcode.IdentifyCharsetsAvailable [-csv | -html | -text ]</strong></span></p>
-<p style="text-align:justify;"><strong></strong>&nbsp;</p></span>
-<p style="text-align:justify;"><span style="font-size:10pt;">It could also be used as a test of transcode outside R66:</span></p>
-<p style="text-align:justify;"><span style="font-family:Courier New;font-size:10pt;"><strong>java -cp WaarpCommon-1.2.7.jar org.waarp.common.transcode.CharsetsUtil -from fromFilename fromCharset -to toFilename toCharset</strong></span></p><span><span style="font-size:10pt;color:#3f5fbf;"><span style="font-size:10pt;color:#3f5fbf;"><span style="font-size:10pt;color:#3f5fbf;"></span></span></span>&nbsp; 
-<p><strong></strong>&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:10pt;">An <em>extract</em> as example of the output from a JDK 1.7.05 Windows from Oracle using -html option:</span></p>
-<table style="border:#000000 1px solid;" cellspacing="1" cellpadding="2" width="631">
-<tbody>
-<tr>
-<p style="text-align:center;"></p>
-<p style="text-align:center;">&nbsp; 
-</p></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">Name</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">CanEncode</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IANA Registered</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">Aliases</span></span></p></td></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IBM01140</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<ul>
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ccsid01140</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp01140</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">1140</span></span></p></li>
-
-<li>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp1140</span></span></p></li></ul></td></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IBM01141</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<ul>
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp1141</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ccsid01141</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp01141</span></span></p></li>
-
-<li>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">1141</span></span></p></li></ul></td></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IBM01142</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<ul>
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp01142</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp1142</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">1142</span></span></p></li>
-
-<li>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ccsid01142</span></span></p></li></ul></td></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IBM01143</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<ul>
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp01143</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">1143</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ccsid01143</span></span></p></li>
-
-<li>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp1143</span></span></p></li></ul></td></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IBM01144</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<ul>
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp01144</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp1144</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ccsid01144</span></span></p></li>
-
-<li>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">1144</span></span></p></li></ul></td></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IBM01145</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<ul>
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp1145</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp01145</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ccsid01145</span></span></p></li>
-
-<li>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">1145</span></span></p></li></ul></td></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IBM01146</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<ul>
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ccsid01146</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp01146</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp1146</span></span></p></li>
-
-<li>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">1146</span></span></p></li></ul></td></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IBM01147</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<ul>
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ccsid01147</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp1147</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">1147</span></span></p></li>
-
-<li>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp01147</span></span></p></li></ul></td></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IBM01148</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<ul>
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp1148</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ccsid01148</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">1148</span></span></p></li>
-
-<li>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp01148</span></span></p></li></ul></td></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IBM01149</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<ul>
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp1149</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp01149</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ccsid01149</span></span></p></li>
-
-<li>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">1149</span></span></p></li></ul></td></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IBM285</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<ul>
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ibm285</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ebcdic-cp-gb</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cpibm285</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp285</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">csIBM285</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ebcdic-gb</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">285</span></span></p></li>
-
-<li>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ibm-285</span></span></p></li></ul></td></tr>
-<tr>
-<td style="border:1px solid #000000;width:121px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">IBM297</span></span></p></td>
-<td style="border:1px solid #000000;width:58px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:96px;">
-<p style="text-align:center;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">true</span></span></p></td>
-<td style="border:1px solid #000000;width:333px;">
-<ul>
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cp297</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ibm297</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">297</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">cpibm297</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ebcdic-cp-fr</span></span></p></li>
-
-<li><p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">ibm-297</span></span></p></li>
-
-<li>
-<p style="text-align:left;"><span style="font-family:courier new, monospace;"><span style="font-size:8pt;">csIBM297</span></span></p></li></ul></td></tr></tbody></table>
-<p style="text-align:justify;">&nbsp;</p>
+<p style="text-align:justify;"><span><span style="font-size:10pt;">Note that to allow a host to call a Business Request, it has to be added in the configuration file as</span> <span style="font-size:8pt;">&lt;business&gt;&lt;businessid&gt;hostname&lt;/businessid&gt;...&lt;/business&gt;</span>. <span style="font-size:10pt;">If not set, the host will not be allow. On EXECJAVA, the security is first that the rule is only local to the host, and second the rule has the possibility to limit the allowed hosts to be partner of it.</span></span></p></li></ul></blockquote>
 <h1 class="h1">FTP Client&nbsp;support</h1>
-<p style="text-align:justify;"><span style="font-size:10pt;">With R66, it is possible to forward or receive a file by FTP. In passive mode (an external FTP client connects to the server to initiate a server), one can use the Waarp Gateway FTP. In active mode (the server will connect to a remote FTP server to initiate a transfer), one can use the integrated FTP Client (based on FTP4J) as a Task after or before a file transfer. This client is compatible with FTP, FTPS and FTPSE. In R66, the task is named FTP. See in Waarp Commons the package Waarp Ftp Client.</span></p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">With R66, it is possible to forward or receive a file by FTP. In passive mode (an external FTP client connects to the server to initiate a server), one can use the Waarp Gateway FTP. In active mode (the server will connect to a remote FTP server to initiate a transfer), one can use the integrated FTP Client (based on FTP4J) as a Task after or before a file transfer. This client is compatible with FTP, FTPS and FTPSE. In R66, the task is named FTP. See in Waarp Commons the package Waarp Ftp Client.</span></p></blockquote>
 <p style="text-align:justify;">&nbsp;</p><span>
 <h1 class="h1">Proxy/Reverse Proxy&nbsp;support</h1>
-<p style="text-align:justify;"><span style="font-size:10pt;">With R66, it is possible install a proxy/reverse proxy in a DMZ in order to ensure high level of security. This Proxy/RP will forward any request to the target defined. No database is needed for this R66 Proxy. See in Waarp Commons the package Waarp Proxy R66.</span></p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">With R66, it is possible install a proxy/reverse proxy in a DMZ in order to ensure high level of security. This Proxy/RP will forward any request to the target defined. No database is needed for this R66 Proxy. See in Waarp Commons the package Waarp Proxy R66.</span></p></blockquote>
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:justify;"></p>
 <h1 class="h1">Global Digest&nbsp;support</h1>
-<p style="text-align:justify;"><span style="font-size:10pt;">With R66, it is now possible (from 2.4.10) to have only one Digest per file transfer. Previously it was optional and only by packet. While this is still possible, it is also optional to have one global digest computed efficiently for the full file transfer. This option is activated by default but could be deactivated by using the &lt;limit&gt;&lt;globaldigest&gt; entry set to false or 0.</span></p>
-<p style="text-align:justify;">&nbsp;</p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">With R66, it is now possible (from 2.4.10) to have only one Digest per file transfer. Previously it was optional and only by packet. While this is still possible, it is also optional to have one global digest computed efficiently for the full file transfer. This option is activated by default but could be deactivated by using the &lt;limit&gt;&lt;globaldigest&gt; entry set to false or 0.</span></p></blockquote>
 <h1 class="h1">Self submitted transfer</h1>
-<p style="text-align:justify;"><span style="font-size:10pt;">With R66, it is now&nbsp;fully supported&nbsp;(from 2.4.10) to send a request of file transfer to itself, whatever using a direct file transfer or a submitted file transfer.</span></p>
-<p style="text-align:justify;">&nbsp;</p><span style="font-size:10pt;color:#2a00ff;"><span style="font-size:10pt;color:#2a00ff;">
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">With R66, it is now&nbsp;fully supported&nbsp;(from 2.4.10) to send a request of file transfer to itself, whatever using a direct file transfer or a submitted file transfer.</span></p></blockquote><span style="font-size:10pt;color:#2a00ff;"><span style="font-size:10pt;color:#2a00ff;">
 <h1 class="h1">Enhanced capability to handle filename with "blank" characters</h1>
+<blockquote style="margin-right:0px;" dir="ltr">
 <p style="text-align:justify;"><span style="font-size:10pt;">Previously, filename transmitted should not have any "blank" character since they could introduce some issues. In order to allow such characters in the filename, a change that could lead to backward incompatibility was made from version 2.4.13. This change now uses the ':' as separator (considering this character is not allowed in most filename implementations). The code keeps the possibility to still accept blank character as separator (as previously to version &lt;= 2.4.12) and is therefore backward compatible. However, if one wants to stay with the old way, one can force the R66 server to use the old blank way by specifying the following property on java command:</span></p>
 <p style="text-align:justify;"><span style="color:#2a00ff;"><span style="font-family:courier new, monospace;"><span style="font-size:10pt;"><strong>-Dopenr66.usespaceseparator=1</strong></span></span></span></p>
-<p style="text-align:justify;"><span style="font-size:10pt;"><strong>From&nbsp;2.4.14, the separator ';' is used now instead of ':' since we make a mistake (Windows usage of ':').</strong></span></p>
-<p style="text-align:justify;">&nbsp;</p></span></span>
+<p style="text-align:justify;"><span style="font-size:10pt;"><strong>From&nbsp;2.4.14, the separator ';' is used now instead of ':' since we make a mistake (Windows usage of ':').</strong></span></p></blockquote></span></span>
 <h1 class="h1">Possibility to block/unblock new requests</h1>
-<p style="text-align:justify;"><span style="font-size:10pt;">When someone wants to stop his Waarp server, he/she might want to wait first that all requests are over and finished. To do that, it is possible now to ask the Waarp server to block all new requests while letting the existing one to continue. This operation is reversible and he/she can unblock as well. This can be achieved either through the web administration interface, or through the ServerShutdown command using the extra '-block' or '-unblock' option.</span></p>
-<p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:10pt;"><strong>Add support for internationalization</strong></span></p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">When someone wants to stop his Waarp server, he/she might want to wait first that all requests are over and finished. To do that, it is possible now to ask the Waarp server to block all new requests while letting the existing one to continue. This operation is reversible and he/she can unblock as well. This can be achieved either through the web administration interface, or through the ServerShutdown command using the extra '-block' or '-unblock' option.</span></p></blockquote></span>
+<h1 class="h1" style="text-align:justify;">Add support for internationalization</h1><span><span><span><span><span style="font-size:10pt;"><span style="font-size:8pt;"><span style="font-family:courier new, monospace;"><span><span style="font-size:10pt;"><span style="font-size:8pt;"><span style="font-family:courier new, monospace;">
+<blockquote style="margin-right:0px;" dir="ltr">
 <p style="text-align:justify;"><span style="font-size:10pt;">It is possible, up to a certain extent, to make Waarp compatible with internationalization. To change the default locale, use the following property at launch time:</span></p>
 <p style="text-align:justify;"><span style="font-size:10pt;color:#0000FF;"><strong>-Dopenr66.locale=xx</strong></span></p>
-<p style="text-align:justify;"><span style="font-size:10pt;">Where xx can be one of "<strong>en</strong>", "<strong>fr</strong>".</span></p>
-<p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><strong><span style="font-size:10pt;">Controling output format</span></strong></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">Where xx can be one of "<strong>en</strong>", "<strong>fr</strong>".</span></p></blockquote></span></span></span></span></span></span></span></span></span></span></span>
+<h1 class="h1" style="text-align:justify;">Controling output format</h1><span><span><span><span><span style="font-size:10pt;"><span style="font-size:8pt;"><span style="font-family:courier new, monospace;"><span><span style="font-size:10pt;"><span style="font-size:8pt;"><span style="font-family:courier new, monospace;">
+<blockquote>
 <p style="text-align:justify;"><span style="font-size:10pt;">Note that commands can also have a special extra argument: the output format as one of</span></p>
-<ul>
-<li>
 <ul>
 <li><p style="text-align:justify;"><span style="font-size:10pt;"><strong>-csv </strong>: output will be as one line for the title, one line for the data, all fields separated by ';'</span></p></li>
 
@@ -658,15 +534,67 @@ a img {
 <li><p style="text-align:justify;"><span style="font-size:10pt;"><strong>-json</strong> : output will be in JSON format (default)</span></p></li>
 
 <li>
-<p style="text-align:justify;"><span style="font-size:10pt;"><strong>-quiet</strong> : no output will be done (only logging)</span></p></li></ul></li></ul>
-<p style="text-align:justify;"><strong></strong>&nbsp;</p>
-<p style="text-align:justify;"><strong><span style="font-size:10pt;">Wildcard character in request of transfer or submit</span></strong></p>
+<p style="text-align:justify;"><span style="font-size:10pt;"><strong>-quiet</strong> : no output will be done (only logging)</span></p></li></ul></blockquote></span></span></span></span></span></span></span></span></span></span></span>
+<h1 class="h1" style="text-align:justify;">Wildcard character in request of transfer or submit</h1><span style="font-family:courier new, monospace;"><span style="font-size:8pt;"><span style="font-size:10pt;"><span><span style="font-family:courier new, monospace;"><span style="font-size:8pt;"><span style="font-size:10pt;"><span><span><span><span>
+<blockquote>
 <p style="text-align:justify;"><span style="font-size:10pt;">You can use '*' and '?' standard wildcard characters in your request. Note however the following issues and way to fix the issue:</span></p>
 <ul>
 <li><div style="text-align:justify;"><span style="font-size:10pt;">When using wildcard characters combined with DirectTransfer or SubmitTransfer, the&nbsp;command is in error if the result gives multiple files. To enable multiple files resolution, use MultipleDirectTransfer or MultipleSubmitTransfer. Note that on MultipleSubmitTransfer, if the request is a "RECV" request, you can specify the option "-client" which allows the MultipleSubmitTransfer to run a RequestInformation first to the remote partner in order to get the list of remote files.</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:10pt;">In some special cases, wildcard characters are badly interpreted (Apache Commons or Shell first level of interpretation), for instance as "*" , "*.*" &nbsp;or "*xx" . In particular, the shell might replace immediately the value, which is not the desired result. In order to allow a "non-interpreted" wildcard character, Waarp allows to use the char '&sect;' in place of '*', so for the previous examples giving "%", "%.%" , "%xx". You can of course still continue to use '*' and '?'.</span></div></li></ul>
+<div style="text-align:justify;"><span style="font-size:10pt;">In some special cases, wildcard characters are badly interpreted (Apache Commons or Shell first level of interpretation), for instance as "*" , "*.*" &nbsp;or "*xx" . In particular, the shell might replace immediately the value, which is not the desired result. In order to allow a "non-interpreted" wildcard character, Waarp allows to use the char '&sect;' in place of '*', so for the previous examples giving "%", "%.%" , "%xx". You can of course still continue to use '*' and '?'.</span></div></li></ul></blockquote></span></span></span></span></span></span></span></span></span></span></span>
+<h1 class="h1" style="text-align:justify;">The Special Configuration fields (System menu)</h1>
+<blockquote style="margin-right:0px;" dir="ltr">
+<h2 class="h2" style="text-align:justify;">Business</h2>
+<ul>
+<li>
+<div style="text-align:justify;"><span style="font-size:10pt;">Each host name specified here will have the ability to make business request (special Java Class to handle B2B functionalities). This information could be passed through the XML configuration file or through the Business field of the Host configuration in the database (System Menu). The format is:</span></div>
+<ul>
+<li><span style="font-family:Courier New;font-size:10pt;">&lt;business&gt;&lt;businessid&gt;id1&lt;/businessid&gt;&lt;businessid&gt;id2&lt;/businessid&gt;...&lt;/business&gt;</span></li></ul></li></ul>
+<h2 class="h2" style="text-align:justify;">Roles</h2>
+<ul>
+<li>
+<div style="text-align:justify;"><span style="font-size:10pt;">If specified for one host, this will override database roles. By default, local server should be added as role = FULLADMIN in XML file. <span style="font-size:10pt;">This information could be passed through the XML configuration file or through the Roles field of the Host configuration in the database (System Menu). The format is:</span></span></div>
+<ul>
+<li><p style="text-align:justify;"><span style="font-family:Courier New;font-size:10pt;">&lt;roles&gt;&lt;role&gt;&lt;roleid&gt;id1&lt;/roleid&gt;&lt;roleset&gt;rolesSet&lt;/roleset&gt;&lt;/role&gt;...&lt;/roles&gt;</span></p></li>
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;">Where idx is&nbsp;an</span><span style="font-size:10pt;"> host id (1 by 1) for which you require to override default database roles</span></p></li>
+
+<li>
+<div style="text-align:justify;"><span style="font-size:10pt;">Where rolesSet is a set of roles, with separators as blank or '|'&nbsp; </span></div>
+<ul>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">The roles assign to this host between <span style="font-family:Courier New;">NOACCESS, READONLY, TRANSFER, RULE, HOST, LIMIT, SYSTEM, LOGCONTROL, PARTNER(READONLY,TRANSFER), CONFIGADMIN(PARTNER,RULE,HOST), FULLADMIN(CONFIGADMIN,LIMIT,SYSTEM,LOGCONTROL)</span></span></div></li>
+
+<li>
+<div style="text-align:justify;"><span style="font-family:Courier New;"><span style="font-size:10pt;"><span style="font-family:Verdana;">Example</span>: PARTNER|LOGCONTROL</span></span></div></li></ul></li></ul></li></ul>
+<h2 class="h2" style="text-align:justify;">Aliases</h2>
+<ul>
+<li>
+<p style="text-align:justify;"><span style="font-size:10pt;">This will allow alias usage for host ids. <span style="font-size:10pt;">This information could be passed through the XML configuration file or through the Aliases field of the Host configuration in the database (System Menu). The format is:</span></span></p>
+<ul>
+<li><p style="text-align:justify;"><span style="font-family:Courier New;font-size:10pt;">&lt;aliases&gt;&lt;alias&gt;&lt;realid&gt;realId&lt;/realid&gt;&lt;aliasid&gt;aliasSet&lt;/aliasid&gt;&lt;/alias&gt;...&lt;/aliases&gt;</span></p></li>
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;">Where realId is t</span><span style="font-size:10pt;">he real host id that will have aliases (locally defined).</span></p></li>
+
+<li>
+<div style="text-align:justify;"><span style="font-size:10pt;">Where aliasSet is a set of alias, with separators as blank or '|'&nbsp;</span></div>
+<ul>
+<li>
+<div style="text-align:justify;"><span style="font-size:10pt;">Example: <span style="font-family:Courier New;">alias1|alias2</span></span></div></li></ul></li></ul></li></ul>
+<h2 class="h2" style="text-align:justify;">Other</h2>
+<ul>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">By default, this field contains the <span style="font-family:Courier New;">&lt;root&gt;&lt;version&gt;version&lt;/version&gt;&lt;/root&gt;</span> xml information, handle by Waarp to check the database configuration version compared to the Waarp program, in order to allow automatic update.</span></div><ul>
+<li>
+<div style="text-align:justify;"><span style="font-size:10pt;">Note that automatic update could be prevented by setting in XML configuration file <span style="font-family:Courier New;">&lt;db&gt;dbcheck&gt;False&lt;/dbcheck&gt;...&lt;/db&gt;</span> or through Java property <span style="font-family:Courier New;">-Dopenr66.startup.dbcheck=0</span></span></div></li></ul></li>
+
+
+<li>
+<div style="text-align:justify;"><span style="font-size:10pt;">In case the database is shared among several R66 servers, to be able to see all transfer logs from the Administration Web interface,&nbsp;you need&nbsp;to set a special option in the "Other informations" with the&nbsp;identifier&nbsp;tha will be used to connect to&nbsp;this web interface.</span></div>
+<ul>
+<li>
+<p style="text-align:justify;"><span style="font-family:Courier New;font-size:10pt;">&lt;root&gt;...&lt;seeallid&gt;id1,id2,...,idn&lt;/seeallid&gt;&lt;/root&gt;</span></p></li></ul></li></ul>
+<blockquote>
+<p style="text-align:justify;"><span style="font-size:10pt;">Such containt will allow any of the ids id1, id2, ... or idn to see, once connected to the administration web interface,&nbsp;the full content of the database&nbsp;from the transfer menu. Note however that those ids need to have also the&nbsp;CONFIGADMIN&nbsp;role since this ability has to be controlled (see <strong>Roles</strong> item to see how to configure the roles).</span></p></blockquote></blockquote><span style="font-size:8pt;"><span style="font-family:courier new, monospace;">
 <p style="text-align:justify;">&nbsp;</p></span></span></div></td></tr></tbody></table>
 <div id="Comp7_CodeRelayer"><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

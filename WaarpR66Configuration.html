@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="description" content="Waarp project" />
-<meta http-equiv="imagetoolbar" content="no" />
-<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <meta name="robots" content="index,follow" />
-<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta name="description" content="Waarp project" />
+<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
+<meta http-equiv="imagetoolbar" content="no" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -24,6 +24,27 @@ a img {
 }
 </style>
 <title>Waarp - Waarp R66-Configuration</title>
+<script type="text/javascript">
+//<![CDATA[
+	function MHTGetRef(str)
+	{
+		if(document.all)
+			return document.all[str];
+		else
+			return document.getElementById(str);
+	}
+
+	function MHTSetClass(strID, strClass)
+	{
+		var obj = MHTGetRef(strID);
+		if(obj != null && typeof(obj) + "" != "undefined")
+			obj.className = strClass;
+		var obj = MHTGetRef(strID + "_second");
+		if(obj != null && typeof(obj) + "" != "undefined")
+			obj.className = strClass;
+	}
+//]]>
+</script>
 	<script type="text/javascript">
 //<![CDATA[
 	function MHGetRef(str)
@@ -44,255 +65,428 @@ a img {
 	</script>
 <script type="text/javascript">
 //<![CDATA[
-	function mvgGetRef(str)						{ return (document.all) ? document.all[str] : document.getElementById(str); }
-	function mvgSetClass(strId, strClass)		{ var obj = mvgGetRef(strId); if(obj != null && typeof(obj) != "undefined") obj.className = strClass; }
-	function mvgSwitchImage(strId, strFileName)	{ var obj = mvgGetRef(strId); if(obj != null && typeof(obj) != "undefined") obj.src = strFileName; }
+	var g_mhd1strTimeoutId	= "";
+	var g_mhd1strLastOpenId	= "";
+
+	function mhdGetRef(str)
+	{
+		return document.all ? document.all[str] : document.getElementById(str);
+	}
+	function mhdSwitchImage(strId, strFileName)
+	{
+		var obj = mhdGetRef(strId);
+		if(obj == null || typeof(obj) == "undefined" || typeof(obj.src) == "undefined") return;
+		obj.src = strFileName;
+	}
+	function mhdSetClass(strId, strClass)
+	{
+		var obj = mhdGetRef(strId);
+		if(obj == null || typeof(obj) == "undefined" || typeof(obj.className) == "undefined") return;
+		obj.className = strClass;
+	}	
+	function mhdShowHideLayer(strId, bShow)
+	{
+		var obj = mhdGetRef(strId);
+		if(obj == null || typeof(obj) == "undefined" || typeof(obj.style) == "undefined") return;
+		if(bShow && obj.style.display != "block")	{ obj.style.display = "block"; return; }
+		if(!bShow && obj.style.display != "none")	{ obj.style.display = "none"; return; }
+	}
+	function mhdGetSubMenuLevel(strId)
+	{
+		strId += "";
+		var arr = strId.split("_");
+		if(arr.length <= 1) return 0;
+		return arr.length - 1;
+	}
+	function mhdGetIdAtLevel(strId, nLevel)
+	{
+		var strRet = "";
+		var arr = strId.split("_");
+		if(arr.length <= 1 || nLevel <= 0 || nLevel > arr.length) return strRet;
+		for(var i = 0; i <= nLevel; ++i) { 
+			if(i > 0) strRet += "_";
+			strRet += arr[i];
+		}
+		return strRet;
+	}
+	function mhdClearSubMenus(strId)
+	{
+		var nMax = mhdGetSubMenuLevel(strId);
+		for(var n = nMax; n >= 1; --n) {
+			mhdShowHideLayer(mhdGetIdAtLevel(strId, n) + "_c", false);
+		}
+	}
+	function mhd1OnMouseOverItem(strId, strClass)
+	{
+		if(strClass != "") mhdSetClass(strId, strClass)
+		if(g_mhd1strLastOpenId != "") {
+			clearTimeout(g_mhd1strTimeoutId);
+			g_mhd1strTimeoutId = "";
+
+			var nMaxLast = mhdGetSubMenuLevel(g_mhd1strLastOpenId);
+			for(var n = nMaxLast; n >= 1; --n) {
+				if(mhdGetIdAtLevel(g_mhd1strLastOpenId, n) == mhdGetIdAtLevel(strId, n)) break;
+				mhdShowHideLayer(mhdGetIdAtLevel(g_mhd1strLastOpenId, n) + "_c", false);
+			}
+		}
+
+		var nMax = mhdGetSubMenuLevel(strId);
+		for(var n = 0; n <= nMax; ++n) {
+			mhdShowHideLayer(mhdGetIdAtLevel(strId, n) + "_c", true);
+		}
+
+		g_mhd1strLastOpenId = strId;
+	}
+	function mhd1OnMouseOutItem(strId, strClass)
+	{
+		if(strClass != "") mhdSetClass(strId, strClass)
+		g_mhd1strTimeoutId = setTimeout("mhdClearSubMenus('" + strId + "');", 500);
+	}
 //]]>
 </script>
+<style type="text/css">
+	#mhd1 a.submenu1:visited	{ text-decoration:none;color:#333333; }
+	#mhd1 a.submenu1over:hover	{ text-decoration:none;color:#FF0000; }
+
+	#mhd1 a.submenu2:visited	{ text-decoration:none;color:#333333; }
+	#mhd1 a.submenu2over:hover	{ text-decoration:none;color:#FF0000; }
+</style>
 </head>
-<body class="normal" style="margin:0px;padding:0px;background-color:#FFFFFF;background-image:url(gre/gre12340.png);background-position:left top;background-repeat:repeat-y;">
+<body class="normal" style="margin:0px;padding:0px;background-color:#FFFFFF;">
 <div style="text-align:left;">
-<div style="text-align:left;background-color:#EF6D00;"><a href="index.html"><img title="GoldenGate" style="border:none;" alt="GoldenGate" src="res/openlsd/waarp.jpg" width="74" height="49" /></a><img title="Waarp" style="border-top-style:none; border-bottom:#000000 0px solid; border-right-style:none; border-left-style:none;" alt="Waarp" src="gre/gre12341.png" width="99" height="40" /></div>
+<div style="text-align:left;background-color:#EF6D00;"><a href="index.html"><img title="Waarp" style="border:none;" alt="Waarp" src="res/openlsd/waarp.jpg" width="53" height="49" /></a><img title="Waarp" style="border:none;border-top:medium none;border-right:medium none;border-bottom:medium none;border-left:medium none;" alt="Waarp" src="gre/gre17587.png" width="99" height="40" /> 
+<div style="width:80%;position:absolute;float:right;left:160px;z-index:0;top:10px;"><table cellpadding="0" cellspacing="0" border="0" style="width:100%;margin:0;padding:0;border:0 solid none;"><tr><td style="vertical-align:top;"><div>
+<div id="Comp12_MenuHorizontalDynamic" style="text-align:left;"><div id="mhd1" style="text-align:left;"><table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+	<tr>
+		<td>
+<table border="0" cellpadding="0" cellspacing="0" style="margin:0px auto 0px 0px;">
+	<tr>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_0_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_0_0" class="submenu1" href="Roadmap.html" onmouseover="mhd1OnMouseOverItem('mhd1_0_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_0_0', 'submenu1')">Roadmap</a><a style="display:block;" id="mhd1_0_1" class="submenu1" href="ReleaseHistory.html" onmouseover="mhd1OnMouseOverItem('mhd1_0_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_0_1', 'submenu1')">Release History</a><a style="display:block;" id="mhd1_0_2" class="submenu1" href="CrawdUser.html" onmouseover="mhd1OnMouseOverItem('mhd1_0_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_0_2', 'submenu1')">Crawd User</a></div><a href="index.html"><img id="mhd1_img0" src="gre/gre17564.png" width="130" height="31" alt="World of Waarp" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_0', ''); mhdSwitchImage('mhd1_img0', 'gre/gre17566.png');" onmouseout="mhd1OnMouseOutItem('mhd1_0', ''); mhdSwitchImage('mhd1_img0', 'gre/gre17564.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_1_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_1_0" class="submenu1" href="WaarpR66Presentation.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_0', 'submenu1')">Waarp R66-Presentation</a><div style="position:relative;z-index:10;"><div id="mhd1_1_1_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_1_0" class="submenu1" href="WaarpR66Configuration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_0', 'submenu1')">Waarp R66-Configuration</a><div style="position:relative;z-index:11;"><div id="mhd1_1_1_1_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_1_1_0" class="submenu1" href="R66ServerConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_0', 'submenu1')">R66ServerConfig</a><a style="display:block;" id="mhd1_1_1_1_1" class="submenu1" href="R66ClientConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_1', 'submenu1')">R66ClientConfig</a><a style="display:block;" id="mhd1_1_1_1_2" class="submenu1" href="R66ClientNoDbConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_2', 'submenu1')">R66ClientNoDbConfig</a><a style="display:block;" id="mhd1_1_1_1_3" class="submenu1" href="R66ClientSubmitConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_3', 'submenu1')">R66ClientSubmitConfig</a><a style="display:block;" id="mhd1_1_1_1_4" class="submenu1" href="R66LimitConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_4', 'submenu1')">R66LimitConfig</a><a style="display:block;" id="mhd1_1_1_1_5" class="submenu1" href="R66RuleConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_5', 'submenu1')">R66RuleConfig</a><a style="display:block;" id="mhd1_1_1_1_6" class="submenu1" href="R66AuthentConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_6', 'submenu1')">R66AuthentConfig</a><a style="display:block;" id="mhd1_1_1_1_7" class="submenu1" href="R66SnmpConfiguration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_7', 'submenu1')">R66SnmpConfiguration</a></div><a style="display:block;" id="mhd1_1_1_1" class="submenu2" href="WaarpR66XmlConfiguration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1', 'submenu2')">Waarp R66-Xml Config</a>
+</div><a style="display:block;" id="mhd1_1_1_2" class="submenu1" href="WaarpR66Options.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_2', 'submenu1')">Waarp R66-Options</a></div><a style="display:block;" id="mhd1_1_1" class="submenu2" href="WaarpR66Installation.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1', 'submenu2')">Waarp R66-Installation</a>
+</div><div style="position:relative;z-index:10;"><div id="mhd1_1_2_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_2_0" class="submenu1" href="WaarpR66Protocol.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2_0', 'submenu1')">Waarp R66-Protocol</a><a style="display:block;" id="mhd1_1_2_1" class="submenu1" href="WaarpR66FileStatus.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2_1', 'submenu1')">Waarp R66-FileStatus</a><a style="display:block;" id="mhd1_1_2_2" class="submenu1" href="WaarpR66RestAPI.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2_2', 'submenu1')">Waarp R66-Rest-API</a></div><a style="display:block;" id="mhd1_1_2" class="submenu2" href="WaarpR66undertheWood.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2', 'submenu2')">Waarp R66 under the Wood</a>
+</div><div style="position:relative;z-index:10;"><div id="mhd1_1_3_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_3_0" class="submenu1" href="WaarpR66Command.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_0', 'submenu1')">Waarp R66-Command</a><a style="display:block;" id="mhd1_1_3_1" class="submenu1" href="WaarpR66CommandLine.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_1', 'submenu1')">Waarp R66-CommandLine</a><div style="position:relative;z-index:11;"><div id="mhd1_1_3_2_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_3_2_0" class="submenu1" href="TaskFormat.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_0', 'submenu1')">TaskFormat</a><a style="display:block;" id="mhd1_1_3_2_1" class="submenu1" href="LOG.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_1', 'submenu1')">LOG</a><a style="display:block;" id="mhd1_1_3_2_2" class="submenu1" href="SNMP.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_2', 'submenu1')">SNMP</a><a style="display:block;" id="mhd1_1_3_2_3" class="submenu1" href="COPY.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_3', 'submenu1')">COPY</a><a style="display:block;" id="mhd1_1_3_2_4" class="submenu1" href="COPYRENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_4', 'submenu1')">COPYRENAME</a><a style="display:block;" id="mhd1_1_3_2_5" class="submenu1" href="MOVE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_5', 'submenu1')">MOVE</a><a style="display:block;" id="mhd1_1_3_2_6" class="submenu1" href="MOVERENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_6', 'submenu1')">MOVERENAME</a><a style="display:block;" id="mhd1_1_3_2_7" class="submenu1" href="LINKRENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_7', 'submenu1')">LINKRENAME</a><a style="display:block;" id="mhd1_1_3_2_8" class="submenu1" href="RENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_8', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_8', 'submenu1')">RENAME</a><a style="display:block;" id="mhd1_1_3_2_9" class="submenu1" href="DELETE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_9', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_9', 'submenu1')">DELETE</a><a style="display:block;" id="mhd1_1_3_2_10" class="submenu1" href="VALIDFILEPATH.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_10', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_10', 'submenu1')">VALIDFILEPATH</a><a style="display:block;" id="mhd1_1_3_2_11" class="submenu1" href="CHKFILE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_11', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_11', 'submenu1')">CHKFILE</a><a style="display:block;" id="mhd1_1_3_2_12" class="submenu1" href="TRANSCODE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_12', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_12', 'submenu1')">TRANSCODE</a><a style="display:block;" id="mhd1_1_3_2_13" class="submenu1" href="TAR.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_13', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_13', 'submenu1')">TAR</a><a style="display:block;" id="mhd1_1_3_2_14" class="submenu1" href="ZIP.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_14', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_14', 'submenu1')">ZIP</a><a style="display:block;" id="mhd1_1_3_2_15" class="submenu1" href="UNZEROED.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_15', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_15', 'submenu1')">UNZEROED</a><a style="display:block;" id="mhd1_1_3_2_16" class="submenu1" href="CHMOD.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_16', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_16', 'submenu1')">CHMOD</a><a style="display:block;" id="mhd1_1_3_2_17" class="submenu1" href="EXEC.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_17', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_17', 'submenu1')">EXEC</a><a style="display:block;" id="mhd1_1_3_2_18" class="submenu1" href="EXECMOVE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_18', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_18', 'submenu1')">EXECMOVE</a><a style="display:block;" id="mhd1_1_3_2_19" class="submenu1" href="EXECOUTPUT.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_19', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_19', 'submenu1')">EXECOUTPUT</a><a style="display:block;" id="mhd1_1_3_2_20" class="submenu1" href="EXECJAVA.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_20', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_20', 'submenu1')">EXECJAVA</a><a style="display:block;" id="mhd1_1_3_2_21" class="submenu1" href="TRANSFER.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_21', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_21', 'submenu1')">TRANSFER</a><a style="display:block;" id="mhd1_1_3_2_22" class="submenu1" href="RESCHEDULE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_22', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_22', 'submenu1')">RESCHEDULE</a><a style="display:block;" id="mhd1_1_3_2_23" class="submenu1" href="FTP.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_23', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_23', 'submenu1')">FTP</a></div><a style="display:block;" id="mhd1_1_3_2" class="submenu2" href="WaarpR66TaskOptions.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2', 'submenu2')">Waarp R66-TaskOptions</a>
+</div><div style="position:relative;z-index:11;"><div id="mhd1_1_3_3_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_3_3_0" class="submenu1" href="R66Authentication.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_0', 'submenu1')">R66Authentication</a><a style="display:block;" id="mhd1_1_3_3_1" class="submenu1" href="R66CentralizationLogs.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_1', 'submenu1')">R66CentralizationLogs</a><a style="display:block;" id="mhd1_1_3_3_2" class="submenu1" href="R66ClusterHA.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_2', 'submenu1')">R66Cluster-HA</a><a style="display:block;" id="mhd1_1_3_3_3" class="submenu1" href="R66DMZ.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_3', 'submenu1')">R66DMZ</a><a style="display:block;" id="mhd1_1_3_3_4" class="submenu1" href="R66Embedded.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_4', 'submenu1')">R66Embedded</a><a style="display:block;" id="mhd1_1_3_3_5" class="submenu1" href="R66OtherProtocols.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_5', 'submenu1')">R66OtherProtocols</a><a style="display:block;" id="mhd1_1_3_3_6" class="submenu1" href="R66Reschedule.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_6', 'submenu1')">R66Reschedule</a><a style="display:block;" id="mhd1_1_3_3_7" class="submenu1" href="R66Definitions.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_7', 'submenu1')">R66Definitions</a><a style="display:block;" id="mhd1_1_3_3_8" class="submenu1" href="PlatformCompatibility.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_8', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_8', 'submenu1')">Platform Compatibility</a></div><a style="display:block;" id="mhd1_1_3_3" class="submenu2" href="WaarpR66Wiki.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3', 'submenu2')">Waarp R66-Wiki</a>
+</div><a style="display:block;" id="mhd1_1_3_4" class="submenu1" href="WaarpR66WebMonitoring.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_4', 'submenu1')">Waarp R66-Web-Monitoring</a><a style="display:block;" id="mhd1_1_3_5" class="submenu1" href="WaarpR66WebAdministration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_5', 'submenu1')">Waarp R66-Web-Administration</a></div><a style="display:block;" id="mhd1_1_3" class="submenu2" href="WaarpR66Howtos.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3', 'submenu2')">Waarp R66 Howtos</a>
+</div><a style="display:block;" id="mhd1_1_4" class="submenu1" href="R66AdministratorGui.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_4', 'submenu1')">R66 Administrator Gui</a><a style="display:block;" id="mhd1_1_5" class="submenu1" href="R66Proxy.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_5', 'submenu1')">R66 Proxy</a><a style="display:block;" id="mhd1_1_6" class="submenu1" href="R66ClientGui.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_6', 'submenu1')">R66 Client Gui</a></div><a href="WaarpR66.html"><img id="mhd1_img1" src="gre/gre17568.png" width="130" height="31" alt="Waarp R66" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_1', ''); mhdSwitchImage('mhd1_img1', 'gre/gre17569.png');" onmouseout="mhd1OnMouseOutItem('mhd1_1', ''); mhdSwitchImage('mhd1_img1', 'gre/gre17568.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_2_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_2_0" class="submenu1" href="WaarpFTPConfiguration.html" onmouseover="mhd1OnMouseOverItem('mhd1_2_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_2_0', 'submenu1')">Waarp-FTP-Configuration</a><a style="display:block;" id="mhd1_2_1" class="submenu1" href="Benchmarks.html" onmouseover="mhd1OnMouseOverItem('mhd1_2_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_2_1', 'submenu1')">Benchmarks</a><a style="display:block;" id="mhd1_2_2" class="submenu1" href="WaarpGatewayFtp.html" onmouseover="mhd1OnMouseOverItem('mhd1_2_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_2_2', 'submenu1')">WaarpGatewayFtp</a></div><a href="WaarpFTP.html"><img id="mhd1_img2" src="gre/gre17570.png" width="130" height="31" alt="Waarp FTP" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_2', ''); mhdSwitchImage('mhd1_img2', 'gre/gre17572.png');" onmouseout="mhd1OnMouseOutItem('mhd1_2', ''); mhdSwitchImage('mhd1_img2', 'gre/gre17570.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_3_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_3_0" class="submenu1" href="Digest.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_0', 'submenu1')">Digest</a><a style="display:block;" id="mhd1_3_1" class="submenu1" href="Common.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_1', 'submenu1')">Common</a><a style="display:block;" id="mhd1_3_2" class="submenu1" href="LocalExec.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_2', 'submenu1')">LocalExec</a><a style="display:block;" id="mhd1_3_3" class="submenu1" href="XmlEditor.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_3', 'submenu1')">XmlEditor</a><a style="display:block;" id="mhd1_3_4" class="submenu1" href="Password.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_4', 'submenu1')">Password</a><a style="display:block;" id="mhd1_3_5" class="submenu1" href="WaarpSNMP.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_5', 'submenu1')">WaarpSNMP</a><a style="display:block;" id="mhd1_3_6" class="submenu1" href="GatewayKernel.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_6', 'submenu1')">Gateway Kernel</a><a style="display:block;" id="mhd1_3_7" class="submenu1" href="Thrift.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_7', 'submenu1')">Thrift</a><a style="display:block;" id="mhd1_3_8" class="submenu1" href="FtpClient.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_8', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_8', 'submenu1')">FtpClient</a><a style="display:block;" id="mhd1_3_9" class="submenu1" href="WaarpGatewayHttp.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_9', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_9', 'submenu1')">WaarpGatewayHttp</a></div><a href="WaarpsFamily.html"><img id="mhd1_img3" src="gre/gre17573.png" width="130" height="31" alt="Waarp's Family" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_3', ''); mhdSwitchImage('mhd1_img3', 'gre/gre17575.png');" onmouseout="mhd1OnMouseOutItem('mhd1_3', ''); mhdSwitchImage('mhd1_img3', 'gre/gre17573.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><a href="APIReferences.html"><img id="mhd1_img4" src="gre/gre17576.png" width="130" height="31" alt="API References" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_4', ''); mhdSwitchImage('mhd1_img4', 'gre/gre17578.png');" onmouseout="mhd1OnMouseOutItem('mhd1_4', ''); mhdSwitchImage('mhd1_img4', 'gre/gre17576.png'); " /></a></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_5_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_5_0" class="submenu1" href="OldGoldenGateDownload.html" onmouseover="mhd1OnMouseOverItem('mhd1_5_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_5_0', 'submenu1')">Old GoldenGate Download</a></div><a href="Downloads.html"><img id="mhd1_img5" src="gre/gre17579.png" width="130" height="31" alt="Downloads" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_5', ''); mhdSwitchImage('mhd1_img5', 'gre/gre17581.png');" onmouseout="mhd1OnMouseOutItem('mhd1_5', ''); mhdSwitchImage('mhd1_img5', 'gre/gre17579.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_6_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_6_0" class="submenu1" href="WaarpDependson.html" onmouseover="mhd1OnMouseOverItem('mhd1_6_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_6_0', 'submenu1')">Waarp Depends on</a><a style="display:block;" id="mhd1_6_1" class="submenu1" href="License.html" onmouseover="mhd1OnMouseOverItem('mhd1_6_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_6_1', 'submenu1')">License</a><a style="display:block;" id="mhd1_6_2" class="submenu1" href="Support.html" onmouseover="mhd1OnMouseOverItem('mhd1_6_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_6_2', 'submenu1')">Support</a></div><a href="About.html"><img id="mhd1_img6" src="gre/gre17582.png" width="130" height="31" alt="About" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_6', ''); mhdSwitchImage('mhd1_img6', 'gre/gre17584.png');" onmouseout="mhd1OnMouseOutItem('mhd1_6', ''); mhdSwitchImage('mhd1_img6', 'gre/gre17582.png'); " /></a>
+</div></td>
+	</tr>
+</table>
+</td>
+	</tr>
+</table>
+</div></div></div></td><td style="height:40px;width:1px;margin:0;padding:0;border:0 solid none;"><div style="height:40px;width:1px;margin:0;padding:0;border:0 solid none;"></div></td></tr></table></div></div>
 <div style="border-right:none;border-left:none;border-bottom:2px solid #FFFFFF;border-top:1px solid #FFFFFF;text-align:left;background-color:#F9DEC7;"><table cellpadding="0" cellspacing="0" border="0" style="width:100%;margin:0;padding:0;border:0 solid none;"><tr><td style="vertical-align:top;"><div></div></td><td style="height:1px;width:1px;margin:0;padding:0;border:0 solid none;"><div style="height:1px;width:1px;margin:0;padding:0;border:0 solid none;"></div></td></tr></table></div>
 <table style="border:none;" cellspacing="0" cellpadding="0" width="100%">
 <tbody>
 <tr>
 <td style="width:100px;vertical-align:top;background-color:#FFFFFF;">&nbsp;</td>
 <td style="width:100%;vertical-align:top;padding-bottom:0px;padding-top:0px;padding-left:5px;padding-right:5px;">
-<div id="Comp4_MenuHorizontal">
+<div id="Comp9_MenuHorizontalText" style="text-align:right;">
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
-	<tr style="background-image:url(gre/gre12309.png);background-repeat:repeat-x;background-position:left top;">
-		<td id="MH1_0"><a href="WaarpR66Presentation.html" onmouseover="MHSwitchImage('MH1_0_img', 'gre/gre12353.png');" onmouseout="MHSwitchImage('MH1_0_img', 'gre/gre12352.png');"><img id="MH1_0_img" src="gre/gre12352.png" width="179" height="26" alt="Waarp R66-Presentation" style="border:none;display:block;" /></a></td>
-		<td></td><td><img src="gre/gre12308.png" height="18" width="1" style="border:none;display:block;" alt="" /></td><td></td>
-		<td id="MH1_1"><a href="WaarpR66Installation.html" onmouseover="MHSwitchImage('MH1_1_img', 'gre/gre12355.png');" onmouseout="MHSwitchImage('MH1_1_img', 'gre/gre12355.png');"><img id="MH1_1_img" src="gre/gre12355.png" width="190" height="26" alt="Waarp R66-Installation" style="border:none;display:block;" /></a></td>
-		<td></td><td><img src="gre/gre12308.png" height="18" width="1" style="border:none;display:block;" alt="" /></td><td></td>
-		<td id="MH1_2"><a href="WaarpR66Technical.html" onmouseover="MHSwitchImage('MH1_2_img', 'gre/gre12357.png');" onmouseout="MHSwitchImage('MH1_2_img', 'gre/gre12356.png');"><img id="MH1_2_img" src="gre/gre12356.png" width="159" height="26" alt="Waarp R66-Technical" style="border:none;display:block;" /></a></td>
-		<td></td><td><img src="gre/gre12308.png" height="18" width="1" style="border:none;display:block;" alt="" /></td><td></td>
-		<td id="MH1_3"><a href="WaarpR66Production.html" onmouseover="MHSwitchImage('MH1_3_img', 'gre/gre12359.png');" onmouseout="MHSwitchImage('MH1_3_img', 'gre/gre12358.png');"><img id="MH1_3_img" src="gre/gre12358.png" width="167" height="26" alt="Waarp R66-Production" style="border:none;display:block;" /></a></td>
-		<td></td><td><img src="gre/gre12308.png" height="18" width="1" style="border:none;display:block;" alt="" /></td><td></td>
-		<td id="MH1_4"><a href="WaarpAdministrator.html" onmouseover="MHSwitchImage('MH1_4_img', 'gre/gre12361.png');" onmouseout="MHSwitchImage('MH1_4_img', 'gre/gre12360.png');"><img id="MH1_4_img" src="gre/gre12360.png" width="156" height="26" alt="Waarp Administrator" style="border:none;display:block;" /></a></td>
-		<td style="width:100%;"><img src="img/space.gif" width="1" height="1" style="border:none;display:block;" alt="" /></td>
-	<td><img src="gre/gre12309.png" height="26" width="1" style="border:none;display:block;" alt="" /></td>
+	<tr>
+		<td class="pathmenu1" style="white-space:nowrap;" valign="top" align="right"><a href="WaarpR66.html" id="MHT1_0_second" class="pathmenu1" onmouseover="MHTSetClass('MHT1_0', 'pathmenu1over');" onmouseout="MHTSetClass('MHT1_0', 'pathmenu1');"><span id="MHT1_0" class="pathmenu1">Waarp R66</span></a><span class="normal"> &gt; </span><a href="WaarpR66Installation.html" id="MHT1_1_second" class="pathmenu1" onmouseover="MHTSetClass('MHT1_1', 'pathmenu1over');" onmouseout="MHTSetClass('MHT1_1', 'pathmenu1');"><span id="MHT1_1" class="pathmenu1">Waarp R66-Installation</span></a><span class="normal"> &gt; </span><span id="MHT1_2" class="pathmenu1sel"><label>Waarp R66-Configuration</label></span></td>
 	</tr>
 </table>
-</div></td></tr>
+</div>
+<div id="Comp13_MenuHorizontal" style="text-align:left;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td id="MH3_0"><a href="WaarpR66Presentation.html" onmouseover="MHSwitchImage('MH3_0_img', 'gre/gre17613.png');" onmouseout="MHSwitchImage('MH3_0_img', 'gre/gre17611.png');"><img id="MH3_0_img" src="gre/gre17611.png" width="178" height="26" alt="Waarp R66-Presentation" style="border:none;display:block;" /></a></td>
+		<td id="MH3_1"><a href="WaarpR66Installation.html" onmouseover="MHSwitchImage('MH3_1_img', 'gre/gre17616.png');" onmouseout="MHSwitchImage('MH3_1_img', 'gre/gre17615.png');"><img id="MH3_1_img" src="gre/gre17615.png" width="176" height="26" alt="Waarp R66-Installation" style="border:none;display:block;" /></a></td>
+		<td id="MH3_2"><a href="WaarpR66undertheWood.html" onmouseover="MHSwitchImage('MH3_2_img', 'gre/gre17619.png');" onmouseout="MHSwitchImage('MH3_2_img', 'gre/gre17617.png');"><img id="MH3_2_img" src="gre/gre17617.png" width="200" height="26" alt="Waarp R66 under the Wood" style="border:none;display:block;" /></a></td>
+		<td id="MH3_3"><a href="WaarpR66Howtos.html" onmouseover="MHSwitchImage('MH3_3_img', 'gre/gre17622.png');" onmouseout="MHSwitchImage('MH3_3_img', 'gre/gre17620.png');"><img id="MH3_3_img" src="gre/gre17620.png" width="142" height="26" alt="Waarp R66 Howtos" style="border:none;display:block;" /></a></td>
+		<td id="MH3_4"><a href="R66AdministratorGui.html" onmouseover="MHSwitchImage('MH3_4_img', 'gre/gre17625.png');" onmouseout="MHSwitchImage('MH3_4_img', 'gre/gre17623.png');"><img id="MH3_4_img" src="gre/gre17623.png" width="164" height="26" alt="R66 Administrator Gui" style="border:none;display:block;" /></a></td>
+		<td id="MH3_5"><a href="R66Proxy.html" onmouseover="MHSwitchImage('MH3_5_img', 'gre/gre17628.png');" onmouseout="MHSwitchImage('MH3_5_img', 'gre/gre17626.png');"><img id="MH3_5_img" src="gre/gre17626.png" width="85" height="26" alt="R66 Proxy" style="border:none;display:block;" /></a></td>
+		<td id="MH3_6"><a href="R66ClientGui.html" onmouseover="MHSwitchImage('MH3_6_img', 'gre/gre17631.png');" onmouseout="MHSwitchImage('MH3_6_img', 'gre/gre17629.png');"><img id="MH3_6_img" src="gre/gre17629.png" width="113" height="26" alt="R66 Client Gui" style="border:none;display:block;" /></a></td>
+		<td style="width:100%;"><img src="img/space.gif" width="1" height="1" style="border:none;display:block;" alt="" /></td>
+	</tr>
+</table>
+</div>
+<div style="text-align:right;">
+<div id="Comp10_MenuHorizontal" style="text-align:left;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td><img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td>
+		<td id="MH1_0"><img id="MH1_0_img" src="gre/gre17633.png" width="154" height="20" alt="Waarp R66-Configuration" style="border:none;display:block;" /></td>
+		<td id="MH1_1"><a href="WaarpR66XmlConfiguration.html" onmouseover="MHSwitchImage('MH1_1_img', 'gre/gre17637.png');" onmouseout="MHSwitchImage('MH1_1_img', 'gre/gre17635.png');"><img id="MH1_1_img" src="gre/gre17635.png" width="139" height="20" alt="Waarp R66-Xml Config" style="border:none;display:block;" /></a></td>
+		<td id="MH1_2"><a href="WaarpR66Options.html" onmouseover="MHSwitchImage('MH1_2_img', 'gre/gre17640.png');" onmouseout="MHSwitchImage('MH1_2_img', 'gre/gre17638.png');"><img id="MH1_2_img" src="gre/gre17638.png" width="120" height="20" alt="Waarp R66-Options" style="border:none;display:block;" /></a></td>
+		<td style="width:100%;"><img src="img/space.gif" width="1" height="1" style="border:none;display:block;" alt="" /></td>
+	</tr>
+</table>
+</div>
+<div id="Comp11_MenuHorizontal" style="text-align:left;"></div></div></td></tr>
 <tr>
-<td style="width:100px;vertical-align:top;">
-<div id="Comp6_MenuVertical" style="text-align:left;"><div id="mvg1"><a href="index.html" onmouseover="mvgSwitchImage('mvg1_0_img', 'gre/gre12312.png');" onmouseout="mvgSwitchImage('mvg1_0_img', 'gre/gre12310.png');"><img id="mvg1_0_img" src="gre/gre12310.png" width="150" height="31" alt="Home" style="display:block;border:none;" /></a>
-<a href="WorldofWaarp.html" onmouseover="mvgSwitchImage('mvg1_1_img', 'gre/gre12315.png');" onmouseout="mvgSwitchImage('mvg1_1_img', 'gre/gre12313.png');"><img id="mvg1_1_img" src="gre/gre12313.png" width="150" height="31" alt="World of Waarp" style="display:block;border:none;" /></a>
-<a href="WaarpR66.html" onmouseover="mvgSwitchImage('mvg1_2_img', 'gre/gre12318.png');" onmouseout="mvgSwitchImage('mvg1_2_img', 'gre/gre12317.png');"><img id="mvg1_2_img" src="gre/gre12317.png" width="150" height="31" alt="Waarp R66" style="display:block;border:none;" /></a>
-<a href="WaarpFTP.html" onmouseover="mvgSwitchImage('mvg1_3_img', 'gre/gre12321.png');" onmouseout="mvgSwitchImage('mvg1_3_img', 'gre/gre12319.png');"><img id="mvg1_3_img" src="gre/gre12319.png" width="150" height="31" alt="Waarp FTP" style="display:block;border:none;" /></a>
-<a href="WaarpGatewayFtp.html" onmouseover="mvgSwitchImage('mvg1_4_img', 'gre/gre12324.png');" onmouseout="mvgSwitchImage('mvg1_4_img', 'gre/gre12322.png');"><img id="mvg1_4_img" src="gre/gre12322.png" width="150" height="31" alt="WaarpGatewayFtp" style="display:block;border:none;" /></a>
-<a href="WaarpGatewayHttp.html" onmouseover="mvgSwitchImage('mvg1_5_img', 'gre/gre12327.png');" onmouseout="mvgSwitchImage('mvg1_5_img', 'gre/gre12325.png');"><img id="mvg1_5_img" src="gre/gre12325.png" width="150" height="31" alt="WaarpGatewayHttp" style="display:block;border:none;" /></a>
-<a href="WaarpCommons.html" onmouseover="mvgSwitchImage('mvg1_6_img', 'gre/gre12330.png');" onmouseout="mvgSwitchImage('mvg1_6_img', 'gre/gre12328.png');"><img id="mvg1_6_img" src="gre/gre12328.png" width="150" height="31" alt="Waarp Commons" style="display:block;border:none;" /></a>
-<a href="APIReferences.html" onmouseover="mvgSwitchImage('mvg1_7_img', 'gre/gre12333.png');" onmouseout="mvgSwitchImage('mvg1_7_img', 'gre/gre12331.png');"><img id="mvg1_7_img" src="gre/gre12331.png" width="150" height="31" alt="API References" style="display:block;border:none;" /></a>
-<a href="Downloads.html" onmouseover="mvgSwitchImage('mvg1_8_img', 'gre/gre12336.png');" onmouseout="mvgSwitchImage('mvg1_8_img', 'gre/gre12334.png');"><img id="mvg1_8_img" src="gre/gre12334.png" width="150" height="31" alt="Downloads" style="display:block;border:none;" /></a>
-<a href="WaarpDependson.html" onmouseover="mvgSwitchImage('mvg1_9_img', 'gre/gre12339.png');" onmouseout="mvgSwitchImage('mvg1_9_img', 'gre/gre12337.png');"><img id="mvg1_9_img" src="gre/gre12337.png" width="150" height="31" alt="Waarp Depends on" style="display:block;border:none;" /></a>
-</div></div></td>
+<td style="width:100px;vertical-align:top;"></td>
 <td style="width:100%;vertical-align:top;padding-bottom:5px;padding-top:5px;padding-left:5px;padding-right:5px;">
 <h1 class="h1">Waarp R66-Configuration</h1>
 <div id="Comp1_sys_doctext"><p style="text-align:justify;"><span style="font-size:11pt;">The primary installation of a server is done using the following steps:</span></p>
-<ol>
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Download the "All Jars Waarp R66" package from <a href="Downloads.html">Downloads page</a></span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><a href="WaarpR66Configuration.html#XML">Create the XML configuration files</a> (Server, Limit, Rule, Authent, SNMP). The minimal configuration is Server and Authent (eventually limited to the created server). An example of various configuration files can be found in the <a href="https://raw.github.com/waarp/WaarpMaven2/master/AllJars/WaarpR66-example-config.zip">"Waarp R66 Configuration example"</a> package. This package is an example and MUST be adapted to your needs. You can also have a look to the page <a href="WaarpR66Options.html">Waarp R66-Options</a>, which explains some specific options.</span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><a href="WaarpR66Configuration.html#PWD">Create the necessary GGP (GoldenGate Password files)</a> using the des Key generated both by Waarp Password</span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><a href="WaarpR66Configuration.html#SSL">Create the necessary SSL KeyStore</a> for the HTTPS Administration interface and another one for the SSL server authentication (server only, or server AND client, depending on your choices)</span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Create the database (dependent on the one choose between Oracle, PostgreSql, MySQL or H2 database, the initial creation is out of this documentation).</span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Adapt the example scripts that helps to launch the Waarp commands and services (in <strong>example/</strong> then according to your OS: Linux, Unix, Windows). In particular <strong>for Linux and Unix, the file ENV_R66</strong> shall be adapted to your installation, while <strong>for Windows, it is the setvari.bat</strong>. Note also that<strong> for Services</strong> (Waarp R66 or Waarp SpooledDirectory service), one should adapt the files found in <strong>/example/service</strong> (Waarp R66) and /example/servicespooled (SpooledDirectory).</span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><a href="WaarpR66Configuration.html#DB">Initialize the database</a> (once created and the user/password and the JDBC access fill in the Server configuration XML file)</span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><a href="WaarpR66Configuration.html#LOG">Create the logback.xml</a> file according to your need (to setup for instance the level of trace from DEBUG to WARN). See the logback.xml example or the <a href="http://logback.qos.ch/">LogBack web site</a>.</span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Now you can run the server and use the various commands or Administration interface to continue the configuration (Limit, Rule, Authent). Note that some specific options can be passed when launching the commands (see at the end the "-Dopenr66.*" options).</span></div></li>
-
-<li>
-<div style="text-align:justify;"><span style="font-size:11pt;">Note that commands can also have a special extra argument: the output format as one of</span></div></li></ol>
-<ul>
-<li>
-<ul>
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><strong>-csv </strong>: output will be as one line for the title, one line for the data, all fields separated by ';'</span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><strong>-property</strong> : output will be one value per line, as name=value</span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><strong>-xml</strong> : output will be in XML format</span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><strong>-json</strong> : output will be in JSON format (default)</span></div></li>
-
-<li>
-<div style="text-align:justify;"><span style="font-size:11pt;"><strong>-quiet</strong> : no output will be done (only logging)</span></div></li></ul></li></ul>
-<p style="text-align:justify;"><span style="font-size:11pt;">Below those several steps are illustrated.</span></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">Note that the various tools are consolidated into one named : <a href="WaarpAdministrator.html">Central Administrator</a> (Xml Editor, Password, R66Gui) plus some other functions.</span></p>
 <p style="text-align:justify;">&nbsp;</p>
-<h1 class="h1" style="text-align:justify;"><a name="XML"></a>XML Configuration</h1>
-<p style="text-align:justify;"><span style="font-size:11pt;">To configure a Waarp R66 Server, you need to first create the XML files as needed (</span><a href="WaarpR66XmlConfiguration.html"><span style="font-size:11pt;">see the Xml Config files page</span></a><span style="font-size:11pt;">): main config file, authent file, rules and limit config files. To help the administrator to generate correct files, XSD models are defined to be used with an extension of the project <a href="javascript:var EffectiveNewWin = window.open('http://www.felixgolubov.com/XMLEditor/','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();">Xample (XML Gui Editor) from Felix Golubov</a>.</span></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">Note that the <strong>httpadmin</strong> shall specify the correct path for your choice of Waarp HTTPS/HTTP administrator/supervision tool. By default, we recommend to use <strong>admin2</strong> (or <strong><em>adminfr</em></strong> for <strong><em>French</em></strong>).</span></p>
+<table style="border:none;width:90%;" cellspacing="1" cellpadding="1">
+<tbody>
+<tr>
+<td style="width:90%;" valign="top">
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;"><strong>1) Download the "All Jars Waarp R66" package</strong> from </span><a href="Downloads.html"><span style="font-size:10pt;">Downloads page</span></a></p></blockquote></td></tr>
+<tr>
+<td valign="top">
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">2) </span><a href="WaarpR66Configuration.html#XML"><strong><span style="font-size:10pt; color:#0000ff;">Create the XML configuration files</span></strong></a><span style="font-size:10pt;"><strong> (Server, Limit, Rule, Authent, SNMP).</strong> The minimal configuration is Server and Authent (eventually limited to the created server). An example of various configuration files can be found in the </span><a href="http://sourceforge.net/projects/waarp/files/AllJars/WaarpR66-example-config.zip/download"><span style="font-size:10pt;">"Waarp R66 Configuration example"</span></a><span style="font-size:10pt;"> package. This package is an example and MUST be adapted to your needs. You can also have a look to the page </span><a href="WaarpR66Options.html"><span style="font-size:10pt;">Waarp R66-Options</span></a><span style="font-size:10pt;">, which explains some specific options.</span></p></blockquote></td></tr>
+<tr>
+<td valign="top">
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">3) </span><a href="WaarpR66Configuration.html#PWD"><strong><span style="font-size:10pt; color:#0000ff;">Create the necessary GGP (GoldenGate Password files)</span></strong></a><span style="font-size:10pt;"> using the des Key generated both by Waarp Password</span></p></blockquote></td></tr>
+<tr>
+<td valign="top">
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">4) </span><a href="WaarpR66Configuration.html#SSL"><strong><span style="font-size:10pt; color:#0000ff;">Create the necessary SSL KeyStore</span></strong></a><span style="font-size:10pt;"> for the HTTPS Administration interface and another one for the SSL server authentication (server only, or server AND client, depending on your choices)</span></p></blockquote></td></tr>
+<tr>
+<td valign="top">
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;"><strong>5) Create the database</strong> (dependent on the one choose between Oracle, PostgreSql, MySQL/MariaDB or H2 database, the initial creation is out of this documentation). <strong>We strongly recommend to use either PostgreSql or H2 Database</strong>, since MySQL and MariaDB show some issues on client side using JDBC in multithreading case.</span></p></blockquote></td></tr>
+<tr>
+<td valign="top">
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;"><strong>6) Adapt the example scripts that helps to launch the Waarp commands and services</strong> (in <strong>example/</strong> then according to your OS: Linux, Unix, Windows). In particular <strong>for Linux and Unix, the file ENV_R66</strong> shall be adapted to your installation, while <strong>for Windows, it is the setvari.bat</strong>. Note also that<strong> for Services</strong> (Waarp R66 or Waarp SpooledDirectory service), one should adapt the files found in <strong>/example/service</strong> (Waarp R66) and /example/servicespooled (SpooledDirectory).</span></p></blockquote></td></tr>
+<tr>
+<td valign="top">
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">7) </span><a href="WaarpR66Configuration.html#DB"><strong><span style="font-size:10pt; color:#0000ff;">Initialize the database</span></strong></a><span style="font-size:10pt;"> (once created and the user/password and the JDBC access fill in the Server configuration XML file)</span></p></blockquote></td></tr>
+<tr>
+<td valign="top">
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">8) </span><a href="WaarpR66Configuration.html#LOG"><strong><span style="font-size:10pt; color:#0000ff;">Create the logback.xml</span></strong></a><span style="font-size:10pt;"> file according to your need (to setup for instance the level of trace from DEBUG to WARN). See the logback.xml example or the </span><a href="http://logback.qos.ch/"><span style="font-size:10pt;">LogBack web site</span></a><span style="font-size:10pt;">.</span></p></blockquote></td></tr>
+<tr>
+<td valign="top">
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">9) Now you can run the server and use the various commands or Administration interface to continue the configuration (Limit, Rule, Authent). Note that </span><a href="WaarpR66Configuration.html#JVMOPT"><span style="font-size:10pt;">some specific options</span></a><span style="font-size:10pt;"> can be passed when launching the commands (see at the end the "-Dopenr66.*" options).</span></p></blockquote></td></tr>
+<tr>
+<td valign="top">
+<blockquote style="margin-right:0px;" dir="ltr">
+<p><span style="font-size:10pt;">10) Note that commands can also have a special extra argument: the output format as one of </span></p></blockquote>
+<ul>
+<li>
+<ul>
+<li><p style="text-align:justify;"><span style="font-size:10pt;"><strong>-csv </strong>: output will be as one line for the title, one line for the data, all fields separated by ';'</span></p></li>
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;"><strong>-property</strong> : output will be one value per line, as name=value</span></p></li>
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;"><strong>-xml</strong> : output will be in XML format</span></p></li>
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;"><strong>-json</strong> : output will be in JSON format (default)</span></p></li>
+
+<li>
+<p style="text-align:justify;"><span style="font-size:10pt;"><strong>-quiet</strong> : no output will be done (only logging)</span></p></li></ul></li></ul></td></tr></tbody></table>
+<p style="text-align:justify;">&nbsp;</p>
+<p style="text-align:justify;"><span style="font-size:11pt;">Below those several steps are illustrated.</span></p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:11pt;"><strong>Note that the various tools are consolidated into one GUI&nbsp;named : </strong><a href="R66AdministratorGui.html"><strong>Central Administrator</strong></a><strong> (Xml Editor, Password, R66Gui) plus some other functions.</strong></span></p></blockquote>
+<p style="text-align:justify;">&nbsp;</p>
+<p style="text-align:justify;">&nbsp;</p>
+<h1 class="h1" style="text-align:justify;"><a name="XML"></a><span style="font-size:11pt;">2) XML Configuration</span></h1>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">To configure a Waarp R66 Server, you need to first create the XML files as needed (</span><a href="WaarpR66XmlConfiguration.html"><span style="font-size:10pt;">see the Xml Config files page</span></a><span style="font-size:10pt;">): main config file, authent file, rules and limit config files. To help the administrator to generate correct files, XSD models are defined to be used with an extension of the project </span><a href="javascript:var EffectiveNewWin = window.open('http://www.felixgolubov.com/XMLEditor/','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();"><span style="font-size:10pt;">Xample (XML Gui Editor) from Felix Golubov</span></a><span style="font-size:10pt;">.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">Note that the <strong>httpadmin</strong> shall specify the correct path for your choice of Waarp HTTPS/HTTP administrator/supervision tool. Now the default is i18n&nbsp;support based.</span></p>
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:center;"><img title="xample-config" style="border:none;" alt="xample-config" src="res/openr66/xampleconfig.png" width="630" height="535" /></p>
 <p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:11pt;"><strong>It is also possible to use <a href="http://jaxe.sourceforge.net/en/">JAXE</a> with jaxe-xxx-config.xml files.</strong></span></p>
+<p style="text-align:justify;"><strong><span style="font-size:10pt;">It is also possible to use </span><a href="http://jaxe.sourceforge.net/en/"><span style="font-size:10pt;">JAXE</span></a><span style="font-size:10pt;"> with jaxe-xxx-config.xml files.</span></strong></p></blockquote>
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:justify;">&nbsp;</p>
-<h1 class="h1" style="text-align:justify;"><a name="PWD"></a>Password configuration</h1>
-<p style="text-align:justify;"><span style="font-size:11pt;">For the administrator you need a specific DES Key for the crypted password support. DES crypted support and generation are available through the GoldenGate Password GUI project. </span></p>
+<h1 class="h1" style="text-align:justify;"><a name="PWD"></a><span style="font-size:11pt;">3) Password configuration</span></h1>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:11pt;"><span style="font-size:10pt;">For the administrator you need a specific DES Key for the crypted password support. DES crypted support and generation are available through the GoldenGate Password GUI project.</span> </span></p></blockquote>
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:center;"><img title="pwdgui2" alt="pwdgui2" src="res/openr66/pwdgui2.png" width="400" height="300" /></p>
 <p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:11pt;"><strong>Note that under Mainframe, some people reports that adding -Dfile.encoding=UTF8 fixes some issues with passwords.</strong></span></p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><strong><span style="font-size:10pt;">Note that under Mainframe, some people reports that adding -Dfile.encoding=UTF8 fixes some issues with passwords.</span></strong></p></blockquote>
 <h2 class="h2" style="text-align:justify;">&nbsp;</h2>
-<h1 class="h1" style="text-align:justify;"><a name="SSL"></a>Cryptography</h1>
-<p style="text-align:justify;"><span style="font-size:11pt;">For the administrator you need a KeyStore containing a RSA key for SSL support in HTTPS. </span></p>
+<h1 class="h1" style="text-align:justify;"><a name="SSL"></a><span style="font-size:11pt;">4) Cryptography</span></h1>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">For the administrator you need a KeyStore containing a RSA key for SSL support in HTTPS. </span></p>
 <p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:11pt;">You need another KeyStore for the SSL support in the Waarp R66 protocol, but only if you want to use this SSL channel. </span></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">If you don't want that OpenR66 uses SSL between two hosts, then you only need one KeyStore for the HTTPS support.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">You need another KeyStore for the SSL support in the Waarp R66 protocol, but only if you want to use this SSL channel. </span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">If you don't want that OpenR66 uses SSL between two hosts, then you only need one KeyStore for the HTTPS support.</span></p>
 <p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:11pt;">In the source, you will find in the certs directory 2 such keystore named admin66.store and openr66.store. You can named the files as you wanted (using the standard "jks" extension for instance).</span></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">To generate those files, you can also ue the keytool command from the jdk, or using the cool free tool KeyTool IUI (last known version in 2.4.1).</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">In the source, you will find in the certs directory 2 such keystore named admin66.store and openr66.store. You can named the files as you wanted (using the standard "jks" extension for instance).</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">To generate those files, you can also ue the keytool command from the jdk, or using the cool free tool KeyTool IUI (last known version in 2.4.1).</span></p>
 <ul>
-<li><div style="text-align:justify;"><span style="font-size:11pt;">keypath&nbsp;for OpenR66 channels (admkeypath for administrator) is the full or relative path to the keystore file</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">keypath&nbsp;for OpenR66 channels (admkeypath for administrator) is the full or relative path to the keystore file</span></div></li>
 
-<li><div style="text-align:justify;"><span style="font-size:11pt;">keystorepass (admkeystorepass) is the password for the keystore</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">keystorepass (admkeystorepass) is the password for the keystore</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;">keypass (admkeypass) is the password for the key</span></div></li></ul>
-<p style="text-align:justify;"><span style="font-size:11pt;">For instance: keytool -genkey -alias myalias -keyalg RSA -validity xxx -keystore mystore.store</span></p>
+<div style="text-align:justify;"><span style="font-size:10pt;">keypass (admkeypass) is the password for the key</span></div></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;">For instance: keytool -genkey -alias myalias -keyalg RSA -validity xxx -keystore mystore.store</span></p>
 <p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:11pt;">Below you will find the full detail on how to create those KeyStore and TrustedKeyStore according to your needs:</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">Below you will find the full detail on how to create those KeyStore and TrustedKeyStore according to your needs:</span></p>
 <p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:11pt;">To generate the stores for Waarp R66 for instance, you need to create 2 JKS keyStore. To generate those files, you can use the "<ins>keytool</ins>" command from the JDK or using the free tool KeyTool IUI (last known version in 2.4.1). Below we show how to use the <strong><ins>Keytool</ins> IUI.</strong></span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">To generate the stores for Waarp R66 for instance, you need to create 2 JKS keyStore. To generate those files, you can use the "<ins>keytool</ins>" command from the JDK or using the free tool KeyTool IUI (last known version in 2.4.1). Below we show how to use the <strong><ins>Keytool</ins> IUI.</strong></span></p>
 <ul>
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><strong>For SSL connection without authentication of clients</strong></span></div><ul>
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><strong><em>Server side (also valid for Administration HTTPS site)</em></strong></span></div><ul>
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Create one <ins>jks</ins> KeyStore (server.jks) with one Private Key Version 3 using RSA algorithm.</span></div></li>
+<li><div style="text-align:justify;"><strong><span style="font-size:10pt;">For SSL connection without authentication of clients</span></strong></div><ul>
+<li><div style="text-align:justify;"><strong><em><span style="font-size:10pt;">Server side (also valid for Administration HTTPS site)</span></em></strong></div><ul>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Create one <ins>jks</ins> KeyStore (server.jks) with one Private Key Version 3 using RSA algorithm.</span></div></li>
 
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Use this KeyStore as KeyStore for the Server.</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Use this KeyStore as KeyStore for the Server.</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;">To do that, suing KeyTool IUI:</span></div>
+<div style="text-align:justify;"><span style="font-size:10pt;">To do that, suing KeyTool IUI:</span></div>
 <ol>
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Create an empty KeyStore</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Create an empty KeyStore</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;">Create a Private Key Version 3 with RSA algorithm added to this KeyStore</span></div></li></ol></li></ul></li>
+<div style="text-align:justify;"><span style="font-size:10pt;">Create a Private Key Version 3 with RSA algorithm added to this KeyStore</span></div></li></ol></li></ul></li>
 
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;"><strong><em>Client side</em></strong></span></div>
+<div style="text-align:justify;"><strong><em><span style="font-size:10pt;">Client side</span></em></strong></div>
 <ul>
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Create one <ins>jks</ins> TrustStore (clientTrust.jks) with the Certificate Chain of the Server Key from the Server as a Regular Certificate.</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Create one <ins>jks</ins> TrustStore (clientTrust.jks) with the Certificate Chain of the Server Key from the Server as a Regular Certificate.</span></div></li>
 
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Use this KeyStore as <ins>Trustore</ins> for the Client.</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Use this KeyStore as <ins>Trustore</ins> for the Client.</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;">To do that, using KeyTool IUI:</span></div>
+<div style="text-align:justify;"><span style="font-size:10pt;">To do that, using KeyTool IUI:</span></div>
 <ol>
-<li><div style="text-align:justify;"><span style="font-size:11pt;">From the Server <ins>Keytore</ins>, export Private Key (2 files with one Certificate Chain)</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">From the Server <ins>Keytore</ins>, export Private Key (2 files with one Certificate Chain)</span></div></li>
 
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Create one <ins>jks</ins> TrustStore (Empty KeyStore)</span></div></li>
-
-<li>
-<div style="text-align:justify;"><span style="font-size:11pt;">Import the Trusted Certificate as Regular Certificate (Certificate Chain as .<ins>der</ins> file)</span></div></li></ol></li></ul></li></ul></li>
-
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Create one <ins>jks</ins> TrustStore (Empty KeyStore)</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;"><strong>For SSL connection with authentication of clients</strong></span></div>
+<div style="text-align:justify;"><span style="font-size:10pt;">Import the Trusted Certificate as Regular Certificate (Certificate Chain as .<ins>der</ins> file)</span></div></li></ol></li></ul></li></ul></li>
+
+
+<li>
+<div style="text-align:justify;"><strong><span style="font-size:10pt;">For SSL connection with authentication of clients</span></strong></div>
 <ul>
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><em>First do as without authentication of clients for the server authentication side</em>: </span><span style="font-size:11pt;">server.jks for the Server's KeyStore and clientTrust.jks for the Client's TrustStore.</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;"><em>First do as without authentication of clients for the server authentication side</em>: server.jks for the Server's KeyStore and clientTrust.jks for the Client's TrustStore.</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;">Handle the reverse authentication of multiples clients within the server</span></div>
+<div style="text-align:justify;"><span style="font-size:10pt;">Handle the reverse authentication of multiples clients within the server</span></div>
 <ul>
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><strong><em>Client side</em></strong></span></div><ul>
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Create one <ins>jks</ins> KeyStore with one Private Key Version 3 using RSA algorithm for each Client (client1.<ins>jks</ins>, client2.<ins>jks</ins>, clientn.jks).</span></div></li>
+<li><div style="text-align:justify;"><strong><em><span style="font-size:10pt;">Client side</span></em></strong></div><ul>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Create one <ins>jks</ins> KeyStore with one Private Key Version 3 using RSA algorithm for each Client (client1.<ins>jks</ins>, client2.<ins>jks</ins>, clientn.jks).</span></div></li>
 
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Use this KeyStore as KeyStore for the Client.</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Use this KeyStore as KeyStore for the Client.</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;">To do that, suing KeyTool IUI:</span></div>
+<div style="text-align:justify;"><span style="font-size:10pt;">To do that, suing KeyTool IUI:</span></div>
 <ol>
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Create an empty KeyStore</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Create an empty KeyStore</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;">Create a Private Key Version 3 with RSA algorithm added to this KeyStore</span></div></li></ol></li></ul></li>
+<div style="text-align:justify;"><span style="font-size:10pt;">Create a Private Key Version 3 with RSA algorithm added to this KeyStore</span></div></li></ol></li></ul></li>
 
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;"><strong><em>Server side</em></strong></span></div>
+<div style="text-align:justify;"><strong><em><span style="font-size:10pt;">Server side</span></em></strong></div>
 <ul>
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Create one <ins>jks</ins> TrustStore (serverTrust.jks) with the Certificate Chain of the Client Key from the Client as a Regular Certificate.</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Create one <ins>jks</ins> TrustStore (serverTrust.jks) with the Certificate Chain of the Client Key from the Client as a Regular Certificate.</span></div></li>
 
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Use this KeyStore as <ins>Trustore</ins> for the Server.</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Use this KeyStore as <ins>Trustore</ins> for the Server.</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;">To do that, using KeyTool IUI:</span></div>
+<div style="text-align:justify;"><span style="font-size:10pt;">To do that, using KeyTool IUI:</span></div>
 <ol>
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Create one <ins>jks</ins> TrustStore (Empty KeyStore)</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Create one <ins>jks</ins> TrustStore (Empty KeyStore)</span></div></li>
 
-<li><div style="text-align:justify;"><span style="font-size:11pt;">From the Client <ins>Keytore</ins>, export Private Key (2 files with one Certificate Chain)</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">From the Client <ins>Keytore</ins>, export Private Key (2 files with one Certificate Chain)</span></div></li>
 
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Import the Trusted Certificate as Regular Certificate (Certificate Chain as .<ins>der</ins> file)</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;">Import the Trusted Certificate as Regular Certificate (Certificate Chain as .<ins>der</ins> file)</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;">Import all Trusted Certificates as with 2 and 3 in the same TrustStore</span></div></li></ol></li></ul></li></ul></li></ul></li></ul>
+<div style="text-align:justify;"><span style="font-size:10pt;">Import all Trusted Certificates as with 2 and 3 in the same TrustStore</span></div></li></ol></li></ul></li></ul></li></ul></li></ul>
 <p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:11pt;">Then you have to fill the ports to use (serverssl port for Waarp R66 channels, serverhttpsport for the administrator) and to set up the good path to every components (don't forget the path to the html admin files, between <em>admin</em> or <em>admin2</em> - the second&nbsp;being more dynamic - ).</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">Then you have to fill the ports to use (serverssl port for Waarp R66 channels, serverhttpsport for the administrator) and to set up the good path to every components (don't forget the path to the html admin files, between <em>admin</em> or <em>admin2</em> - the second&nbsp;being more dynamic - ).</span></p></blockquote>
 <p style="text-align:justify;">&nbsp;</p>
-<h1 class="h1" style="text-align:justify;"><a name="DB"></a>Database configuration</h1>
-<p style="text-align:justify;"><span style="font-size:11pt;">Then, you create a database entry in the model you choose (currently supported is Oracle, PostGreSQL, MySQL and H2 Database). This database entry should be referenced in the XML config files. Below is presented the schema of the database that will be created.</span></p>
-<p style="text-align:center;"><img title="openr66-database" style="height:547px;width:949px;" alt="openr66-database" src="res/openr66/openr66database.png" width="1149" height="628" /></p>
+<h1 class="h1" style="text-align:justify;"><a name="DB"></a><span style="font-size:11pt;">7) Database configuration</span></h1>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">Then, you create a database entry in the model you choose (currently supported is Oracle, PostGreSQL, MySQL and H2 Database). This database entry should be referenced in the XML config files. Below is presented the schema of the database that will be created.</span></p>
+<p style="text-align:center;"><span style="font-size:10pt;"><img title="openr66-database" style="height:547px;width:949px;" alt="openr66-database" src="res/openr66/openr66database.png" width="1149" height="628" /></span></p>
 <p style="text-align:justify;"></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">You need to get all the necessary jar (see the depencies of the project) to allow you to launch the server. An example of shell script including all jar is presented in the src/main/example directory.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">You need to get all the necessary jar (see the depencies of the project) to allow you to launch the server. An example of shell script including all jar is presented in the src/main/example directory.</span></p>
 <p style="text-align:justify;"></p>
 <p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:11pt;">Then you launch the <strong><em>ServerInitDatabase</em></strong>.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">Then you launch the <strong><em>ServerInitDatabase</em></strong>.</span></p></blockquote>
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:justify;"></p>
-<p style="text-align:justify;"><span style="font-size:11pt;"><strong>Note that multiple Waarp R66 Servers may shared the exactly same database</strong>. Waarp R66 is compatible with such a model. Note however that Rules are strictly shared, which means that you will need to take care of the absolute path of EXEC commands such that they are valid on all Waarp R66 servers where it should be executed.</span></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">Note also that from version 2.4.17, it is possible to update the database schema using <strong><em>ServerInitDatabase -updateDb</em></strong>.</span></p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;"><strong>Note that multiple Waarp R66 Servers may shared the exactly same database</strong>. Waarp R66 is compatible with such a model. Note however that Rules are strictly shared, which means that you will need to take care of the absolute path of EXEC commands such that they are valid on all Waarp R66 servers where it should be executed.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">Note also that from version 2.4.17, it is possible to update the database schema using <strong><em>ServerInitDatabase -updateDb</em></strong>.</span></p></blockquote>
 <p style="text-align:justify;">&nbsp;</p>
-<h1 class="h1" style="text-align:justify;"><a name="LOG"></a><span style="font-size:11pt;">Example of logback.xml file</span></h1>
+<h1 class="h1" style="text-align:justify;"><a name="LOG"></a><span style="font-size:11pt;">8) Example of logback.xml file</span></h1>
+<blockquote style="margin-right:0px;" dir="ltr">
 <p style="text-align:justify;"><span style="font-family:Courier New;font-size:10pt;">&lt;configuration&gt;</span></p>
 <p style="text-align:justify;"><span style="font-family:Courier New;font-size:10pt;">&nbsp; &lt;appender name="FILE"<br />&nbsp;&nbsp;&nbsp; class="ch.qos.logback.core.rolling.RollingFileAppender"&gt;<br />&nbsp;&nbsp;&nbsp; &lt;file&gt;/GG/R66/log/R66Server.log&lt;/file&gt;<br />&nbsp;&nbsp;&nbsp; &lt;append&gt;true&lt;/append&gt;<br />&nbsp;&nbsp;&nbsp; &lt;rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;fileNamePattern&gt;/GG/R66/log/R66Server.%d{yyyy-MM-dd}.%i.log.zip&lt;/fileNamePattern&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;maxHistory&gt;30&lt;/maxHistory&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;maxFileSize&gt;10MB&lt;/maxFileSize&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/timeBasedFileNamingAndTriggeringPolicy&gt;<br />&nbsp;&nbsp;&nbsp; &lt;/rollingPolicy&gt;</span></p>
 <p style="text-align:justify;"><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;&nbsp; &lt;encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;pattern&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; %date{dd/MM/yyyy/HH:mm:ss.SSS} %level [%logger] [%thread] %msg%n<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/pattern&gt;<br />&nbsp;&nbsp;&nbsp; &lt;/encoder&gt;<br />&nbsp; &lt;/appender&gt;</span></p>
 <p style="text-align:justify;"><span style="font-family:Courier New;font-size:10pt;">&nbsp; &lt;appender name="STDOUT"<br />&nbsp;&nbsp;&nbsp; class="ch.qos.logback.core.ConsoleAppender"&gt;<br />&nbsp;&nbsp;&nbsp; &lt;encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;Pattern&gt;%date{dd/MM/yyyy/HH:mm:ss.SSS} %level [%logger] [%thread] %msg%n&lt;/Pattern&gt;<br />&nbsp;&nbsp;&nbsp; &lt;/encoder&gt;<br />&nbsp; &lt;/appender&gt;<br />&nbsp; <br />&nbsp; &lt;root&gt;<br />&nbsp;&nbsp;&nbsp; &lt;level value="warn" /&gt;<br />&nbsp;&nbsp;&nbsp; &lt;appender-ref ref="FILE" /&gt;<br />&nbsp;&nbsp;&nbsp; &lt;appender-ref ref="STDOUT" /&gt;<br />&nbsp; &lt;/root&gt;<br />&lt;/configuration&gt;</span></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">And use the -Dlogback.configurationFile=J:/GG/R66/conf/logback.xml as argument to the java command (before the class to launch, roughly were you put the -Xms -Xmx arguments).</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">And use the -Dlogback.configurationFile=J:/GG/R66/conf/logback.xml as argument to the java command (before the class to launch, roughly were you put the -Xms -Xmx arguments).</span></p></blockquote>
 <p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:11pt;">Moreover, several options can be placed in the command line (preferably in ENV_R66 or setvari.bat):</span></p>
+<h1 class="h1" style="text-align:justify;"><a name="JVMOPT"></a><span style="font-size:11pt;">9) Extra Waarp JVM Options</span></h1>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p><span style="font-size:10pt;">Moreover, several options can be placed in the command line (preferably in ENV_R66 or setvari.bat): </span></p>
 <ul>
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><strong>-Dopenr66.locale=en|fr</strong> to choose between english or french default language (note: not all elements are translated, only the more relevant)</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;"><strong>-Dopenr66.locale=en|fr</strong> to choose between english or french default language (note: not all elements are translated, only the more relevant)</span></div></li>
 
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><strong>-Dopenr66.ishostproxyfied=1|0</strong> to set that this host is proxyfied (using R66Proxy), such that eventual IP check will not apply to it (since the IP will be the one from the proxy)</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;"><strong>-Dopenr66.ishostproxyfied=1|0</strong> to set that this host is proxyfied (using R66Proxy), such that eventual IP check will not apply to it (since the IP will be the one from the proxy)</span></div></li>
 
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><strong>-Dopenr66.startup.warning=1|0</strong> to choose if warning at startup should be printed or not (useful for client where those warning are not real issues but information)</span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><strong>-Dopenr66.chroot.checked=1|0</strong> to choose if all rules will have to be respected in terms of chroot. For instance, trying to get a file (RECV) from a remote partner, while specifying a full path might be allowed, even if outside OUT directory, except if checked=1. Then all files must be under (immediately or in subdirectories) the OUT directory.</span></div></li>
-
-<li><div style="text-align:justify;"><span style="font-size:11pt;"><strong>-Dopenr66.blacklist.badauthent=1|0</strong> to choose if a server that will have a bad authentification will be put as black listed (no more allowed for a while), to prevent DOS. if OPENR66_ISHOSTPROXYFIED is true, then is mandatory false). Note that this must not be true if several partners might have the same IP (proxyfied for instance), since they will all be banned</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:10pt;"><strong>-Dopenr66.startup.warning=1|0</strong> to choose if warning at startup should be printed or not (useful for client where those warning are not real issues but information)</span></div></li>
 
 <li><div style="text-align:justify;">
-<p><span style="font-size:11pt;"><strong>-Dopenr66.filename.maxlength=n</strong> (default n = 255) to choose the default max filename length used when receiving a file (for the temporary filename and final filename). This does not prevent to change the filename after (and #ORIGINALFILENAME# does still contain the full filename, untroncated).</span></p></div></li>
+<p style="text-align:justify;"><span style="font-size:10pt;"><strong>-Dopenr66.startup.checkdb=1|0</strong> to choose if&nbsp;database configuration shall be checked at startup (default is true)</span></p></div></li>
+
+<li><div style="text-align:justify;"><span style="font-size:10pt;"><strong>-Dopenr66.chroot.checked=1|0</strong> to choose if all rules will have to be respected in terms of chroot. For instance, trying to get a file (RECV) from a remote partner, while specifying a full path might be allowed, even if outside OUT directory, except if checked=1. Then all files must be under (immediately or in subdirectories) the OUT directory.</span></div></li>
+
+<li><div style="text-align:justify;"><span style="font-size:10pt;"><strong>-Dopenr66.blacklist.badauthent=1|0</strong> to choose if a server that will have a bad authentification will be put as black listed (no more allowed for a while), to prevent DOS. if OPENR66_ISHOSTPROXYFIED is true, then is mandatory false). Note that this must not be true if several partners might have the same IP (proxyfied for instance), since they will all be banned</span></div></li>
 
 <li><div style="text-align:justify;">
-<p><span style="font-size:11pt;"><strong>-Dopenr66.trace.stats=n</strong> (default n=0) to debug by making a trace of some specific data structure&nbsp;usages every&nbsp;n s, where&nbsp;n is specify as value in the definition. If 0 or less, means not activated.</span></p></div></li>
+<p><span style="font-size:10pt;"><strong>-Dopenr66.filename.maxlength=n</strong> (default n = 255) to choose the default max filename length used when receiving a file (for the temporary filename and final filename). This does not prevent to change the filename after (and #ORIGINALFILENAME# does still contain the full filename, untroncated).</span></p></div></li>
+
+<li><div style="text-align:justify;">
+<p><span style="font-size:10pt;"><strong>-Dopenr66.trace.stats=n</strong> (default n=0) to debug by making a trace of some specific data structure&nbsp;usages every&nbsp;n s, where&nbsp;n is specify as value in the definition. If 0 or less, means not activated.</span></p></div></li>
 
 <li>
 <div style="text-align:justify;">
-<p><span style="font-size:11pt;"><strong>-Dopenr66.cache.limit=n</strong> and <strong>-Dopenr66.cache.timelimit=m</strong> (default n=20000, m=180000 - 180s -) to manage the cache behavior of Transfer informations&nbsp;with </span></p></div><ul>
+<p><span style="font-size:10pt;"><strong>-Dopenr66.cache.limit=n</strong> and <strong>-Dopenr66.cache.timelimit=m</strong> (default n=20000, m=180000 - 180s -) to manage the cache behavior of Transfer informations&nbsp;with </span></p></div>
+<ul>
 <li><div style="text-align:justify;">
-<p><span style="font-size:11pt;">n being the maximum number of DbTaskRunners to keep in LRU cache (used in self request and for instance without database) -&nbsp;Minimal value is 100 -</span></p></div></li>
+<p><span style="font-size:10pt;">n being the maximum number of DbTaskRunners to keep in LRU cache (used in self request and for instance without database) -&nbsp;Minimal value is 100 -</span></p></div></li>
 
 <li>
 <div style="text-align:justify;">
-<p><span style="font-size:11pt;">m being the maximum time in ms of valid element once created, used or updated (used in self request and for instance without database). -&nbsp;Minimal value is 1000 ms (1s). If set to 1000, the value will not be regularly&nbsp;cleaned of outtimed values&nbsp;but the cache will be filled up to n. -</span></p></div></li></ul></li>
-</ul>
-<p style="text-align:justify;"><span style="font-size:11pt;">Now you can launch the Waarp R66 Server.</span></p>
+<p><span style="font-size:10pt;">m being the maximum time in ms of valid element once created, used or updated (used in self request and for instance without database). -&nbsp;Minimal value is 1000 ms (1s). If set to 1000, the value will not be regularly&nbsp;cleaned of outtimed values&nbsp;but the cache will be filled up to n. -</span></p></div></li></ul></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;">Now you can launch the Waarp R66 Server.</span></p>
 <p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:11pt;">Note that you can&nbsp;add specific user rights with specific authentication to access to the Web administrator interface from version 2.4.22 (</span><a href="WaarpR66Admin.html"><span style="font-size:11pt;">see here</span></a><span style="font-size:11pt;">), in addition to the super user specified in the XML configuration file of the server.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">Note that you can&nbsp;add specific user rights with specific authentication to access to the Web administrator interface from version 2.4.22 (</span><a href="WaarpR66WebAdministration.html"><span style="font-size:10pt;">see here</span></a><span style="font-size:10pt;">), in addition to the super user specified in the XML configuration file of the server.</span></p></blockquote>
 <p style="text-align:justify;">&nbsp;</p></div></td></tr></tbody></table>
 <div id="Comp7_CodeRelayer"><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="robots" content="index,follow" />
-<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
-<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
-<meta http-equiv="imagetoolbar" content="no" />
 <meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <meta name="description" content="Waarp project" />
+<meta http-equiv="imagetoolbar" content="no" />
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta name="robots" content="index,follow" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -24,6 +24,27 @@ a img {
 }
 </style>
 <title>Waarp - Waarp R66-Command</title>
+<script type="text/javascript">
+//<![CDATA[
+	function MHTGetRef(str)
+	{
+		if(document.all)
+			return document.all[str];
+		else
+			return document.getElementById(str);
+	}
+
+	function MHTSetClass(strID, strClass)
+	{
+		var obj = MHTGetRef(strID);
+		if(obj != null && typeof(obj) + "" != "undefined")
+			obj.className = strClass;
+		var obj = MHTGetRef(strID + "_second");
+		if(obj != null && typeof(obj) + "" != "undefined")
+			obj.className = strClass;
+	}
+//]]>
+</script>
 	<script type="text/javascript">
 //<![CDATA[
 	function MHGetRef(str)
@@ -44,51 +65,190 @@ a img {
 	</script>
 <script type="text/javascript">
 //<![CDATA[
-	function mvgGetRef(str)						{ return (document.all) ? document.all[str] : document.getElementById(str); }
-	function mvgSetClass(strId, strClass)		{ var obj = mvgGetRef(strId); if(obj != null && typeof(obj) != "undefined") obj.className = strClass; }
-	function mvgSwitchImage(strId, strFileName)	{ var obj = mvgGetRef(strId); if(obj != null && typeof(obj) != "undefined") obj.src = strFileName; }
+	var g_mhd1strTimeoutId	= "";
+	var g_mhd1strLastOpenId	= "";
+
+	function mhdGetRef(str)
+	{
+		return document.all ? document.all[str] : document.getElementById(str);
+	}
+	function mhdSwitchImage(strId, strFileName)
+	{
+		var obj = mhdGetRef(strId);
+		if(obj == null || typeof(obj) == "undefined" || typeof(obj.src) == "undefined") return;
+		obj.src = strFileName;
+	}
+	function mhdSetClass(strId, strClass)
+	{
+		var obj = mhdGetRef(strId);
+		if(obj == null || typeof(obj) == "undefined" || typeof(obj.className) == "undefined") return;
+		obj.className = strClass;
+	}	
+	function mhdShowHideLayer(strId, bShow)
+	{
+		var obj = mhdGetRef(strId);
+		if(obj == null || typeof(obj) == "undefined" || typeof(obj.style) == "undefined") return;
+		if(bShow && obj.style.display != "block")	{ obj.style.display = "block"; return; }
+		if(!bShow && obj.style.display != "none")	{ obj.style.display = "none"; return; }
+	}
+	function mhdGetSubMenuLevel(strId)
+	{
+		strId += "";
+		var arr = strId.split("_");
+		if(arr.length <= 1) return 0;
+		return arr.length - 1;
+	}
+	function mhdGetIdAtLevel(strId, nLevel)
+	{
+		var strRet = "";
+		var arr = strId.split("_");
+		if(arr.length <= 1 || nLevel <= 0 || nLevel > arr.length) return strRet;
+		for(var i = 0; i <= nLevel; ++i) { 
+			if(i > 0) strRet += "_";
+			strRet += arr[i];
+		}
+		return strRet;
+	}
+	function mhdClearSubMenus(strId)
+	{
+		var nMax = mhdGetSubMenuLevel(strId);
+		for(var n = nMax; n >= 1; --n) {
+			mhdShowHideLayer(mhdGetIdAtLevel(strId, n) + "_c", false);
+		}
+	}
+	function mhd1OnMouseOverItem(strId, strClass)
+	{
+		if(strClass != "") mhdSetClass(strId, strClass)
+		if(g_mhd1strLastOpenId != "") {
+			clearTimeout(g_mhd1strTimeoutId);
+			g_mhd1strTimeoutId = "";
+
+			var nMaxLast = mhdGetSubMenuLevel(g_mhd1strLastOpenId);
+			for(var n = nMaxLast; n >= 1; --n) {
+				if(mhdGetIdAtLevel(g_mhd1strLastOpenId, n) == mhdGetIdAtLevel(strId, n)) break;
+				mhdShowHideLayer(mhdGetIdAtLevel(g_mhd1strLastOpenId, n) + "_c", false);
+			}
+		}
+
+		var nMax = mhdGetSubMenuLevel(strId);
+		for(var n = 0; n <= nMax; ++n) {
+			mhdShowHideLayer(mhdGetIdAtLevel(strId, n) + "_c", true);
+		}
+
+		g_mhd1strLastOpenId = strId;
+	}
+	function mhd1OnMouseOutItem(strId, strClass)
+	{
+		if(strClass != "") mhdSetClass(strId, strClass)
+		g_mhd1strTimeoutId = setTimeout("mhdClearSubMenus('" + strId + "');", 500);
+	}
 //]]>
 </script>
+<style type="text/css">
+	#mhd1 a.submenu1:visited	{ text-decoration:none;color:#333333; }
+	#mhd1 a.submenu1over:hover	{ text-decoration:none;color:#FF0000; }
+
+	#mhd1 a.submenu2:visited	{ text-decoration:none;color:#333333; }
+	#mhd1 a.submenu2over:hover	{ text-decoration:none;color:#FF0000; }
+</style>
 </head>
-<body class="normal" style="margin:0px;padding:0px;background-color:#FFFFFF;background-image:url(gre/gre12340.png);background-position:left top;background-repeat:repeat-y;">
+<body class="normal" style="margin:0px;padding:0px;background-color:#FFFFFF;">
 <div style="text-align:left;">
-<div style="text-align:left;background-color:#EF6D00;"><a href="index.html"><img title="GoldenGate" style="border:none;" alt="GoldenGate" src="res/openlsd/waarp.jpg" width="74" height="49" /></a><img title="Waarp" style="border-top-style:none; border-bottom:#000000 0px solid; border-right-style:none; border-left-style:none;" alt="Waarp" src="gre/gre12341.png" width="99" height="40" /></div>
+<div style="text-align:left;background-color:#EF6D00;"><a href="index.html"><img title="Waarp" style="border:none;" alt="Waarp" src="res/openlsd/waarp.jpg" width="53" height="49" /></a><img title="Waarp" style="border:none;border-top:medium none;border-right:medium none;border-bottom:medium none;border-left:medium none;" alt="Waarp" src="gre/gre17587.png" width="99" height="40" /> 
+<div style="width:80%;position:absolute;float:right;left:160px;z-index:0;top:10px;"><table cellpadding="0" cellspacing="0" border="0" style="width:100%;margin:0;padding:0;border:0 solid none;"><tr><td style="vertical-align:top;"><div>
+<div id="Comp12_MenuHorizontalDynamic" style="text-align:left;"><div id="mhd1" style="text-align:left;"><table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+	<tr>
+		<td>
+<table border="0" cellpadding="0" cellspacing="0" style="margin:0px auto 0px 0px;">
+	<tr>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_0_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_0_0" class="submenu1" href="Roadmap.html" onmouseover="mhd1OnMouseOverItem('mhd1_0_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_0_0', 'submenu1')">Roadmap</a><a style="display:block;" id="mhd1_0_1" class="submenu1" href="ReleaseHistory.html" onmouseover="mhd1OnMouseOverItem('mhd1_0_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_0_1', 'submenu1')">Release History</a><a style="display:block;" id="mhd1_0_2" class="submenu1" href="CrawdUser.html" onmouseover="mhd1OnMouseOverItem('mhd1_0_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_0_2', 'submenu1')">Crawd User</a></div><a href="index.html"><img id="mhd1_img0" src="gre/gre17564.png" width="130" height="31" alt="World of Waarp" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_0', ''); mhdSwitchImage('mhd1_img0', 'gre/gre17566.png');" onmouseout="mhd1OnMouseOutItem('mhd1_0', ''); mhdSwitchImage('mhd1_img0', 'gre/gre17564.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_1_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_1_0" class="submenu1" href="WaarpR66Presentation.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_0', 'submenu1')">Waarp R66-Presentation</a><div style="position:relative;z-index:10;"><div id="mhd1_1_1_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_1_0" class="submenu1" href="WaarpR66Configuration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_0', 'submenu1')">Waarp R66-Configuration</a><div style="position:relative;z-index:11;"><div id="mhd1_1_1_1_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_1_1_0" class="submenu1" href="R66ServerConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_0', 'submenu1')">R66ServerConfig</a><a style="display:block;" id="mhd1_1_1_1_1" class="submenu1" href="R66ClientConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_1', 'submenu1')">R66ClientConfig</a><a style="display:block;" id="mhd1_1_1_1_2" class="submenu1" href="R66ClientNoDbConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_2', 'submenu1')">R66ClientNoDbConfig</a><a style="display:block;" id="mhd1_1_1_1_3" class="submenu1" href="R66ClientSubmitConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_3', 'submenu1')">R66ClientSubmitConfig</a><a style="display:block;" id="mhd1_1_1_1_4" class="submenu1" href="R66LimitConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_4', 'submenu1')">R66LimitConfig</a><a style="display:block;" id="mhd1_1_1_1_5" class="submenu1" href="R66RuleConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_5', 'submenu1')">R66RuleConfig</a><a style="display:block;" id="mhd1_1_1_1_6" class="submenu1" href="R66AuthentConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_6', 'submenu1')">R66AuthentConfig</a><a style="display:block;" id="mhd1_1_1_1_7" class="submenu1" href="R66SnmpConfiguration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_7', 'submenu1')">R66SnmpConfiguration</a></div><a style="display:block;" id="mhd1_1_1_1" class="submenu2" href="WaarpR66XmlConfiguration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1', 'submenu2')">Waarp R66-Xml Config</a>
+</div><a style="display:block;" id="mhd1_1_1_2" class="submenu1" href="WaarpR66Options.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_2', 'submenu1')">Waarp R66-Options</a></div><a style="display:block;" id="mhd1_1_1" class="submenu2" href="WaarpR66Installation.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1', 'submenu2')">Waarp R66-Installation</a>
+</div><div style="position:relative;z-index:10;"><div id="mhd1_1_2_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_2_0" class="submenu1" href="WaarpR66Protocol.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2_0', 'submenu1')">Waarp R66-Protocol</a><a style="display:block;" id="mhd1_1_2_1" class="submenu1" href="WaarpR66FileStatus.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2_1', 'submenu1')">Waarp R66-FileStatus</a><a style="display:block;" id="mhd1_1_2_2" class="submenu1" href="WaarpR66RestAPI.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2_2', 'submenu1')">Waarp R66-Rest-API</a></div><a style="display:block;" id="mhd1_1_2" class="submenu2" href="WaarpR66undertheWood.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2', 'submenu2')">Waarp R66 under the Wood</a>
+</div><div style="position:relative;z-index:10;"><div id="mhd1_1_3_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_3_0" class="submenu1" href="WaarpR66Command.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_0', 'submenu1')">Waarp R66-Command</a><a style="display:block;" id="mhd1_1_3_1" class="submenu1" href="WaarpR66CommandLine.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_1', 'submenu1')">Waarp R66-CommandLine</a><div style="position:relative;z-index:11;"><div id="mhd1_1_3_2_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_3_2_0" class="submenu1" href="TaskFormat.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_0', 'submenu1')">TaskFormat</a><a style="display:block;" id="mhd1_1_3_2_1" class="submenu1" href="LOG.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_1', 'submenu1')">LOG</a><a style="display:block;" id="mhd1_1_3_2_2" class="submenu1" href="SNMP.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_2', 'submenu1')">SNMP</a><a style="display:block;" id="mhd1_1_3_2_3" class="submenu1" href="COPY.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_3', 'submenu1')">COPY</a><a style="display:block;" id="mhd1_1_3_2_4" class="submenu1" href="COPYRENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_4', 'submenu1')">COPYRENAME</a><a style="display:block;" id="mhd1_1_3_2_5" class="submenu1" href="MOVE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_5', 'submenu1')">MOVE</a><a style="display:block;" id="mhd1_1_3_2_6" class="submenu1" href="MOVERENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_6', 'submenu1')">MOVERENAME</a><a style="display:block;" id="mhd1_1_3_2_7" class="submenu1" href="LINKRENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_7', 'submenu1')">LINKRENAME</a><a style="display:block;" id="mhd1_1_3_2_8" class="submenu1" href="RENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_8', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_8', 'submenu1')">RENAME</a><a style="display:block;" id="mhd1_1_3_2_9" class="submenu1" href="DELETE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_9', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_9', 'submenu1')">DELETE</a><a style="display:block;" id="mhd1_1_3_2_10" class="submenu1" href="VALIDFILEPATH.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_10', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_10', 'submenu1')">VALIDFILEPATH</a><a style="display:block;" id="mhd1_1_3_2_11" class="submenu1" href="CHKFILE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_11', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_11', 'submenu1')">CHKFILE</a><a style="display:block;" id="mhd1_1_3_2_12" class="submenu1" href="TRANSCODE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_12', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_12', 'submenu1')">TRANSCODE</a><a style="display:block;" id="mhd1_1_3_2_13" class="submenu1" href="TAR.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_13', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_13', 'submenu1')">TAR</a><a style="display:block;" id="mhd1_1_3_2_14" class="submenu1" href="ZIP.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_14', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_14', 'submenu1')">ZIP</a><a style="display:block;" id="mhd1_1_3_2_15" class="submenu1" href="UNZEROED.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_15', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_15', 'submenu1')">UNZEROED</a><a style="display:block;" id="mhd1_1_3_2_16" class="submenu1" href="CHMOD.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_16', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_16', 'submenu1')">CHMOD</a><a style="display:block;" id="mhd1_1_3_2_17" class="submenu1" href="EXEC.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_17', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_17', 'submenu1')">EXEC</a><a style="display:block;" id="mhd1_1_3_2_18" class="submenu1" href="EXECMOVE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_18', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_18', 'submenu1')">EXECMOVE</a><a style="display:block;" id="mhd1_1_3_2_19" class="submenu1" href="EXECOUTPUT.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_19', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_19', 'submenu1')">EXECOUTPUT</a><a style="display:block;" id="mhd1_1_3_2_20" class="submenu1" href="EXECJAVA.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_20', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_20', 'submenu1')">EXECJAVA</a><a style="display:block;" id="mhd1_1_3_2_21" class="submenu1" href="TRANSFER.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_21', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_21', 'submenu1')">TRANSFER</a><a style="display:block;" id="mhd1_1_3_2_22" class="submenu1" href="RESCHEDULE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_22', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_22', 'submenu1')">RESCHEDULE</a><a style="display:block;" id="mhd1_1_3_2_23" class="submenu1" href="FTP.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_23', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_23', 'submenu1')">FTP</a></div><a style="display:block;" id="mhd1_1_3_2" class="submenu2" href="WaarpR66TaskOptions.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2', 'submenu2')">Waarp R66-TaskOptions</a>
+</div><div style="position:relative;z-index:11;"><div id="mhd1_1_3_3_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_3_3_0" class="submenu1" href="R66Authentication.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_0', 'submenu1')">R66Authentication</a><a style="display:block;" id="mhd1_1_3_3_1" class="submenu1" href="R66CentralizationLogs.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_1', 'submenu1')">R66CentralizationLogs</a><a style="display:block;" id="mhd1_1_3_3_2" class="submenu1" href="R66ClusterHA.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_2', 'submenu1')">R66Cluster-HA</a><a style="display:block;" id="mhd1_1_3_3_3" class="submenu1" href="R66DMZ.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_3', 'submenu1')">R66DMZ</a><a style="display:block;" id="mhd1_1_3_3_4" class="submenu1" href="R66Embedded.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_4', 'submenu1')">R66Embedded</a><a style="display:block;" id="mhd1_1_3_3_5" class="submenu1" href="R66OtherProtocols.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_5', 'submenu1')">R66OtherProtocols</a><a style="display:block;" id="mhd1_1_3_3_6" class="submenu1" href="R66Reschedule.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_6', 'submenu1')">R66Reschedule</a><a style="display:block;" id="mhd1_1_3_3_7" class="submenu1" href="R66Definitions.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_7', 'submenu1')">R66Definitions</a><a style="display:block;" id="mhd1_1_3_3_8" class="submenu1" href="PlatformCompatibility.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_8', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_8', 'submenu1')">Platform Compatibility</a></div><a style="display:block;" id="mhd1_1_3_3" class="submenu2" href="WaarpR66Wiki.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3', 'submenu2')">Waarp R66-Wiki</a>
+</div><a style="display:block;" id="mhd1_1_3_4" class="submenu1" href="WaarpR66WebMonitoring.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_4', 'submenu1')">Waarp R66-Web-Monitoring</a><a style="display:block;" id="mhd1_1_3_5" class="submenu1" href="WaarpR66WebAdministration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_5', 'submenu1')">Waarp R66-Web-Administration</a></div><a style="display:block;" id="mhd1_1_3" class="submenu2" href="WaarpR66Howtos.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3', 'submenu2')">Waarp R66 Howtos</a>
+</div><a style="display:block;" id="mhd1_1_4" class="submenu1" href="R66AdministratorGui.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_4', 'submenu1')">R66 Administrator Gui</a><a style="display:block;" id="mhd1_1_5" class="submenu1" href="R66Proxy.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_5', 'submenu1')">R66 Proxy</a><a style="display:block;" id="mhd1_1_6" class="submenu1" href="R66ClientGui.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_6', 'submenu1')">R66 Client Gui</a></div><a href="WaarpR66.html"><img id="mhd1_img1" src="gre/gre17568.png" width="130" height="31" alt="Waarp R66" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_1', ''); mhdSwitchImage('mhd1_img1', 'gre/gre17569.png');" onmouseout="mhd1OnMouseOutItem('mhd1_1', ''); mhdSwitchImage('mhd1_img1', 'gre/gre17568.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_2_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_2_0" class="submenu1" href="WaarpFTPConfiguration.html" onmouseover="mhd1OnMouseOverItem('mhd1_2_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_2_0', 'submenu1')">Waarp-FTP-Configuration</a><a style="display:block;" id="mhd1_2_1" class="submenu1" href="Benchmarks.html" onmouseover="mhd1OnMouseOverItem('mhd1_2_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_2_1', 'submenu1')">Benchmarks</a><a style="display:block;" id="mhd1_2_2" class="submenu1" href="WaarpGatewayFtp.html" onmouseover="mhd1OnMouseOverItem('mhd1_2_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_2_2', 'submenu1')">WaarpGatewayFtp</a></div><a href="WaarpFTP.html"><img id="mhd1_img2" src="gre/gre17570.png" width="130" height="31" alt="Waarp FTP" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_2', ''); mhdSwitchImage('mhd1_img2', 'gre/gre17572.png');" onmouseout="mhd1OnMouseOutItem('mhd1_2', ''); mhdSwitchImage('mhd1_img2', 'gre/gre17570.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_3_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_3_0" class="submenu1" href="Digest.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_0', 'submenu1')">Digest</a><a style="display:block;" id="mhd1_3_1" class="submenu1" href="Common.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_1', 'submenu1')">Common</a><a style="display:block;" id="mhd1_3_2" class="submenu1" href="LocalExec.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_2', 'submenu1')">LocalExec</a><a style="display:block;" id="mhd1_3_3" class="submenu1" href="XmlEditor.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_3', 'submenu1')">XmlEditor</a><a style="display:block;" id="mhd1_3_4" class="submenu1" href="Password.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_4', 'submenu1')">Password</a><a style="display:block;" id="mhd1_3_5" class="submenu1" href="WaarpSNMP.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_5', 'submenu1')">WaarpSNMP</a><a style="display:block;" id="mhd1_3_6" class="submenu1" href="GatewayKernel.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_6', 'submenu1')">Gateway Kernel</a><a style="display:block;" id="mhd1_3_7" class="submenu1" href="Thrift.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_7', 'submenu1')">Thrift</a><a style="display:block;" id="mhd1_3_8" class="submenu1" href="FtpClient.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_8', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_8', 'submenu1')">FtpClient</a><a style="display:block;" id="mhd1_3_9" class="submenu1" href="WaarpGatewayHttp.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_9', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_9', 'submenu1')">WaarpGatewayHttp</a></div><a href="WaarpsFamily.html"><img id="mhd1_img3" src="gre/gre17573.png" width="130" height="31" alt="Waarp's Family" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_3', ''); mhdSwitchImage('mhd1_img3', 'gre/gre17575.png');" onmouseout="mhd1OnMouseOutItem('mhd1_3', ''); mhdSwitchImage('mhd1_img3', 'gre/gre17573.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><a href="APIReferences.html"><img id="mhd1_img4" src="gre/gre17576.png" width="130" height="31" alt="API References" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_4', ''); mhdSwitchImage('mhd1_img4', 'gre/gre17578.png');" onmouseout="mhd1OnMouseOutItem('mhd1_4', ''); mhdSwitchImage('mhd1_img4', 'gre/gre17576.png'); " /></a></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_5_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_5_0" class="submenu1" href="OldGoldenGateDownload.html" onmouseover="mhd1OnMouseOverItem('mhd1_5_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_5_0', 'submenu1')">Old GoldenGate Download</a></div><a href="Downloads.html"><img id="mhd1_img5" src="gre/gre17579.png" width="130" height="31" alt="Downloads" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_5', ''); mhdSwitchImage('mhd1_img5', 'gre/gre17581.png');" onmouseout="mhd1OnMouseOutItem('mhd1_5', ''); mhdSwitchImage('mhd1_img5', 'gre/gre17579.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_6_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_6_0" class="submenu1" href="WaarpDependson.html" onmouseover="mhd1OnMouseOverItem('mhd1_6_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_6_0', 'submenu1')">Waarp Depends on</a><a style="display:block;" id="mhd1_6_1" class="submenu1" href="License.html" onmouseover="mhd1OnMouseOverItem('mhd1_6_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_6_1', 'submenu1')">License</a><a style="display:block;" id="mhd1_6_2" class="submenu1" href="Support.html" onmouseover="mhd1OnMouseOverItem('mhd1_6_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_6_2', 'submenu1')">Support</a></div><a href="About.html"><img id="mhd1_img6" src="gre/gre17582.png" width="130" height="31" alt="About" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_6', ''); mhdSwitchImage('mhd1_img6', 'gre/gre17584.png');" onmouseout="mhd1OnMouseOutItem('mhd1_6', ''); mhdSwitchImage('mhd1_img6', 'gre/gre17582.png'); " /></a>
+</div></td>
+	</tr>
+</table>
+</td>
+	</tr>
+</table>
+</div></div></div></td><td style="height:40px;width:1px;margin:0;padding:0;border:0 solid none;"><div style="height:40px;width:1px;margin:0;padding:0;border:0 solid none;"></div></td></tr></table></div></div>
 <div style="border-right:none;border-left:none;border-bottom:2px solid #FFFFFF;border-top:1px solid #FFFFFF;text-align:left;background-color:#F9DEC7;"><table cellpadding="0" cellspacing="0" border="0" style="width:100%;margin:0;padding:0;border:0 solid none;"><tr><td style="vertical-align:top;"><div></div></td><td style="height:1px;width:1px;margin:0;padding:0;border:0 solid none;"><div style="height:1px;width:1px;margin:0;padding:0;border:0 solid none;"></div></td></tr></table></div>
 <table style="border:none;" cellspacing="0" cellpadding="0" width="100%">
 <tbody>
 <tr>
 <td style="width:100px;vertical-align:top;background-color:#FFFFFF;">&nbsp;</td>
 <td style="width:100%;vertical-align:top;padding-bottom:0px;padding-top:0px;padding-left:5px;padding-right:5px;">
-<div id="Comp4_MenuHorizontal">
+<div id="Comp9_MenuHorizontalText" style="text-align:right;">
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
-	<tr style="background-image:url(gre/gre12309.png);background-repeat:repeat-x;background-position:left top;">
-		<td id="MH1_0"><a href="WaarpR66Presentation.html" onmouseover="MHSwitchImage('MH1_0_img', 'gre/gre12353.png');" onmouseout="MHSwitchImage('MH1_0_img', 'gre/gre12352.png');"><img id="MH1_0_img" src="gre/gre12352.png" width="179" height="26" alt="Waarp R66-Presentation" style="border:none;display:block;" /></a></td>
-		<td></td><td><img src="gre/gre12308.png" height="18" width="1" style="border:none;display:block;" alt="" /></td><td></td>
-		<td id="MH1_1"><a href="WaarpR66Installation.html" onmouseover="MHSwitchImage('MH1_1_img', 'gre/gre12355.png');" onmouseout="MHSwitchImage('MH1_1_img', 'gre/gre12354.png');"><img id="MH1_1_img" src="gre/gre12354.png" width="171" height="26" alt="Waarp R66-Installation" style="border:none;display:block;" /></a></td>
-		<td></td><td><img src="gre/gre12308.png" height="18" width="1" style="border:none;display:block;" alt="" /></td><td></td>
-		<td id="MH1_2"><a href="WaarpR66Technical.html" onmouseover="MHSwitchImage('MH1_2_img', 'gre/gre12357.png');" onmouseout="MHSwitchImage('MH1_2_img', 'gre/gre12357.png');"><img id="MH1_2_img" src="gre/gre12357.png" width="175" height="26" alt="Waarp R66-Technical" style="border:none;display:block;" /></a></td>
-		<td></td><td><img src="gre/gre12308.png" height="18" width="1" style="border:none;display:block;" alt="" /></td><td></td>
-		<td id="MH1_3"><a href="WaarpR66Production.html" onmouseover="MHSwitchImage('MH1_3_img', 'gre/gre12359.png');" onmouseout="MHSwitchImage('MH1_3_img', 'gre/gre12358.png');"><img id="MH1_3_img" src="gre/gre12358.png" width="167" height="26" alt="Waarp R66-Production" style="border:none;display:block;" /></a></td>
-		<td></td><td><img src="gre/gre12308.png" height="18" width="1" style="border:none;display:block;" alt="" /></td><td></td>
-		<td id="MH1_4"><a href="WaarpAdministrator.html" onmouseover="MHSwitchImage('MH1_4_img', 'gre/gre12361.png');" onmouseout="MHSwitchImage('MH1_4_img', 'gre/gre12360.png');"><img id="MH1_4_img" src="gre/gre12360.png" width="156" height="26" alt="Waarp Administrator" style="border:none;display:block;" /></a></td>
-		<td style="width:100%;"><img src="img/space.gif" width="1" height="1" style="border:none;display:block;" alt="" /></td>
-	<td><img src="gre/gre12309.png" height="26" width="1" style="border:none;display:block;" alt="" /></td>
+	<tr>
+		<td class="pathmenu1" style="white-space:nowrap;" valign="top" align="right"><a href="WaarpR66.html" id="MHT1_0_second" class="pathmenu1" onmouseover="MHTSetClass('MHT1_0', 'pathmenu1over');" onmouseout="MHTSetClass('MHT1_0', 'pathmenu1');"><span id="MHT1_0" class="pathmenu1">Waarp R66</span></a><span class="normal"> &gt; </span><a href="WaarpR66Howtos.html" id="MHT1_1_second" class="pathmenu1" onmouseover="MHTSetClass('MHT1_1', 'pathmenu1over');" onmouseout="MHTSetClass('MHT1_1', 'pathmenu1');"><span id="MHT1_1" class="pathmenu1">Waarp R66 Howtos</span></a><span class="normal"> &gt; </span><span id="MHT1_2" class="pathmenu1sel"><label>Waarp R66-Command</label></span></td>
 	</tr>
 </table>
-</div></td></tr>
+</div>
+<div id="Comp13_MenuHorizontal" style="text-align:left;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td id="MH3_0"><a href="WaarpR66Presentation.html" onmouseover="MHSwitchImage('MH3_0_img', 'gre/gre17613.png');" onmouseout="MHSwitchImage('MH3_0_img', 'gre/gre17611.png');"><img id="MH3_0_img" src="gre/gre17611.png" width="178" height="26" alt="Waarp R66-Presentation" style="border:none;display:block;" /></a></td>
+		<td id="MH3_1"><a href="WaarpR66Installation.html" onmouseover="MHSwitchImage('MH3_1_img', 'gre/gre17616.png');" onmouseout="MHSwitchImage('MH3_1_img', 'gre/gre17614.png');"><img id="MH3_1_img" src="gre/gre17614.png" width="170" height="26" alt="Waarp R66-Installation" style="border:none;display:block;" /></a></td>
+		<td id="MH3_2"><a href="WaarpR66undertheWood.html" onmouseover="MHSwitchImage('MH3_2_img', 'gre/gre17619.png');" onmouseout="MHSwitchImage('MH3_2_img', 'gre/gre17617.png');"><img id="MH3_2_img" src="gre/gre17617.png" width="200" height="26" alt="Waarp R66 under the Wood" style="border:none;display:block;" /></a></td>
+		<td id="MH3_3"><a href="WaarpR66Howtos.html" onmouseover="MHSwitchImage('MH3_3_img', 'gre/gre17622.png');" onmouseout="MHSwitchImage('MH3_3_img', 'gre/gre17621.png');"><img id="MH3_3_img" src="gre/gre17621.png" width="147" height="26" alt="Waarp R66 Howtos" style="border:none;display:block;" /></a></td>
+		<td id="MH3_4"><a href="R66AdministratorGui.html" onmouseover="MHSwitchImage('MH3_4_img', 'gre/gre17625.png');" onmouseout="MHSwitchImage('MH3_4_img', 'gre/gre17623.png');"><img id="MH3_4_img" src="gre/gre17623.png" width="164" height="26" alt="R66 Administrator Gui" style="border:none;display:block;" /></a></td>
+		<td id="MH3_5"><a href="R66Proxy.html" onmouseover="MHSwitchImage('MH3_5_img', 'gre/gre17628.png');" onmouseout="MHSwitchImage('MH3_5_img', 'gre/gre17626.png');"><img id="MH3_5_img" src="gre/gre17626.png" width="85" height="26" alt="R66 Proxy" style="border:none;display:block;" /></a></td>
+		<td id="MH3_6"><a href="R66ClientGui.html" onmouseover="MHSwitchImage('MH3_6_img', 'gre/gre17631.png');" onmouseout="MHSwitchImage('MH3_6_img', 'gre/gre17629.png');"><img id="MH3_6_img" src="gre/gre17629.png" width="113" height="26" alt="R66 Client Gui" style="border:none;display:block;" /></a></td>
+		<td style="width:100%;"><img src="img/space.gif" width="1" height="1" style="border:none;display:block;" alt="" /></td>
+	</tr>
+</table>
+</div>
+<div style="text-align:right;">
+<div id="Comp10_MenuHorizontal" style="text-align:left;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td><img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td>
+		<td id="MH1_0"><img id="MH1_0_img" src="gre/gre17675.png" width="134" height="20" alt="Waarp R66-Command" style="border:none;display:block;" /></td>
+		<td id="MH1_1"><a href="WaarpR66CommandLine.html" onmouseover="MHSwitchImage('MH1_1_img', 'gre/gre17679.png');" onmouseout="MHSwitchImage('MH1_1_img', 'gre/gre17677.png');"><img id="MH1_1_img" src="gre/gre17677.png" width="157" height="20" alt="Waarp R66-CommandLine" style="border:none;display:block;" /></a></td>
+		<td id="MH1_2"><a href="WaarpR66TaskOptions.html" onmouseover="MHSwitchImage('MH1_2_img', 'gre/gre17682.png');" onmouseout="MHSwitchImage('MH1_2_img', 'gre/gre17680.png');"><img id="MH1_2_img" src="gre/gre17680.png" width="146" height="20" alt="Waarp R66-TaskOptions" style="border:none;display:block;" /></a></td>
+		<td id="MH1_3"><a href="WaarpR66Wiki.html" onmouseover="MHSwitchImage('MH1_3_img', 'gre/gre17685.png');" onmouseout="MHSwitchImage('MH1_3_img', 'gre/gre17683.png');"><img id="MH1_3_img" src="gre/gre17683.png" width="102" height="20" alt="Waarp R66-Wiki" style="border:none;display:block;" /></a></td>
+		<td id="MH1_4"><a href="WaarpR66WebMonitoring.html" onmouseover="MHSwitchImage('MH1_4_img', 'gre/gre17688.png');" onmouseout="MHSwitchImage('MH1_4_img', 'gre/gre17686.png');"><img id="MH1_4_img" src="gre/gre17686.png" width="166" height="20" alt="Waarp R66-Web-Monitoring" style="border:none;display:block;" /></a></td>
+		<td id="MH1_5"><a href="WaarpR66WebAdministration.html" onmouseover="MHSwitchImage('MH1_5_img', 'gre/gre17691.png');" onmouseout="MHSwitchImage('MH1_5_img', 'gre/gre17689.png');"><img id="MH1_5_img" src="gre/gre17689.png" width="188" height="20" alt="Waarp R66-Web-Administration" style="border:none;display:block;" /></a></td>
+		<td style="width:100%;"><img src="img/space.gif" width="1" height="1" style="border:none;display:block;" alt="" /></td>
+	</tr>
+</table>
+</div>
+<div id="Comp11_MenuHorizontal" style="text-align:left;"></div></div></td></tr>
 <tr>
-<td style="width:100px;vertical-align:top;">
-<div id="Comp6_MenuVertical" style="text-align:left;"><div id="mvg1"><a href="index.html" onmouseover="mvgSwitchImage('mvg1_0_img', 'gre/gre12312.png');" onmouseout="mvgSwitchImage('mvg1_0_img', 'gre/gre12310.png');"><img id="mvg1_0_img" src="gre/gre12310.png" width="150" height="31" alt="Home" style="display:block;border:none;" /></a>
-<a href="WorldofWaarp.html" onmouseover="mvgSwitchImage('mvg1_1_img', 'gre/gre12315.png');" onmouseout="mvgSwitchImage('mvg1_1_img', 'gre/gre12313.png');"><img id="mvg1_1_img" src="gre/gre12313.png" width="150" height="31" alt="World of Waarp" style="display:block;border:none;" /></a>
-<a href="WaarpR66.html" onmouseover="mvgSwitchImage('mvg1_2_img', 'gre/gre12318.png');" onmouseout="mvgSwitchImage('mvg1_2_img', 'gre/gre12317.png');"><img id="mvg1_2_img" src="gre/gre12317.png" width="150" height="31" alt="Waarp R66" style="display:block;border:none;" /></a>
-<a href="WaarpFTP.html" onmouseover="mvgSwitchImage('mvg1_3_img', 'gre/gre12321.png');" onmouseout="mvgSwitchImage('mvg1_3_img', 'gre/gre12319.png');"><img id="mvg1_3_img" src="gre/gre12319.png" width="150" height="31" alt="Waarp FTP" style="display:block;border:none;" /></a>
-<a href="WaarpGatewayFtp.html" onmouseover="mvgSwitchImage('mvg1_4_img', 'gre/gre12324.png');" onmouseout="mvgSwitchImage('mvg1_4_img', 'gre/gre12322.png');"><img id="mvg1_4_img" src="gre/gre12322.png" width="150" height="31" alt="WaarpGatewayFtp" style="display:block;border:none;" /></a>
-<a href="WaarpGatewayHttp.html" onmouseover="mvgSwitchImage('mvg1_5_img', 'gre/gre12327.png');" onmouseout="mvgSwitchImage('mvg1_5_img', 'gre/gre12325.png');"><img id="mvg1_5_img" src="gre/gre12325.png" width="150" height="31" alt="WaarpGatewayHttp" style="display:block;border:none;" /></a>
-<a href="WaarpCommons.html" onmouseover="mvgSwitchImage('mvg1_6_img', 'gre/gre12330.png');" onmouseout="mvgSwitchImage('mvg1_6_img', 'gre/gre12328.png');"><img id="mvg1_6_img" src="gre/gre12328.png" width="150" height="31" alt="Waarp Commons" style="display:block;border:none;" /></a>
-<a href="APIReferences.html" onmouseover="mvgSwitchImage('mvg1_7_img', 'gre/gre12333.png');" onmouseout="mvgSwitchImage('mvg1_7_img', 'gre/gre12331.png');"><img id="mvg1_7_img" src="gre/gre12331.png" width="150" height="31" alt="API References" style="display:block;border:none;" /></a>
-<a href="Downloads.html" onmouseover="mvgSwitchImage('mvg1_8_img', 'gre/gre12336.png');" onmouseout="mvgSwitchImage('mvg1_8_img', 'gre/gre12334.png');"><img id="mvg1_8_img" src="gre/gre12334.png" width="150" height="31" alt="Downloads" style="display:block;border:none;" /></a>
-<a href="WaarpDependson.html" onmouseover="mvgSwitchImage('mvg1_9_img', 'gre/gre12339.png');" onmouseout="mvgSwitchImage('mvg1_9_img', 'gre/gre12337.png');"><img id="mvg1_9_img" src="gre/gre12337.png" width="150" height="31" alt="Waarp Depends on" style="display:block;border:none;" /></a>
-</div></div></td>
+<td style="width:100px;vertical-align:top;"></td>
 <td style="width:100%;vertical-align:top;padding-bottom:5px;padding-top:5px;padding-left:5px;padding-right:5px;">
 <h1 class="h1">Waarp R66-Command</h1>
 <div id="Comp1_sys_doctext"><p style="text-align:justify;"><span style="font-size:11pt;">Waarp R66 is mainly a set of commands,from the server, to the clients, through utilities.</span></p>
@@ -97,527 +257,523 @@ a img {
 <p style="text-align:justify;"><span style="font-size:11pt;color:#ff0000;"><strong><em><a href="http://waarp.github.com/WaarpR66/api/org/waarp/openr66/server/package-summary.html"><span style="color:#0000FF;">org.waarp.openr66.server package</span></a><span style="color:#0000FF;">:</span></em></strong></span></p>
 <ul>
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;"><strong>R66Server</strong></span></div></li></ul>
-<p style="text-align:justify;"><span style="font-size:11pt;">It launches the Waarp R66 Server using as unique argument the full XML configuration file. It loads the rest of the configuration (or update its configuration) from the database specified in the XML configuration file.</span></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">By default, three services are opened:</span></p>
+<div class="normal" style="text-align:justify;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>R66Server</strong></span></div></li></ul>
+<blockquote>
+<p style="text-align:justify;"><span style="font-size:10pt;">It launches the Waarp R66 Server using as unique argument the full XML configuration file. It loads the rest of the configuration (or update its configuration) from the database specified in the XML configuration file.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">By default, three services are opened:</span></p>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Non SSL file transfer monitor</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Non SSL file transfer monitor</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">SSL file transfer monitor</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">SSL file transfer monitor</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">HTTP file transfer observer</span></div></li></ul>
-<p style="text-align:justify;"><span style="font-size:11pt;">By default, 5 subdirectories (under the main home) are defined:</span></p>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">HTTP file transfer observer</span></div></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;">By default, 5 subdirectories (under the main home) are defined:</span></p>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Config directory where configurations files are stored</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Config directory where configurations files are stored</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Archive directory where archive transfer can be put (using post actions) or where transfer logs are placed</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Archive directory where archive transfer can be put (using post actions) or where transfer logs are placed</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Input directory where received files are stored (except if a post action moves it)</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Input directory where received files are stored (except if a post action moves it)</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Output directory where to be sent files are stored (or linked)</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Output directory where to be sent files are stored (or linked)</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Working directory where currently received files are temporarily placed</span></div></li></ul>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Working directory where currently received files are temporarily placed</span></div></li></ul></blockquote>
 <blockquote style="margin-right:0px;" dir="ltr">
 <p style="text-align:justify;"><span style="font-size:11pt;color:#FF0000;"><strong>Utilities:</strong></span></p></blockquote>
 <ul>
 <li>
-<div class="normal" style="text-align:justify;"><span><span style="font-size:11pt;"><strong>ServerInitDatabase</strong></span></span></div></li></ul>
+<div class="normal" style="text-align:justify;"><span><span style="font-size:11pt;background-color:#CCCCCC;"><strong>ServerInitDatabase</strong></span></span></div></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:justify;"><span style="font-size:11pt;">The first step in installation of an Waarp R66 Server or heavy client is to construct the XML configuration files and to initiate the database that support file transfers and configurations. This function is an helper for database initialisation.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">The first step in installation of an Waarp R66 Server or heavy client is to construct the XML configuration files and to initiate the database that support file transfers and configurations. This function is an helper for database initialisation.</span></p>
 <ul>
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">The first argument is the JDBC database connection XML file.</span></div></li></ul>
-<p style="text-align:justify;"><span style="font-size:11pt;">From there any argument are optional. Any existing data will be replaced. No data are deleted if not replaced.</span></p>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">The first argument is the JDBC database connection XML file.</span></div></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;">From there any argument are optional. Any existing data will be replaced. No data are deleted if not replaced.</span></p>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-initdb' : It will try to create the database tables and to initiate the sequence (unique Id by host of runners from runner table).</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-initdb' : It will try to create the database tables and to initiate the sequence (unique Id by host of runners from runner table).</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-loadBusiness businessConfig' : It will load the business configuration into the database HostConfig table.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-loadBusiness businessConfig' : It will load the business configuration into the database HostConfig table.</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-loadAlias aliasConfig' : It will load the&nbsp;aliases configuration into the database HostConfig table.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-loadAlias aliasConfig' : It will load the&nbsp;aliases configuration into the database HostConfig table.</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-loadRoles rolesConfig' : It will load the&nbsp;roles configuration into the database HostConfig table.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-loadRoles rolesConfig' : It will load the&nbsp;roles configuration into the database HostConfig table.</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-dir directory' : this argument is the directory from where to load rules into the database using the XML <span>rule </span>files present in this directory (rules table). </span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-dir directory' : this argument is the directory from where to load rules into the database using the XML <span>rule </span>files present in this directory (rules table). </span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-auth hostConfig' : this argument is to load the host authentication XML file into the database (hosts table).</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-auth hostConfig' : this argument is to load the host authentication XML file into the database (hosts table).</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-limit limitConfig' : this argument is to load the bandwidth XML file into the database (configuration table).</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-limit limitConfig' : this argument is to load the bandwidth XML file into the database (configuration table).</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;">&nbsp;<span style="font-size:12pt; font-family:arial, sans-serif;">'-<span style="font-family:Verdana;font-size:11pt;">upgradeDb'</span>: this argument allow to try to upgrade the database schema (from version 2.4.17).</span></div></li></ul>
-<p style="text-align:justify;"><span style="font-size:11pt;">From that point, the Waarp R66 server (R66Server) can be started.</span></p></blockquote>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">&nbsp;<span style="font-family:arial, sans-serif;">'-<span style="font-family:Verdana;">upgradeDb'</span>: this argument allow to try to upgrade the database schema (from version 2.4.17).</span></span></div></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;">From that point, the Waarp R66 server (R66Server) can be started.</span></p></blockquote>
 <ul>
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;"><strong>ServerExportConfiguration</strong></span></div></li></ul>
+<div class="normal" style="text-align:justify;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>ServerExportConfiguration</strong></span></div></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:justify;"><span style="font-size:11pt;">One of the ideas of Waarp R66 is the ability to centralized some information asynchronously into a centralized database. This centralization can be in two ways:</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">One of the ideas of Waarp R66 is the ability to centralized some information asynchronously into a centralized database. This centralization can be in two ways:</span></p>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Import new rules, host authentication or bandwidth limitation: this can be done using the ServerInitDatabase after&nbsp;some file transfers from a post operation which could execute this utility.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Import new rules, host authentication or bandwidth limitation: this can be done using the ServerInitDatabase after&nbsp;some file transfers from a post operation which could execute this utility.</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Export rules, hosts authentication and actual runners (done or not): this is the goal of this utility. It takes two arguments:</span></div>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Export rules, hosts authentication and actual runners (done or not): this is the goal of this utility. It takes two arguments:</span></div>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">The client configuration XML file</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">The client configuration XML file</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">The directory where to export files in XML format</span></div></li></ul></li></ul>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">The directory where to export files in XML format</span></div></li></ul></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:justify;"><span style="font-size:11pt;">It will export Rules, all present Runners, Host Authentications.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">It will export Rules, all present Runners, Host Authentications.</span></p>
 <p style="text-align:justify;">&nbsp;</p></blockquote></blockquote><span style="font-size:10pt;">
 <ul>
 <li>
-<div style="text-align:left;"><span style="font-size:11pt;"><strong>ConfigExport</strong></span></div></li></ul>
+<div style="text-align:left;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>ConfigExport</strong></span></div></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:left;"><span style="font-size:11pt;">This tool enables to ask the server remotely to export Rules and Hosts configuration into one file each.</span></p>
-<p style="text-align:left;"><span style="font-size:11pt;">It could be used before a retrieve of the configuration in a central repository.</span></p>
-<p style="text-align:left;"><span style="font-size:11pt;">Options are:</span></p>
+<p style="text-align:left;"><span style="font-size:10pt;">This tool enables to ask the server remotely to export Rules and Hosts configuration into one file each.</span></p>
+<p style="text-align:left;"><span style="font-size:10pt;">It could be used before a retrieve of the configuration in a central repository.</span></p>
+<p style="text-align:left;"><span style="font-size:10pt;">Options are:</span></p>
 <ul>
-<li><div style="text-align:left;"><span style="font-size:11pt;">The first argument is the client XML configuration file</span></div></li>
+<li><div style="text-align:left;"><span style="font-size:10pt;">The first argument is the client XML configuration file</span></div></li>
 
-<li><div style="text-align:left;"><span style="font-size:11pt;">-hosts : export all Hosts configuration</span></div></li>
+<li><div style="text-align:left;"><span style="font-size:10pt;">-hosts : export all Hosts configuration</span></div></li>
 
-<li><div style="text-align:left;"><span style="font-size:11pt;">-rules : export all Rules configuration</span></div></li>
+<li><div style="text-align:left;"><span style="font-size:10pt;">-rules : export all Rules configuration</span></div></li>
 
-<li><div style="text-align:left;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-<span style="font-family:Verdana;font-size:11pt;">business</span> : export all Business configuration</span></span></div></li>
+<li><div style="text-align:left;"><span style="font-family:arial, sans-serif;"><span style="font-size:10pt;">-<span style="font-family:Verdana;">business</span> : export all Business configuration</span></span></div></li>
 
-<li><div style="text-align:left;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-<span style="font-family:Verdana;font-size:11pt;">alias</span> : export all Alias configuration</span></span></div></li>
+<li><div style="text-align:left;"><span style="font-family:arial, sans-serif;"><span style="font-size:10pt;">-<span style="font-family:Verdana;">alias</span> : export all Alias configuration</span></span></div></li>
 
-<li><div style="text-align:left;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-<span style="font-family:Verdana;font-size:11pt;">role</span> : export all Roles configuration</span></span></div></li>
+<li><div style="text-align:left;"><span style="font-family:arial, sans-serif;"><span style="font-size:10pt;">-<span style="font-family:Verdana;">role</span> : export all Roles configuration</span></span></div></li>
 
 <li>
-<div style="text-align:left;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-<span style="font-family:Verdana;font-size:11pt;">host host</span> : try to run this command over host (if allowed)</span></span></div></li></ul></blockquote>
+<div style="text-align:left;"><span style="font-family:arial, sans-serif;"><span style="font-size:10pt;">-<span style="font-family:Verdana;">host host</span> : try to run this command over host (if allowed)</span></span></div></li></ul></blockquote>
 <ul dir="ltr">
 <li>
-<div style="text-align:left;"><span style="font-size:11pt;"><strong>ConfigImport</strong></span></div></li></ul>
+<div style="text-align:left;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>ConfigImport</strong></span></div></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:left;"><span style="font-size:11pt;">This tool enables to ask the server remotely to import Rules and Hosts configuration from one file each.</span></p>
-<p style="text-align:left;"><span style="font-size:11pt;">It could be used before a upload the configuration from a central repository after transmission.</span></p>
-<p style="text-align:left;"><span style="font-size:11pt;">Options are:</span></p>
+<p style="text-align:left;"><span style="font-size:10pt;">This tool enables to ask the server remotely to import Rules and Hosts configuration from one file each.</span></p>
+<p style="text-align:left;"><span style="font-size:10pt;">It could be used before a upload the configuration from a central repository after transmission.</span></p>
+<p style="text-align:left;"><span style="font-size:10pt;">Options are:</span></p>
 <ul>
-<li><div style="text-align:left;"><span style="font-size:11pt;">The first argument is the client XML configuration file</span></div></li>
+<li><div style="text-align:left;"><span style="font-size:10pt;">The first argument is the client XML configuration file</span></div></li>
 
-<li><div style="text-align:left;"><span style="font-size:11pt;">-hosts : import all Hosts configuration</span></div></li>
+<li><div style="text-align:left;"><span style="font-size:10pt;">-hosts : import all Hosts configuration</span></div></li>
 
-<li><div style="text-align:left;"><span style="font-size:11pt;">-<ins>purgehosts</ins> : purge all hosts configuration before importing new configuration</span></div></li>
+<li><div style="text-align:left;"><span style="font-size:10pt;">-<ins>purgehosts</ins> : purge all hosts configuration before importing new configuration</span></div></li>
 
-<li><div style="text-align:left;"><span style="font-size:11pt;">-rules : import all Rules configuration</span></div></li>
+<li><div style="text-align:left;"><span style="font-size:10pt;">-rules : import all Rules configuration</span></div></li>
 
-<li><div style="text-align:left;"><span style="font-size:11pt;">-<ins>purgerules</ins> : purge all rules configuration before importing new configuration</span></div></li>
+<li><div style="text-align:left;"><span style="font-size:10pt;">-<ins>purgerules</ins> : purge all rules configuration before importing new configuration</span></div></li>
 
-<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-<span style="font-family:Verdana;font-size:11pt;">business file</span> (if compatible)</span></span></span></div></li>
+<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:10pt;">-<span style="font-family:Verdana;">business file</span> (if compatible)</span></span></span></div></li>
 
-<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;"><span style="font-family:Verdana;font-size:11pt;">-alias file</span> (if compatible)</span></span></span></div></li>
+<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span><span style="font-size:10pt;"><span style="font-family:Verdana;">-alias file</span> (if compatible)</span></span></span></span></div></li>
 
-<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;"><span style="font-family:Verdana;font-size:11pt;">-roles file</span> (if compatible)</span></span></span></div></li>
+<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span><span style="font-size:10pt;"><span style="font-family:Verdana;">-roles file</span> (if compatible)</span></span></span></span></div></li>
 
-<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-<span style="font-family:Verdana;font-size:11pt;">purgebusiness</span> (if compatible)</span></span></span></div></li>
+<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:10pt;">-<span style="font-family:Verdana;">purgebusiness</span> (if compatible)</span></span></span></div></li>
 
-<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-<span style="font-family:Verdana;font-size:11pt;">purgealias</span> (if compatible)</span></span></span></div></li>
+<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:10pt;">-<span style="font-family:Verdana;">purgealias</span> (if compatible)</span></span></span></div></li>
 
-<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-<span style="font-family:Verdana;font-size:11pt;">purgeroles</span> (if compatible)</span></span></span></div></li>
+<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:10pt;">-<span style="font-family:Verdana;">purgeroles</span> (if compatible)</span></span></span></div></li>
 
-<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;"><span style="font-family:Verdana;font-size:11pt;">-hostid fileTransferId</span> (if compatible, from a previous file transfer)</span></span></span></div></li>
+<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span><span style="font-size:10pt;"><span style="font-family:Verdana;">-hostid fileTransferId</span> (if compatible, from a previous file transfer)</span></span></span></span></div></li>
 
-<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;"><span style="font-family:Verdana;font-size:11pt;">-ruleid fileTransferId</span> (if compatible, from a previous file transfer)</span></span></span></div></li>
+<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span><span style="font-size:10pt;"><span style="font-family:Verdana;">-ruleid fileTransferId</span> (if compatible, from a previous file transfer)</span></span></span></span></div></li>
 
-<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;"><span style="font-family:Verdana;font-size:11pt;">-businessid fileTransferId</span> (if compatible, from a previous file transfer)</span></span></span></div></li>
+<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span><span style="font-size:10pt;"><span style="font-family:Verdana;">-businessid fileTransferId</span> (if compatible, from a previous file transfer)</span></span></span></span></div></li>
 
-<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;"><span style="font-family:Verdana;font-size:11pt;">-aliasid fileTransferId</span> (if compatible, from a previous file transfer)</span></span></span></div></li>
+<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span><span style="font-size:10pt;"><span style="font-family:Verdana;">-aliasid fileTransferId</span> (if compatible, from a previous file transfer)</span></span></span></span></div></li>
 
-<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;"><span style="font-family:Verdana;font-size:11pt;">-roleid fileTransferId</span> (if compatible, from a previous file transfer)</span></span></span></div></li>
+<li><div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span><span style="font-size:10pt;"><span style="font-family:Verdana;">-roleid fileTransferId</span> (if compatible, from a previous file transfer)</span></span></span></span></div></li>
 
 <li>
-<div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;"><span style="font-family:Verdana;font-size:11pt;">-host host</span> (optional)</span></span></span></div></li></ul></blockquote></span>
+<div style="text-align:left;"><span style="color:#000000;"><span style="font-family:arial, sans-serif;"><span><span style="font-size:10pt;"><span style="font-family:Verdana;">-host host</span> (optional)</span></span></span></span></div></li></ul></blockquote></span>
 <ul>
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;"><strong>ServerShutdown</strong></span></div></li></ul>
+<div class="normal" style="text-align:justify;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>ServerShutdown</strong></span></div></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:justify;"><span style="font-size:11pt;">The Waarp R66 Server can be shutdown mainly in two ways:</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">The Waarp R66 Server can be shutdown mainly in two ways:</span></p>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Sending a -SIGTERM signal (or under Unix a -SIGUSR1 signal) to the JVM process hosting the OpenR66 Server.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Sending a -SIGTERM signal (or under Unix a -SIGUSR1 signal) to the JVM process hosting the OpenR66 Server.</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span><span style="font-size:11pt;"><strong><span style="color:#0000FF;">The prefered way</span></strong> is to use the HTTPS Administrator interface.</span></span></div></li>
+<li><div class="normal" style="text-align:justify;"><span><span><span style="font-size:10pt;"><strong><span style="color:#0000FF;">The prefered way</span></strong> is to use the HTTPS Administrator interface.</span></span></span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span><span><span style="font-size:11pt;"><strong><span style="color:#0000FF;">Another&nbsp;prefered way</span></strong> is to use this utility which sends a shutdown request through network but using a key shared physically (adminkey). This utility takes the same XML configuration file than the server (where the admin key is refered but not stored in any database) and uses the SSL service. </span></span></span></div></li>
+<li><div class="normal" style="text-align:justify;"><span><span><span><span style="font-size:10pt;"><strong><span style="color:#0000FF;">Another&nbsp;prefered way</span></strong> is to use this utility which sends a shutdown request through network but using a key shared physically (adminkey). This utility takes the same XML configuration file than the server (where the admin key is refered but not stored in any database) and uses the SSL service. </span></span></span></span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span><span style="font-size:11pt;">If one wants to used the non SSL service, use the option <strong>-nossl</strong></span></span></div></li>
+<li><div class="normal" style="text-align:justify;"><span><span><span style="font-size:10pt;">If one wants to used the non SSL service, use the option <strong>-nossl</strong></span></span></span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">This command allows also to "block" or "unblock" new requests while leaving currently running requests to finish normally. To block, add the argument '-<strong>block'</strong>, to unblock add the argument '-<strong>unblock'</strong>.</span></div></li></ul></blockquote>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">This command allows also to "block" or "unblock" new requests while leaving currently running requests to finish normally. To block, add the argument '-<strong>block'</strong>, to unblock add the argument '-<strong>unblock'</strong>.</span></div></li></ul></blockquote>
 <ul>
 <li>
-<p style="text-align:justify;"><span style="font-size:11pt;"><strong>LogExport</strong></span></p></li></ul>
+<p style="text-align:justify;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>LogExport</strong></span></p></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:justify;"><span style="font-size:11pt;">If one wants to centralized in asynchronous way the transfer logs, this utility is made for it. Its purpose is to export logs into the archive directory and to eventually purge them from database. It sends a local request to the server, which really export the logs into a file. No file are transfered, they are just export to a file in the global archive directory. To use it, two main ways can be achieved:</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">If one wants to centralized in asynchronous way the transfer logs, this utility is made for it. Its purpose is to export logs into the archive directory and to eventually purge them from database. It sends a local request to the server, which really export the logs into a file. No file are transfered, they are just export to a file in the global archive directory. To use it, two main ways can be achieved:</span></p>
 <ol>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">The local&nbsp;server runs this tool refering the OpenR66 Server using the client configuration XML file and then running a log request.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">The local&nbsp;server runs this tool refering the OpenR66 Server using the client configuration XML file and then running a log request.</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Directly runs a transfer request where the rule execute at pre processing this utility (again either in receive or send mode according to the initiate server).</span></div></li></ol>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Directly runs a transfer request where the rule execute at pre processing this utility (again either in receive or send mode according to the initiate server).</span></div></li></ol>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">The First argument is the Client Configuration (eventually without database access).</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">The First argument is the Client Configuration (eventually without database access).</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">The rest of arguments can be:</span></div>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">The rest of arguments can be:</span></div>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-clean' option: Change all UpdatedInfo to Done where GlobalLastTask is ALLDONETASK and status is CompleteOk (sometimes some runners can be done but UpdatedInfo could be erroneous - no impact but clean function -).</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-clean' option: Change all UpdatedInfo to Done where GlobalLastTask is ALLDONETASK and status is CompleteOk (sometimes some runners can be done but UpdatedInfo could be erroneous - no impact but clean function -).</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-purge' option: This option removes all ALLDONETASK from those that will be exported.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-purge' option: This option removes all ALLDONETASK from those that will be exported.</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-start' option: This option specifies the low limit&nbsp;to select runners from start runner time. If not specified, there is no low limit.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-start' option: This option specifies the low limit&nbsp;to select runners from start runner time. If not specified, there is no low limit.</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-stop' option: This option specifies the&nbsp;upper limit&nbsp;to select runners from start runner time. If not specified, there is no upper limit.</span></div></li></ul></li></ul></blockquote>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-stop' option: This option specifies the&nbsp;upper limit&nbsp;to select runners from start runner time. If not specified, there is no upper limit.</span></div></li></ul></li></ul></blockquote>
 <ul dir="ltr">
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;"><strong>LogExtendedExport</strong></span>&nbsp; </div></li></ul>
+<div class="normal" style="text-align:justify;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>LogExtendedExport</strong></span>&nbsp; </div></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-family:Verdana;font-size:10pt;">This command is the same as LogExport but with more options</span></span></p>
 <ul>
-<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">This command is the same as LogExport but with more options</span></span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:11pt;">The First argument is the Client Configuration (eventually without database access).</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">The First argument is the Client Configuration (eventually without database access).</span></p></li>
 
 <li>
-<p style="text-align:justify;"><span style="font-size:11pt;">The rest of arguments can be:</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">The rest of arguments can be:</span></p>
 <ul>
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-clean' option: Change all UpdatedInfo to Done where GlobalLastTask is ALLDONETASK and status is CompleteOk (sometimes some runners can be done but UpdatedInfo could be erroneous - no impact but clean function -).</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-clean' option: Change all UpdatedInfo to Done where GlobalLastTask is ALLDONETASK and status is CompleteOk (sometimes some runners can be done but UpdatedInfo could be erroneous - no impact but clean function -).</span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-purge' option: This option removes all ALLDONETASK from those that will be exported.</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-purge' option: This option removes all ALLDONETASK from those that will be exported.</span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-start' option: This option specifies the low limit&nbsp;to select runners from start runner time. If not specified, there is no low limit.</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-start' option: This option specifies the low limit&nbsp;to select runners from start runner time. If not specified, there is no low limit.</span></p></li>
 
 <li>
-<p style="text-align:justify;"><span style="font-size:11pt;">'-stop' option: This option specifies the&nbsp;upper limit&nbsp;to select runners from start runner time. If not specified, there is no upper limit.</span></p></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;">'-stop' option: This option specifies the&nbsp;upper limit&nbsp;to select runners from start runner time. If not specified, there is no upper limit.</span></p></li></ul>
 <ul>
-<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-startid id: This option specifies the low limit for Transfer Id</span></span></p></li>
+<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-family:Verdana;font-size:10pt;">-startid id: This option specifies the low limit for Transfer Id</span></span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-stopid id: This option specifies the upper limit for Transfer Id</span></span></p></li>
+<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-family:Verdana;font-size:10pt;">-stopid id: This option specifies the upper limit for Transfer Id</span></span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-rule rule: This option specifies that logs will only concern this rule</span></span></p></li>
+<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-family:Verdana;font-size:10pt;">-rule rule: This option specifies that logs will only concern this rule</span></span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-request host: This option specifies that logs will only concern this host</span></span></p></li>
+<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-family:Verdana;font-size:10pt;">-request host: This option specifies that logs will only concern this host</span></span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-pending: This option specifies that logs will only concern pending request</span></span></p></li>
+<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-family:Verdana;font-size:10pt;">-pending: This option specifies that logs will only concern pending request</span></span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-transfer: This option specifies that logs will only concern in transfer request</span></span></p></li>
+<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-family:Verdana;font-size:10pt;">-transfer: This option specifies that logs will only concern in transfer request</span></span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-done: This option specifies that logs will only concern done (finished) request</span></span></p></li>
+<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-family:Verdana;font-size:10pt;">-done: This option specifies that logs will only concern done (finished) request</span></span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-size:12pt;">-error: This option specifies that logs will only concern in error request</span></span></p></li>
+<li><p style="text-align:justify;"><span style="font-family:arial, sans-serif;"><span style="font-family:Verdana;font-size:10pt;">-error: This option specifies that logs will only concern in error request</span></span></p></li>
 
 <li>
-<p style="text-align:justify;"><span style="font-family:Arial;font-size:12pt;">-host host: This options specifies a specific server to contact</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">-host host: This options specifies a specific server to contact</span></p>
 <ul>
-<li><p style="text-align:justify;"><span style="font-family:Arial;font-size:11pt;">Additional option: -ruleDownload rule : if set, will try to download the exported logs</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">Additional option: -ruleDownload rule : if set, will try to download the exported logs</span></p></li>
 
 <li>
-<p style="text-align:justify;"><span style="font-family:Arial;font-size:11pt;">Additional option: -import : if set, will try to import exported logs&nbsp;using ruleDownload</span></p></li></ul></li></ul></li></ul></blockquote>
+<p style="text-align:justify;"><span style="font-size:10pt;">Additional option: -import : if set, will try to import exported logs&nbsp;using ruleDownload</span></p></li></ul></li></ul></li></ul></blockquote>
 <ul>
 <li>
-<p style="text-align:justify;"><span style="font-size:11pt;"><strong>LogImport</strong></span></p>
+<p style="text-align:justify;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>LogImport</strong></span></p>
 <ul>
-<li><p style="text-align:justify;"><span style="font-size:11pt;">The First argument is the Client Configuration with database support&nbsp;</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">The First argument is the Client Configuration with database support&nbsp;</span></p></li>
 
 <li>
-<p style="text-align:justify;"><span style="font-size:11pt;">This command will import the XML logs into the database</span></p></li></ul></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;">This command will import the XML logs into the database</span></p></li></ul></li></ul>
 <ul>
 <li>
-<p style="text-align:justify;"><span style="font-size:11pt;"><strong>ChangeBandwidthLimits</strong></span></p></li></ul>
+<p style="text-align:justify;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>ChangeBandwidthLimits</strong></span></p></li></ul>
 <blockquote>
-<p style="text-align:justify;"><span style="font-size:11pt;">This tool enables to change dynamicaly the bandwidth limitations (only in memory, not in database). To use it, it should be used locally with the admin account.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">This tool enables to change dynamicaly the bandwidth limitations (only in memory, not in database). To use it, it should be used locally with the admin account.</span></p>
 <ul>
-<li><span style="font-size:11pt;"><span>The First argument is the Client Configuration (eventually without database access).</span> </span></li>
+<li><span><span style="font-size:10pt;"><span>The First argument is the Client Configuration (eventually without database access).</span> </span></span></li>
 <li>
-<p style="text-align:justify;"><span style="font-size:11pt;">The rest of arguments can be:</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">The rest of arguments can be:</span></p>
 <ul>
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-wglob' option: Write Global limitation in Bytes by Second (minimum 1024 so 1KBs).</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-wglob' option: Write Global limitation in Bytes by Second (minimum 1024 so 1KBs).</span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-rglob' option: Read Global limitation in Bytes by Second (minimum 1024 so 1KBs).</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-rglob' option: Read Global limitation in Bytes by Second (minimum 1024 so 1KBs).</span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-wsess' option: Write Session limitation in Bytes by Second (minimum 1024 so 1KBs).</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-wsess' option: Write Session limitation in Bytes by Second (minimum 1024 so 1KBs).</span></p></li>
 
 <li>
-<p style="text-align:justify;"><span style="font-size:11pt;">'-rsess' option: Read Session limitation in Bytes by Second (minimum 1024 so 1KBs).</span></p></li></ul></li></ul></blockquote>
+<p style="text-align:justify;"><span style="font-size:10pt;">'-rsess' option: Read Session limitation in Bytes by Second (minimum 1024 so 1KBs).</span></p></li></ul></li></ul></blockquote>
 <p style="text-align:justify;"><em><span style="font-size:12pt;color:#ff0000;"><u><a href="http://waarp.github.com/WaarpR66/api/org/waarp/openr66/client/package-summary.html"><strong>org.waarp.openr66.client package:</strong></a></u></span></em></p>
 <p style="text-align:justify;">&nbsp;</p>
-<p style="text-align:justify;"><span style="font-size:11pt;">All commands accept special extra arguments to format the output as desired:</span></p>
+<blockquote>
+<p style="text-align:justify;"><span style="font-size:10pt;">All commands accept special extra arguments to <strong>format the output</strong> as desired:</span></p>
 <ul>
 <li>
+<div class="normal" style="text-align:justify;"><span><span style="font-size:10pt;"><strong>-csv </strong>: output will be as one line for the title, one line for the data, all fields separated by ';'</span></span></div></li>
+<li><p style="text-align:justify;"><span><span style="font-size:10pt;"><strong>-property</strong> : output will be one value per line, as name=value</span></span></p></li>
+
+<li><p style="text-align:justify;"><span><span style="font-size:10pt;"><strong>-xml</strong> : output will be in XML format</span></span></p></li>
+
+<li><p style="text-align:justify;"><span><span style="font-size:10pt;"><strong>-json</strong> : output will be in JSON format (default)</span></span></p></li>
+
+<li><p style="text-align:justify;"><span><span style="font-size:10pt;"><strong>-quiet</strong> : no output will be done (only logging)</span></span></p></li>
+
+<li>
+<p style="text-align:justify;"><span style="font-size:10pt;">In addition, for success result, if <strong>-logWarn</strong> is set (default), the information will be logged using WARN level, while if <strong>-notlogWarn</strong> is set, the information will be logged using INFO level.</span></p></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;"><strong>Wildcard characters</strong> are allowed ('*', '?') in submit or direct requests, with some point of attentions:</span></p>
 <ul>
-<li><p style="text-align:justify;"><span style="font-size:11pt;"><strong>-csv </strong>: output will be as one line for the title, one line for the data, all fields separated by ';'</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:11pt;"><strong>-property</strong> : output will be one value per line, as name=value</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:11pt;"><strong>-xml</strong> : output will be in XML format</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:11pt;"><strong>-json</strong> : output will be in JSON format (default)</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:11pt;"><strong>-quiet</strong> : no output will be done (only logging)</span></p></li>
+<li><span style="font-size:10pt;"><span>When using wildcard characters combined with DirectTransfer or SubmitTransfer, the&nbsp;command is in error if the result gives multiple files.</span> </span><ul>
+<li><span style="font-size:10pt;">To enable multiple files resolution, use MultipleDirectTransfer or MultipleSubmitTransfer. </span><ul>
+<li>
+<p><span style="font-size:10pt;">Note that on MultipleSubmitTransfer, if the request is a "RECV" request, you can specify the option "-cient" which allows the MultipleSubmitTransfer to run a RequestInformation first to the remote partner in order to get the list of remote files.</span></p></li></ul></li>
+</ul></li>
 
 <li>
-<p style="text-align:justify;"><span style="font-size:11pt;">In addition, for success result, if <strong>-logWarn</strong> is set (default), the information will be logged using WARN level, while if <strong>-notlogWarn</strong> is set, the information will be logged using INFO level.</span></p></li></ul></li></ul>
-<p style="text-align:justify;"><span style="font-size:11pt;">Wildcard characters are allowed ('*', '?') in submit or direct requests, with some point of attentions:</span></p>
-<ul>
-<li>
-<ul>
-<li><span style="font-size:11pt;">When using wildcard characters combined with DirectTransfer or SubmitTransfer, the&nbsp;command is in error if the result gives multiple files.</span> 
-</li><li><ul>
-<li><p><span style="font-size:11pt;">To enable multiple files resolution, use MultipleDirectTransfer or MultipleSubmitTransfer. </span></p></li>
-
-<li>
-<p><span style="font-size:11pt;">Note that on MultipleSubmitTransfer, if the request is a "RECV" request, you can specify the option "-cient" which allows the MultipleSubmitTransfer to run a RequestInformation first to the remote partner in order to get the list of remote files.</span></p></li></ul></li>
-
-<li>
-<p><span style="font-size:11pt;">In some special cases, wildcard characters are badly interpreted (at Shell first level of interpretation), for instance as "*" , "*.*" &nbsp;or "*xx" . In particular, the shell might replace immediately the value, which is not the desired result. </span></p>
+<p><span style="font-size:10pt;">In some special cases, wildcard characters are badly interpreted (at Shell first level of interpretation), for instance as "*" , "*.*" &nbsp;or "*xx" . In particular, the shell might replace immediately the value, which is not the desired result. </span></p>
 <ul>
 <li>
-<p><span style="font-size:11pt;">In order to allow a "non-interpreted" wildcard character, Waarp allows to use the char '&sect;' in place of '*', so for the previous examples giving "%", "%.%" , "%xx". You can of course still continue to use '*' and '?'.</span></p></li></ul></li></ul></li></ul>
+<p><span style="font-size:10pt;">In order to allow a "non-interpreted" wildcard character, Waarp allows to use the char '&sect;' in place of '*', so for the previous examples giving "%", "%.%" , "%xx". You can of course still continue to use '*' and '?'.</span></p></li></ul></li></ul></blockquote>
 <p>&nbsp;</p>
 <ul>
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;"><strong>SubmitTransfer</strong></span></div></li></ul>
+<div class="normal" style="text-align:justify;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>SubmitTransfer</strong></span></div></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:justify;"><span style="font-size:11pt;">To transfer a file, two main methods exist. This one is a submission request, so an asynchronous operation since once the request is submitted, the client returns without waiting for the end of the operation.</span></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">It takes the following argument:</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">To transfer a file, two main methods exist. This one is a submission request, so an asynchronous operation since once the request is submitted, the client returns without waiting for the end of the operation.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">It takes the following argument:</span></p>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">The client XML configuration file as first argument, the one including database access</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">The client XML configuration file as first argument, the one including database access</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">At least 3 other arguments are necessary:</span></div><ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-to' option: specifies the remote Host Id (either&nbsp;the Id for SSL or not ).</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">At least 3 other arguments are necessary:</span></div><ul>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-to' option: specifies the remote Host Id (either&nbsp;the Id for SSL or not ).</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-file' option: specifies the file to transfer (either in receive or send mode).</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-file' option: specifies the file to transfer (either in receive or send mode).</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-rule' option: specifies the rule to apply (which specifies the transfer mode, the pre, post or error operations, ...).</span></div></li></ul></li>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-rule' option: specifies the rule to apply (which specifies the transfer mode, the pre, post or error operations, ...).</span></div></li></ul></li>
 
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Or at least 2 other arguments are necessary:</span></div><ul>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Or at least 2 other arguments are necessary:</span></div><ul>
 <li><div class="normal" style="text-align:justify;">
-<p style="text-align:left;"><span style="font-size:11pt;">'-to' option: specifies the remote Host Id (either the Id for SSL or not ).</span></p></div></li>
+<p style="text-align:left;"><span style="font-size:10pt;">'-to' option: specifies the remote Host Id (either the Id for SSL or not ).</span></p></div></li>
 
 <li>
 <div class="normal" style="text-align:justify;">
-<p style="text-align:left;"><span style="font-size:11pt;">'-id' option: specifies the Id of a previous transfer (stopped or in error).</span></p></div></li></ul></li>
+<p style="text-align:left;"><span style="font-size:10pt;">'-id' option: specifies the Id of a previous transfer (stopped or in error).</span></p></div></li></ul></li>
 
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Other options are:</span></div>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Other options are:</span></div>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-info' option: specifies the optional information that is send at the same time with the transfer request (extra information that could be needed by the remote host).</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-info' option: specifies the optional information that is send at the same time with the transfer request (extra information that could be needed by the remote host).</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-md5' option: specifies that each block transfer will be checked with a MD5 key. If the rule used is already in MD5 mode, this option will change nothing.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-md5' option: specifies that each block transfer will be checked with a MD5 key. If the rule used is already in MD5 mode, this option will change nothing.</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-block' option: specifies the block size (default is 64 KB).</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-block' option: specifies the block size (default is 64 KB).</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-nolog' option: specifies that this transfer will not be logged (only on requester side).</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-nolog' option: specifies that this transfer will not be logged (only on requester side).</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">
-<p style="text-align:left;"><span style="font-size:11pt;">'-start' "time start" as yyyyMMddHHmmss (override previous -delay options)</span></p></span></div></li>
+<li><div class="normal" style="text-align:justify;"><span>
+<p style="text-align:left;"><span style="font-size:10pt;">'-start' "time start" as yyyyMMddHHmmss (override previous -delay options)</span></p></span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">
-<p style="text-align:left;"><span style="font-size:11pt;">'-delay' "+delay in <ins>ms</ins>" as delay in <ins>ms</ins> from current time(override previous -start options)</span></p></span></div></li>
+<li><div class="normal" style="text-align:justify;"><span>
+<p style="text-align:left;"><span style="font-size:10pt;">'-delay' "+delay in <ins>ms</ins>" as delay in <ins>ms</ins> from current time(override previous -start options)</span></p></span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">
-<p style="text-align:left;"><span style="font-size:11pt;">'-delay' "delay in <ins>ms</ins>" as time in <ins>ms</ins> (override previous -start options)</span></p></span></div></li></ul></li></ul></blockquote>
+<div class="normal" style="text-align:justify;"><span>
+<p style="text-align:left;"><span style="font-size:10pt;">'-delay' "delay in <ins>ms</ins>" as time in <ins>ms</ins> (override previous -start options)</span></p></span></div></li></ul></li></ul></blockquote>
 <ul>
 <li>
 <div class="normal" style="text-align:justify;"><span style="font-size:11pt;"><strong>
-<p style="text-align:justify;"><span style="font-size:11pt;"><strong>MultipleSubmitTransfer</strong></span></p></strong></span></div>
+<p style="text-align:justify;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>MultipleSubmitTransfer</strong></span></p></strong></span></div>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">This function is the same than SubmitTransfer except that multiple hosts and multiples files could be specifed using a comma (',') as separator to -file and -to arguments.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">This function is the same than SubmitTransfer except that multiple hosts and multiples files could be specifed using a comma (',') as separator to -file and -to arguments.</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">-client : If the Rule is a RECV method, passing the -client additionnal option allows the function to contact the remote servers in case wildcards are used (?*&sect;~).</span></div></li></ul></li></ul>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">-client : If the Rule is a RECV method, passing the -client additionnal option allows the function to contact the remote servers in case wildcards are used (?*&sect;~).</span></div></li></ul></li></ul>
 <ul>
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;"><strong>DirectTransfer</strong></span></div></li></ul>
+<div class="normal" style="text-align:justify;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>DirectTransfer</strong></span></div></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:justify;"><span style="font-size:11pt;">This is the&nbsp;second method to transfer a file. This method is direct, so as a synchronous operation. This time the client will do the real work (transfering the file). The options are exactly the same than with SubmitTransfer. However two cases exist:</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">This is the&nbsp;second method to transfer a file. This method is direct, so as a synchronous operation. This time the client will do the real work (transfering the file). The options are exactly the same than with SubmitTransfer. However two cases exist:</span></p>
 <ol>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Heavy client: The client XML configuration file includes the database access. All transfer operations will be logged (eventually deleted at the end from the client side if the '-nolog' option is set). This option is useful for "production" clients in a data center.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Heavy client: The client XML configuration file includes the database access. All transfer operations will be logged (eventually deleted at the end from the client side if the '-nolog' option is set). This option is useful for "production" clients in a data center.</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Light client: The client XML configuration file does not included the database access. All transfer operations will not be logged at all (at client side). This option is useful for "light client" like personal computers where transfering files to or from a data center is a necessity. </span></div></li></ol>
-<p style="text-align:justify;"><span style="font-size:11pt;">However,&nbsp;both clients can only be the initiator of the transfer (receive or send), since no service is running once the client is over.</span></p></blockquote>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Light client: The client XML configuration file does not included the database access. All transfer operations will not be logged at all (at client side). This option is useful for "light client" like personal computers where transfering files to or from a data center is a necessity. </span></div></li></ol>
+<p style="text-align:justify;"><span style="font-size:10pt;">However,&nbsp;both clients can only be the initiator of the transfer (receive or send), since no service is running once the client is over.</span></p></blockquote>
 <ul dir="ltr">
 <li>
 <div class="normal" style="text-align:justify;"><strong><span style="font-size:11pt;">
-<p style="text-align:justify;"><span style="font-size:11pt;"><strong>MultipleDirectTransfer</strong></span></p></span></strong></div>
+<p style="text-align:justify;"><span style="font-size:11pt;background-color:#CCCCCC;"><strong>MultipleDirectTransfer</strong></span></p></span></strong></div>
 <ul>
 <li>
 <div class="normal" style="text-align:justify;">
-<p style="text-align:justify;"><span style="font-size:11pt;">This function is the same than DirectTransfer except that multiple hosts and multiples files could be specifed using a comma (',') as separator to -file and -to arguments.</span></p></div></li></ul></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;">This function is the same than DirectTransfer except that multiple hosts and multiples files could be specifed using a comma (',') as separator to -file and -to arguments.</span></p></div></li></ul></li></ul>
 <ul dir="ltr">
 <li>
-<div class="normal" style="text-align:justify;"><strong><span style="font-size:11pt;">SpooledDirectoryTransfer</span></strong></div>
-<p style="text-align:justify;"><span style="font-size:11pt;">This method (runs a service, even using Windows or Unix services) allows to spool a directory to submit transfers or directly transferred files to remote partners. It is intend as an helper. Note however that in many cases, it is preferable to directly request a file transfer from the application that has produced the file, and not relying on a directory scan (this method could be wrong with special situations like slow writes to disk). </span></p>
+<div class="normal" style="text-align:justify;"><strong><span style="font-size:11pt;background-color:#CCCCCC;">SpooledDirectoryTransfer</span></strong></div>
+<p style="text-align:justify;"><span style="font-size:10pt;">This method (runs a service, even using Windows or Unix services) allows to spool a directory to submit transfers or directly transferred files to remote partners. It is intend as an helper. Note however that in many cases, it is preferable to directly request a file transfer from the application that has produced the file, and not relying on a directory scan (this method could be wrong with special situations like slow writes to disk). </span></p>
 <ul>
-<li><p style="text-align:justify;"><span style="font-size:11pt;">The method consider a file as acceptable once </span></p><ul>
-<li><p style="text-align:justify;"><span style="font-size:11pt;">the file is discovered at iteration 1, </span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">The method consider a file as acceptable once </span></p><ul>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">the file is discovered at iteration 1, </span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">modification time and size not changed at iteration 2, </span></p></li>
-
-<li>
-<p style="text-align:justify;"><span style="font-size:11pt;">and finally hash unchanged at iteration 3. </span></p></li></ul></li>
-
-
-<li><p style="text-align:justify;"><span style="font-size:11pt;">The statusFile keeps the current status on disk (in case of crash, or restart of the process), in order that a file is not send twice. However, to ensure this is not the case, we encourage that the rule used a POST-SEND task that will move or eraze this file, such that it will be removed from the track list.</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">modification time and size not changed at iteration 2, </span></p></li>
 
 <li>
-<p style="text-align:justify;"><span style="font-size:11pt;">The SpooledDirectoryTransfer will also check at startup if another daemon is already running with the very same status file (which is not allowed). If so, the new daemon is immediately stopped.</span></p></li></ul></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;">and finally hash unchanged at iteration 3. </span></p></li></ul></li>
+
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;">The statusFile keeps the current status on disk (in case of crash, or restart of the process), in order that a file is not send twice. However, to ensure this is not the case, we encourage that the rule used a POST-SEND task that will move or eraze this file, such that it will be removed from the track list.</span></p></li>
+
+<li>
+<p style="text-align:justify;"><span style="font-size:10pt;">The SpooledDirectoryTransfer will also check at startup if another daemon is already running with the very same status file (which is not allowed). If so, the new daemon is immediately stopped.</span></p></li></ul></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
 <blockquote style="margin-right:0px;" dir="ltr">
-<p dir="ltr" style="text-align:justify;"><span style="font-size:11pt;">Note : for the SpooledDirectoryTransfer service to be able to&nbsp;inform the Waarp server of its status, you must allow explicitely this client to use "Business" actions. This can be done by allowing this using the Business XML file and the <span style="font-family:MS Sans Serif;"><em>ConfigImport -business file</em></span> or <span style="font-family:Microsoft Sans Serif;"><em>ServerInitDatabase -loadBusiness file</em></span>, or by adding directly this in the "Business Configuration:" field of the System page of the Web Administrator Waarp page with a content as in the Business XML file:</span></p>
-<p dir="ltr" style="text-align:justify;"><span style="font-size:11pt;"><strong>&lt;business&gt;&lt;businessid&gt;hosta&lt;/businessid&gt;&lt;/business&gt;</strong></span></p></blockquote>
-<p dir="ltr" style="text-align:justify;"><span style="font-size:11pt;">To launch the SpooledDirectoryTransfer, 2 options exist:</span></p>
-<p style="text-align:justify;margin-right:0px;" dir="ltr"><span style="font-size:11pt;">A) Through service (for Windows) by setting the Spooled program as a service (have a look in the example/Windows/servicespooled/ directory - using the Apache Commons Daemon)</span></p>
-<p style="text-align:justify;margin-right:0px;" dir="ltr"><span style="font-size:11pt;">B) Through command line (Windows or Linux - the last might be setup as a service too) by starting the command R66SPOOLEDSEND with the necessary arguments</span></p>
+<p dir="ltr" style="text-align:justify;"><span style="font-size:10pt;">Note : for the SpooledDirectoryTransfer service to be able to&nbsp;inform the Waarp server of its status, you must allow explicitely this client to use "Business" actions. This can be done by allowing this using the Business XML file and the <span style="font-family:MS Sans Serif;"><em>ConfigImport -business file</em></span> or <span style="font-family:Microsoft Sans Serif;"><em>ServerInitDatabase -loadBusiness file</em></span>, or by adding directly this in the "Business Configuration:" field of the System page of the Web Administrator Waarp page with a content as in the Business XML file:</span></p>
+<p dir="ltr" style="text-align:justify;"><span style="font-size:10pt;"><strong>&lt;business&gt;&lt;businessid&gt;hosta&lt;/businessid&gt;&lt;/business&gt;</strong></span></p></blockquote>
+<p dir="ltr" style="text-align:justify;"><span style="font-size:10pt;">To launch the SpooledDirectoryTransfer, 2 options exist:</span></p>
+<p style="text-align:justify;margin-right:0px;" dir="ltr"><span style="font-size:10pt;">A) Through service (for Windows) by setting the Spooled program as a service (have a look in the example/Windows/servicespooled/ directory - using the Apache Commons Daemon)</span></p>
+<p style="text-align:justify;margin-right:0px;" dir="ltr"><span style="font-size:10pt;">B) Through command line (Windows or Linux - the last might be setup as a service too) by starting the command R66SPOOLEDSEND with the necessary arguments</span></p>
 <p style="text-align:justify;margin-right:0px;" dir="ltr">&nbsp;</p>
-<p style="text-align:justify;margin-right:0px;" dir="ltr"><span style="font-size:11pt;">The arguments might be setup in 2 ways:</span></p>
+<p style="text-align:justify;margin-right:0px;" dir="ltr"><span style="font-size:10pt;">The arguments might be setup in 2 ways:</span></p>
 <ol dir="ltr">
-<li><div class="normal" style="text-align:justify;margin-right:0px;"><span style="font-size:11pt;">Using a standard client XML configuration file as first argument, using database access is recommended (No Database support&nbsp;might be ok if using -direct mode) plus extra arguments as command line (or for Windows service putting those arguments in the spooled.conf file - see example)</span></div></li>
+<li><div class="normal" style="text-align:justify;margin-right:0px;"><span style="font-size:10pt;">Using a standard client XML configuration file as first argument, using database access is recommended (No Database support&nbsp;might be ok if using -direct mode) plus extra arguments as command line (or for Windows service putting those arguments in the spooled.conf file - see example)</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;margin-right:0px;"><span style="font-size:11pt;">Using an extended client XML configuration file as unique argument (or throufg the spooled.conf as unique variable setup), which enable multiple SpooledDirectoryTransfer monitor running in one unique JVM, but with the lack of differentiation in term of stopping the spooled dameons (all stopping at the same time, all starting at the same time). The XML file is described in one XSD and one JAXE format as OpenR66-SpooledDirectory file in xample directory.</span></div></li></ol></blockquote>
-<ul>
-<li>
-<ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">The client XML configuration file as first argument, the one including database access</span></div></li>
-
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-to remoteHost' : single or multiple with a comma separated list</span></div></li>
-
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-directory namedir' : the directory to spool ; namedir could be a comma separated list too, in order to scan several directories in one and unique SpooledDirectoryTransfer service</span></div></li>
-
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-statusfile file' : the file (fullpath) to use as permanent status - if process is killed or aborts -. <strong><em>Note this file must be unique per SpooledDirectoryTransfer instance.</em></strong></span></div></li>
-
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-stopfile file' : the file (fullpath) to use when its existence will stop the daemon</span></div></li>
-
-<li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-rule rule' : the rule to use for the transfers</span></div></li></ul></li></ul>
+<div class="normal" style="text-align:justify;margin-right:0px;"><span style="font-size:10pt;">Using an extended client XML configuration file as unique argument (or throufg the spooled.conf as unique variable setup), which enable multiple SpooledDirectoryTransfer monitor running in one unique JVM, but with the lack of differentiation in term of stopping the spooled dameons (all stopping at the same time, all starting at the same time). The XML file is described in one XSD and one JAXE format as OpenR66-SpooledDirectory file in xample directory.</span></div></li></ol></blockquote>
 <ul>
 <li>
 <ul>
-<li class="normal"><span style="font-size:11pt;">Options:</span> 
-<ul>
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-info' option: specifies the optional information that is send at the same time with the transfer request (extra information that could be needed by the remote host).</span></p></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">The client XML configuration file as first argument, the one including database access</span></div></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-md5' option: specifies that each block transfer will be checked with a MD5 key. If the rule used is already in MD5 mode, this option will change nothing.</span></p></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-to remoteHost' : single or multiple with a comma separated list</span></div></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-block' option: specifies the block size (default is 64 KB).</span></p></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-directory namedir' : the directory to spool ; namedir could be a comma separated list too, in order to scan several directories in one and unique SpooledDirectoryTransfer service</span></div></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-nolog' option: specifies that this transfer will not be logged (only on requester side).</span></p></li>
+<li><div class="normal" style="text-align:justify;"><span><span style="font-size:10pt;">'-statusfile file' : the file (fullpath) to use as permanent status - if process is killed or aborts -. <strong><em>Note this file must be unique per SpooledDirectoryTransfer instance.</em></strong></span></span></div></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-regex regex': regular expression to filter file names from directory source</span></p></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-stopfile file' : the file (fullpath) to use when its existence will stop the daemon</span></div></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-elapse elapse': elapse time bewteen 2 checks of the directory in milliseconds (default 1000 ms)</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:11pt;"><strong>'-submit'</strong> (<em>default</em>) <strong>OR</strong> <strong>'-direct'</strong>: to submit only or to directly transfer only</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-recursive' allows the service to scan also subdirectories</span></p></li>
-
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-name' allows to specify explicitely a name (used in conjonction with the following -waarp option as the name of the remote SpooledDirectory service), instead of the name of the client and of the directories (default). The name should be globally unique (per Waarp server listed in -waarp option).</span></p></li>
-
-<li class="normal"><span style="font-size:11pt;">'-waarp remoteHosts' : single or multiple (comma separated list) of Waarp servers that will be informed on the current status. </span><ul>
-<li class="normal"><span style="font-size:11pt;">Note that those informations are only saved in memory on Waarp Servers side. It allows to quickly see the status under the Web Https Administrator interface, from Transfer element (Spooled.html). </span></li>
-<li class="normal"><span style="font-size:11pt;">The page shows a status of how much the status is fresh (green to orange to red), which could implies that the SpooledDirectory is stopped or broken.</span> 
-</li><li class="normal"><span style="font-size:11pt;">If the '-parallel' option is specified, the information will be sent to the Waarp servers at fix interval (potentially set by -elapseWaarp option). On the contrary (-sequential), the information will be sent only at the end of a full check and send operation&nbsp;(-elapse time plus time to check and send).</span> 
-</li><li class="normal"><span style="font-size:11pt;">'-parallel' or '-sequential' to allow parallism between send actions and information to Waarp server&nbsp; </span></li>
-<li class="normal"><span style="font-size:11pt;">'-elapseWaarp elapse': elapse time between 2 sends to Waarp servers (default 5000ms). If less than 1000 ms, will be run sequentially after each check and not in parallel (could lead to great elapse time if a lot of files or big files must be sent in one step). </span></li></ul></li>
-
-<li class="normal"><span style="font-size:11pt;"><strong>'-limitParallel limit'</strong> to specify the number of concurrent actions (send) in -direct mode only: <em><strong>It is recommended to set it to a low number, as 1.</strong></em></span>&nbsp; 
-</li><li class="normal"><span style="font-size:11pt;">'-minimalSize limit' to specify the minimal size of each file that will be transferred (default: no limit)</span> 
-</li><li class="normal">
-<p><span style="font-size:11pt;">'-notlogWarn' | '-logWarn' to deactivate or activate (default) the logging in Warn mode of Send/Remove information of the spool</span></p></li></ul></li></ul></li></ul>
+<li>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-rule rule' : the rule to use for the transfers</span></div></li></ul></li></ul>
 <ul>
 <li>
-<div class="normal" style="text-align:justify;"><strong><span style="font-size:11pt;">SendThroughClient</span></strong></div></li></ul>
+<ul>
+<li class="normal"><span style="font-size:10pt;"><span>Options:</span> </span>
+<ul>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-info' option: specifies the optional information that is send at the same time with the transfer request (extra information that could be needed by the remote host).</span></p></li>
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-md5' option: specifies that each block transfer will be checked with a MD5 key. If the rule used is already in MD5 mode, this option will change nothing.</span></p></li>
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-block' option: specifies the block size (default is 64 KB).</span></p></li>
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-nolog' option: specifies that this transfer will not be logged (only on requester side).</span></p></li>
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-regex regex': regular expression to filter file names from directory source</span></p></li>
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-elapse elapse': elapse time bewteen 2 checks of the directory in milliseconds (default 1000 ms)</span></p></li>
+
+<li><p style="text-align:justify;"><span><span style="font-size:10pt;"><strong>'-submit'</strong> (<em>default</em>) <strong>OR</strong> <strong>'-direct'</strong>: to submit only or to directly transfer only</span></span></p></li>
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-recursive' allows the service to scan also subdirectories</span></p></li>
+
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-name' allows to specify explicitely a name (used in conjonction with the following -waarp option as the name of the remote SpooledDirectory service), instead of the name of the client and of the directories (default). The name should be globally unique (per Waarp server listed in -waarp option).</span></p></li>
+
+<li class="normal"><span style="font-size:10pt;">'-waarp remoteHosts' : single or multiple (comma separated list) of Waarp servers that will be informed on the current status. </span><ul>
+<li class="normal"><span style="font-size:10pt;">Note that those informations are only saved in memory on Waarp Servers side. It allows to quickly see the status under the Web Https Administrator interface, from Transfer element (Spooled.html). </span></li>
+<li class="normal"><span style="font-size:10pt;"><span>The page shows a status of how much the status is fresh (green to orange to red), which could implies that the SpooledDirectory is stopped or broken.</span> </span></li>
+<li class="normal"><span style="font-size:10pt;"><span>If the '-parallel' option is specified, the information will be sent to the Waarp servers at fix interval (potentially set by -elapseWaarp option). On the contrary (-sequential), the information will be sent only at the end of a full check and send operation&nbsp;(-elapse time plus time to check and send).</span> </span></li>
+<li class="normal"><span style="font-size:10pt;">'-parallel' or '-sequential' to allow parallism between send actions and information to Waarp server&nbsp; </span></li>
+<li class="normal"><span style="font-size:10pt;">'-elapseWaarp elapse': elapse time between 2 sends to Waarp servers (default 5000ms). If less than 1000 ms, will be run sequentially after each check and not in parallel (could lead to great elapse time if a lot of files or big files must be sent in one step). </span></li></ul></li>
+
+<li class="normal"><span style="font-size:10pt;"><span><strong>'-limitParallel limit'</strong> to specify the number of concurrent actions (send) in -direct mode only: <em><strong>It is recommended to set it to a low number, as 1.</strong></em></span>&nbsp; </span></li>
+<li class="normal"><span style="font-size:10pt;"><span>'-minimalSize limit' to specify the minimal size of each file that will be transferred (default: no limit)</span> </span></li>
+<li class="normal">
+<p><span style="font-size:10pt;">'-notlogWarn' | '-logWarn' to deactivate or activate (default) the logging in Warn mode of Send/Remove information of the spool</span></p></li></ul></li></ul></li></ul>
+<ul>
+<li>
+<div class="normal" style="text-align:justify;"><strong><span style="font-size:10pt;background-color:#CCCCCC;">SendThroughClient</span></strong></div></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:justify;"><span style="font-size:11pt;">This method is not a full implemented method. It is a way to route a file transfer from one protocol in Java to OpenR66. For instance, if a protocol like HTTP upload or FTP upload allows to get a file upload by packet, you can then route this file transfer through Waarp R66 to a final Waarp R66 Server using the protocol but without writing an intermediary file (directly write the bytes from the upload to the Waarp R66 SendThroughClient interface). A simple&nbsp;example is shown in TestSendThroughClient.</span></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">So this method needs some minor developments to be implemented.</span></p></blockquote>
+<p style="text-align:justify;"><span style="font-size:10pt;">This method is not a full implemented method. It is a way to route a file transfer from one protocol in Java to OpenR66. For instance, if a protocol like HTTP upload or FTP upload allows to get a file upload by packet, you can then route this file transfer through Waarp R66 to a final Waarp R66 Server using the protocol but without writing an intermediary file (directly write the bytes from the upload to the Waarp R66 SendThroughClient interface). A simple&nbsp;example is shown in TestSendThroughClient.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">So this method needs some minor developments to be implemented.</span></p></blockquote>
 <ul dir="ltr">
 <li>
-<p style="text-align:justify;"><strong><span style="font-size:11pt;">RecvThroughClient</span></strong></p></li></ul>
+<p style="text-align:justify;"><strong><span style="font-size:10pt;background-color:#CCCCCC;">RecvThroughClient</span></strong></p></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:justify;"><span style="font-size:11pt;">This method is not a full implemented method. It is a way to route a file transfer to one protocol in Java to OpenR66. For instance, if a protocol like HTTP or FTP download allows to get a file downloaded by packet, you can then route directly the file transfer from Waarp R66 from a remote Waarp R66 Server using the protocol directly but without writing an intermediary file (directly write the bytes from the download from the Waarp R66 RecvThroughHandler interface). A simple&nbsp;example is shown in TestRecvThroughClient.</span></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">So this method needs some minor developments to be implemented.</span></p></blockquote>
+<p style="text-align:justify;"><span style="font-size:10pt;">This method is not a full implemented method. It is a way to route a file transfer to one protocol in Java to OpenR66. For instance, if a protocol like HTTP or FTP download allows to get a file downloaded by packet, you can then route directly the file transfer from Waarp R66 from a remote Waarp R66 Server using the protocol directly but without writing an intermediary file (directly write the bytes from the download from the Waarp R66 RecvThroughHandler interface). A simple&nbsp;example is shown in TestRecvThroughClient.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">So this method needs some minor developments to be implemented.</span></p></blockquote>
 <ul>
 <li>
-<p><span style="font-size:11pt;"><strong>ProgressBarTransfer</strong></span></p></li></ul>
-<blockquote><span style="font-size:11pt;"><span style="font-size:10pt;">
-<p style="text-align:left;"><span style="font-size:11pt;">This method is not a full implemented method. It is a way to implement a file transfer within a Graphical User Interface or to get information on progression during the transfer. Such an example is presented in the R66GUI.</span></p></span></span><span style="font-size:11pt;">To be used,&nbsp;this method needs some minor developments to be implemented, according to business needs.</span></blockquote>
+<p><span style="font-size:10pt;background-color:#CCCCCC;"><strong>ProgressBarTransfer</strong></span></p></li></ul>
+<blockquote><span><span>
+<p style="text-align:left;"><span style="font-size:10pt;">This method is not a full implemented method. It is a way to implement a file transfer within a Graphical User Interface or to get information on progression during the transfer. Such an example is presented in the R66GUI.</span></p></span></span><span>To be used,&nbsp;this method needs some minor developments to be implemented, according to business needs.</span></blockquote>
 <ul>
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;"><strong>RequestTransfer</strong></span></div></li></ul>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;background-color:#CCCCCC;"><strong>RequestTransfer</strong></span></div></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:justify;"><span style="font-size:11pt;">This utility is used to get information for a specific runner or to have an action on this runner.</span></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">The arguments are the following:</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">This utility is used to get information for a specific runner or to have an action on this runner.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">The arguments are the following:</span></p>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">The first argument is the client XML configuration file including the database access.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">The first argument is the client XML configuration file including the database access.</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-id' option: this is the Runner Id.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-id' option: this is the Runner Id.</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-to' or '-from' option (exclusive): this specifies the way of the request transfer. '-to' specifies that the original request was&nbsp;initiated by the current running&nbsp;host to the remote specified host. '-from' specifies that the original request was initiated by the remote specifed host.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-to' or '-from' option (exclusive): this specifies the way of the request transfer. '-to' specifies that the original request was&nbsp;initiated by the current running&nbsp;host to the remote specified host. '-from' specifies that the original request was initiated by the remote specifed host.</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">Optional arguments (exclusive): without any of those arguments, the request only returns the current information of the runner.</span></div>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">Optional arguments (exclusive): without any of those arguments, the request only returns the current information of the runner.</span></div>
 <ul>
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-cancel' option: the runner will be canceled. Any file currently in writing will be deleted.</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-cancel' option: the runner will be canceled. Any file currently in writing will be deleted.</span></div></li>
 
-<li><div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-stop' option: the runner will be stopped (but not canceled).</span></div></li>
+<li><div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-stop' option: the runner will be stopped (but not canceled).</span></div></li>
 
 <li>
-<div class="normal" style="text-align:justify;"><span style="font-size:11pt;">'-restart' option: the runner will be restart (if stopped). Optionnally the following options can be applied in addition:</span></div>
+<div class="normal" style="text-align:justify;"><span style="font-size:10pt;">'-restart' option: the runner will be restart (if stopped). Optionnally the following options can be applied in addition:</span></div>
 <ul>
 <li><div class="normal" style="text-align:justify;">
-<p style="text-align:left;"><span style="font-size:11pt;">'-start' "time start" as yyyyMMddHHmmss (override previous -delay options)</span></p></div></li>
+<p style="text-align:left;"><span style="font-size:10pt;">'-start' "time start" as yyyyMMddHHmmss (override previous -delay options)</span></p></div></li>
 
 <li><div class="normal" style="text-align:justify;">
-<p style="text-align:left;"><span style="font-size:11pt;">'-delay' "+delay in <ins>ms</ins>" as delay in <ins>ms</ins> from current time(override previous -start options)</span></p></div></li>
+<p style="text-align:left;"><span style="font-size:10pt;">'-delay' "+delay in <ins>ms</ins>" as delay in <ins>ms</ins> from current time(override previous -start options)</span></p></div></li>
 
 <li>
 <div class="normal" style="text-align:justify;">
-<p style="text-align:left;"><span style="font-size:11pt;">'-delay' "delay in <ins>ms</ins>" as time in <ins>ms</ins> (override previous -start options)</span></p></div></li></ul></li></ul></li></ul></blockquote>
+<p style="text-align:left;"><span style="font-size:10pt;">'-delay' "delay in <ins>ms</ins>" as time in <ins>ms</ins> (override previous -start options)</span></p></div></li></ul></li></ul></li></ul></blockquote>
 <ul>
 <li>
-<p style="text-align:justify;"><span style="font-size:11pt;"><strong>RequestInformation</strong></span></p></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;background-color:#CCCCCC;"><strong>RequestInformation</strong></span></p></li></ul>
 <blockquote>
-<p style="text-align:justify;"><span style="font-size:11pt;">This utility is used to get information for a file, a directory, with or without wildcard characters ('*' and '?").</span></p>
-<p style="text-align:justify;"><span style="font-size:11pt;">The arguments are the following:</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">This utility is used to get information for a file, a directory, with or without wildcard characters ('*' and '?").</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">The arguments are the following:</span></p>
 <ul>
-<li><p style="text-align:justify;"><span style="font-size:11pt;">The first argument is the client XML configuration file including the database access.</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">The first argument is the client XML configuration file including the database access.</span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-to' option: specifies the requested host.</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-to' option: specifies the requested host.</span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-rule' option: the rule</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-rule' option: the rule</span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-file' the optional file for which to get info (may contain wildcard characters)</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-file' the optional file for which to get info (may contain wildcard characters)</span></p></li>
 </ul>
-<p style="text-align:justify;"><span style="font-size:11pt;">Optional arguments (exclusive): without any of those arguments, the request only returns the existence of the file or directory.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">Optional arguments (exclusive): without any of those arguments, the request only returns the existence of the file or directory.</span></p>
 <ul>
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-exist' to test the existence.</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-exist' to test the existence.</span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-detail' to get the detail on file.</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-detail' to get the detail on file.</span></p></li>
 
-<li><p style="text-align:justify;"><span style="font-size:11pt;">'-list' to get the list of files.</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">'-list' to get the list of files.</span></p></li>
 
 <li>
-<p style="text-align:justify;"><span style="font-size:11pt;">'-mlsx' to get the list and details of files</span></p></li></ul></blockquote>
+<p style="text-align:justify;"><span style="font-size:10pt;">'-mlsx' to get the list and details of files</span></p></li></ul></blockquote>
 <ul>
 <li>
-<div style="text-align:left;"><span style="font-size:11pt;"><strong>Message</strong></span></div></li></ul>
+<div style="text-align:left;"><span style="font-size:10pt;background-color:#CCCCCC;"><strong>Message</strong></span></div></li></ul>
 <blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:left;"><span style="font-size:11pt;">This utility is used to send a short message to another server (like a ping in Waarp R66 protocol)</span></p>
-<p style="text-align:left;"><span style="font-size:11pt;">The arguments are the following:</span></p>
+<p style="text-align:left;"><span style="font-size:10pt;">This utility is used to send a short message to another server (like a ping in Waarp R66 protocol)</span></p>
+<p style="text-align:left;"><span style="font-size:10pt;">The arguments are the following:</span></p>
 <ul>
-<li><div style="text-align:left;"><span style="font-size:11pt;">The first argument is the client XML configuration file</span></div></li>
+<li><div style="text-align:left;"><span style="font-size:10pt;">The first argument is the client XML configuration file</span></div></li>
 
-<li><div style="text-align:left;"><span style="font-size:11pt;">'-to' option: specifies the requested host.</span></div></li>
+<li><div style="text-align:left;"><span style="font-size:10pt;">'-to' option: specifies the requested host.</span></div></li>
 
 <li>
-<div style="text-align:left;"><span style="font-size:11pt;">'-<ins>msg</ins>' option: the <ins>msg</ins> to send</span></div></li></ul></blockquote></div></td></tr></tbody></table>
+<div style="text-align:left;"><span style="font-size:10pt;">'-<ins>msg</ins>' option: the <ins>msg</ins> to send</span></div></li></ul></blockquote></div></td></tr></tbody></table>
 <div id="Comp7_CodeRelayer"><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

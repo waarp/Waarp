@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
-<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
-<meta name="description" content="Open Source project Waarp (file transfert monitor) supporting FTP, HTTP, SSH and OpenR66" />
-<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
-<meta name="robots" content="index,follow" />
 <meta http-equiv="imagetoolbar" content="no" />
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta name="description" content="Main project page" />
+<meta name="robots" content="index,follow" />
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
+<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -23,7 +23,28 @@ a img {
 	border:#000000 0px none;
 }
 </style>
-<title>Waarp - Home</title>
+<title>Waarp - World of Waarp</title>
+<script type="text/javascript">
+//<![CDATA[
+	function MHTGetRef(str)
+	{
+		if(document.all)
+			return document.all[str];
+		else
+			return document.getElementById(str);
+	}
+
+	function MHTSetClass(strID, strClass)
+	{
+		var obj = MHTGetRef(strID);
+		if(obj != null && typeof(obj) + "" != "undefined")
+			obj.className = strClass;
+		var obj = MHTGetRef(strID + "_second");
+		if(obj != null && typeof(obj) + "" != "undefined")
+			obj.className = strClass;
+	}
+//]]>
+</script>
 	<script type="text/javascript">
 //<![CDATA[
 	function MHGetRef(str)
@@ -44,71 +65,229 @@ a img {
 	</script>
 <script type="text/javascript">
 //<![CDATA[
-	function mvgGetRef(str)						{ return (document.all) ? document.all[str] : document.getElementById(str); }
-	function mvgSetClass(strId, strClass)		{ var obj = mvgGetRef(strId); if(obj != null && typeof(obj) != "undefined") obj.className = strClass; }
-	function mvgSwitchImage(strId, strFileName)	{ var obj = mvgGetRef(strId); if(obj != null && typeof(obj) != "undefined") obj.src = strFileName; }
+	var g_mhd1strTimeoutId	= "";
+	var g_mhd1strLastOpenId	= "";
+
+	function mhdGetRef(str)
+	{
+		return document.all ? document.all[str] : document.getElementById(str);
+	}
+	function mhdSwitchImage(strId, strFileName)
+	{
+		var obj = mhdGetRef(strId);
+		if(obj == null || typeof(obj) == "undefined" || typeof(obj.src) == "undefined") return;
+		obj.src = strFileName;
+	}
+	function mhdSetClass(strId, strClass)
+	{
+		var obj = mhdGetRef(strId);
+		if(obj == null || typeof(obj) == "undefined" || typeof(obj.className) == "undefined") return;
+		obj.className = strClass;
+	}	
+	function mhdShowHideLayer(strId, bShow)
+	{
+		var obj = mhdGetRef(strId);
+		if(obj == null || typeof(obj) == "undefined" || typeof(obj.style) == "undefined") return;
+		if(bShow && obj.style.display != "block")	{ obj.style.display = "block"; return; }
+		if(!bShow && obj.style.display != "none")	{ obj.style.display = "none"; return; }
+	}
+	function mhdGetSubMenuLevel(strId)
+	{
+		strId += "";
+		var arr = strId.split("_");
+		if(arr.length <= 1) return 0;
+		return arr.length - 1;
+	}
+	function mhdGetIdAtLevel(strId, nLevel)
+	{
+		var strRet = "";
+		var arr = strId.split("_");
+		if(arr.length <= 1 || nLevel <= 0 || nLevel > arr.length) return strRet;
+		for(var i = 0; i <= nLevel; ++i) { 
+			if(i > 0) strRet += "_";
+			strRet += arr[i];
+		}
+		return strRet;
+	}
+	function mhdClearSubMenus(strId)
+	{
+		var nMax = mhdGetSubMenuLevel(strId);
+		for(var n = nMax; n >= 1; --n) {
+			mhdShowHideLayer(mhdGetIdAtLevel(strId, n) + "_c", false);
+		}
+	}
+	function mhd1OnMouseOverItem(strId, strClass)
+	{
+		if(strClass != "") mhdSetClass(strId, strClass)
+		if(g_mhd1strLastOpenId != "") {
+			clearTimeout(g_mhd1strTimeoutId);
+			g_mhd1strTimeoutId = "";
+
+			var nMaxLast = mhdGetSubMenuLevel(g_mhd1strLastOpenId);
+			for(var n = nMaxLast; n >= 1; --n) {
+				if(mhdGetIdAtLevel(g_mhd1strLastOpenId, n) == mhdGetIdAtLevel(strId, n)) break;
+				mhdShowHideLayer(mhdGetIdAtLevel(g_mhd1strLastOpenId, n) + "_c", false);
+			}
+		}
+
+		var nMax = mhdGetSubMenuLevel(strId);
+		for(var n = 0; n <= nMax; ++n) {
+			mhdShowHideLayer(mhdGetIdAtLevel(strId, n) + "_c", true);
+		}
+
+		g_mhd1strLastOpenId = strId;
+	}
+	function mhd1OnMouseOutItem(strId, strClass)
+	{
+		if(strClass != "") mhdSetClass(strId, strClass)
+		g_mhd1strTimeoutId = setTimeout("mhdClearSubMenus('" + strId + "');", 500);
+	}
 //]]>
 </script>
+<style type="text/css">
+	#mhd1 a.submenu1:visited	{ text-decoration:none;color:#333333; }
+	#mhd1 a.submenu1over:hover	{ text-decoration:none;color:#FF0000; }
+
+	#mhd1 a.submenu2:visited	{ text-decoration:none;color:#333333; }
+	#mhd1 a.submenu2over:hover	{ text-decoration:none;color:#FF0000; }
+</style>
 </head>
-<body class="normal" style="margin:0px;padding:0px;background-color:#FFFFFF;background-image:url(gre/gre12340.png);background-position:left top;background-repeat:repeat-y;">
+<body class="normal" style="margin:0px;padding:0px;background-color:#FFFFFF;">
 <div style="text-align:left;">
-<div style="text-align:left;background-color:#EF6D00;"><a href="index.html"><img title="GoldenGate" style="border:none;" alt="GoldenGate" src="res/openlsd/waarp.jpg" width="74" height="49" /></a><img title="Waarp" style="border-top-style:none; border-bottom:#000000 0px solid; border-right-style:none; border-left-style:none;" alt="Waarp" src="gre/gre12341.png" width="99" height="40" /></div>
+<div style="text-align:left;background-color:#EF6D00;"><a href="index.html"><img title="Waarp" style="border:none;" alt="Waarp" src="res/openlsd/waarp.jpg" width="53" height="49" /></a><img title="Waarp" style="border:none;border-top:medium none;border-right:medium none;border-bottom:medium none;border-left:medium none;" alt="Waarp" src="gre/gre17587.png" width="99" height="40" /> 
+<div style="width:80%;position:absolute;float:right;left:160px;z-index:0;top:10px;"><table cellpadding="0" cellspacing="0" border="0" style="width:100%;margin:0;padding:0;border:0 solid none;"><tr><td style="vertical-align:top;"><div>
+<div id="Comp12_MenuHorizontalDynamic" style="text-align:left;"><div id="mhd1" style="text-align:left;"><table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+	<tr>
+		<td>
+<table border="0" cellpadding="0" cellspacing="0" style="margin:0px auto 0px 0px;">
+	<tr>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_0_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_0_0" class="submenu1" href="Roadmap.html" onmouseover="mhd1OnMouseOverItem('mhd1_0_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_0_0', 'submenu1')">Roadmap</a><a style="display:block;" id="mhd1_0_1" class="submenu1" href="ReleaseHistory.html" onmouseover="mhd1OnMouseOverItem('mhd1_0_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_0_1', 'submenu1')">Release History</a><a style="display:block;" id="mhd1_0_2" class="submenu1" href="CrawdUser.html" onmouseover="mhd1OnMouseOverItem('mhd1_0_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_0_2', 'submenu1')">Crawd User</a></div><img id="mhd1_img0" src="gre/gre17565.png" width="130" height="31" alt="World of Waarp" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_0', '');" onmouseout="mhd1OnMouseOutItem('mhd1_0', '');" />
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_1_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_1_0" class="submenu1" href="WaarpR66Presentation.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_0', 'submenu1')">Waarp R66-Presentation</a><div style="position:relative;z-index:10;"><div id="mhd1_1_1_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_1_0" class="submenu1" href="WaarpR66Configuration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_0', 'submenu1')">Waarp R66-Configuration</a><div style="position:relative;z-index:11;"><div id="mhd1_1_1_1_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_1_1_0" class="submenu1" href="R66ServerConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_0', 'submenu1')">R66ServerConfig</a><a style="display:block;" id="mhd1_1_1_1_1" class="submenu1" href="R66ClientConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_1', 'submenu1')">R66ClientConfig</a><a style="display:block;" id="mhd1_1_1_1_2" class="submenu1" href="R66ClientNoDbConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_2', 'submenu1')">R66ClientNoDbConfig</a><a style="display:block;" id="mhd1_1_1_1_3" class="submenu1" href="R66ClientSubmitConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_3', 'submenu1')">R66ClientSubmitConfig</a><a style="display:block;" id="mhd1_1_1_1_4" class="submenu1" href="R66LimitConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_4', 'submenu1')">R66LimitConfig</a><a style="display:block;" id="mhd1_1_1_1_5" class="submenu1" href="R66RuleConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_5', 'submenu1')">R66RuleConfig</a><a style="display:block;" id="mhd1_1_1_1_6" class="submenu1" href="R66AuthentConfig.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_6', 'submenu1')">R66AuthentConfig</a><a style="display:block;" id="mhd1_1_1_1_7" class="submenu1" href="R66SnmpConfiguration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1_7', 'submenu1')">R66SnmpConfiguration</a></div><a style="display:block;" id="mhd1_1_1_1" class="submenu2" href="WaarpR66XmlConfiguration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_1', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_1', 'submenu2')">Waarp R66-Xml Config</a>
+</div><a style="display:block;" id="mhd1_1_1_2" class="submenu1" href="WaarpR66Options.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1_2', 'submenu1')">Waarp R66-Options</a></div><a style="display:block;" id="mhd1_1_1" class="submenu2" href="WaarpR66Installation.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_1', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_1', 'submenu2')">Waarp R66-Installation</a>
+</div><div style="position:relative;z-index:10;"><div id="mhd1_1_2_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_2_0" class="submenu1" href="WaarpR66Protocol.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2_0', 'submenu1')">Waarp R66-Protocol</a><a style="display:block;" id="mhd1_1_2_1" class="submenu1" href="WaarpR66FileStatus.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2_1', 'submenu1')">Waarp R66-FileStatus</a><a style="display:block;" id="mhd1_1_2_2" class="submenu1" href="WaarpR66RestAPI.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2_2', 'submenu1')">Waarp R66-Rest-API</a></div><a style="display:block;" id="mhd1_1_2" class="submenu2" href="WaarpR66undertheWood.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_2', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_2', 'submenu2')">Waarp R66 under the Wood</a>
+</div><div style="position:relative;z-index:10;"><div id="mhd1_1_3_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_3_0" class="submenu1" href="WaarpR66Command.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_0', 'submenu1')">Waarp R66-Command</a><a style="display:block;" id="mhd1_1_3_1" class="submenu1" href="WaarpR66CommandLine.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_1', 'submenu1')">Waarp R66-CommandLine</a><div style="position:relative;z-index:11;"><div id="mhd1_1_3_2_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_3_2_0" class="submenu1" href="TaskFormat.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_0', 'submenu1')">TaskFormat</a><a style="display:block;" id="mhd1_1_3_2_1" class="submenu1" href="LOG.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_1', 'submenu1')">LOG</a><a style="display:block;" id="mhd1_1_3_2_2" class="submenu1" href="SNMP.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_2', 'submenu1')">SNMP</a><a style="display:block;" id="mhd1_1_3_2_3" class="submenu1" href="COPY.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_3', 'submenu1')">COPY</a><a style="display:block;" id="mhd1_1_3_2_4" class="submenu1" href="COPYRENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_4', 'submenu1')">COPYRENAME</a><a style="display:block;" id="mhd1_1_3_2_5" class="submenu1" href="MOVE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_5', 'submenu1')">MOVE</a><a style="display:block;" id="mhd1_1_3_2_6" class="submenu1" href="MOVERENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_6', 'submenu1')">MOVERENAME</a><a style="display:block;" id="mhd1_1_3_2_7" class="submenu1" href="LINKRENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_7', 'submenu1')">LINKRENAME</a><a style="display:block;" id="mhd1_1_3_2_8" class="submenu1" href="RENAME.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_8', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_8', 'submenu1')">RENAME</a><a style="display:block;" id="mhd1_1_3_2_9" class="submenu1" href="DELETE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_9', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_9', 'submenu1')">DELETE</a><a style="display:block;" id="mhd1_1_3_2_10" class="submenu1" href="VALIDFILEPATH.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_10', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_10', 'submenu1')">VALIDFILEPATH</a><a style="display:block;" id="mhd1_1_3_2_11" class="submenu1" href="CHKFILE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_11', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_11', 'submenu1')">CHKFILE</a><a style="display:block;" id="mhd1_1_3_2_12" class="submenu1" href="TRANSCODE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_12', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_12', 'submenu1')">TRANSCODE</a><a style="display:block;" id="mhd1_1_3_2_13" class="submenu1" href="TAR.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_13', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_13', 'submenu1')">TAR</a><a style="display:block;" id="mhd1_1_3_2_14" class="submenu1" href="ZIP.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_14', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_14', 'submenu1')">ZIP</a><a style="display:block;" id="mhd1_1_3_2_15" class="submenu1" href="UNZEROED.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_15', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_15', 'submenu1')">UNZEROED</a><a style="display:block;" id="mhd1_1_3_2_16" class="submenu1" href="CHMOD.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_16', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_16', 'submenu1')">CHMOD</a><a style="display:block;" id="mhd1_1_3_2_17" class="submenu1" href="EXEC.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_17', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_17', 'submenu1')">EXEC</a><a style="display:block;" id="mhd1_1_3_2_18" class="submenu1" href="EXECMOVE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_18', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_18', 'submenu1')">EXECMOVE</a><a style="display:block;" id="mhd1_1_3_2_19" class="submenu1" href="EXECOUTPUT.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_19', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_19', 'submenu1')">EXECOUTPUT</a><a style="display:block;" id="mhd1_1_3_2_20" class="submenu1" href="EXECJAVA.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_20', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_20', 'submenu1')">EXECJAVA</a><a style="display:block;" id="mhd1_1_3_2_21" class="submenu1" href="TRANSFER.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_21', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_21', 'submenu1')">TRANSFER</a><a style="display:block;" id="mhd1_1_3_2_22" class="submenu1" href="RESCHEDULE.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_22', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_22', 'submenu1')">RESCHEDULE</a><a style="display:block;" id="mhd1_1_3_2_23" class="submenu1" href="FTP.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2_23', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2_23', 'submenu1')">FTP</a></div><a style="display:block;" id="mhd1_1_3_2" class="submenu2" href="WaarpR66TaskOptions.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_2', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_2', 'submenu2')">Waarp R66-TaskOptions</a>
+</div><div style="position:relative;z-index:11;"><div id="mhd1_1_3_3_c" style="position:absolute;display:none;left:100%;top:0px;"><a style="display:block;" id="mhd1_1_3_3_0" class="submenu1" href="R66Authentication.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_0', 'submenu1')">R66Authentication</a><a style="display:block;" id="mhd1_1_3_3_1" class="submenu1" href="R66CentralizationLogs.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_1', 'submenu1')">R66CentralizationLogs</a><a style="display:block;" id="mhd1_1_3_3_2" class="submenu1" href="R66ClusterHA.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_2', 'submenu1')">R66Cluster-HA</a><a style="display:block;" id="mhd1_1_3_3_3" class="submenu1" href="R66DMZ.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_3', 'submenu1')">R66DMZ</a><a style="display:block;" id="mhd1_1_3_3_4" class="submenu1" href="R66Embedded.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_4', 'submenu1')">R66Embedded</a><a style="display:block;" id="mhd1_1_3_3_5" class="submenu1" href="R66OtherProtocols.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_5', 'submenu1')">R66OtherProtocols</a><a style="display:block;" id="mhd1_1_3_3_6" class="submenu1" href="R66Reschedule.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_6', 'submenu1')">R66Reschedule</a><a style="display:block;" id="mhd1_1_3_3_7" class="submenu1" href="R66Definitions.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_7', 'submenu1')">R66Definitions</a><a style="display:block;" id="mhd1_1_3_3_8" class="submenu1" href="PlatformCompatibility.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3_8', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3_8', 'submenu1')">Platform Compatibility</a></div><a style="display:block;" id="mhd1_1_3_3" class="submenu2" href="WaarpR66Wiki.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_3', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_3', 'submenu2')">Waarp R66-Wiki</a>
+</div><a style="display:block;" id="mhd1_1_3_4" class="submenu1" href="WaarpR66WebMonitoring.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_4', 'submenu1')">Waarp R66-Web-Monitoring</a><a style="display:block;" id="mhd1_1_3_5" class="submenu1" href="WaarpR66WebAdministration.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3_5', 'submenu1')">Waarp R66-Web-Administration</a></div><a style="display:block;" id="mhd1_1_3" class="submenu2" href="WaarpR66Howtos.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_3', 'submenu2over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_3', 'submenu2')">Waarp R66 Howtos</a>
+</div><a style="display:block;" id="mhd1_1_4" class="submenu1" href="R66AdministratorGui.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_4', 'submenu1')">R66 Administrator Gui</a><a style="display:block;" id="mhd1_1_5" class="submenu1" href="R66Proxy.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_5', 'submenu1')">R66 Proxy</a><a style="display:block;" id="mhd1_1_6" class="submenu1" href="R66ClientGui.html" onmouseover="mhd1OnMouseOverItem('mhd1_1_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_1_6', 'submenu1')">R66 Client Gui</a></div><a href="WaarpR66.html"><img id="mhd1_img1" src="gre/gre17567.png" width="130" height="31" alt="Waarp R66" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_1', ''); mhdSwitchImage('mhd1_img1', 'gre/gre17569.png');" onmouseout="mhd1OnMouseOutItem('mhd1_1', ''); mhdSwitchImage('mhd1_img1', 'gre/gre17567.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_2_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_2_0" class="submenu1" href="WaarpFTPConfiguration.html" onmouseover="mhd1OnMouseOverItem('mhd1_2_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_2_0', 'submenu1')">Waarp-FTP-Configuration</a><a style="display:block;" id="mhd1_2_1" class="submenu1" href="Benchmarks.html" onmouseover="mhd1OnMouseOverItem('mhd1_2_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_2_1', 'submenu1')">Benchmarks</a><a style="display:block;" id="mhd1_2_2" class="submenu1" href="WaarpGatewayFtp.html" onmouseover="mhd1OnMouseOverItem('mhd1_2_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_2_2', 'submenu1')">WaarpGatewayFtp</a></div><a href="WaarpFTP.html"><img id="mhd1_img2" src="gre/gre17570.png" width="130" height="31" alt="Waarp FTP" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_2', ''); mhdSwitchImage('mhd1_img2', 'gre/gre17572.png');" onmouseout="mhd1OnMouseOutItem('mhd1_2', ''); mhdSwitchImage('mhd1_img2', 'gre/gre17570.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_3_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_3_0" class="submenu1" href="Digest.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_0', 'submenu1')">Digest</a><a style="display:block;" id="mhd1_3_1" class="submenu1" href="Common.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_1', 'submenu1')">Common</a><a style="display:block;" id="mhd1_3_2" class="submenu1" href="LocalExec.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_2', 'submenu1')">LocalExec</a><a style="display:block;" id="mhd1_3_3" class="submenu1" href="XmlEditor.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_3', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_3', 'submenu1')">XmlEditor</a><a style="display:block;" id="mhd1_3_4" class="submenu1" href="Password.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_4', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_4', 'submenu1')">Password</a><a style="display:block;" id="mhd1_3_5" class="submenu1" href="WaarpSNMP.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_5', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_5', 'submenu1')">WaarpSNMP</a><a style="display:block;" id="mhd1_3_6" class="submenu1" href="GatewayKernel.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_6', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_6', 'submenu1')">Gateway Kernel</a><a style="display:block;" id="mhd1_3_7" class="submenu1" href="Thrift.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_7', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_7', 'submenu1')">Thrift</a><a style="display:block;" id="mhd1_3_8" class="submenu1" href="FtpClient.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_8', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_8', 'submenu1')">FtpClient</a><a style="display:block;" id="mhd1_3_9" class="submenu1" href="WaarpGatewayHttp.html" onmouseover="mhd1OnMouseOverItem('mhd1_3_9', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_3_9', 'submenu1')">WaarpGatewayHttp</a></div><a href="WaarpsFamily.html"><img id="mhd1_img3" src="gre/gre17573.png" width="130" height="31" alt="Waarp's Family" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_3', ''); mhdSwitchImage('mhd1_img3', 'gre/gre17575.png');" onmouseout="mhd1OnMouseOutItem('mhd1_3', ''); mhdSwitchImage('mhd1_img3', 'gre/gre17573.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><a href="APIReferences.html"><img id="mhd1_img4" src="gre/gre17576.png" width="130" height="31" alt="API References" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_4', ''); mhdSwitchImage('mhd1_img4', 'gre/gre17578.png');" onmouseout="mhd1OnMouseOutItem('mhd1_4', ''); mhdSwitchImage('mhd1_img4', 'gre/gre17576.png'); " /></a></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_5_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_5_0" class="submenu1" href="OldGoldenGateDownload.html" onmouseover="mhd1OnMouseOverItem('mhd1_5_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_5_0', 'submenu1')">Old GoldenGate Download</a></div><a href="Downloads.html"><img id="mhd1_img5" src="gre/gre17579.png" width="130" height="31" alt="Downloads" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_5', ''); mhdSwitchImage('mhd1_img5', 'gre/gre17581.png');" onmouseout="mhd1OnMouseOutItem('mhd1_5', ''); mhdSwitchImage('mhd1_img5', 'gre/gre17579.png'); " /></a>
+</div></td>
+		<td></td><td>
+<img src="gre/gre17588.png" height="22" width="4" style="border:none;display:block;" alt="" /></td><td>
+</td>
+		<td style="white-space:nowrap;"><div style="position:relative;z-index:1;"><div id="mhd1_6_c" style="position:absolute;display:none;left:0px;top:31px;"><a style="display:block;" id="mhd1_6_0" class="submenu1" href="WaarpDependson.html" onmouseover="mhd1OnMouseOverItem('mhd1_6_0', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_6_0', 'submenu1')">Waarp Depends on</a><a style="display:block;" id="mhd1_6_1" class="submenu1" href="License.html" onmouseover="mhd1OnMouseOverItem('mhd1_6_1', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_6_1', 'submenu1')">License</a><a style="display:block;" id="mhd1_6_2" class="submenu1" href="Support.html" onmouseover="mhd1OnMouseOverItem('mhd1_6_2', 'submenu1over')" onmouseout="mhd1OnMouseOutItem('mhd1_6_2', 'submenu1')">Support</a></div><a href="About.html"><img id="mhd1_img6" src="gre/gre17582.png" width="130" height="31" alt="About" style="border:none;display:block;" onmouseover="mhd1OnMouseOverItem('mhd1_6', ''); mhdSwitchImage('mhd1_img6', 'gre/gre17584.png');" onmouseout="mhd1OnMouseOutItem('mhd1_6', ''); mhdSwitchImage('mhd1_img6', 'gre/gre17582.png'); " /></a>
+</div></td>
+	</tr>
+</table>
+</td>
+	</tr>
+</table>
+</div></div></div></td><td style="height:40px;width:1px;margin:0;padding:0;border:0 solid none;"><div style="height:40px;width:1px;margin:0;padding:0;border:0 solid none;"></div></td></tr></table></div></div>
 <div style="border-right:none;border-left:none;border-bottom:2px solid #FFFFFF;border-top:1px solid #FFFFFF;text-align:left;background-color:#F9DEC7;"><table cellpadding="0" cellspacing="0" border="0" style="width:100%;margin:0;padding:0;border:0 solid none;"><tr><td style="vertical-align:top;"><div></div></td><td style="height:1px;width:1px;margin:0;padding:0;border:0 solid none;"><div style="height:1px;width:1px;margin:0;padding:0;border:0 solid none;"></div></td></tr></table></div>
 <table style="border:none;" cellspacing="0" cellpadding="0" width="100%">
 <tbody>
 <tr>
 <td style="width:100px;vertical-align:top;background-color:#FFFFFF;">&nbsp;</td>
 <td style="width:100%;vertical-align:top;padding-bottom:0px;padding-top:0px;padding-left:5px;padding-right:5px;">
-<div id="Comp4_MenuHorizontal">
+<div id="Comp9_MenuHorizontalText" style="text-align:right;">
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
-	<tr style="background-image:url(gre/gre12309.png);background-repeat:repeat-x;background-position:left top;">
-		<td style="width:100%;"><img src="img/space.gif" width="1" height="1" style="border:none;display:block;" alt="" /></td>
-	<td><img src="gre/gre12309.png" height="26" width="1" style="border:none;display:block;" alt="" /></td>
+	<tr>
+		<td class="pathmenu1" style="white-space:nowrap;" valign="top" align="right"><span id="MHT1_0" class="pathmenu1sel"><label>World of Waarp</label></span></td>
 	</tr>
 </table>
-</div></td></tr>
+</div>
+<div id="Comp13_MenuHorizontal" style="text-align:left;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tr>
+		<td id="MH3_0"><a href="Roadmap.html" onmouseover="MHSwitchImage('MH3_0_img', 'gre/gre17592.png');" onmouseout="MHSwitchImage('MH3_0_img', 'gre/gre17590.png');"><img id="MH3_0_img" src="gre/gre17590.png" width="78" height="26" alt="Roadmap" style="border:none;display:block;" /></a></td>
+		<td id="MH3_1"><a href="ReleaseHistory.html" onmouseover="MHSwitchImage('MH3_1_img', 'gre/gre17595.png');" onmouseout="MHSwitchImage('MH3_1_img', 'gre/gre17593.png');"><img id="MH3_1_img" src="gre/gre17593.png" width="119" height="26" alt="Release History" style="border:none;display:block;" /></a></td>
+		<td id="MH3_2"><a href="CrawdUser.html" onmouseover="MHSwitchImage('MH3_2_img', 'gre/gre17598.png');" onmouseout="MHSwitchImage('MH3_2_img', 'gre/gre17596.png');"><img id="MH3_2_img" src="gre/gre17596.png" width="93" height="26" alt="Crawd User" style="border:none;display:block;" /></a></td>
+		<td style="width:100%;"><img src="img/space.gif" width="1" height="1" style="border:none;display:block;" alt="" /></td>
+	</tr>
+</table>
+</div>
+<div style="text-align:right;">
+<div id="Comp10_MenuHorizontal" style="text-align:left;"></div>
+<div id="Comp11_MenuHorizontal" style="text-align:left;"></div></div></td></tr>
 <tr>
-<td style="width:100px;vertical-align:top;">
-<div id="Comp6_MenuVertical" style="text-align:left;"><div id="mvg1"><img id="mvg1_0_img" src="gre/gre12311.png" width="150" height="31" alt="Home" style="display:block;border:none;" />
-<a href="WorldofWaarp.html" onmouseover="mvgSwitchImage('mvg1_1_img', 'gre/gre12315.png');" onmouseout="mvgSwitchImage('mvg1_1_img', 'gre/gre12313.png');"><img id="mvg1_1_img" src="gre/gre12313.png" width="150" height="31" alt="World of Waarp" style="display:block;border:none;" /></a>
-<a href="WaarpR66.html" onmouseover="mvgSwitchImage('mvg1_2_img', 'gre/gre12318.png');" onmouseout="mvgSwitchImage('mvg1_2_img', 'gre/gre12316.png');"><img id="mvg1_2_img" src="gre/gre12316.png" width="150" height="31" alt="Waarp R66" style="display:block;border:none;" /></a>
-<a href="WaarpFTP.html" onmouseover="mvgSwitchImage('mvg1_3_img', 'gre/gre12321.png');" onmouseout="mvgSwitchImage('mvg1_3_img', 'gre/gre12319.png');"><img id="mvg1_3_img" src="gre/gre12319.png" width="150" height="31" alt="Waarp FTP" style="display:block;border:none;" /></a>
-<a href="WaarpGatewayFtp.html" onmouseover="mvgSwitchImage('mvg1_4_img', 'gre/gre12324.png');" onmouseout="mvgSwitchImage('mvg1_4_img', 'gre/gre12322.png');"><img id="mvg1_4_img" src="gre/gre12322.png" width="150" height="31" alt="WaarpGatewayFtp" style="display:block;border:none;" /></a>
-<a href="WaarpGatewayHttp.html" onmouseover="mvgSwitchImage('mvg1_5_img', 'gre/gre12327.png');" onmouseout="mvgSwitchImage('mvg1_5_img', 'gre/gre12325.png');"><img id="mvg1_5_img" src="gre/gre12325.png" width="150" height="31" alt="WaarpGatewayHttp" style="display:block;border:none;" /></a>
-<a href="WaarpCommons.html" onmouseover="mvgSwitchImage('mvg1_6_img', 'gre/gre12330.png');" onmouseout="mvgSwitchImage('mvg1_6_img', 'gre/gre12328.png');"><img id="mvg1_6_img" src="gre/gre12328.png" width="150" height="31" alt="Waarp Commons" style="display:block;border:none;" /></a>
-<a href="APIReferences.html" onmouseover="mvgSwitchImage('mvg1_7_img', 'gre/gre12333.png');" onmouseout="mvgSwitchImage('mvg1_7_img', 'gre/gre12331.png');"><img id="mvg1_7_img" src="gre/gre12331.png" width="150" height="31" alt="API References" style="display:block;border:none;" /></a>
-<a href="Downloads.html" onmouseover="mvgSwitchImage('mvg1_8_img', 'gre/gre12336.png');" onmouseout="mvgSwitchImage('mvg1_8_img', 'gre/gre12334.png');"><img id="mvg1_8_img" src="gre/gre12334.png" width="150" height="31" alt="Downloads" style="display:block;border:none;" /></a>
-<a href="WaarpDependson.html" onmouseover="mvgSwitchImage('mvg1_9_img', 'gre/gre12339.png');" onmouseout="mvgSwitchImage('mvg1_9_img', 'gre/gre12337.png');"><img id="mvg1_9_img" src="gre/gre12337.png" width="150" height="31" alt="Waarp Depends on" style="display:block;border:none;" /></a>
-</div></div></td>
+<td style="width:100px;vertical-align:top;"></td>
 <td style="width:100%;vertical-align:top;padding-bottom:5px;padding-top:5px;padding-left:5px;padding-right:5px;">
-<h1 class="h1">Home</h1>
-<div id="Comp1_sys_doctext"><p style="text-align:left;"><strong><ins><span style="font-size:14pt;">About</span></ins></strong></p>
+<h1 class="h1">World of Waarp</h1>
+<div id="Comp1_sys_doctext"><h1 class="h1" style="text-align:justify;"><span style="font-size:12pt;">Open Source</span></h1>
+<p style="text-align:justify;"><span style="font-size:11pt;"><span style="font-size:11pt;">Waarp is an open source project with multiple subelements. There are related to each other, and they improve the developement by being in several separated modules.</span></span></p>
+<p style="text-align:left;"><span style="font-size:11pt;">All are Open Source projects and</span><span style="font-size:11pt;">&nbsp;fully in Java. </span><span style="font-size:11pt;">The global license is GPL V3.</span></p>
 <p style="text-align:left;">&nbsp;</p>
-<p style="text-align:left;"><span style="font-size:11pt;">You will find in this web site some information on this Open Source project named </span><a href="javascript:var EffectiveNewWin = window.open('http://www.waarp.it','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();"><span style="font-size:11pt;">Waarp</span></a><span style="font-size:11pt;">, fully in Java.</span></p>
-<p style="text-align:left;"><span style="font-size:11pt;">The global license is GPL V3.</span></p>
-<p style="text-align:left;">&nbsp;</p>
-<table style="border:none;width:100%;" cellspacing="0" cellpadding="0">
-<tbody>
-<tr>
-<td style="padding-bottom:17px;padding-left:17px;width:100%;padding-right:17px;vertical-align:top;padding-top:17px;"><strong><ins><span style="font-size:14pt;">
-<p style="text-align:center;"><strong><ins><span style="font-size:14pt;"><img style="border:none;" title="goldengate-1" alt="goldengate-1" src="res/openlsd/waarp.gif" width="200" height="205" /></span></ins></strong></p>
-<p style="text-align:center;"><strong><ins></ins></strong>&nbsp;</p></span></ins></strong>
-<p style="text-align:left;"><span style="font-size:11pt;">Waarp is a project that provides among other an open source massive file transfer monitor in Java. Its goal is to&nbsp;unify several protocols (FTP, FTPS, SSH, HTTP and proprietary protocols) in an efficient and secured way. Its purpose is to enable bridging between several protocols and to enable dynamic pre or post action on transfer or other commands. Currently FTP(S) and efficient and secure R66 protocols are implemented. HTTP is supported but not yet in production release.</span></p>
-<p style="text-align:left;">&nbsp;</p>
-<p style="text-align:left;"><span style="font-size:11pt;">This project was developped initially for the French Ministery of Finance. The 3 main components (originally named GoldenGate, GoldenGate FTP and OpenR66)&nbsp;are in production in the Ministery since end of 2007. It is also in production in the French Gendarmerie Nationale since 2012 (see <a href="CrawdUser.html">Crawd User</a>).&nbsp;It is an Open Source project based on an independent community.</span></p>
-<p style="text-align:left;">&nbsp;</p>
-<p style="text-align:left;"><span style="font-size:12pt;">A new company named <strong><a href="http://www.waarp.it"><span style="font-size:14pt;">Waarp</span></a></strong> holds the ability to provide&nbsp;professional services:</span></p>
-<blockquote style="margin-right:0px;" dir="ltr">
-<p style="text-align:left;"><span style="font-size:11pt;"><img style="border:none;" title="waarp" alt="waarp" src="res/openr66/waarp.png" width="100" height="102" /></span></p></blockquote>
+<h1 class="h1"><span style="font-size:12pt;">Production purpose</span></h1>
+<p><span style="font-size:11pt;">Waarp is a project that provides among other an open source massive file transfer monitor in Java. Its goal is to&nbsp;unify several protocols (FTP, FTPS, SSH, HTTP and proprietary protocols) in an efficient and secured way. Its purpose is to enable bridging between several protocols and to enable dynamic pre or post action on transfer or other commands. Currently FTP(S) and efficient and secure R66 protocols are implemented. HTTP is supported but not yet in production release.</span></p>
+<p>&nbsp;</p>
+<p><span style="font-size:11pt;">This project was developped initially for the French Ministery of Finance. The 3 main components (originally named GoldenGate, GoldenGate FTP and OpenR66)&nbsp;are in production in the Ministery since end of 2007. It is also in production in the French Gendarmerie Nationale since 2012 (see <a href="CrawdUser.html">Crawd User</a>).&nbsp;It is an Open Source project based on an independent community.</span></p>
+<p>&nbsp;</p>
+<h1 class="h1"><span style="font-size:12pt;">Professional services</span></h1>
+<p style="text-align:justify;"><span style="font-size:12pt;">The company named <strong><a href="http://www.waarp.it/"><span style="font-size:14pt;"><span style="color:#0000ff;">Waarp</span></span></a></strong> propose professional services (contact through info at waarp.it). In addition to professional services, Waarp company is able to propose&nbsp;extensions to Waarp in order to centralize all configurations and events for a large installation, to provide easiness of exploitation, monitoring and therefore for the production. This software is based on Waarp standard API, with no proprietary or backdoor access. We commit to keep Waarp to be a&nbsp;full functional Open Source&nbsp;solution.</span></p>
+<p style="text-align:justify;">&nbsp;</p>
+<p style="text-align:center;"></p>
+<p style="text-align:center;"><img title="waarp" style="border:none;" alt="waarp" src="res/waarp/waarp.gif" width="200" height="205" /></p><span style="font-size:11pt;">
+<p>&nbsp;</p></span>
+<h1 class="h1"><span style="font-size:11pt;">What is Waarp?</span></h1><span style="font-size:11pt;">
+<p><span style="font-size:11pt;">Waarp is composed of several parts, most of them could be used separately without the full package:</span></p>
 <ul>
-<li><div class="normal" style="text-align:left;"><span style="font-size:12pt;">Installation and parameters</span></div></li>
+<li><p><span style="font-size:11pt;">an open FTP(S) Server with an extension to serve as a gateway for R66: it can be used in a stand alone version to fit your needs.</span></p></li>
 
-<li><div class="normal" style="text-align:left;"><span style="font-size:12pt;">Integration, additional development</span></div></li>
+<li><span style="font-size:11pt;">an open HTTP Server but only intend to be used within a Waarp gateway: <em>this component is not yet publicly available.</em></span> 
+</li><li><p><span style="font-size:11pt;">an open proprietary file transfer monitor, R66 it can be used in a stand alone version to fit your needs.</span></p></li>
 
 <li>
-<div class="normal" style="text-align:left;"><span style="font-size:12pt;">Support, Maintenance, phone support</span></div></li></ul>
-<p style="text-align:left;"><span style="font-size:11pt;">You can contact us using the&nbsp;waarp.it support through<span style="color:#EF6D00;"> info at waarp.it</span>.</span></p>
-<p style="text-align:left;">&nbsp;</p></td></tr></tbody></table></div></td></tr></tbody></table>
+<p><span style="font-size:11pt;">a kernel for common actions (Waarp) that could be taken when merging any part of the above.</span></p></li></ul>
+<p>&nbsp;</p></span>
+<h1 class="h1"><span style="font-size:12pt;">From where comes the idea of Waarp?</span></h1><span style="font-size:11pt;">
+<p><span style="font-size:11pt;">The start idea was to be able to receive through several protocols some files (or not files but data) and to transmit them into a system not directly accessible, but without breaking the global vision of the data transfer (where it is, what status, and so on...).</span></p>
+<p>&nbsp;</p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p><span style="font-size:11pt;">A standard FTP server (or SFTP or FTPS) do not allow to make post action (and of course neither pre action) when a file transfer occurs. So the reason of this new project to be able to imply business actions that can be whatever the need when an event occurs in the transfer protocol.</span></p>
+<p><span style="font-size:11pt;">For instance, when a file is to be transmitted through an FTP service, perhaps some tests should be done to see if the next business step (another application) is ready to accept transfers. When a file is transmitted, an action can occur like for instance checking of integrity (business vision) or retransmission to another business partner (using eventually a different protocol). Also one possibly wants to follow any transfers (or other actions defined in the protocols) and to log them somewhere in its own format, either to just be able to look at what happened or even to restart some actions to correct wrong situation in production.</span></p></blockquote>
+<p>&nbsp;</p>
+<p><span style="font-size:11pt;">To be able to do all of that, we decided to implement the most common used file transfer protocols (FTP, HTTP) in such a way they can fulfill those behaviours. FTP was the first step. HTTP for now is simply a bunch of JSP and classes attached to this JSP. FTPS (implicit or explicit) is now supported.</span></p>
+<p><span style="font-size:11pt;">Of course, if they can do all the stuff we present before, they can also do simple thing like standard FTP server.</span></p>
+<p>&nbsp;</p></span>
+<h1 class="h1"><span style="font-size:11pt;">Why a proprietary protocol therefore ?</span></h1><span style="font-size:11pt;">
+<p><span style="font-size:11pt;">Well, all of those protocols suffers from pitfalls like:</span></p>
+<ul>
+<li><p><span style="font-size:11pt;">When a file is transfered, even if it is by block (FTP BLOCK mode), it does not have any control on each block transfered. So if something goes wrong on the network, it could happened that the sender or the receiver will not see what happens. The proprietary protocol will implement such a check on each transfered block.</span></p></li>
+
+<li><p><span style="font-size:11pt;">When a file transfered ends up abnormally, it does not have true facility to enable to restart from where it falls. Even the FTP REST command is not enough since who knows at which step the error occurs. And asking for the size of the remote file could be not enough. The proprietary protocol will implement such a restart facility on failed transfer.</span></p></li>
+
+<li><p><span style="font-size:11pt;">In production context, if you have to send many files, how do you follow those transfers and check them? Some FTP clients does such thing, however they generally don't have the hability to enable planned production. The proprietary protocol will implement such control, planning, and adding some functionalities like limitating (or not) the number of concurrent file transfers.</span></p></li>
+
+<li>
+<p><span style="font-size:11pt;">Of course, all of the behaviours we described before for GoldenGate will be implemented in this proprietary protocol.</span></p></li></ul></span>
+<h2 class="h2"><span style="font-size:11pt;">What kind of proprietary protocol is it?</span></h2><span style="font-size:11pt;">
+<ul>
+<li><span style="font-size:11pt;">It&nbsp;is a proprietary protocol that mimic the CFT PESIT one plus some extension, including in the protocol itself (block checking and restarting), but also to enable specific functionalities like MD5 block control (optional), restart possibilities, duplexing network connection, SSL support, database support, ... </span></li>
+<li><span style="font-size:11pt;">Note that Waarp protocol is not compatible with PESIT, but there are some facilities to setup a PESIT/Waarp gateway.</span></li>
+<li>
+<div style="text-align:justify;"><span style="font-size:11pt;">Finally Waarp protocol is proprietary in the sens it does not follow any standard ISO or whatever protocol, but it is open and freely implementable since it is documented and open source.</span></div></li></ul>
+<p>&nbsp;</p></span></div></td></tr></tbody></table>
 <div id="Comp7_CodeRelayer"><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
