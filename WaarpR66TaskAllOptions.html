@@ -26,8 +26,7 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <script>
-(function($){
- $(document).ready(function(){
+$( document ).ready(function(){
  $.get( "res/waarpmenu.html", function(data) {
  $( "#waarpmenu" ).html(data);
  var curpage="r660/r66howto0/r66task";
@@ -41,7 +40,6 @@
   });
  });
 });
-})(jQuery);
 </script>
 <style type="text/css">
 .dropdown-submenu{position:relative;}

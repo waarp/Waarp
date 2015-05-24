@@ -1,22 +1,22 @@
 <!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
 <meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
-<meta name="description" content="Waarp project" />
 <meta name="robots" content="index,follow" />
+<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
+<meta name="description" content="Waarp project" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
 	color:#0000FF;
-	text-decoration:none;
+	text-decoration:underline;
 }
 a:visited {
-	text-decoration:none;
+	text-decoration:underline;
 }
 a:hover {
-	text-decoration:none;
+	text-decoration:underline;
 }
 a img {
 	border:#000000 0px none;
@@ -38,12 +38,11 @@ a img {
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <script>
-(function($){
- $(document).ready(function(){
+$( document ).ready(function(){
  $.get( "res/waarpmenu.html", function(data) {
  $( "#waarpmenu" ).html(data);
  $("body").removeAttr("class").removeAttr( "style" );
- $("#Comp9_sys_doctext").addClass("panel-body container-fluid");
+ $("#Comp2_sys_doctext").addClass("panel-body container-fluid");
  var curpage= "download0/download";
  var splitPages = curpage.split("/");
  $.each( splitPages, function( index, value ){ $("#"+value).addClass("active"); });
@@ -55,7 +54,6 @@ a img {
   });
  });
 });
-})(jQuery);
 </script>
 <style type="text/css">
 .dropdown-submenu{position:relative;}
@@ -68,18 +66,25 @@ a img {
 .h4, .h5, .h6 { font-size:13px; color:#333333; font-weight:bold; }
 </style>
 </head>
-<body class="normal" style="padding:0px;">
-<div id="Comp8_CodeRelayer">
-<!--[if lt IE 8]>
-	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<body class="normal" style="font-family:Verdana,sans-serif;font-size:8pt;color:#000000;margin:0px;padding:0px;background-color:#FFFFFF;">
+
+<div id="Comp1_CodeRelayer"><!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 <div class="cover" id="waarpmenu" />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-</div>
-<h1 class="h1"><span atomicselection="true">Downloads</span></h1>
-<div id="Comp9_sys_doctext"><p><span style="font-size:11pt;">You will find here the links to all Downloads of projects implied by Waarp.</span></p>
+  ga('create', 'UA-1693657-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</div><h1 class="h1">Downloads</h1><div id="Comp3_sys_doctext"><p><span style="font-size:11pt;">You will find here the links to all Downloads of projects implied by Waarp.</span></p>
 <p><span style="font-size:11pt;">A Binary Distribution web site is hosted at Sourceforge: </span><a href="http://sourceforge.net/projects/waarp/files/"><span style="font-size:12pt;"><strong>http://sourceforge.net/projects/waarp/files/</strong></span></a></p>
-<table style="border-top-style:none; border-right:#ef6d00 0px solid; border-bottom:#ef6d00 0px solid; border-left:#ef6d00 0px solid;" bordercolor="#ce0a00" cellpadding="0" bgcolor="#0a0e0" solid="solid" 0px="0px" src_reftype:reftypenone="src_reftype:reftypenone">
+<table style="border-top-style:none; border-right:#ef6d00 0px solid; border-bottom:#ef6d00 0px solid; border-left:#ef6d00 0px solid;" bordercolor="#ce0a00" cellpadding="0" bgcolor="#0a0e0" 0px="0px" solid="solid" src_reftype:reftypenone="src_reftype:reftypenone">
 <tbody></tbody></table>
 <p>&nbsp;</p>
 <table cellpadding="0">
@@ -96,30 +101,30 @@ a img {
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">Managed File Transfer using R66 protocol</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://github.com/waarp/WaarpR66"><span style="font-size:10pt;"><img title="View from GitHub" alt="View from GitHub" src="res/waarp/octocaticon.png" width="28" height="23" />&nbsp;WaarpR66</span></a></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">2.4.31 </span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpR66/2.4.31/WaarpR66-2.4.31.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td>
+<p style="text-align:center;"><span style="font-size:10pt;">2.4.32 </span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpR66/2.4.32/WaarpR66-2.4.32.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">3.0.1&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpR66/3.0.1/WaarpR66-3.0.1.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td></tr>
+<p style="text-align:center;"><span style="font-size:10pt;">3.0.2&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpR66/3.0.2/WaarpR66-3.0.2.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td></tr>
 <tr>
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">Netty based FTP Server</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://github.com/waarp/WaarpFtp"><span style="font-size:10pt;"><img title="View from GitHub" alt="View from GitHub" src="res/waarp/octocaticon.png" width="28" height="23" />&nbsp;WaarpFtp</span></a><span style="font-size:10pt;"> (3 Packages: Core, Filesystem, Simpleimpl)</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp; 1.1.10&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpFtp-Core/1.1.10/WaarpFtp-Core-1.1.10.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a><span style="font-size:10pt;">&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpFtp-Filesystem/1.1.10/WaarpFtp-Filesystem-1.1.10.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a><span style="font-size:10pt;">&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpFtp-Simpleimpl/1.1.10/WaarpFtp-Simpleimpl-1.1.10.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp; </span></p></td>
+<p style="text-align:center;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp; 1.1.11&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpFtp-Core/1.1.11/WaarpFtp-Core-1.1.11.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a><span style="font-size:10pt;">&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpFtp-Filesystem/1.1.11/WaarpFtp-Filesystem-1.1.11.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a><span style="font-size:10pt;">&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpFtp-Simpleimpl/1.1.11/WaarpFtp-Simpleimpl-1.1.11.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp; </span></p></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp; 3.0.0&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpFtp-Core/3.0.0/WaarpFtp-Core-3.0.0.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a><span style="font-size:10pt;">&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpFtp-Filesystem/3.0.0/WaarpFtp-Filesystem-3.0.0.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a><span style="font-size:10pt;">&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpFtp-Simpleimpl/3.0.0/WaarpFtp-Simpleimpl-3.0.0.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp; </span></p></td></tr>
+<p style="text-align:center;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp; 3.0.1&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpFtp-Core/3.0.1/WaarpFtp-Core-3.0.1.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a><span style="font-size:10pt;">&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpFtp-Filesystem/3.0.1/WaarpFtp-Filesystem-3.0.1.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a><span style="font-size:10pt;">&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpFtp-Simpleimpl/3.0.1/WaarpFtp-Simpleimpl-3.0.1.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp; </span></p></td></tr>
 <tr>
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">Gateway using FTP</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://github.com/waarp/WaarpGatewayFtp"><span style="font-size:10pt;"><img title="View from GitHub" alt="View from GitHub" src="res/waarp/octocaticon.png" width="28" height="23" />&nbsp;WaarpGatewayFtp</span></a></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">2.1.12&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpGatewayFtp/2.1.12/WaarpGatewayFtp-2.1.12.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td>
+<p style="text-align:center;"><span style="font-size:10pt;">2.1.13&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpGatewayFtp/2.1.13/WaarpGatewayFtp-2.1.13.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">3.0.0&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpGatewayFtp/3.0.0/WaarpGatewayFtp-3.0.0.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td></tr>
+<p style="text-align:center;"><span style="font-size:10pt;">3.0.1&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpGatewayFtp/3.0.1/WaarpGatewayFtp-3.0.1.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td></tr>
 <tr>
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">Proxy for R66</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://github.com/waarp/WaarpProxyR66"><span style="font-size:10pt;"><img title="View from GitHub" alt="View from GitHub" src="res/waarp/octocaticon.png" width="28" height="23" />&nbsp;WaarpProxyR66</span></a></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">1.0.11&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpProxyR66/1.0.11/WaarpProxyR66-1.0.11.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td>
+<p style="text-align:center;"><span style="font-size:10pt;">1.0.12&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpProxyR66/1.0.12/WaarpProxyR66-1.0.12.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">3.0.0&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpProxyR66/3.0.0/WaarpProxyR66-3.0.0.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td></tr>
+<p style="text-align:center;"><span style="font-size:10pt;">3.0.1&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpProxyR66/3.0.1/WaarpProxyR66-3.0.1.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td></tr>
 <tr>
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">Digest Support</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://github.com/waarp/WaarpDigest"><span style="font-size:10pt;"><img title="View from GitHub" alt="View from GitHub" src="res/waarp/octocaticon.png" width="28" height="23" />&nbsp;WaarpDigest</span></a></td>
@@ -131,9 +136,9 @@ a img {
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">Common functions support</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://github.com/waarp/WaarpCommon"><span style="font-size:10pt;"><img title="View from GitHub" alt="View from GitHub" src="res/waarp/octocaticon.png" width="28" height="23" />&nbsp;WaarpCommon</span></a></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">1.2.28&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpCommon/1.2.28/WaarpCommon-1.2.28.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td>
+<p style="text-align:center;"><span style="font-size:10pt;">1.2.29&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpCommon/1.2.29/WaarpCommon-1.2.29.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">3.0.1&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpCommon/3.0.1/WaarpCommon-3.0.1.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td></tr>
+<p style="text-align:center;"><span style="font-size:10pt;">3.0.2&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpCommon/3.0.2/WaarpCommon-3.0.2.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td></tr>
 <tr>
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">Remote and Local Execution support</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://github.com/waarp/WaarpExec"><span style="font-size:10pt;"><img title="View from GitHub" alt="View from GitHub" src="res/waarp/octocaticon.png" width="28" height="23" />&nbsp;WaarpExec</span></a></td>
@@ -166,9 +171,9 @@ a img {
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">Password Configuration Gui</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://github.com/waarp/WaarpPassword"><span style="font-size:10pt;"><img title="View from GitHub" alt="View from GitHub" src="res/waarp/octocaticon.png" width="28" height="23" />&nbsp;WaarpPassword</span></a></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">1.1.3&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpPassword/1.1.3/WaarpPassword-1.1.3.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td>
+<p style="text-align:center;"><span style="font-size:10pt;">1.1.4&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpPassword/1.1.4/WaarpPassword-1.1.4.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">3.0.0&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpPassword/3.0.0/WaarpPassword-3.0.0.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td></tr>
+<p style="text-align:center;"><span style="font-size:10pt;">3.0.1&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpPassword/3.0.1/WaarpPassword-3.0.1.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td></tr>
 <tr>
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">Administrator for R66 servers</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://github.com/waarp/WaarpAdministrator"><span style="font-size:10pt;"><img title="View from GitHub" alt="View from GitHub" src="res/waarp/octocaticon.png" width="28" height="23" />&nbsp;WaarpAdministrator</span></a></td>
@@ -187,9 +192,9 @@ a img {
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">Based Gateway Kernel support</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://github.com/waarp/WaarpGatewayKernel"><span style="font-size:10pt;"><img title="View from GitHub" alt="View from GitHub" src="res/waarp/octocaticon.png" width="28" height="23" />&nbsp;WaarpGatewayKernel</span></a></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">1.0.8&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpGatewayKernel/1.0.8/WaarpGatewayKernel-1.0.8.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td>
+<p style="text-align:center;"><span style="font-size:10pt;">1.0.9&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpGatewayKernel/1.0.9/WaarpGatewayKernel-1.0.9.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">3.0.1&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpGatewayKernel/3.0.1/WaarpGatewayKernel-3.0.1.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td></tr>
+<p style="text-align:center;"><span style="font-size:10pt;">3.0.2&nbsp;</span><a href="https://raw.github.com/waarp/WaarpMaven2/master/maven2/Waarp/WaarpGatewayKernel/3.0.2/WaarpGatewayKernel-3.0.2.jar"><span style="font-size:10pt;"><img title="Get jar" alt="Get jar" src="res/waarp/jaricon.png" width="31" height="23" /></span></a></p></td></tr>
 <tr>
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">Ftp Client support</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="https://github.com/waarp/WaarpFtpClient"><span style="font-size:10pt;"><img title="View from GitHub" alt="View from GitHub" src="res/waarp/octocaticon.png" width="28" height="23" />&nbsp;WaarpFtpClient</span></a></td>
@@ -214,22 +219,22 @@ a img {
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">All Jars Waarp Gateway FTP</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All Jars&nbsp;(dependency inclusive) (*)</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">2.1.12 </span><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpGatewayFtp-2.1.12.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td>
+<p style="text-align:center;"><span style="font-size:10pt;">2.1.13 </span><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpGatewayFtp-2.1.13.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">3.0.0&nbsp;</span><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpGatewayFtp-3.0.0.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td></tr>
+<p style="text-align:center;"><span style="font-size:10pt;">3.0.1&nbsp;</span><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpGatewayFtp-3.0.1.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td></tr>
 <tr>
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;height:44px;vertical-align:middle;" rowspan="2"><span style="font-size:10pt;">All Jars Waarp R66</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All Jars&nbsp;(dependency inclusive) (*)</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">2.4.31&nbsp;</span><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpR66-2.4.31.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td>
+<p style="text-align:center;"><span style="font-size:10pt;">2.4.32&nbsp;</span><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpR66-2.4.32.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">3.0.1&nbsp;</span><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpR66-3.0.1.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td></tr>
+<p style="text-align:center;"><span style="font-size:10pt;">3.0.2&nbsp;</span><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpR66-3.0.2.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td></tr>
 <tr>
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All Full Jars&nbsp;(all dependencies, including JDBC drivers)</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">2.4.31&nbsp;</span><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpR66-2.4.31-Full.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td>
+<p style="text-align:center;"><span style="font-size:10pt;">2.4.32&nbsp;</span><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpR66-2.4.32-Full.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;">
-<p style="text-align:center;"><span style="font-size:10pt;">3.0.1&nbsp;</span><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpR66-3.0.1-Full.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td></tr>
+<p style="text-align:center;"><span style="font-size:10pt;">3.0.2&nbsp;</span><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpR66-3.0.2-Full.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td></tr>
 <tr>
 <td style="border-left:1px solid #000000;border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">Waarp R66 configuration example</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Configuration examples for R66</span></td>
@@ -240,7 +245,7 @@ a img {
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;"><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In complement to &laquo;&nbsp;All Jars&nbsp;&raquo; package</span></td>
 <td style="border-right:1px solid #000000;border-bottom:1px solid #000000;vertical-align:middle;" colspan="2">
 <p style="text-align:center;"><a href="http://sourceforge.net/projects/waarp/files/AllJars/jdbc-drivers.zip/download"><span style="font-size:10pt;"><img title="get zip" alt="get zip" src="res/waarp/zipicon.png" width="31" height="23" /></span></a></p></td></tr></tbody></table>
-<table style="border-top-style:none; border-right:#ef6d00 0px solid; border-bottom:#ef6d00 0px solid; border-left:#ef6d00 0px solid;" bordercolor="#ce0a00" cellpadding="0" bgcolor="#0a0e0" solid="solid" 0px="0px" src_reftype:reftypenone="src_reftype:reftypenone">
+<table style="border-top-style:none; border-right:#ef6d00 0px solid; border-bottom:#ef6d00 0px solid; border-left:#ef6d00 0px solid;" bordercolor="#ce0a00" cellpadding="0" bgcolor="#0a0e0" 0px="0px" solid="solid" src_reftype:reftypenone="src_reftype:reftypenone">
 <tbody></tbody></table>
 <p>&nbsp;</p><span style="color:rgb(0,0,0);">
 <p>(*) JDBC drivers are omitted to fit in &lt; 10 MB all jars.</p>
@@ -261,17 +266,5 @@ a img {
 <ul>
 <li><span style="font-size:11pt;"><span style="font-family:'courier new';">https://github.com/<em>waarp</em>/<em><span style="font-family:'courier new';">&lt;nickname&gt;</span></em>.git&nbsp;<span style="font-family:verdana;">as repository reference</span></span></span> 
 </li><li><span style="font-size:11pt;"><span style="font-family:'courier new';">&lt;version&gt;&nbsp;<span style="font-family:verdana;">as tag for a&nbsp;</span><span style="font-family:'courier new';">git checkout &lt;version&gt;</span></span></span></li></ul></span>&nbsp;</div>
-<p>&nbsp;</p>
-<div id="Comp10_CodeRelayer" style="visibility:hidden;"><script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-1693657-4', 'auto');
-  ga('send', 'pageview');
-
-</script>
-</div>
 </body>
 </html>
