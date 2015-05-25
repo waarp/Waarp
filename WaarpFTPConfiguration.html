@@ -1,11 +1,11 @@
 <!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
-<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
-<meta name="robots" content="index,follow" />
 <meta name="description" content="Waarp project" />
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
+<meta name="robots" content="index,follow" />
+<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -67,7 +67,6 @@ $( document ).ready(function(){
 </style>
 </head>
 <body class="normal" style="font-family:Verdana,sans-serif;font-size:8pt;color:#000000;margin:0px;padding:0px;background-color:#FFFFFF;">
-
 <div id="Comp1_CodeRelayer"><!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -82,7 +81,10 @@ $( document ).ready(function(){
   ga('send', 'pageview');
 
 </script>
-</div><h1 class="h1">Waarp-FTP-Configuration</h1><div id="Comp3_sys_doctext"><p style="text-align:justify;"><span style="font-size:11pt;"><strong>How to configure Waarp Ftp using default implementation</strong></span></p>
+</div>
+<div style="text-align:left;margin:0px 4px;">
+<h1 class="h1">Waarp-FTP-Configuration</h1>
+<div id="Comp2_sys_doctext"><p style="text-align:justify;"><span style="font-size:11pt;"><strong>How to configure Waarp Ftp using default implementation</strong></span></p>
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:justify;"><span style="font-size:11pt;">In the zip distribution WaarpFtp-X.Y.Z-dist.zip, you will find an extra directory named: src/main/config where two examples files are: config.xml and authent.xml.<br />Those two files are related to the simple implementation of the Ftp Server.<br /><br />The first one (config.xml) specifies the general behavior:</span></p>
 <ul>
@@ -158,5 +160,6 @@ $( document ).ready(function(){
 <p style="text-align:justify;margin-right:0px;" dir="ltr"><span style="font-size:11pt;">internalshutdown &lt;password&gt;</span></p>
 <p style="text-align:justify;margin-right:0px;" dir="ltr"><br /><span style="font-size:11pt;">where the password is the one in the config.xml for admin actions.</span></p></blockquote>
 <p style="text-align:justify;margin-right:0px;" dir="ltr"><span style="font-size:11pt;">For instance, using FTP from windows you have to type<br />&gt;quote internalshutdown password<br /><br />Note that this FTP Server can be used as a simple one, but also for more complicated cases. It is in the middle of a self FTP server (simpleimpl package) and a framework to implement its own FTP service, which is the main reason of this project since I've not found any other open source&nbsp; implementations allowing to have pre or post actions on transfers or commands.<br /></span></p></div>
+<p>&nbsp;</p></div>
 </body>
 </html>

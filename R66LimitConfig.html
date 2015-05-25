@@ -1,11 +1,11 @@
 <!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
 <meta name="description" content="Waarp project" />
-<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
-<meta name="robots" content="index,follow" />
 <meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta name="robots" content="index,follow" />
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -67,7 +67,6 @@ $( document ).ready(function(){
 </style>
 </head>
 <body class="normal" style="font-family:Verdana,sans-serif;font-size:8pt;color:#000000;margin:0px;padding:0px;background-color:#FFFFFF;">
-
 <div id="Comp1_CodeRelayer"><!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -82,7 +81,10 @@ $( document ).ready(function(){
   ga('send', 'pageview');
 
 </script>
-</div><h1 class="h1">R66LimitConfig</h1><div id="Comp3_sys_doctext"><h2 class="h2">Waarp R66 Limit Configuration File</h2>
+</div>
+<div style="text-align:left;margin:0px 4px;">
+<h1 class="h1">R66LimitConfig</h1>
+<div id="Comp2_sys_doctext"><h2 class="h2">Waarp R66 Limit Configuration File</h2>
 <h3 class="h3">config</h3>
 <ul>
 <li>comment:string Optional</li></ul>
@@ -106,5 +108,6 @@ $( document ).ready(function(){
 <p>Delay between 2 attemps in case of error (30s)</p></li></ul>
 <h1 class="h1">Example:</h1>
 <p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;<br />&lt;config xmlns:x0="http://www.w3.org/2001/XMLSchema"&gt;<br />&nbsp;&nbsp;&nbsp; &lt;comment&gt;Example of config file: change its as your need.&lt;/comment&gt;<br />&nbsp;&nbsp;&nbsp; &lt;identity&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;hostid&gt;hosta&lt;/hostid&gt;<br />&nbsp;&nbsp;&nbsp; &lt;/identity&gt;<br />&nbsp;&nbsp;&nbsp; &lt;limit&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;sessionlimit&gt;0&lt;/sessionlimit&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;globallimit&gt;0&lt;/globallimit&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;delaylimit&gt;10000&lt;/delaylimit&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;runlimit&gt;10000&lt;/runlimit&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;delaycommand&gt;5000&lt;/delaycommand&gt;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;delayretry&gt;30000&lt;/delayretry&gt;<br />&nbsp;&nbsp;&nbsp; &lt;/limit&gt;<br />&lt;/config&gt;<br /></p></div>
+<p>&nbsp;</p></div>
 </body>
 </html>
