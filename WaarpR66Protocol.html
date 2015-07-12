@@ -1,11 +1,11 @@
 <!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
-<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
-<meta name="robots" content="index,follow" />
 <meta name="description" content="Waarp project" />
+<meta name="robots" content="index,follow" />
 <meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -171,10 +171,10 @@ $( document ).ready(function(){
 </li><li><span style="color:#000000;"><span style="font-size:11pt;"><em>FileNotFound&nbsp;: </em>the file is not found</span></span> 
 </li><li><span style="color:#000000;"><span style="font-size:11pt;"><em>CommandNotFound&nbsp;: </em>the Command is not found</span></span>&nbsp;</li></ul></div>
 <ul>
-<li><span style="color:#000000;"><span style="font-size:11pt;"><em>PassThroughMode&nbsp;: </em>the requested transfer (restart) is in PassThrough mode and is not compatible with the required action</span></span></li>
-<li><span style="color:#000000;"><span style="font-size:11pt;"><em>IncorrectCommand&nbsp;: </em>the command passed to the server is incorrect and cannot continue</span></span></li>
-<li><span style="color:#000000;"><span style="font-size:11pt;"><em>FileNotAllowed&nbsp;: </em>the File requested is not allowed (due to a path not allowed for instance)</span></span></li>
-<li><span style="color:#000000;"><span style="font-size:11pt;"><em>SizeNotAllowed&nbsp;: </em>the file size is not allowed (either because the size is out of the limit or because the working/recv directories cannot host this file due to insufficient space available)</span></span></li></ul></li></ul></li></ul>
+<li><span style="color:#000000;"><span style="font-size:11pt;"><em>PassThroughMode&nbsp;: </em>the requested transfer (restart) is in PassThrough mode and is not compatible with the required action</span></span> 
+</li><li><span style="color:#000000;"><span style="font-size:11pt;"><em>IncorrectCommand&nbsp;: </em>the command passed to the server is incorrect and cannot continue</span></span> 
+</li><li><span style="color:#000000;"><span style="font-size:11pt;"><em>FileNotAllowed&nbsp;: </em>the File requested is not allowed (due to a path not allowed for instance)</span></span> 
+</li><li><span style="color:#000000;"><span style="font-size:11pt;"><em>SizeNotAllowed&nbsp;: </em>the file size is not allowed (either because the size is out of the limit or because the working/recv directories cannot host this file due to insufficient space available)</span></span></li></ul></li></ul></li></ul>
 <p style="text-align:justify;"></p>
 <p style="text-align:justify;"><span style="font-size:11pt;">A request of transfer follows a sequential logic:</span></p>
 <p style="text-align:justify;">&nbsp;</p>
@@ -256,6 +256,8 @@ $( document ).ready(function(){
 <ul>
 <li>
 <p style="text-align:justify;"><span style="font-size:11pt;">Once finished, the Request is in PreProcessingOK status.</span></p></li></ul></li></ul>
+<p style="text-align:justify;"><span style="font-size:11pt;">During pre-start, some preconditions could change (file name, file size, transfer information): if so, a special message is send in order to change the remote corresponding information.</span></p>
+<p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:justify;"><span style="font-size:11pt;"><strong>Data Transfer</strong></span></p>
 <p style="text-align:justify;"><span style="font-size:11pt;"><ins>Sender:</ins></span></p>
 <ol>

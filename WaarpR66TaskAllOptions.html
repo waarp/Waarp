@@ -645,8 +645,8 @@ If not set, the host will not be allow. On EXECJAVA, the security is first that 
 <h4>TRANSFER</h4>
 <p>Submit a new transfer based on the Path and Transfer Information arguments.</p>
 <ul><li>The transfer arguments are obtained from Path transformed according to above dynamic replacements, it is then used as a String Format where Transfer Information is used as input (String.format(Path,Info)).</li>
-<li>The result should be as r66send command except "-info" must be the last field:
-<code>-file filepath -to requestedHost -rule rule [-md5] [-start yyyyMMddHHmmss or -delay (delay or +delay)] -info transferInformation</code>
+<li>The result should be as r66send command except "-info" must be the last item, and "-copyinfo" will copy at first place the original transfer information as the new one, while still having the possibility to add new informations through "-info":
+<code>-file filepath -to requestedHost -rule rule [-md5] [-start yyyyMMddHHmmss or -delay (delay or +delay)] [-copyinfo] [-info transferInformation]</code>
 where each field is separated by blank character. Last field (transferInformation) may contain however blank character.</li>
 <li>Delay is ignored.</li>
 <li>The file is not marked as moved.</li>
