@@ -1,11 +1,11 @@
 <!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta name="description" content="Waarp project" />
 <meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <meta name="robots" content="index,follow" />
-<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
-<meta name="description" content="Waarp project" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -430,8 +430,12 @@ $( document ).ready(function(){
 <li>
 <p style="text-align:justify;"><span style="font-family:Courier New;font-size:10pt;">&lt;root&gt;...&lt;seeallid&gt;id1,id2,...,idn&lt;/seeallid&gt;&lt;/root&gt;</span></p></li></ul></li></ul>
 <blockquote>
-<p style="text-align:justify;"><span style="font-size:10pt;">Such containt will allow any of the ids id1, id2, ... or idn to see, once connected to the administration web interface,&nbsp;the full content of the database&nbsp;from the transfer menu. Note however that those ids need to have also the&nbsp;CONFIGADMIN&nbsp;role since this ability has to be controlled (see <strong>Roles</strong> item to see how to configure the roles).</span></p></blockquote></blockquote><span style="font-size:8pt;"><span style="font-family:courier new, monospace;">
-<p style="text-align:justify;">&nbsp;</p></span></span></div>
+<p style="text-align:justify;"><span style="font-size:10pt;">Such containt will allow any of the ids id1, id2, ... or idn to see, once connected to the administration web interface,&nbsp;the full content of the database&nbsp;from the transfer menu. Note however that those ids need to have also the&nbsp;CONFIGADMIN&nbsp;role since this ability has to be controlled (see <strong>Roles</strong> item to see how to configure the roles).</span></p></blockquote></blockquote>
+<h1 class="h1" style="text-align:justify;">ulimit (max number of opened files exceeded)</h1><span style="font-size:8pt;"><span style="font-family:courier new, monospace;">
+<blockquote style="margin-right:0px;" dir="ltr">
+<p style="text-align:justify;"><span style="font-size:10pt;">While a server/client should have an acceptable limit for opened file per process (or globally for the system), we recommend to have at least a value of 4096, and more depending on your use case.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">However you can limit the NIO selector file descriptor opened impact by decreasing or setting the <span style="font-family:Courier New;"><strong>serverthread</strong></span> value. For instance, a value of 1 will imply around 250 descriptors, while a value of 5 will imply around 850 descriptors.</span></p>
+<p style="text-align:justify;"><span style="font-size:10pt;">According to your needs, you can setup the number of cores to use (<span style="font-family:Courier New;">serverthread</span>), default being <span style="font-family:Courier New;"><strong>number of cores * 2 + 1</strong></span>, but a value of 1 as minimum is allowed (0 meaning using the number of cores).</span></p></blockquote></span></span></div>
 <p>&nbsp;</p></div>
 </body>
 </html>

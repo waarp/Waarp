@@ -1,11 +1,11 @@
 <!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
 <meta name="robots" content="index,follow" />
-<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
-<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <meta name="description" content="Waarp project" />
+<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -114,89 +114,47 @@ $( document ).ready(function(){
 <hr />
 
 <h1 class="h1"><em>Last release</em></h1>
-<h1 class="h1" style="text-align:justify;">July 2015: New Version for R66 2.4.34/3.0.4 (various fixes and new features) and&nbsp;Gateway FTP&nbsp;2.1.14/3.0.2 (various fix and new features)</h1>
+<h1 class="h1" style="text-align:justify;">October 2015: New Version for R66 3.0.5 (various fixes and optimisations) and&nbsp;Gateway FTP&nbsp;3.0.3 (various fix and optimisations)</h1>
 <ul>
-<li><h1 class="h1">Waarp R66 2.4.34 / 3.0.4</h1><ul>
-<li><p>Fix issue on startup/shutdown with Gateway Ftp</p></li>
+<li><h1 class="h1">Waarp R66 3.0.5</h1><ul>
+<li><p>Fix Database data size to lower values</p></li>
 
-<li><p>Fix R66PreparedTransferExecutor (Gateway Ftp)</p></li>
-
-<li><p>Fix Database from Common fix (multiple databases)</p></li>
-
-<li><p>Fix Json when \" is present <strong><em>(3.0 only)</em></strong></p></li>
-
-<li><p>Fix 100% in admin IHM for very small file <strong><em>(3.0 only)</em></strong></p></li>
-
-<li><p>Fix TransferTask to allow -copyinfo to copy all previous transfer information to the next one without having to care about the number of information. (applied before any -info)</p></li>
-
-<li><p>Add AddUuidJavaTask <strong><em>(3.0 only)</em></strong></p></li>
-
-<li><p>Small fix when self-requested transfer require restart</p></li>
-
-<li><p>Add AddUuidJavaTask in task/javatask <strong><em>(3.0 only)</em></strong></p></li>
-
-<li><p>Add AddDigestJavaTask in task/javatask <strong><em>(3.0 only)</em></strong></p></li>
-
-<li><p>Add #UUID# option in AbstractExecutor for Gateway FTP <strong><em>(3.0 only)</em></strong></p></li>
-
-<li><p>Fix Static HTTPS service <strong><em>(3.0 only)</em></strong></p></li>
-
-<li><p>Check LCR null in restart/Cancel</p></li>
-
-<li><p>Check if LCR still active before passing the packet from Network to Local channel</p></li>
+<li><p>Fix Opened File Descriptor too high: limit the impact from NIO selectors</p></li>
 
 <li>
-<p>Use LocalWorkerGroup as much as possible</p></li></ul></li>
+<p>Fix after upgrading Netty</p></li></ul></li>
 
 
 <li>
-<h1 class="h1">Waarp Common 1.2.31 / 3.0.4</h1>
+<h1 class="h1">Waarp Common 3.0.5</h1><ul>
+<li>Fix Database data size
+</li><li>
+<p>Fix after upgrading Netty</p></li></ul></li>
+
+<li>
+<h1 class="h1">Waarp&nbsp;Gateway Kernel&nbsp;3.0.4</h1><ul>
+<li>Fix after upgrading Netty</li></ul></li>
+
+<li>
+<h1 class="h1">Waarp Gateway Ftp&nbsp;3.0.3</h1><ul>
+<li>
+<p>Fix after upgrading Netty</p></li></ul></li>
+
+<li>
+<h1 class="h1">Waarp&nbsp;Proxy 3.0.2</h1>
 <ul>
-<li><p>Add main to get or check UUID</p></li>
-
-<li><p>step up the abstraction level of XmlUitls.saveDocument() using java.io.Writer</p></li>
-
-<li><p>Fix Database to support multiple JDBC drivers</p></li>
+<li>
+<p>Fix after upgrading Netty</p></li></ul></li>
+<li>
+<h1 class="h1">Waarp SNMP 3.0.1</h1><ul>
+<li>
+<p>Fix after upgrading SNMP4J</p></li></ul></li>
 
 <li>
-<p>Fix Netty main configuration<strong><em>(3.0 only)</em></strong></p></li></ul></li>
+<h1 class="h1">Waarp&nbsp;THRIFT 3.0.1</h1>
+<ul>
 <li>
-<h1 class="h1">Waarp&nbsp;FtpClient 3.0.1</h1><ul>
-<li>Fix Database to support multiple JDBC drivers</li></ul></li>
-
-<li>
-<h1 class="h1">Waarp&nbsp;Gateway Kernel&nbsp;1.0.10 / 3.0.3</h1><ul>
-<li>Fix Database to support multiple JDBC drivers</li></ul></li>
-
-<li>
-<h1 class="h1">Waarp Ftp 1.1.12 / 3.0.2</h1><ul>
-<li><p>Clean and fix RETRIEVE operation</p></li>
-
-<li>
-<p>Fix startup process and memory issue</p></li></ul></li>
-
-<li>
-<h1 class="h1">Waarp Gateway Ftp&nbsp;2.1.14 / 3.0.2</h1><ul>
-<li><p>Clean and fix RETRIEVE operation</p></li>
-
-<li>
-<p>Fix startup process and memory issue</p></li></ul></li>
-
-<li>
-<h1 class="h1">Waarp Ftp 1.1.12 / 3.0.2</h1><ul>
-<li><p>Fix startup process and memory issue</p></li>
-
-<li><p>Fix Db Issue when connecting to 2 databases (FTP and R66)</p></li>
-
-<li><p>factorize code in HttpSslHandler.Transfer()</p></li>
-
-<li><p>Fix purgeCorrect : Successfull transfers have the status "226 CLOSING DATA CONNECTION", so purgeCorrect never returned any result, as filtering was done on status 250.</p></li>
-
-<li><p>Add a level of abstraction using Writer in DbTransferLog.saveDbTransferLogFile()</p></li>
-
-<li>
-<p>Add the ExportLog command to export transfer log to a file and optionally purge exported lines from database.</p></li></ul></li>
-</ul></div>
+<p>Fix after upgrading thrift</p></li></ul></li></ul></div>
 <p>&nbsp;</p></div>
 </body>
 </html>
