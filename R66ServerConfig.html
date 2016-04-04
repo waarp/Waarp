@@ -3,9 +3,9 @@
 <head>
 <meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
-<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <meta name="description" content="Waarp project" />
 <meta name="robots" content="index,follow" />
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -129,7 +129,11 @@ $( document ).ready(function(){
 <li>checkclientaddress:booleanType default="False" Optional 
 <p>True if R66 will check remote IP address also for remote Client</p></li>
 <li>multiplemonitors:nonNullInteger default="1" 
-<p>Set the number of servers that act in the same group as a single instance of OpenR66 File Transfer Monitor</p></li></ul>
+<p>Set the number of servers that act in the same group as a single instance of OpenR66 File Transfer Monitor</p></li>
+<li>
+<p>businessfactorynetwork:nonEmptyString if specified </p>
+<p>If you need a special Business Factory, you must specify the full class name here.</p>
+<p>Default is: org.waarp.openr66.context.R66DefaultBusinessFactory which only logs in DEBUG mode.</p></li></ul>
 <h4 class="h4">network</h4>
 <ul>
 <li>serverport:nonNulInteger default="6666" 

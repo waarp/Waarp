@@ -1,11 +1,11 @@
 <!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
-<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
 <meta name="description" content="Waarp project" />
 <meta name="robots" content="index,follow" />
-<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -85,6 +85,48 @@ $( document ).ready(function(){
 <div style="text-align:left;margin:0px 4px;">
 <h1 class="h1">Release History</h1>
 <div id="Comp2_sys_doctext"><h1 class="h1"><em>History of versions</em></h1>
+<h1 class="h1" style="text-align:justify;">April&nbsp;2016: New Version for R66 3.0.6 (clean, fixes and stop supporting Java 6) and&nbsp;Gateway FTP&nbsp;3.0.4 (clean, fixes and stop supporting Java 6)</h1>
+<h2 class="h2">Waarp R66 3.0.6</h2>
+<p>Evolution: Remove support of Java 1.6 </p>
+<p>Bug fix: remove standard output during database version checking </p>
+<p>Bug fix: REST interface fix </p>
+<p>Bug fix: Ability to restart a transfer when using a client with no db support </p>
+<p>Bug fix: -nolog option fix in nodb client </p>
+<p>Bug fix: error during connexion init now allow to execute error tasks </p>
+<p>Bug fix: Initdb includes upgradedb now by default </p>
+<p>Bug fix: Oracle not thread safe (as in MariaDB and MySQL) </p>
+<p>Bug fix: Oracle (&gt;= 10) doesn't respect empty string and changes them to null (fix) </p>
+<p>Bug fix: Improvement of HTTPS Admin web </p>
+<p>Bug fix: allow to use R66BusinessInterface again (deprecation removed) </p>
+<p>Fix after upgrading Netty and other dependencies</p>
+<p>&nbsp;</p>
+<h2 class="h2">Waarp Common 3.0.6</h2>
+<p>Evolution: Remove support of Java 1.6 </p>
+<p>Fix after upgrading Netty</p>
+<p>&nbsp;</p>
+<h2 class="h2">Waarp&nbsp;Gateway Kernel&nbsp;3.0.5</h2>
+<p>Evolution: Remove support of Java 1.6 </p>
+<p>Bug fix: Content-length headers in REST response </p>
+<p>Fix after upgrading Netty</p>
+<p>&nbsp;</p>
+<h2 class="h2">Waarp Gateway Ftp&nbsp;3.0.4 and FTP 3.0.3</h2>Evolution: Remove support of Java 1.6 
+<p>Bug fix: fix impossibility to have more than one active connexion </p>
+<p>Bug fix: Gateway FTP now accepts empty files </p>
+<p>Bug fix: Gateway FTP fix of bad answer ("Post operations cannot be done so force disconnection" even when no transfer was done) </p>
+<p>Bug fix: MLSx commands contains now "facts"&nbsp;if OPTS MLSx is used </p>
+<p>Bug fix: FEAT command now possible before authentification </p>
+<p>Fix after upgrading Netty and other dependencies </p>
+<p>&nbsp;</p>
+<h2 class="h2">Waarp&nbsp;Proxy 3.0.3</h2>
+<p>Evolution: Remove support of Java 1.6 </p>
+<p>Bug fix: Fix startup </p>
+<p>Fix after upgrading Netty</p>
+<p>&nbsp;</p>
+<h2 class="h2">Waarp SNMP 3.0.2</h2>
+<p style="text-align:justify;">Evolution: Remove support of Java 1.6</p>
+<p>Fix after upgrading SNMP4J</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <h1 class="h1" style="text-align:justify;">October 2015: New Version for R66 3.0.5 (various fixes and optimisations) and&nbsp;Gateway FTP&nbsp;3.0.3 (various fix and optimisations)</h1>
 <ul>
 <li><h1 class="h1">Waarp R66 3.0.5</h1><ul>
@@ -96,30 +138,30 @@ $( document ).ready(function(){
 <p>Fix after upgrading Netty</p></li></ul></li>
 
 
-<li>
-<h1 class="h1">Waarp Common 3.0.5</h1><ul>
+<li><h1 class="h1">Waarp Common 3.0.5</h1><ul>
 <li>Fix Database data size 
 </li><li>
 <p>Fix after upgrading Netty</p></li></ul></li>
 
-<li>
-<h1 class="h1">Waarp&nbsp;Gateway Kernel&nbsp;3.0.4</h1><ul>
+
+<li><h1 class="h1">Waarp&nbsp;Gateway Kernel&nbsp;3.0.4</h1><ul>
 <li>Fix after upgrading Netty</li></ul></li>
 
-<li>
-<h1 class="h1">Waarp Gateway Ftp&nbsp;3.0.3</h1><ul>
+
+<li><h1 class="h1">Waarp Gateway Ftp&nbsp;3.0.3</h1><ul>
 <li>
 <p>Fix after upgrading Netty</p></li></ul></li>
 
-<li>
-<h1 class="h1">Waarp&nbsp;Proxy 3.0.2</h1>
-<ul>
+
+<li><h1 class="h1">Waarp&nbsp;Proxy 3.0.2</h1><ul>
 <li>
 <p>Fix after upgrading Netty</p></li></ul></li>
-<li>
-<h1 class="h1">Waarp SNMP 3.0.1</h1><ul>
+
+
+<li><h1 class="h1">Waarp SNMP 3.0.1</h1><ul>
 <li>
 <p>Fix after upgrading SNMP4J</p></li></ul></li>
+
 
 <li>
 <h1 class="h1">Waarp&nbsp;THRIFT 3.0.1</h1>

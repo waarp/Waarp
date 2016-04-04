@@ -596,7 +596,7 @@ Moreover, in case of error, if the last line contains the prefix NEWFILENAME:, t
 <h4>EXECJAVA</h4>
 <p>Execute an external Java class given by Path and Transfer Information arguments.</p>
 <ul><li>The Delay is the maximum amount of time in milliseconds before the task should be considered as over time and so in error.</li>
-<li>The class name (which must implement R66Runnable) is obtained from Path transformed according to above dynamic replacements, and after a String Format where Transfer Information is used as input (String.format(Path,Info)). The first argument is this full classname. The allocation must be of the form new MyClass(), so an empty constructor.</li>
+<li>The class name (which must implement <code>R66Runnable</code> or being an extend of <code>AbstractExecJavaTask</code>, ignoring the extra <code>validate/finalValidate/invalid</code> methods used only in Business tasks) is obtained from Path transformed according to above dynamic replacements, and after a String Format where Transfer Information is used as input (<code>String.format(Path,Info)</code>). The first argument is this full classname. The allocation must be of the form <code>new MyClass()</code>, so an empty constructor.</li>
 <li>The file is not marked as moved.</li>
 </ul>
 <p>Example:
@@ -611,7 +611,7 @@ Moreover, in case of error, if the last line contains the prefix NEWFILENAME:, t
 <p>In order to facilitate the integration in application modules, OpenR66 supports the ability to run specific Java Class through 3 ways. Note that this functionality is only valid starting in version 2.3.</P>
 <ul><li>One is through pre or post or error tasks using the EXECJAVA keyword, following by the full class name which must implement the <code>R66Runnable</code> interface.</li>
 <li>Another one is through specific R66Business command, which will also execute an R66Runnable implementation, through for instance the <code>AbstractExecJavaTask</code> abstract class that could be extended.</li>
-<li>Finally, there is the possibility to associate a Business Class (see <code>R66BusinessInterface</code>) through a Business Factory (see <code>R66BusinessFactoryInterface</code>) to each transfer that will run several methods in the various steps that could occur:</li>
+<li>Finally, there is the possibility to associate a Business Class (see <code>R66BusinessInterface</code>) through a Business Factory (see <code>R66BusinessFactoryInterface</code>) to each transfer that will run several methods in the various steps that could occur:
 <ul><li><code>void checkAtStartup(R66Session session)</code>: launched at the very startup of the transfer and before the pre commands</li>
 <li><code>void checkAfterPreCommand(R66Session session)</code>: launched after the pre commands and before the transfer starts</li>
 <li><code>void checkAfterTransfer(R66Session session)</code>: launched after the transfer is finished and before the post commands</li>
@@ -620,6 +620,7 @@ Moreover, in case of error, if the last line contains the prefix NEWFILENAME:, t
 <li><code>void checkAtChangeFilename(R66Session session)</code>: launched if the filename is changed during the commands (pre or post)</li>
 <li><code>void releaseResources()</code>: launched at the very end, to release any internal resources that should be released</li>
 <li><code>String getInfo()</code> and <code>void setInfo(String info)</code>: launched by programmatic (business code) to enable to set a special info (as String) and to retrieve it at any time.</li></ul>
+Note that the <code>R66BusinessFactory</code> could be set through XML configuration file in <xmp><businessfactory></xmp> field in <xmp><server></xmp> or <xmp><client></xmp> part, but is limited to empty constructor form.</li>
 <li>Note that to allow a host to call a Business Request, it has to be added in the configuration file as <xmp><business><businessid>hostname</businessid>...</business></xmp>
 If not set, the host will not be allow. On EXECJAVA, the security is first that the rule is only local to the host, and second the rule has the possibility to limit the allowed hosts to be partner of it.</li></ul></p>
   </div>

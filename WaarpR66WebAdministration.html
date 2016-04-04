@@ -1,10 +1,10 @@
 <!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
-<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
-<meta name="description" content="Waarp project" />
 <meta name="robots" content="index,follow" />
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta name="description" content="Waarp project" />
 <meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
@@ -92,7 +92,7 @@ $( document ).ready(function(){
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:justify;"><span style="font-size:10pt;">Note that it is possible from version 2.4.22 to specify different levels of applicable rights to a user connected to the web administration interface:</span></p>
 <ul>
-<li><p style="text-align:justify;"><span style="font-size:10pt;">The default admin user (specified in the XML configuration file) has all rights (super user account)</span></p></li>
+<li><p style="text-align:justify;"><span style="font-size:10pt;">The default admin user (specified in the XML configuration file through <span style="font-family:Courier New;">&lt;server&gt;&lt;serveradmin&gt;name&lt;/serveradmin&gt; [ &lt;serverpasswd&gt;pwd&lt;/serverpasswd&gt; | &lt;serverpasswdfile&gt;passwdfile&lt;/serverpasswdfile&gt; ])</span> has all rights (super user account)</span></p></li>
 
 <li><p style="text-align:justify;"><span style="font-size:10pt;">It is possible to create new user accounts by creating "dummy" Hosts with a value of PORT &lt; 0 (it will set automatically Address to 0.0.0.0 and isClient to True).</span></p></li>
 
@@ -110,8 +110,10 @@ $( document ).ready(function(){
 
 <li><p style="text-align:justify;"><span style="font-size:10pt;">By default, all other menus are allowed (LISTING and SPOOLED DIRECTORY sub menus of TRANSFERS menu, LOGON and START menus) since they do not act on the server. Note that SYSTEM menu will be limited to showing the current values (not changing them), except the Web interface language (not the server language).</span></p></li>
 
+<li><p style="text-align:justify;"><span style="font-size:10pt;">You can combine rights, for instance by setting <span style="font-family:courier new;">&lt;roleset&gt;TRANSFER SYSTEM&lt;/roleset&gt;</span> for the role, or any combination.</span></p></li>
+
 <li>
-<p style="text-align:justify;"><span style="font-size:10pt;">You can combine rights, for instance by setting <span style="font-family:courier new;">&lt;roleset&gt;TRANSFER SYSTEM&lt;/roleset&gt;</span> for the role, or any combination.</span></p></li></ul>
+<p style="text-align:justify;"><span size="2">All possible values are : <span style="font-family:Courier New;color:rgb(51,51,51);">NOACCESS READONLY TRANSFER RULE HOST LIMIT SYSTEM LOGCONTROL PARTNER(= READONLY + TRANSFER) CONFIGADMIN(= PARTNER + RULE + HOST) FULLADMIN(= CONFIGADMIN + LIMIT + SYSTEM + LOGCONTROL)</span></span></p></li></ul>
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:justify;"><span style="font-size:10pt;">Internationalization of the Web interface (and the server and client) is now fully supported from version 2.4.22:</span></p></blockquote>
 <p style="text-align:center;"><img title="w3-i18n" style="border:none;" alt="w3-i18n" src="res/V3/w3i18n.png" width="800" height="149" /></p>

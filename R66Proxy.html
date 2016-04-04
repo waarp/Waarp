@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
-<meta name="robots" content="index,follow" />
-<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
-<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <meta name="description" content="Waarp project" />
+<meta name="robots" content="index,follow" />
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
+<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -118,11 +118,17 @@ $( document ).ready(function(){
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:justify;"><span style="font-size:11pt;">The configuration is made by pair, meaning that each listening interface (address, port, <ins>ssl</ins> mode) is linked to one and only one </span><span style="font-size:11pt;"><ins>proxified</ins> interface (address, port, <ins>ssl</ins> mode). Therefore, let say that on internal side we have a R66 server named A, on external </span><span style="font-size:11pt;">side a R66 server named B, the configuration will be as follow:</span></p>
 <ul>
-<li><div style="text-align:justify;"><span style="font-size:11pt;">Listening B' in DMZ through address/port/SSL mode (probably none) accessible from inside, linked to B</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:11pt;">Listening B' in DMZ through address/port/SSL mode (probably none) accessible from inside, linked to B outside</span></div></li>
 
 <li>
-<div style="text-align:justify;"><span style="font-size:11pt;">Listening A' in DMZ through address/port/SSL mode (probably yes) accessible from outside, linked to A</span></div></li></ul>
+<div style="text-align:justify;"><span style="font-size:11pt;">Listening A' in DMZ through address/port/SSL mode (probably yes) accessible from outside, linked to A inside</span></div></li></ul>
 <p style="text-align:justify;"><span style="font-size:11pt;">Therefore, in A, the configuration to access to B is made through address/port/SSL mode defined in B', </span><span style="font-size:11pt;">while the remote partner B will access to A through address/port/SSL mode defined in A'.</span></p>
+<ul>
+<li>
+<div style="text-align:justify;"><span style="font-size:10pt;">Any servers inside could then reach B through B' (B will then check the authentication)</span></div></li>
+<li>
+<div style="text-align:justify;"><span style="font-size:10pt;">Any servers outsde could then reach A through A' (A will then check the authentication)</span></div></li></ul>
+<p style="text-align:justify;"><span style="font-size:10pt;">So if you want that all outside clients will be able to reach one particular server of yours inside, you need to setup only one path (knowing clients could do either SEND or RECV transfers). Reversely if you want to be able to reach from inside multiples partner servers (say n), then you will have to define one route for each, so n routes.</span></p>
 <p style="text-align:justify;">&nbsp;</p><span style="font-size:11pt;"><ins>Proxy</ins> server is started and stopped as a R66 server (command line is java ... </span></span><span style="font-size:11pt;">classpath</span> <span style="font-size:10pt;"><span style="font-size:11pt;">... java options .... </span></span><span style="font-size:11pt;">config</span><span style="font-size:10pt;"><span style="font-size:11pt;">-proxy.xml). </span>
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:justify;"><span style="font-size:11pt;">It contains a specific administrator and a specific configuration file, close to R66 standard ones, but will less functionalities. </span></p>

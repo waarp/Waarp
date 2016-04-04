@@ -1,11 +1,11 @@
 <!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="robots" content="index,follow" />
 <meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
 <meta name="description" content="Waarp project" />
-<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
 <meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
+<meta name="robots" content="index,follow" />
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" href="Waarp.css" type="text/css" />
 <style type="text/css">
 a {
@@ -101,7 +101,11 @@ $( document ).ready(function(){
 <h4 class="h4">client Optional</h4>
 <ul>
 <li>taskrunnernodb:booleanType Optional default="False" 
-<p>When client with no DB, do R66 will use XML files as permanent information on Transfer Tasks</p></li></ul>
+<p>When client with no DB, do R66 will use XML files as permanent information on Transfer Tasks</p></li>
+<li>
+<p>businessfactorynetwork:nonEmptyString if specified </p>
+<p>If you need a special Business Factory, you must specify the full class name here.</p>
+<p>Default is: org.waarp.openr66.context.R66DefaultBusinessFactory which only logs in DEBUG mode.</p></li></ul>
 <h4 class="h4">ssl Optional</h4>
 <ul>
 <li>keypath:JKS-File 
