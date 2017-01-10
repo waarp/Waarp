@@ -47,8 +47,8 @@ $( document ).ready(function(){
  var splitPages = curpage.split("/");
  $.each( splitPages, function( index, value ){ $("#"+value).addClass("active"); });
   $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
-   event.preventDefault(); 
-   event.stopPropagation(); 
+   event.preventDefault();
+   event.stopPropagation();
    $(this).parent().siblings().removeClass('open');
    $(this).parent().toggleClass('open');
   });
@@ -95,7 +95,7 @@ $( document ).ready(function(){
 <ul>
 <li><span style="font-size:11pt;">Waarp R66</span><ul>
 <li><span style="font-size:11pt; color:rgb(51,51,51);">&nbsp;All Jars&nbsp;(dependency inclusive) </span><ul>
-<li><span style="font-size:11pt;"><a href="https://dl.waarp.org/dist/waarp-r66/waarp-r66-3.0.6.zip">3.0.6 <img title="get zip" alt="get zip" src="res/Default/zipicon21.png" width="31" height="23" /></a></span>&nbsp; 
+<li><span style="font-size:11pt;"><a href="https://dl.waarp.org/dist/waarp-r66/3.0/waarp-r66-3.0.7.zip">3.0.7 <img title="get zip" alt="get zip" src="res/Default/zipicon21.png" width="31" height="23" /></a></span>&nbsp;
 </li><li><span style="font-size:11pt;"><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpR66-2.4.34.zip/download">2.4.34 <img title="get zip" alt="get zip" src="res/Default/zipicon21.png" width="31" height="23" /></a></span></li></ul></li>
 
 <li><span style="font-size:11pt;"><a href="http://sourceforge.net/projects/waarp/files/AllJars/WaarpR66-example-config.zip/download">Configuration example <img title="get zip" alt="get zip" src="res/Default/zipicon21.png" width="31" height="23" /></a></span></li></ul></li>
@@ -103,17 +103,14 @@ $( document ).ready(function(){
 <li><span style="font-size:11pt;">Waarp Gateway FTP</span><ul>
 <li><span style="font-size:11pt; color:rgb(51,51,51);">&nbsp;All Jars&nbsp;(dependency inclusive)</span>
 <ul>
-<li><a href="https://dl.waarp.org/dist/waarp-gateway-ftp/waarp-gateway-ftp-3.0.4.zip"><span style="font-size:11pt;">3.0.4</span> <img title="get zip" alt="get zip" src="res/Default/zipicon21.png" width="31" height="23" /></a> 
+<li><a href="https://dl.waarp.org/dist/waarp-gateway-ftp/3.0/waarp-gateway-ftp-3.0.5.zip"><span style="font-size:11pt;">3.0.5</span> <img title="get zip" alt="get zip" src="res/Default/zipicon21.png" width="31" height="23" /></a>
 </li><li><span style="font-size:11pt;"><a href="http://sourceforge.net/projects/waarp/files/AllJars/AllJarsWaarpGatewayFtp-2.1.14.zip/download">2.1.14 <img title="get zip" alt="get zip" src="res/Default/zipicon21.png" width="31" height="23" /></a></span></li></ul></li></ul></li>
 
 <li><span style="font-size:11pt;">JDBC Drivers (validated versions):<a href="http://sourceforge.net/projects/waarp/files/AllJars/jdbc-drivers.zip/download"> <img title="get zip" alt="get zip" src="res/Default/zipicon21.png" width="31" height="23" /></a></span></li></ul>
-<blockquote style="margin-right:0px;" dir="ltr">
-<blockquote style="margin-right:0px;" dir="ltr">
-<p>&nbsp;</p></blockquote></blockquote>
 <p>&nbsp;</p>
 <p><span style="font-size:11pt;">You can also download sources by using Maven2. You have to configure a subsidiary repository as the following:</span></p>
 <blockquote>
-<p><span style="font-size:10pt;"><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">repository</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span></p><span style="font-size:10pt;"><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">id</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span><span style="font-size:10pt;">waarp</span><span style="color:rgb(0,0,0);"><span style="font-size:10pt;">.releases<span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;/</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">id</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span> 
+<p><span style="font-size:10pt;"><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">repository</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span></p><span style="font-size:10pt;"><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">id</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span><span style="font-size:10pt;">waarp</span><span style="color:rgb(0,0,0);"><span style="font-size:10pt;">.releases<span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;/</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">id</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span>
 <p><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">name</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span>Waarp releases<span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;/</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">name</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span></p>
 <p><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">url</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span>https://raw.github.com/waarp/WaarpMaven2/master/maven2<span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;/</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">url</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span></p>
 <p><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">releases</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span></p>
@@ -122,10 +119,10 @@ $( document ).ready(function(){
 <p><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">snapshots</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span></p>
 <p><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">enabled</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span>false<span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;/</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">enabled</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span></p>
 <p><span style="font-size:10pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;/</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">snapshots</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span></p>
-<p><span style="font-size:10pt;"><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;/</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">repository</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span></p></span><span style="color:rgb(0,0,0);"><span style="font-size:11pt;">You can also download sources by using GIT.</span> 
+<p><span style="font-size:10pt;"><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&lt;/</span></span><span style="color:rgb(63,127,127);"><span style="color:rgb(63,127,127);">repository</span></span><span style="color:rgb(0,128,128);"><span style="color:rgb(0,128,128);">&gt;</span></span></span></p></span><span style="color:rgb(0,0,0);"><span style="font-size:11pt;">You can also download sources by using GIT.</span>
 <p><span style="font-size:11pt;">For all projects, use the &lt;nickname&gt; and eventually the &lt;version&gt; and replace it in the following:</span></p>
 <ul>
-<li><span style="font-size:11pt;"><span style="font-family:'courier new';">https://github.com/<em>waarp</em>/<em><span style="font-family:'courier new';">&lt;nickname&gt;</span></em>.git&nbsp;<span style="font-family:verdana;">as repository reference</span></span></span> 
+<li><span style="font-size:11pt;"><span style="font-family:'courier new';">https://github.com/<em>waarp</em>/<em><span style="font-family:'courier new';">&lt;nickname&gt;</span></em>.git&nbsp;<span style="font-family:verdana;">as repository reference</span></span></span>
 </li><li><span style="font-size:11pt;"><span style="font-family:'courier new';">&lt;version&gt;&nbsp;<span style="font-family:verdana;">as tag for a&nbsp;</span><span style="font-family:'courier new';">git checkout &lt;version&gt;</span></span></span></li></ul></span></blockquote>
 <p>&nbsp;</p></div>
 <p>&nbsp;</p></div>
