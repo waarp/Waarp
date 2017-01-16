@@ -47,8 +47,8 @@ $( document ).ready(function(){
  var splitPages = curpage.split("/");
  $.each( splitPages, function( index, value ){ $("#"+value).addClass("active"); });
   $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
-   event.preventDefault(); 
-   event.stopPropagation(); 
+   event.preventDefault();
+   event.stopPropagation();
    $(this).parent().siblings().removeClass('open');
    $(this).parent().toggleClass('open');
   });
@@ -85,6 +85,25 @@ $( document ).ready(function(){
 <div style="text-align:left;margin:0px 4px;">
 <h1 class="h1">Release History</h1>
 <div id="Comp2_sys_doctext"><h1 class="h1"><em>History of versions</em></h1>
+<h1 class="h1" style="text-align:justify;">
+  December&nbsp;2016: Waarp R66 3.0.7 and&nbsp;Waarp Gateway FTP&nbsp;3.0.5
+</h1>
+<h2 class="h2">Waarp R66 3.0.7</h2>
+<p>Evolution: Dependencies upgrades</p>
+<p>Bug fix: Solve issues with http interfaces visualization</p>
+<p>Bug fix: Exception with MySQL drivers during installation</p>
+
+<h2 class="h2">Waarp Gateway FTP 3.0.5</h2>
+<p>Evolution: Dependencies upgrades</p>
+
+<h2 class="h2">Waarp Gateway Kernel 3.0.5</h2>
+<p>Bug fix: Fixes HTTP errors</p>
+
+<h2 class="h2">Waarp Common 3.0.7</h2>
+<p>Bug fix: TCP errors when closing connections</p>
+<p>Bug fix: Fixes resource release in MySQL connection pool</p>
+
+
 <h1 class="h1" style="text-align:justify;">April&nbsp;2016: New Version for R66 3.0.6 (clean, fixes and stop supporting Java 6) and&nbsp;Gateway FTP&nbsp;3.0.4 (clean, fixes and stop supporting Java 6)</h1>
 <h2 class="h2">Waarp R66 3.0.6</h2>
 <p>Evolution: Remove support of Java 1.6 </p>
@@ -109,7 +128,7 @@ $( document ).ready(function(){
 <p>Bug fix: Content-length headers in REST response </p>
 <p>Fix after upgrading Netty</p>
 <p>&nbsp;</p>
-<h2 class="h2">Waarp Gateway Ftp&nbsp;3.0.4 and FTP 3.0.3</h2>Evolution: Remove support of Java 1.6 
+<h2 class="h2">Waarp Gateway Ftp&nbsp;3.0.4 and FTP 3.0.3</h2>Evolution: Remove support of Java 1.6
 <p>Bug fix: fix impossibility to have more than one active connexion </p>
 <p>Bug fix: Gateway FTP now accepts empty files </p>
 <p>Bug fix: Gateway FTP fix of bad answer ("Post operations cannot be done so force disconnection" even when no transfer was done) </p>
@@ -139,7 +158,7 @@ $( document ).ready(function(){
 
 
 <li><h1 class="h1">Waarp Common 3.0.5</h1><ul>
-<li>Fix Database data size 
+<li>Fix Database data size
 </li><li>
 <p>Fix after upgrading Netty</p></li></ul></li>
 
@@ -272,7 +291,7 @@ $( document ).ready(function(){
 <h1 class="h1" style="text-align:justify;">May 2015: New Version for R66 2.4.32/3.0.2 (various fixes and improvement for 3.0.2 with Responsive and dynamic design for the Web Administrator Gui) and Common 1.2.29/3.0.2 (various fixes) and new Versions&nbsp;following upgrades (Gateway Kernel, Ftp, Gateway Ftp, Proxy R66, Password)</h1>
 <ul>
 <li><h1 class="h1">Waarp R66 2.4.32 / 3.0.2</h1><ul>
-<li>Add Responsive and dynamic UI 
+<li>Add Responsive and dynamic UI
 </li><li><p>Fix ErrorCode</p></li>
 
 <li><p>Fix print of Spooled information</p></li>
@@ -329,7 +348,7 @@ $( document ).ready(function(){
 <h1 class="h1">December 2014: New Version for R66 2.4.30 (various fixes) and new Major Version 3.0.0, all items upgraded</h1>
 <ul>
 <li><h1 class="h1">Waarp R66 2.4.30</h1><ul>
-<li>Fix issue on Netty 3.9.4/3.9.5 with TrafficShaping 
+<li>Fix issue on Netty 3.9.4/3.9.5 with TrafficShaping
 </li><li><p>Fix Database client memory leack when using MySQL/MariaDB (leack is on JDBC client, so the fix is a workaround fix): <strong><em>MySQL and MariaDB are not therefore recommended for production</em></strong></p></li>
 
 <li><p>Optimize memory allocation within Waarp and in particular with File/Checksum handling</p></li>
@@ -358,7 +377,7 @@ $( document ).ready(function(){
 
 
 <li><h1 class="h1">Waarp submodules: Digest 1.1.9, Common 1.2.27, R66Proxy 1.0.11, GatewayKernel 1.0.8, Thrift 1.1.1, LocalExec 1.1.5</h1><ul>
-<li>Optimize some internals 
+<li>Optimize some internals
 </li><li>Upgrade dependencies</li></ul></li>
 
 
@@ -372,7 +391,7 @@ $( document ).ready(function(){
 <li>
 <h1 class="h1">All Waarp submodules with Neety 4.1: version 3.0</h1>
 <ul>
-<li>Same status than 1.x.y versions 
+<li>Same status than 1.x.y versions
 </li><li>
 <p>Upgrade from Netty 3.9 to Netty 4.1</p></li></ul></li></ul>
 <h1 class="h1">October 2014: New Version for R66 2.4.29 (various fixes), Proxy 1.0.10,&nbsp;Common 1.2.26, Gateway Kernel 1.0.6, FTP 1.1.9, Gateway FTP 2.1.11, Snmp 1.1.6</h1>
@@ -380,7 +399,7 @@ $( document ).ready(function(){
 <li>
 <h1 class="h1">Waarp R66 2.4.29, Waarp Proxy R66 1.0.10</h1>
 <ul>
-<li>Fix issue on Netty 3.9.4 with GlobalTrafficShaping 
+<li>Fix issue on Netty 3.9.4 with GlobalTrafficShaping
 </li><li><p>Fix Waarp status feedback in SpooledDirectoryTransfer client</p></li>
 
 <li><p>Issue #114 in WaarpR66: add NVARCHAR to database model to represent VARCHAR in PRIMARY KEY to fix the issue of MySQL/MariaDB (limited size of primary key) by changing VARCHAR(8096) to VARCHAR(255)</p></li>
@@ -425,10 +444,10 @@ $( document ).ready(function(){
 
 
 <li><h1 class="h1">Waarp R66 2.4.28</h1><ul>
-<li>Add capacity to specify one specific IP for REST interface 
-</li><li>Add capacity to deactivate Signature on REST interface 
-</li><li>Add capacity to limit Method and Command on several REST Interface (multiple REST interface possibility) 
-</li><li>Fix setFromJson to check if value is given in All DbData and Mandatory values to be there 
+<li>Add capacity to specify one specific IP for REST interface
+</li><li>Add capacity to deactivate Signature on REST interface
+</li><li>Add capacity to limit Method and Command on several REST Interface (multiple REST interface possibility)
+</li><li>Fix setFromJson to check if value is given in All DbData and Mandatory values to be there
 </li><li>Fix REST API by letting the SHA-256 key be different for each active interface set</li></ul></li>
 
 
@@ -663,12 +682,12 @@ $( document ).ready(function(){
 
 <li><p>Fix and add support to specify for each host if it is proxified directly in the configuration instead of argument of Json authentication</p></li>
 
-<li>Add CHKFILE task that allows to check filesize against some limit or disk space 
-</li><li>Improve Http monitoring and db usage 
-</li><li>Fix SpooledDirectory restart in error, reverting to direct 
-</li><li>Fix Https part for Active/Unactive hosts 
-</li><li>Fixing log 
-</li><li>Update XML configuration files 
+<li>Add CHKFILE task that allows to check filesize against some limit or disk space
+</li><li>Improve Http monitoring and db usage
+</li><li>Fix SpooledDirectory restart in error, reverting to direct
+</li><li>Fix Https part for Active/Unactive hosts
+</li><li>Fixing log
+</li><li>Update XML configuration files
 </li><li>Update Admin web site</li></ul></li>
 
 
@@ -820,7 +839,7 @@ $( document ).ready(function(){
 <li><h1 class="h1">Waarp&nbsp;Gui 2.1.7</h1><ul>
 <li><p>Upgrade with R66 2.4.19</p></li>
 
-<li>Fix Database access when using configuration with Database support 
+<li>Fix Database access when using configuration with Database support
 </li><li><p>Add Internationalization</p></li>
 
 <li>
@@ -832,7 +851,7 @@ $( document ).ready(function(){
 <ul>
 <li><p>Upgrade with R66 2.4.19</p></li>
 
-<li>Add support for restart process 
+<li>Add support for restart process
 </li><li>Fix issue when no connexion is possible</li></ul></li></ul>
 <h1 class="h1">September&nbsp;2013: New Version for R66 2.4.18 (major fixes: RECOMMANDED UPDATE), ProxyR66 1.0.4 and R66Gui 2.1.6 (update), Administrator 1.0.3 (improvement and bug fix), Common 1.2.14/1.2.15 (major fixes and improvement), and upgrade for FTP (1.1.6), GatewayFTP (2.1.7), FtpClient (1.0.2),&nbsp;GatewayKernel (1.0.2)</h1>
 <ul>
@@ -1065,21 +1084,21 @@ $( document ).ready(function(){
 <li>
 <h1 class="h1">Waarp R66 : 2.4.12</h1>
 <ul>
-<li>Fix HTTPS Administrator log 
-</li><li>Fix end of transfer by adding a final check if possible on computed hash to check&nbsp;if the final file moved in target directory is correct (before any post operations) 
-</li><li>Fix file size changing on sender side not detected, now detected (only if not using Through mode) 
-</li><li>Add support for Alias 
-</li><li>Add support for HostConfiguration (Alias, Business, Roles) in database 
+<li>Fix HTTPS Administrator log
+</li><li>Fix end of transfer by adding a final check if possible on computed hash to check&nbsp;if the final file moved in target directory is correct (before any post operations)
+</li><li>Fix file size changing on sender side not detected, now detected (only if not using Through mode)
+</li><li>Add support for Alias
+</li><li>Add support for HostConfiguration (Alias, Business, Roles) in database
 </li><li>Fix config file in <span style="color:rgb(0,0,0);">Waarp R66 configuration example</span></li></ul></li></ul>
 <h1 class="h1">Beginning of&nbsp;April 2013: New Version for R66 and First release of Central Administrator</h1>
 <ul>
 <li><h2 class="h2">Waarp R66 : 2.4.11</h2><ul>
-<li>Fix&nbsp;HTTPS Administrator interface (admin2) 
-</li><li>Allow full self request (transfer where the requester and the requested are the very same host) 
-</li><li>Add support for global digest per transfer (one digest for all file) 
-</li><li>Fix wildcard (?, *) support 
-</li><li>Add synchronous FTP Task support with client (using FTP4J) 
-</li><li>Add Proxy/Reverse Proxy support 
+<li>Fix&nbsp;HTTPS Administrator interface (admin2)
+</li><li>Allow full self request (transfer where the requester and the requested are the very same host)
+</li><li>Add support for global digest per transfer (one digest for all file)
+</li><li>Fix wildcard (?, *) support
+</li><li>Add synchronous FTP Task support with client (using FTP4J)
+</li><li>Add Proxy/Reverse Proxy support
 </li><li>Fix for Admin Central support</li></ul></li>
 
 
@@ -1088,7 +1107,7 @@ $( document ).ready(function(){
 
 
 <li><h2 class="h2">Waarp Common : 1.2.10</h2><ul>
-<li>Fix DB support 
+<li>Fix DB support
 </li><li>Update Netty version</li></ul></li>
 
 
@@ -1108,21 +1127,21 @@ $( document ).ready(function(){
 <h1 class="h1">November 2012: New Version for R66 and Gateway FTP</h1>
 <ul>
 <li><h2 class="h2">Waarp R66 : 2.4.10</h2><ul>
-<li>Enhance HTTPS Administrator interface (admin2) 
-</li><li>Allow self request (transfer where the requester and the requested are the very same host) 
-</li><li>Add support for global digest per transfer (one digest for all file) 
-</li><li>Fix wildcard (?, *) support 
-</li><li>Add synchronous FTP Task support with client (using FTP4J) 
+<li>Enhance HTTPS Administrator interface (admin2)
+</li><li>Allow self request (transfer where the requester and the requested are the very same host)
+</li><li>Add support for global digest per transfer (one digest for all file)
+</li><li>Fix wildcard (?, *) support
+</li><li>Add synchronous FTP Task support with client (using FTP4J)
 </li><li>Add Proxy/Reverse Proxy support</li></ul></li>
 
 
 <li><h2 class="h2">Waarp Common : 1.2.9</h2><ul>
-<li>Fix DB support 
+<li>Fix DB support
 </li><li>Relax dependency with Netty</li></ul></li>
 
 
 <li><h2 class="h2">Waarp FTP and Gateway FTP : 1.1.5 &amp; 2.1.6</h2><ul>
-<li>Fix FTP NOOP and correct file transfer code returned 
+<li>Fix FTP NOOP and correct file transfer code returned
 </li><li>Add support for FTP Client as Java task (using FTP4J)</li></ul></li>
 
 
@@ -1137,11 +1156,11 @@ $( document ).ready(function(){
 <h1 class="h1">End of September 2012: New Version for R66 and some others</h1>
 <ul>
 <li><h2 class="h2">Waarp R66 : 2.4.9</h2><ul>
-<li>Add serverpassword file option (so a choice between value or file as for host key)&nbsp; 
-</li><li>Add and update XSD and Jaxe configuration helpers 
-</li><li>Add -nossl option in ServerShutdown command to allow shutdown from a "nossl" host 
-</li><li>Add support for AllEvents snmp trap/info in order to monitor within SNMP all transfer status (so an added level = 5) 
-</li><li>Add support for local overriden roles (overriding database roles, useful when the database is shared among a lot of R66 servers) 
+<li>Add serverpassword file option (so a choice between value or file as for host key)&nbsp;
+</li><li>Add and update XSD and Jaxe configuration helpers
+</li><li>Add -nossl option in ServerShutdown command to allow shutdown from a "nossl" host
+</li><li>Add support for AllEvents snmp trap/info in order to monitor within SNMP all transfer status (so an added level = 5)
+</li><li>Add support for local overriden roles (overriding database roles, useful when the database is shared among a lot of R66 servers)
 </li><li>Add SNMP task to enable SNMP trap/info to be send from a task</li></ul></li>
 
 
@@ -1159,24 +1178,24 @@ $( document ).ready(function(){
 <h1 class="h1">Early of&nbsp;September 2012: New Version for R66, GatewayFtp and some others</h1>
 <ul>
 <li><h2 class="h2">Waarp R66 : 2.4.8</h2><ul>
-<li>Tar and Zip fix 
-</li><li>Log task fix&nbsp; 
-</li><li>Fix shutdown using Hook instead&nbsp;of Signal support&nbsp; 
-</li><li>Reschedule enhancement with count repetition limitation addition&nbsp; 
-</li><li>Allow Error tasks to be executed even from a&nbsp;init-step&nbsp;(before pre-tasks)&nbsp; 
-</li><li>First production ready Thrift support 
-</li><li>Windows Service capability support (through Apache Commons Daemon) 
-</li><li>Add TRANSCODE capability 
-</li><li>Add restart for RequestTransfer capability 
-</li><li>Fix SubmitTransfer with ID (existing transfer to restart) 
+<li>Tar and Zip fix
+</li><li>Log task fix&nbsp;
+</li><li>Fix shutdown using Hook instead&nbsp;of Signal support&nbsp;
+</li><li>Reschedule enhancement with count repetition limitation addition&nbsp;
+</li><li>Allow Error tasks to be executed even from a&nbsp;init-step&nbsp;(before pre-tasks)&nbsp;
+</li><li>First production ready Thrift support
+</li><li>Windows Service capability support (through Apache Commons Daemon)
+</li><li>Add TRANSCODE capability
+</li><li>Add restart for RequestTransfer capability
+</li><li>Fix SubmitTransfer with ID (existing transfer to restart)
 </li><li>Enhance the Admin GUI for Rule management with Rule Helper Box</li></ul></li>
 
 
 <li><h2 class="h2">Waarp Common : 1.2.7</h2><ul>
-<li>Add Apache Commons Daemon support to enable Windows Service 
-</li><li>Add support for transcode operations 
-</li><li>Fix DetectionUtils and ShutdownHook 
-</li><li>Fix XML support 
+<li>Add Apache Commons Daemon support to enable Windows Service
+</li><li>Add support for transcode operations
+</li><li>Fix DetectionUtils and ShutdownHook
+</li><li>Fix XML support
 </li><li>Add limit option to restart operation (FTP only)</li></ul></li>
 
 
@@ -1189,11 +1208,11 @@ $( document ).ready(function(){
 <h1 class="h1">August 2012: New Version for R66, GatewayFtp and some others</h1>
 <ul>
 <li><h2 class="h2">Waarp R66 : 2.4.6</h2><ul>
-<li>Tar and Zip fix&nbsp; 
-</li><li>Http single file fix 
-</li><li>URL acceptance for filename argument&nbsp; 
-</li><li>Fix Waarp R66 GUI filename under Windows 
-</li><li>Fix Export of configuration 
+<li>Tar and Zip fix&nbsp;
+</li><li>Http single file fix
+</li><li>URL acceptance for filename argument&nbsp;
+</li><li>Fix Waarp R66 GUI filename under Windows
+</li><li>Fix Export of configuration
 </li><li>First beta release with Thrift support</li></ul></li>
 
 
@@ -1209,13 +1228,13 @@ $( document ).ready(function(){
 <h1 class="h1">End of July 2012: New Version for R66, GatewayFtp and some others</h1>
 <ul>
 <li><h2 class="h2">Waarp R66 : 2.4.1</h2><ul>
-<li>Fix closing&nbsp;SSL 
-</li><li>Fix NumberFormat Exception&nbsp; 
+<li>Fix closing&nbsp;SSL
+</li><li>Fix NumberFormat Exception&nbsp;
 </li><li>Fix Log level for LogTask&nbsp;</li></ul></li>
 
 
 <li><h2 class="h2">Waarp Common : 1.2.4</h2><ul>
-<li>Add FTPS new reply code 
+<li>Add FTPS new reply code
 </li><li>Add Support for SSL for FTPS</li></ul></li>
 
 
@@ -1241,22 +1260,22 @@ $( document ).ready(function(){
 <h1 class="h1">June 2012: New Version for almost all Components for fix and new future extensions</h1>
 <ul>
 <li><h2 class="h2">OpenR66</h2><ul>
-<li>Fix closing issue on File 
-</li><li>Add support for EXECJAVA and BusinessRequest 
-</li><li>Add support of R66Server with no DB at all 
-</li><li>Add support for BusinessFactory 
-</li><li>Fix and improve performance in case of huge amount of concurrent connections 
-</li><li>Fix SendThrough and RecvThrough 
+<li>Fix closing issue on File
+</li><li>Add support for EXECJAVA and BusinessRequest
+</li><li>Add support of R66Server with no DB at all
+</li><li>Add support for BusinessFactory
+</li><li>Fix and improve performance in case of huge amount of concurrent connections
+</li><li>Fix SendThrough and RecvThrough
 </li><li>Migration to Netty 3.5, removal of NettyExtension</li></ul></li>
 
 
 <li><h2 class="h2">GoldenGate Common</h2><ul>
-<li>Improve support to make easier the automatic reconnection of database connections 
-</li><li>Logger optimization 
-</li><li>Add Cache LRU Support 
-</li><li>Add GgThreadFactory 
-</li><li>Add connection Pooling for database (H2, MySQL and Oracle, but not PostGreSQL since it is not yet supported by PostGre directly) 
-</li><li>File support optimization 
+<li>Improve support to make easier the automatic reconnection of database connections
+</li><li>Logger optimization
+</li><li>Add Cache LRU Support
+</li><li>Add GgThreadFactory
+</li><li>Add connection Pooling for database (H2, MySQL and Oracle, but not PostGreSQL since it is not yet supported by PostGre directly)
+</li><li>File support optimization
 </li><li>Migration to Netty 3.5, removal of NettyExtension</li></ul></li>
 
 
@@ -1290,7 +1309,7 @@ $( document ).ready(function(){
 <h1 class="h1">March 2012: New Version for almost all&nbsp;Components to fix best practices</h1>
 <ul>
 <li><h2 class="h2">OpenR66</h2><ul>
-<li>Fix a bug in restarted transfer while binary transfer is&nbsp;over but not post-tasks&nbsp; 
+<li>Fix a bug in restarted transfer while binary transfer is&nbsp;over but not post-tasks&nbsp;
 </li><li>Add "dry" Finite State Machine</li></ul></li>
 
 
@@ -1311,12 +1330,12 @@ $( document ).ready(function(){
 <li>
 <h2 class="h2">GoldenGate Common</h2>
 <ul>
-<li>Add non auto commit support for DbData 
+<li>Add non auto commit support for DbData
 </li><li>Add Support for dynamic encryption algorithms</li></ul></li></ul>
 <h1 class="h1">November 2011: New Version 1.0.3 for GoldenGate Digest, 2.2.0 for OpenR66 and 1.1.6 for GoldenGate Common</h1>
 <ul>
 <li><h2 class="h2">OpenR66</h2><ul>
-<li>Add Finite State Machine in warning mode 
+<li>Add Finite State Machine in warning mode
 </li><li>Add support for different Digest&nbsp;(was only MD5, now MD5, MD2, SHA1, SHA256/384/512, CRC32, ADLER32)</li></ul></li>
 
 
@@ -1335,7 +1354,7 @@ $( document ).ready(function(){
 
 
 <li><h2 class="h2">OpenR66</h2><ul>
-<li>Update Jar Versions 
+<li>Update Jar Versions
 </li><li>Various fixes (restart in case of RECV rule and restart only for requester)</li></ul></li>
 
 
@@ -1346,26 +1365,26 @@ $( document ).ready(function(){
 <h1 class="h1">July 2011: New Version 2.0.5 for GoldenGateFTP Exec, OpenR66 2.1.3 and 1.1.4&nbsp;for GoldenGate Common</h1>
 <ul>
 <li><h2 class="h2">GoldenGate Ftp Exec</h2><ul>
-<li>Update Jar Versions 
+<li>Update Jar Versions
 </li><li>Improvements of Database connections&nbsp;</li></ul></li>
 
 
 <li><h2 class="h2">OpenR66</h2><ul>
-<li>Update Jar Versions 
-</li><li>Improvements of Database connections 
-</li><li>Add a support of Multiple Monitors acting as one unique Monitor behind a Load Balancer for reliability and scalability 
+<li>Update Jar Versions
+</li><li>Improvements of Database connections
+</li><li>Add a support of Multiple Monitors acting as one unique Monitor behind a Load Balancer for reliability and scalability
 </li><li>Various fixes</li></ul></li>
 
 
 <li><h2 class="h2">GoldenGate Common</h2><ul>
-<li>Update Jar Versions 
+<li>Update Jar Versions
 </li><li>Improvements of Database connections</li></ul></li>
 
 
 <li>
 <h2 class="h2">Netty Extension</h2>
 <ul>
-<li>Update Jar Versions 
+<li>Update Jar Versions
 </li><li>Fixes from Netty Forum</li></ul></li></ul>
 <h1 class="h1">mid April 2011: New Version 2.0.4 for GoldenGateFTP Exec, OpenR66 2.1.2 and 1.1.3&nbsp;for GoldenGate Common</h1>
 <ul>
@@ -1394,84 +1413,84 @@ $( document ).ready(function(){
 <h1 class="h1">March 2011: New Version 2.1.1 for OpenR66, 2.0.2 for GoldenGateFTP Exec&nbsp;and&nbsp;1.0.0 for GoldenGate Snmp</h1>
 <ul>
 <li><h2 class="h2">OpenR66</h2><ul>
-<li>Add Cache Support to HTTP/HTTPS interface&nbsp; 
-</li><li>Add NoWait and LocalExec option to&nbsp;ExecTask&nbsp; 
-</li><li>Add SNMP agent support with optional notification (trap/inform) capability 
-</li><li>Update the database schema (index) to optimize Monitoring (HTTP and SNMP) 
+<li>Add Cache Support to HTTP/HTTPS interface&nbsp;
+</li><li>Add NoWait and LocalExec option to&nbsp;ExecTask&nbsp;
+</li><li>Add SNMP agent support with optional notification (trap/inform) capability
+</li><li>Update the database schema (index) to optimize Monitoring (HTTP and SNMP)
 </li><li>Update to&nbsp;latest versions of&nbsp;Jar libraries such as Netty&nbsp;</li></ul></li>
 
 
 <li><h2 class="h2">GoldenGate Ftp Exec</h2><ul>
-<li>Add Cache Support to HTTPS interface 
+<li>Add Cache Support to HTTPS interface
 </li><li>Update to&nbsp;latest versions of&nbsp;Jar libraries such as Netty&nbsp;</li></ul></li>
 
 
 <li>
 <h2 class="h2">GoldenGate SNMP</h2>
 <ul>
-<li>First release 
+<li>First release
 </li><li>Rely on SNMP4J jars</li></ul></li></ul>
 <h1 class="h1">February 2011: New Version 2.1.0 for OpenR66 and 2.0.1 for GoldenGateFTP Exec</h1>
 <ul>
 <li><h2 class="h2">OpenR66</h2><ul>
-<li>Update Digest functions&nbsp; 
-</li><li>Move of Database Support and Enhancements&nbsp; 
-</li><li>Add support for Progress Bar in GUI&nbsp; 
-</li><li>Add functionalities: 
+<li>Update Digest functions&nbsp;
+</li><li>Move of Database Support and Enhancements&nbsp;
+</li><li>Add support for Progress Bar in GUI&nbsp;
+</li><li>Add functionalities:
 <ul>
-<li>ExecOutput where in case of Error, the output is bring back as&nbsp;part of the error&nbsp;message to the remote host&nbsp; 
-</li><li>Reschedule which enables to reschedule a transfer in case or error and according to error type, a given delay, and between or not-between dates as inclusion or exclusion 
-</li><li>Add #ERRORMSG#, #ERRORCODE# and #ERRORSTRCODE#&nbsp;strings replacement support 
-</li><li>Add the possibility to specify a start time of transfer or a delay 
-</li><li>Add full support of limit bandwidth in Client&nbsp; 
+<li>ExecOutput where in case of Error, the output is bring back as&nbsp;part of the error&nbsp;message to the remote host&nbsp;
+</li><li>Reschedule which enables to reschedule a transfer in case or error and according to error type, a given delay, and between or not-between dates as inclusion or exclusion
+</li><li>Add #ERRORMSG#, #ERRORCODE# and #ERRORSTRCODE#&nbsp;strings replacement support
+</li><li>Add the possibility to specify a start time of transfer or a delay
+</li><li>Add full support of limit bandwidth in Client&nbsp;
 </li><li>Add /statusxml extended status for xml integration of internal detailed status</li></ul></li>
-<li>Fix bugs (among) or technical fixes: 
+<li>Fix bugs (among) or technical fixes:
 <ul>
-<li>Overloaded case 
-</li><li>Protocol in order to get PostOperation first on Receiver then on Sender 
-</li><li>BlockSize testing 
-</li><li>Schedule transfer 
-</li><li>Limit Bandwidth in client 
-</li><li>IdleHandler 
-</li><li>Shutdown process (both server and client) 
-</li><li>Log fix 
+<li>Overloaded case
+</li><li>Protocol in order to get PostOperation first on Receiver then on Sender
+</li><li>BlockSize testing
+</li><li>Schedule transfer
+</li><li>Limit Bandwidth in client
+</li><li>IdleHandler
+</li><li>Shutdown process (both server and client)
+</li><li>Log fix
 </li><li>Check compatibility with last version of H2 V2 and PostgreSQL V9 databases</li></ul></li></ul></li>
 
 
 <li>
 <h2 class="h2">GoldenGate FTP Exec</h2>
 <ul>
-<li>Update Digest functions&nbsp; 
-</li><li>Move of Database Support and Enhancements&nbsp; 
+<li>Update Digest functions&nbsp;
+</li><li>Move of Database Support and Enhancements&nbsp;
 </li><li>
 <p>Log fix</p></li></ul></li></ul>
 <h1 class="h1">end of 2010: Version 2.0 for OpenR66 and GoldenGateFTP Exec</h1>
 <p><span style="font-size:10pt; color:#ff0000;"><strong>Note: OpenR66 Version 2.0&nbsp;is incompatible with Version 1.0</strong></span></p>
 <ul>
 <li><h2 class="h2">OpenR66</h2><ul>
-<li>SSL Support improved 
+<li>SSL Support improved
 <ul>
-<li>Allow string authentication of clients 
-</li><li>Passwords are now fully crypted using DES Key 
+<li>Allow string authentication of clients
+</li><li>Passwords are now fully crypted using DES Key
 </li><li>A GUI for passwords generation is proposed</li></ul></li>
-<li>Improvement of support of external command execution 
+<li>Improvement of support of external command execution
 <ul>
-<li>Can use native standard way 
+<li>Can use native standard way
 </li><li>Or using a Local Exec GoldenGate daemon</li></ul></li>
-<li>Improvement on XML file configuration 
+<li>Improvement on XML file configuration
 <ul>
-<li>Make more hierarchical XML document 
+<li>Make more hierarchical XML document
 </li><li>Propose to use a XSD schema associated with a GUI XML Editor</li></ul></li>
-<li>Add functionalities: 
+<li>Add functionalities:
 <ul>
-<li>CPU and number of connexions limitation 
-</li><li>IP checking 
-</li><li>Client explicit declaration 
+<li>CPU and number of connexions limitation
+</li><li>IP checking
+</li><li>Client explicit declaration
 </li><li>XML persistent files for Thin Client with no DB support</li></ul></li>
-<li>Fix bugs (among) or technical fixes: 
+<li>Fix bugs (among) or technical fixes:
 <ul>
-<li>H2 and MySQL database support 
-</li><li>Update of underlying other Java libraries 
+<li>H2 and MySQL database support
+</li><li>Update of underlying other Java libraries
 </li><li>File transfer restart</li></ul></li></ul></li>
 
 
@@ -1480,13 +1499,13 @@ $( document ).ready(function(){
 <ul>
 <li><p>Add Administration support through HTTPS</p></li>
 
-<li>Improvement of support of external command execution 
+<li>Improvement of support of external command execution
 <ul>
-<li>Can use native standard way 
+<li>Can use native standard way
 </li><li>Or using a Local Exec GoldenGate daemon</li></ul></li>
-<li>Add the possibility to trace through database 
-</li><li>Add optional specific post (STOR like operations) or PRE (RETR operation) commands 
-</li><li>Fix bugs (among) or technical fixes: 
+<li>Add the possibility to trace through database
+</li><li>Add optional specific post (STOR like operations) or PRE (RETR operation) commands
+</li><li>Fix bugs (among) or technical fixes:
 <ul>
 <li>Update of underlying other Java libraries</li></ul></li></ul></li></ul>
 <p>&nbsp;</p></div>
