@@ -1,7 +1,7 @@
 <!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
+<meta name="generator" content="Bluefish 2.2.10" />
 <meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <meta name="description" content="Waarp project" />
 <meta name="robots" content="index,follow" />
@@ -85,10 +85,89 @@ $( document ).ready(function(){
 <div style="text-align:left;margin:0px 4px;">
 <h1 class="h1">Release History</h1>
 <div id="Comp2_sys_doctext"><h1 class="h1"><em>History of versions</em></h1>
+<h1 class="h1">October 2019: Waarp R66 3.2.0, Waarp Gateway FTP 3.2.0 (Major versions) : upgrade is highly recommended</h1>
+<p><strong><span style="color:#FF0000;font-size:10pt;">From the beginning, each module had its own git repository under Github. In order to facilitate analysis and evolution, now all modules are reassembled into one git repository (</span></strong><a href="javascript:var EffectiveNewWin = window.open('https://github.com/waarp/Waarp-All','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();"><strong><span style="color:#FF0000;font-size:10pt;">Waarp-All</span></strong></a><strong><span style="color:#FF0000;font-size:10pt;">), while the jar can still be created independently. Moreover, a shaded jar for each independent module, containing all dependencies, is now provided.</span></strong></p>
+<ul>
+<li>
+<div class="h1">Waarp R66</div><ul>
+<li><span style="font-size:10pt;">This versions brings a lot of security and performance improvements. The&nbsp;upgrade is strongly recommended.</span></li>
+<li>
+<div class="h1"><span style="font-size:12px;font-family:verdana, sans-serif;color:rgb(51,51,51);">Changes</span></div><ul>
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Security</span></h3><ul>
+<li><span style="font-size:10pt;">Support&nbsp;of TLS 1.2 for all versions of JRE</span></li></ul></li>
+
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Internal evolution</span></h3><ul>
+<li><span style="font-size:10pt;">Database interface totally rewritten. This enables a lot of improvements, such as the number of connections, now very slow, or such as a numerous number of related bug fixes</span></li></ul></li>
+
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Improvements</span></h3><ul>
+<li><span style="font-size:10pt;">Lower number of threads used (x3 times less)</span></li>
+<li><span style="font-size:10pt;">Optimization of external resources usage (RAM, CPU)</span></li>
+<li><span style="font-size:10pt;">Update of external dependencies</span></li></ul></li>
+
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Bug fixes</span></h3><ul>
+<li><span style="font-size:10pt;">Deadlocks and Memory leaks</span></li></ul></li>
+</ul></li>
+</ul></li>
+
+<li>
+<div class="h1">Waarp Gateway FTP</div><ul>
+<li><span style="font-size:10pt;">This versions brings a lot of security and performance improvements. The update is stoingly recommended.</span></li>
+<li>
+<div class="h2"><span style="font-size:10pt;">Changes</span></div><ul>
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Security</span></h3><ul>
+<li><span style="font-size:10pt;">Support&nbsp;of TLS 1.2 for all versions of JRE</span></li></ul></li>
+
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Fonctionality</span></h3><ul>
+<li><span style="font-size:10pt;">Support of commands FTP&nbsp;<a></a>&nbsp;et&nbsp;<a></a>&nbsp;extended to SHA-XXX (check of transfer correctness)</span></li></ul></li>
+
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Bug fixes</span></h3><ul>
+<li><span style="font-size:10pt;">Optimisation of external ressources usage (RAM, CPU)</span></li>
+<li><span style="font-size:10pt;">Update of external dependencies</span></li></ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h1 class="h1">May 2019: Waarp R66 3.0.12</h1>
+<ul>
+<li>
+<div class="h2"><span style="font-size:10pt;">Bug fix</span></div><ul>
+<li><span style="font-size:10pt;">Fix lost of database connections</span></li></ul></li>
+</ul>
+<h1 class="h1">February 2019: Waarp R66 3.0.11, Waarp Gateway FTP 3.0.9</h1>
+<ul>
+<li>
+<div class="h2"><span style="font-size:10pt;">Bug fixes</span></div><ul>
+<li><span style="font-size:10pt;">Support of "spaces" inf TRANSFER task</span></li>
+<li><span style="font-size:10pt;">NullPointerException fix during startup of filewatcher</span></li>
+<li><span style="font-size:10pt;">Fix of startup of asynchronous transfers</span></li>
+<li><span style="font-size:10pt;">No more minimal value for runlimit</span></li>
+<li><span style="font-size:10pt;">Stop sending packets when transfer is stopped or canceled</span></li>
+<li><span style="font-size:10pt;">Fix for Windows path</span></li>
+<li><span style="font-size:10pt;">Add a 5 minutes delay when new try of bad startup of R66 servers using automatic system handling (systemd&nbsp;and Windows)</span></li></ul></li>
+</ul>
+<h1 class="h1">August&nbsp;2018 : Waarp R66 3.0.9 (New distribution and fixes)</h1>
+<ul>
+<li><span style="font-size:10pt;">This version brings more stability to the server part. This also introduces a new distribution of Waarp R66 based onf preconfigred portable archives.</span></li>
+<li>
+<h2 class="h2"><span style="font-size:10pt;">Bug fixes</span></h2><ul>
+<li><span style="font-size:10pt;">Update of external dependencies</span></li>
+<li><span style="font-size:10pt;">Fix of loading data into administration interface</span></li>
+<li><span style="font-size:10pt;">If TCP/IP port are in used when the R66 server starts, now it stops and logs the corresponding error</span></li>
+<li><span style="font-size:10pt;">Path of destination for tasks RENAME, MOVE, MOVERENAME, COPY, COPYRENAME can contain "spaces"</span></li>
+<li><span style="font-size:10pt;">Fix deadlock</span></li>
+<li><span style="font-size:10pt;">Fix memory leak</span></li>
+<li><span style="font-size:10pt;">Filewatcher allow to start even if fileinfo field is not set in the configuration file</span></li></ul></li>
+</ul>
 <h1 class="h1" style="text-align:justify;">
   January&nbsp;2018: Waarp R66 3.0.8 and&nbsp;Waarp Gateway FTP&nbsp;3.0.7
 </h1>
-<h2 class="h2">Waarp R66 3.0.9</h2>
+<h2 class="h2">Waarp R66 3.0.8</h2>
 <p>Upgrade external dependencies</p>
 <p>Fixes a bug during data loading in the administration interface</p>
 <p>Waarp R66 Server does not start anymore if it cannot bind to specified ports</p>
@@ -102,7 +181,30 @@ $( document ).ready(function(){
 <p>&nbsp;</p>
 <h2 class="h2">Waarp Gateway FTP 3.0.7</h2>
 <p>Evolution: Dependencies upgrades</p>
+<h1 class="h1">March&nbsp;2017 : Waarp R66 3.0.8 (Support&nbsp;of Java 1.6), Waarp Gateway FTP 3.0.6 (Support&nbsp;of Java 1.6)</h1>
+<ul>
+<li>
+<div class="h1">Waarp R66 3.0.8</div><ul>
+<li><span style="font-size:10pt;">Version 3.0.6 removed wrongly the support of Java 6. Even if Java 6 is no more supported by Oracle, some OS still in production are too old to use more recent versions of Java. This version enables back the support of Java 6. We will remove this support once the benefices will be less than the effort to keep this compatibility.<br /></span></li>
+<li>
+<h2 class="h2"><span style="font-size:10pt;">Fixes</span></h2><ul>
+<li><span style="font-size:10pt;">Java 6 support restored</span></li>
+<li><span style="font-size:10pt;">NullPointerExceptions fixed when Waarp R66 check if one partner is blocked</span></li>
+<li><span style="font-size:10pt;">API REST : correction of transfer creation</span></li>
+<li><span style="font-size:10pt;">API REST : correction HTTP handling when divided in several TCP packets</span></li>
+<li><span style="font-size:10pt;">API REST : Json wrong requests now are catched and generates an information</span></li>
+<li><span style="font-size:10pt;">API REST : GET without filters could be used (default values applies)</span></li>
+<li><span style="font-size:10pt;">API REST : Removal of double Content-Length header in responses<strong><em></em></strong></span></li></ul></li>
+</ul></li>
 
+<li>
+<div class="h1">Waarp&nbsp;Gateway FTP&nbsp;3.0.6</div><ul>
+<li><span style="font-size:10pt;">Version 3.0.6 removed wrongly the support of Java 6. Even if Java 6 is no more supported by Oracle, some OS still in production are too old to use more recent versions of Java. This version enables back the support of Java 6. We will remove this support once the benefices will be less than the effort to keep this compatibility.<br />&nbsp;</span></li>
+<li>
+<h2 class="h2"><span style="font-size:10pt;">Fixes</span></h2><ul>
+<li><span style="font-size:10pt;">Java 6 support restored</span></li></ul></li>
+</ul></li>
+</ul>
 <h1 class="h1" style="text-align:justify;">
   December&nbsp;2016: Waarp R66 3.0.7 and&nbsp;Waarp Gateway FTP&nbsp;3.0.5
 </h1>

@@ -1,7 +1,7 @@
 <!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
+<meta name="generator" content="Bluefish 2.2.10" />
 <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
 <meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <meta name="description" content="Main project page" />
@@ -85,16 +85,16 @@ $( document ).ready(function(){
 <div style="text-align:left;margin:0px 4px;">
 <h1 class="h1">World of Waarp</h1>
 <div id="Comp2_sys_doctext"><h1 class="h1" style="text-align:justify;"><span style="font-size:12pt;">Open Source</span></h1>
-<p style="text-align:justify;"><span style="font-size:11pt;"><span style="font-size:11pt;">Waarp is an open source project with multiple subelements. There are related to each other, and they improve the developement by being in several separated modules.</span></span></p>
+<p style="text-align:justify;"><span style="font-size:11pt;"><span style="font-size:11pt;">Waarp is an open source project with multiple subelements. There are related to each other, and they improve the development by being in several separated modules.</span></span></p>
 <p style="text-align:left;"><span style="font-size:11pt;">All are Open Source projects and</span><span style="font-size:11pt;">&nbsp;fully in Java. </span><span style="font-size:11pt;">The global license is GPL V3.</span></p>
 <p style="text-align:left;">&nbsp;</p>
 <h1 class="h1"><span style="font-size:12pt;">Production purpose</span></h1>
 <p><span style="font-size:11pt;">Waarp is a project that provides among other an open source massive file transfer monitor in Java. Its goal is to&nbsp;unify several protocols (FTP, FTPS, SSH, HTTP and proprietary protocols) in an efficient and secured way. Its purpose is to enable bridging between several protocols and to enable dynamic pre or post action on transfer or other commands. Currently FTP(S) and efficient and secure R66 protocols are implemented. HTTP is supported but not yet in production release.</span></p>
 <p>&nbsp;</p>
-<p><span style="font-size:11pt;">This project was developped initially for the French Ministery of Finance. The 3 main components (originally named GoldenGate, GoldenGate FTP and OpenR66)&nbsp;are in production in the Ministery since end of 2007. It is also in production in the French Gendarmerie Nationale since 2012 (see <a href="CrawdUser.html">Crawd User</a>).&nbsp;It is an Open Source project based on an independent community.</span></p>
+<p><span style="font-size:11pt;">This project was developed initially for the French Ministry of Finance. The 3 main components (originally named GoldenGate, GoldenGate FTP and OpenR66)&nbsp;are in production in the Ministry since end of 2007. It is also in production in the French Gendarmerie Nationale since 2012 (see <a href="CrawdUser.html">Crawd User</a>).&nbsp;It is an Open Source project based on an independent community.</span></p>
 <p>&nbsp;</p>
 <h1 class="h1"><span style="font-size:12pt;">Professional services</span></h1>
-<p style="text-align:justify;"><span style="font-size:12pt;">The company named <strong><a href="http://www.waarp.fr"><span style="font-size:14pt;"><span style="color:#0000ff;">Waarp</span></span></a></strong> propose professional services (contact through info '<em>at</em>' waarp.it). In addition to professional services, Waarp company is able to propose&nbsp;extensions to Waarp in order to centralize all configurations and events for a large installation, to provide easiness of exploitation, monitoring and therefore for the production. This software is based on Waarp standard API, with no proprietary or backdoor access. We commit to keep Waarp to be a&nbsp;full functional Open Source&nbsp;solution.</span></p>
+<p style="text-align:justify;"><span style="font-size:12pt;">The company named <strong><a href="http://www.waarp.fr"><span style="font-size:14pt;"><span style="color:#0000ff;">Waarp</span></span></a></strong> propose professional services (contact through info '<em>at</em>' waarp.fr). In addition to professional services, Waarp company is able to propose&nbsp;extensions to Waarp in order to centralize all configurations and events for a large installation, to provide easiness of exploitation, monitoring and therefore for the production. This software is based on Waarp standard API, with no proprietary or backdoor access. We commit to keep Waarp to be a&nbsp;full functional Open Source&nbsp;solution.</span></p>
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:center;"></p>
 <p style="text-align:center;"><img title="waarp" style="border:none;" alt="waarp" src="res/waarp/waarp.gif" width="200" height="205" /></p><span style="font-size:11pt;">
@@ -123,11 +123,11 @@ $( document ).ready(function(){
 <h1 class="h1"><span style="font-size:11pt;">Why a proprietary protocol therefore ?</span></h1><span style="font-size:11pt;">
 <p><span style="font-size:11pt;">Well, all of those protocols suffers from pitfalls like:</span></p>
 <ul>
-<li><p><span style="font-size:11pt;">When a file is transfered, even if it is by block (FTP BLOCK mode), it does not have any control on each block transfered. So if something goes wrong on the network, it could happened that the sender or the receiver will not see what happens. The proprietary protocol will implement such a check on each transfered block.</span></p></li>
+<li><p><span style="font-size:11pt;">When a file is transferred, even if it is by block (FTP BLOCK mode), it does not have any control on each block transferred. So if something goes wrong on the network, it could happened that the sender or the receiver will not see what happens. The proprietary protocol will implement such a check on each transferred block.</span></p></li>
 
-<li><p><span style="font-size:11pt;">When a file transfered ends up abnormally, it does not have true facility to enable to restart from where it falls. Even the FTP REST command is not enough since who knows at which step the error occurs. And asking for the size of the remote file could be not enough. The proprietary protocol will implement such a restart facility on failed transfer.</span></p></li>
+<li><p><span style="font-size:11pt;">When a file transferred ends up abnormally, it does not have true facility to enable to restart from where it falls. Even the FTP REST command is not enough since who knows at which step the error occurs. And asking for the size of the remote file could be not enough. The proprietary protocol will implement such a restart facility on failed transfer.</span></p></li>
 
-<li><p><span style="font-size:11pt;">In production context, if you have to send many files, how do you follow those transfers and check them? Some FTP clients does such thing, however they generally don't have the hability to enable planned production. The proprietary protocol will implement such control, planning, and adding some functionalities like limitating (or not) the number of concurrent file transfers.</span></p></li>
+<li><p><span style="font-size:11pt;">In production context, if you have to send many files, how do you follow those transfers and check them? Some FTP clients does such thing, however they generally don't have the hability to enable planned production. The proprietary protocol will implement such control, planning, and adding some functionalities like limiting (or not) the number of concurrent file transfers.</span></p></li>
 
 <li>
 <p><span style="font-size:11pt;">Of course, all of the behaviours we described before for GoldenGate will be implemented in this proprietary protocol.</span></p></li></ul></span>

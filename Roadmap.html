@@ -1,7 +1,7 @@
 <!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
+<meta name="generator" content="Bluefish 2.2.10" />
 <meta name="robots" content="index,follow" />
 <meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
 <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
@@ -114,46 +114,54 @@ $( document ).ready(function(){
 <hr />
 
 <h1 class="h1"><em>Last release</em></h1>
-<h1 class="h1" style="text-align:justify;">April&nbsp;2016: New Version for R66 3.0.6 (clean, fixes and stop supporting Java 6) and&nbsp;Gateway FTP&nbsp;3.0.4 (clean, fixes and stop supporting Java 6)</h1>
-<h1 class="h1">Waarp R66 3.0.6</h1>
-<p>Evolution: Remove support of Java 1.6 </p>
-<p>Bug fix: remove standard output during database version checking</p>
-<p>Bug fix: REST interface fix</p>
-<p>Bug fix: Ability to restart a transfer when using a client with no db support</p>
-<p>Bug fix: -nolog option fix in nodb client</p>
-<p>Bug fix: error during connexion init now allow to execute error tasks</p>
-<p>Bug fix: Initdb includes upgradedb now by default</p>
-<p>Bug fix: Oracle not thread safe (as in MariaDB and MySQL)</p>
-<p>Bug fix: Oracle (&gt;= 10) doesn't respect empty string and changes them to null (fix)</p>
-<p>Bug fix: Improvement of HTTPS Admin web</p>
-<p>Bug fix: allow to use R66BusinessInterface again (deprecation removed)</p>
-<p>Fix after upgrading Netty and other dependencies</p>
-<p>&nbsp;</p>
-<h1 class="h1">Waarp Common 3.0.6</h1>
-<p>Evolution: Remove support of Java 1.6 </p>
-<p>Fix after upgrading Netty</p>
-<p>&nbsp;</p>
-<h1 class="h1">Waarp&nbsp;Gateway Kernel&nbsp;3.0.5</h1>
-<p>Evolution: Remove support of Java 1.6 </p>
-<p>Bug fix: Content-length headers in REST response </p>
-<p>Fix after upgrading Netty</p>
-<p>&nbsp;</p><span style="font-size:10pt;">
-<h1 class="h1">Waarp Gateway Ftp&nbsp;3.0.4 and FTP 3.0.3</h1></span>Evolution: Remove support of Java 1.6 
-<p>Bug fix: fix impossibility to have more than one active connexion</p>
-<p>Bug fix: Gateway FTP now accepts empty files</p>
-<p>Bug fix: Gateway FTP fix of bad answer ("Post operations cannot be done so force disconnection" even when no transfer was done)</p>
-<p>Bug fix: MLSx commands contains now "facts"&nbsp;if OPTS MLSx is used</p>
-<p>Bug fix: FEAT command now possible before authentification</p>
-<p>Fix after upgrading Netty and other dependencies</p>
-<p>&nbsp;</p>
-<h1 class="h1">Waarp&nbsp;Proxy 3.0.3</h1>
-<p>Evolution: Remove support of Java 1.6</p>
-<p>Bug fix: Fix startup</p>
-<p>Fix after upgrading Netty</p>
-<p>&nbsp;</p><span style="font-size:10pt;"><span style="font-family:monospace, monospace;">
-<h1 class="h1">Waarp SNMP 3.0.2</h1></span></span>
-<p>Evolution: Remove support of Java 1.6</p>
-<p>Fix after upgrading SNMP4J</p>
+<h1 class="h1">October 2019: Waarp R66 3.2.0, Waarp Gateway FTP 3.2.0 (Major versions) : upgrade is highly recommended</h1>
+<p><strong><span style="color:#FF0000;font-size:10pt;">From the beginning, each module had its own git repository under Github. In order to facilitate analysis and evolution, now all modules are reassembled into one git repository (</span></strong><a href="javascript:var EffectiveNewWin = window.open('https://github.com/waarp/Waarp-All','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();"><strong><span style="color:#FF0000;font-size:10pt;">Waarp-All</span></strong></a><strong><span style="color:#FF0000;font-size:10pt;">), while the jar can still be created independently. Moreover, a shaded jar for each independent module, containing all dependencies, is now provided.</span></strong></p>
+<ul>
+<li>
+<div class="h1">Waarp R66</div><ul>
+<li><span style="font-size:10pt;">This versions brings a lot of security and performance improvements. The&nbsp;upgrade is strongly recommended.</span></li>
+<li>
+<div class="h1"><span style="font-size:12px;font-family:verdana, sans-serif;color:rgb(51,51,51);">Changes</span></div><ul>
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Security</span></h3><ul>
+<li><span style="font-size:10pt;">Support&nbsp;of TLS 1.2 for all versions of JRE</span></li></ul></li>
+
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Internal evolution</span></h3><ul>
+<li><span style="font-size:10pt;">Database interface totally rewritten. This enables a lot of improvements, such as the number of connections, now very slow, or such as a numerous number of related bug fixes</span></li></ul></li>
+
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Improvements</span></h3><ul>
+<li><span style="font-size:10pt;">Lower number of threads used (x3 times less)</span></li>
+<li><span style="font-size:10pt;">Optimization of external resources usage (RAM, CPU)</span></li>
+<li><span style="font-size:10pt;">Update of external dependencies</span></li></ul></li>
+
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Bug fixes</span></h3><ul>
+<li><span style="font-size:10pt;">Deadlocks and Memory leaks</span></li></ul></li>
+</ul></li>
+</ul></li>
+
+<li>
+<div class="h1">Waarp Gateway FTP</div><ul>
+<li><span style="font-size:10pt;">This versions brings a lot of security and performance improvements. The update is stoingly recommended.</span></li>
+<li>
+<div class="h2"><span style="font-size:10pt;">Changes</span></div><ul>
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Security</span></h3><ul>
+<li><span style="font-size:10pt;">Support&nbsp;of TLS 1.2 for all versions of JRE</span></li></ul></li>
+
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Fonctionality</span></h3><ul>
+<li><span style="font-size:10pt;">Support of commands FTP&nbsp;<a></a>&nbsp;et&nbsp;<a></a>&nbsp;extended to SHA-XXX (check of transfer correctness)</span></li></ul></li>
+
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Bug fixes</span></h3><ul>
+<li><span style="font-size:10pt;">Optimisation of external ressources usage (RAM, CPU)</span></li>
+<li><span style="font-size:10pt;">Update of external dependencies</span></li></ul></li>
+</ul></li>
+</ul></li>
+</ul>
 <p>&nbsp;</p></div>
 <p>&nbsp;</p></div>
 </body>
