@@ -172,6 +172,30 @@ $( document ).ready(function(){
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:justify;"><span style="font-size:11pt;">This project is in production in the French Ministery of Finances to enable file transfers from an FTP protocol (client side) to a Waarp&nbsp;R66 protocol (server side protocol) and to allow file transfers between two instances&nbsp;within the same services with a long distance and with a high secured and controled protocol due to the&nbsp;high level of security and integrity in the corresponding project&nbsp;since end of 2009. See <a href="CrawdUser.html">Crawd User</a> page for some other IT using it.</span></p>
 <p style="text-align:justify;">&nbsp;</p>
+<p style="text-align:justify;"><strong><ins><span style="font-size:11pt;">Benchmarks (2019)</span></ins></strong></p>
+<p style="text-align:justify;">&nbsp;</p>
+<p style="text-align:justify;"><span style="font-size:11pt;">New benchmarks were done in 2019 to check the correctness of the solution according to new environement, using mainly Linux and small servers, even more in Cloud environement. The servers used were simple Linux server with 8 GB of RAM, Sata DISK and 2 cores, including both database and the Waarp R66 Server. Two versions were compared: the V3.0, mainly based on 2.4 version with few improvements around performances and bottleneck, and the V3.2 with a huge gap of improvements.</span></p>
+<ul>
+<li><div style="text-align:justify;"><span style="font-size:11pt;">Memory consumption decreases of 25% (from 1100MB to 700MB)</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:11pt;">CPU consumption decreases of 25% (from 70% to 45%)</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:11pt;">Thread consumption decreases drastically by a factor of 3 (from 6000 to 2000 Threads)</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:11pt;">Database consumption decreases drastically from more than 100 concurrent connections to a couple of them.</span></div></li>
+<li><div style="text-align:justify;"><span style="font-size:11pt;">Last but not least, Transfer capacity increases accordingly of 30% and with even more stability.</div>
+<ul><li>
+<div style="text-align:justify;"><span style="font-size:11pt;">
+ In V3.0 and previously, it was possible that transfers hang above 1000 concurrent transfers, now even 5000 do not prevent any transfer to continue until the end.</li>
+<li>
+<div style="text-align:justify;"><span style="font-size:11pt;"> On this small server, the transfer rate was about 54 transfers per second for 2000 simultaneous transfers between 2 local Waarp servers using 2 databases (so twice CPU, RAM, Disk, Network, Database, Thread contentions on the same host).</li>
+<li>
+<div style="text-align:justify;"><span style="font-size:11pt;"><em>According to our tests, compare to 110 transfers per seconds on 2 servers having each 4 cores, this is a great improvement, since only 2 cores were available and only 1 host for 2 servers and CPU was at 100%. A projection on 2 servers using each 4 cores could lead to more than 150 transfers per seconds.<em></span></div></li>
+</ul>
+</li>
+</ul>
+<p style="text-align:justify;">&nbsp;</p>
+<p style="text-align:center;"><img title="openr66-v3.2-benchmark" alt="openr66-v3.2-benchmark" src="res/bench/bench-v3-V3.2.png" width="947" height="574" /></p>
+<p style="text-align:justify;">&nbsp;</p>
+
+
 <p style="text-align:justify;"><strong><ins><span style="font-size:11pt;">Benchmarks (2009)</span></ins></strong></p>
 <p style="text-align:justify;">&nbsp;</p>
 <p style="text-align:justify;"><span style="font-size:11pt;">Some pre benchmarks were done on PC and a Power5 server (12 CPU). In every benchmarks, the java used memory was less than 200 Mbytes, the CPU was always less than 4 CPU by JVM (server or client). The tested file has a size of 1.12 Mbytes.</span></p>

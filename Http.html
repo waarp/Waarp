@@ -1,0 +1,390 @@
+<!DOCTYPE html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]--><!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]--><!--[if IE 8]> <html class="no-js lt-ie9" lang=""> <![endif]--><!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
+<meta name="description" content="Waarp project" />
+<meta name="robots" content="index,follow" />
+<meta name="keywords" content="bregier, fichier, file, frederic, gateway, goldengate, http, java, libre, moniteur, monitor, open, openr66, route, source, ssh, transfer, transfert, waarp" />
+<meta name="generator" content="Site Studio 6 (www.effectivestudios.com)" />
+<link rel="stylesheet" href="Waarp.css" type="text/css" />
+<style type="text/css">
+a {
+	color:#0000FF;
+	text-decoration:underline;
+}
+a:visited {
+	text-decoration:underline;
+}
+a:hover {
+	text-decoration:underline;
+}
+a img {
+	border:#000000 0px none;
+}
+</style>
+<title>Waarp - Http</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/magic-bootstrap-min.css">
+<!-- special CSS -->
+<style type="text/css">
+@-moz-document url-prefix() { fieldset { display: table-cell; } }
+</style>
+<!-- JQuery -->
+<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script src="js/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+<!-- Bootstrap -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="Waarp.css" type="text/css" />
+<script>
+$( document ).ready(function(){
+ $.get( "res/waarpmenu.html", function(data) {
+ $( "#waarpmenu" ).html(data);
+ $("body").removeAttr("class").removeAttr( "style" );
+ $("#Comp2_sys_doctext").addClass("panel-body container-fluid");
+ var curpage= "";
+ var splitPages = curpage.split("/");
+ $.each( splitPages, function( index, value ){ $("#"+value).addClass("active"); });
+  $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+   event.preventDefault(); 
+   event.stopPropagation(); 
+   $(this).parent().siblings().removeClass('open');
+   $(this).parent().toggleClass('open');
+  });
+ });
+});
+</script>
+<style type="text/css">
+.dropdown-submenu{position:relative;}
+.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+.dropdown-submenu:hover>a:after{border-left-color:#555;}
+.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+.h1 { font-size:14px; color:#333333; font-weight:bold;}
+.h2, .h3 { font-size:12pt; color:#333333; font-weight:bold; }
+.h4, .h5, .h6 { font-size:13px; color:#333333; font-weight:bold; }
+</style>
+</head>
+<body class="normal" style="font-family:Verdana,sans-serif;font-size:8pt;color:#000000;margin:0px;padding:0px;background-color:#FFFFFF;">
+<div id="Comp1_CodeRelayer"><!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="cover" id="waarpmenu" />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1693657-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</div>
+<div style="text-align:left;margin:0px 4px;">
+<h1 class="h1">Http</h1>
+<div id="Comp2_sys_doctext"><p><span style="font-size:11pt;"><strong>Waarp Http</strong> prototype support for end users through Browser</span></p>
+<ul>
+<li><div class="normal"><span style="font-size:11pt;">Usage of <strong>Resumable.js</strong> javascript library from http://www.resumablejs.com/</span></div></li>
+
+<li><div class="normal"><span style="font-size:11pt;">Usage of<strong> jquery.FileDownload.js</strong> javascript library from https://github.com/johnculviner/jquery.fileDownload</span></div></li>
+
+<li>
+<div class="normal"><span style="font-size:11pt;">Creation of prototype of module Waarp Http</span></div>
+<ul>
+<li><div class="normal"><span style="font-size:11pt;">Prototype using servlets for both Upload (using URI+Body or Multipart) and Download</span></div></li>
+
+<li><div class="normal"><span style="font-size:11pt;">Pre, Post or Error tasks are executed as if the file was transfered directly using Waarp R66, on server side only.</span></div></li>
+
+<li><div class="normal"><span style="font-size:11pt;">On Upload:</span></div><ul>
+<li><div class="normal"><span style="font-size:11pt;">the sha256 can be computed on Browser side and checked against on server side, as in Waarp R66.</span></div></li>
+
+<li><div class="normal"><span style="font-size:11pt;">Except last chunk, response using POST is 201. Last chunk response using POST is 200.</span></div></li>
+
+<li><div class="normal"><span style="font-size:11pt;">For GET, if resumable file in Waarp is known and current chunk also, response is 200, else response is 404.</span></div></li>
+
+<li>
+<div class="normal"><span style="font-size:11pt;">In case of any error, response is 500.</span></div></li></ul></li>
+
+
+<li>
+<div class="normal"><span style="font-size:11pt;">On Download:</span></div>
+<ul>
+<li><div class="normal"><span style="font-size:11pt;">the sha256 is computed by Waarp Web Server then returned to client, while client can check on its own the correct SHA256 (scripts as example)</span></div></li>
+
+<li><div class="normal"><span style="font-size:11pt;">Download is a normal download, by chunk if the servlet allows it</span></div></li>
+
+<li><div class="normal"><span style="font-size:11pt;">A special service (using HEAD) can allow to check if the download is really finished (as it can take long to download huge file): answear is 200 for end, 202 for on going, 404 as unknown (but maybe not immediately available)</span></div></li>
+
+<li>
+<div class="normal"><span style="font-size:11pt;">In case of any error, response is 500</span></div></li></ul></li></ul></li></ul>
+<p><span style="font-size:11pt;">This is only a prototype yet. Some extra works might be needed to get a generic support without changing current code (mainly in servlet itself).</span></p>
+<p><span style="font-size:11pt;">However, this could be used as a base, using the generated jar, to be included in a war with correct servlet or other ways to interact with the browser javascript and end user. In particular:</span></p>
+<ul>
+<li><div class="normal"><span style="font-size:11pt;">Create the authentication step for the end user</span></div></li>
+
+<li><div class="normal"><span style="font-size:11pt;">Currently the HttpAuthentDefault use the user and crypted key in the Javascript</span></div></li>
+
+<li><div class="normal"><span style="font-size:11pt;">One might change this by adding a specific authentication step and then pass a credentials according to CORS using the *withCredentials* option of Resumable.js. In order to do so, create a specific HttpAuthent implementation that you set in the web.xml configuration file to replace the default one.</span></div></li>
+
+<li><div class="normal"><span style="font-size:11pt;">Add the possibility to choose between various rules</span></div></li>
+
+<li>
+<div class="normal"><span style="font-size:11pt;">The listing of availables files is out of scope, since it is application centric</span></div></li></ul>
+<p><span style="font-size:11pt;">Future works:</span></p>
+<ul>
+<li><div class="normal"><span style="font-size:11pt;">Enabling a easier integration in a final web server (servlet or jax-rs)</span></div></li>
+
+<li>
+<div class="normal"><span style="font-size:11pt;">Using it in a full Web Application as demo or final product</span></div></li></ul>
+<h2 class="h2"><span style="font-size:10pt;">1) Presentation</span></h2>
+<h3 class="h3">&nbsp;</h3>
+<h3 class="h3"><span style="font-size:10pt;">1.1) For Upload</span></h3>
+<p>&nbsp;</p>
+<p><span style="font-size:10pt;">The browser allows the user to select a local file (drag and drop or select through a window).</span></p>
+<p><span style="font-size:10pt;">Once the file is selected, the javascript embedded computes the Hash (SHA-256) of this local file and then sends this one by chunk (1MB by default) to the Waarp Web Server.</span></p>
+<p><strong></strong>&nbsp;</p>
+<p><strong><span style="font-size:10pt;">The client perspective</span></strong></p>
+<p><span style="font-size:10pt;">The sending follows the Waarp rules of transfers:</span></p>
+<ul>
+<li><span style="font-size:10pt;">a local unique identifier is assigned to the transfer </span></li>
+<li><span style="font-size:10pt;">a hash (SHA-256) is computed locally </span></li>
+<li><span style="font-size:10pt;">a rule of transfer is selected (in Send mode) </span></li>
+<li><span style="font-size:10pt;">an identifier of the user is selected </span></li>
+<li><span style="font-size:10pt;">the local name of the file </span></li>
+<li><span style="font-size:10pt;">the size of the chunk (default being 1MB) </span></li></ul>
+<p><em><span style="font-size:10pt;">Visual comportment</span></em></p>
+<p><span style="font-size:10pt;">When the file is currently uploaded (a progression bar is visible for the user), the user can stop and restart the transfer or cancel the transfer.</span></p>
+<p><span style="font-size:10pt;">A user can select multiple files, but they will be transferred one by one however.</span></p>
+<p><em></em>&nbsp;</p>
+<p><em><span style="font-size:10pt;">Functional Comportment</span></em></p>
+<p><span style="font-size:10pt;">For each chunk (block of binary content), the browser test if this block was already sent before to the Waarp Web Server. If so, the chunk is ignored, else it is sent.</span></p>
+<p><span style="font-size:10pt;">This allows to have "resumable" compliant transfers, including when lost of carrier.</span></p>
+<p><strong></strong>&nbsp;</p>
+<p><strong><span style="font-size:10pt;">Waarp Web Server perspective</span></strong></p>
+<p><span style="font-size:10pt;">From Waarp Web Server perspective, this transfer is as a "usual" transfer, using the standard database of Waarp product.</span></p>
+<p><em></em>&nbsp;</p>
+<p><em><span style="font-size:10pt;">Functional Comportment</span></em></p>
+<p><span style="font-size:10pt;">The unique identifier is given by the client.</span></p>
+<p><span style="font-size:10pt;">The hash is compared with the one given by the client.</span></p>
+<p><span style="font-size:10pt;">The rule is given by the client. The Waarp Web Server will apply all pre and post tasks, according to the rule used, and also the error tasks if any.</span></p>
+<p><span style="font-size:10pt;">Therefore, it allows to use this transfer to reroute it to another Waarp server (using other Waarp protocols), or to execute a task that will manage the content of this file for another application, potentially also embedded by the same Web Application server.</span></p>
+<h3 class="h3">&nbsp;</h3>
+<h3 class="h3"><span style="font-size:10pt;">1.2) For Download</span></h3>
+<p><span style="font-size:10pt;">This part is partially developed, since the availability of files to be downloaded is part of the integration process. Therefore the HTML part and some of the javascript are given but it is straightforward to adapt it to specific download scenario.</span></p>
+<p><span style="font-size:10pt;">Once the file is selected, the javascript download all the file and then compares the received file with the received Hash (SHA-256) from the Waarp Web Server.</span></p>
+<p><strong></strong>&nbsp;</p>
+<p><strong><span style="font-size:10pt;">The client perspective</span></strong></p>
+<p><span style="font-size:10pt;">The download follows the Waarp rules of transfers:</span></p>
+<ul>
+<li><span style="font-size:10pt;">a local unique identifier is assigned to the transfer </span></li>
+<li><span style="font-size:10pt;">a rule of transfer is selected (in Recv mode) </span></li>
+<li><span style="font-size:10pt;">an identifier of the user is selected </span></li>
+<li><span style="font-size:10pt;">the name of the file to download </span></li></ul>
+<p><em><span style="font-size:10pt;">Visual comportment</span></em></p>
+<p><span style="font-size:10pt;">The file download is the usual download from the web browser, except, through integration, the check of the hash computed by the Waarp Web Server to check within the client's browser. Currently, there is a demo feature where you click on the button once downloaded the file, select the file downloaded and it checks the hash according to the very last item downloaded from the Waarp Web Server.</span></p>
+<p><span style="font-size:10pt;">Therefore, there is no resumable download yet, since javascript is not able to write directly to a local file (security reasons). However a javascript can check the downloaded file once it is done.</span></p>
+<p><strong></strong>&nbsp;</p>
+<p><strong><span style="font-size:10pt;">Waarp Web Server perspective</span></strong></p>
+<p><span style="font-size:10pt;">From Waarp Web Server perspective, this transfer is as a "usual" transfer, using the standard database of Waarp product.</span></p>
+<p><em></em>&nbsp;</p>
+<p><em><span style="font-size:10pt;">Functional Comportment</span></em></p>
+<p><span style="font-size:10pt;">The unique identifier is given by the client.</span></p>
+<p><span style="font-size:10pt;">The hash is computed by the server and sent to the client, which allows the client to check against it.</span></p>
+<p><span style="font-size:10pt;">The rule is given by the client. The Waarp Web Server will apply all pre and post tasks, according to the rule used, and also the error tasks if any.</span></p>
+<p><span style="font-size:10pt;">Therefore, it allows to use this transfer to execute a task that will manage the content of this file from another application, potentially also embedded by the same Web Application server.</span></p>
+<h2 class="h2">&nbsp;</h2>
+<h2 class="h2"><span style="font-size:10pt;">2) Integration focus</span></h2>
+<h3 class="h3">&nbsp;</h3>
+<h3 class="h3"><span style="font-size:10pt;">2.1) Web Integration</span></h3>
+<p><span style="font-size:10pt;">You can use any Servlet server accepting 3.1 servlet versions (such as Jetty, Tomcat).</span></p>
+<ul>
+<li><span style="font-size:10pt;">Install the WaarpHttp-X.Y.Z-jar-with-dependencies.jar (containing all dependencies) within an application directory of a web server, such as Tomcat or Jetty. </span></li>
+<li><span style="font-size:10pt;">Create a webapp directory for WaarpHttp, containing the files and subdirectories as in WaarpHttp/src/main/webapp </span></li>
+<li><span style="font-size:10pt;">In the WEB-INF directory, define the necessary entries in the web.xml, such as the one in example in WaarpHttp/src/main/webapp/WEB-INF/web.xml </span><p><span style="font-size:10pt;">For instance, for Jetty, the following configuration can be used:</span></p></li>
+
+<li><span style="font-size:10pt;">Path: /WaarpHttp </span></li>
+<li><span style="font-size:10pt;">WebApp directory: /WaarpHttp/src/main/webapp </span></li>
+<li><span style="font-size:10pt;">WebApp Class directory: where you put the WaarpHttp-X.Y.Z-jar-with-dependencies.jar </span></li>
+<li><span style="font-size:10pt;">Extra argument for Jetty: -Dlogback.configurationFile=/WaarpHttp/test/resources/logback.xml </span></li></ul>
+<p><span style="font-size:10pt;">Therefore the url of the two servlet will be:</span></p>
+<ul>
+<li><span style="font-size:10pt;">http://server:port/WaarpHttp/resumable (upload) </span></li>
+<li><span style="font-size:10pt;">http://server:port/WaarpHttp/download (download)</span></li></ul>
+<h3 class="h3"><span style="font-size:10pt;">2.2) Missing integration</span></h3>
+<h3 class="h3">&nbsp;</h3>
+<p><strong><span style="font-size:10pt;">Authentication</span></strong></p>
+<p><span style="font-size:10pt;">In the prototype, even if the authentication relies on Waarp repository, it is currently hard coded in the javascript of the web page. So you should obviously use the authentication of your company and integrates it within the code by specifying the right class to use for authentication (see authentClassName in web.xml).</span></p>
+<p><strong></strong>&nbsp;</p>
+<p><strong><span style="font-size:10pt;">Selection of rule to apply</span></strong></p>
+<p><span style="font-size:10pt;">In the prototype, even if the authentication relies on Waarp repository, it is currently hard coded in the javascript of the web page. So you should obviously either change it to a specific fixed value or propose a way for the final user to select a correct value, according to his/her rights.</span></p>
+<p><strong></strong>&nbsp;</p>
+<p><strong><span style="font-size:10pt;">Selection of file to download (Download)</span></strong></p>
+<p><span style="font-size:10pt;">The prototype is very simple with fixed files. One should take care to create the file before running the Jetty server (test.txt and test2.bin in /tmp/R66/out directory). Take a look at the Junit tests (DownloadServletTest) to see what to send and what is returned. But obviously you should provide a way to propose various files for the end user according to his/her rights.</span></p>
+<p><strong></strong>&nbsp;</p>
+<p><strong><span style="font-size:10pt;">Initialization of the database</span></strong></p>
+<p><span style="font-size:10pt;">To run the prototype, you should initialize the database. To do it simply, you can use the test named InitDatabase by commenting the @Ignore specification.</span></p>
+<p><strong></strong>&nbsp;</p>
+<p><strong><span style="font-size:10pt;">Extra elements</span></strong></p>
+<p><span style="font-size:10pt;">One could integrate also some extra features such as:</span></p>
+<ul>
+<li><span style="font-size:10pt;">testing if a file was already sent before (Hash based comparison) </span></li>
+<li><span style="font-size:10pt;">allowing to see historic of transfers </span></li>
+<li><span style="font-size:10pt;">...</span></li></ul>
+<h3 class="h3"><span style="font-size:10pt;">2.3) Web integration for Upload</span></h3>
+<p><strong></strong>&nbsp;</p>
+<p><strong><span style="font-size:10pt;">Content of web.xml</span></strong></p>
+<ul>
+<li><span style="font-size:10pt;">servlet-class points to the Java Servlet, here org.waarp.http.protocol.servlet.UploadServlet </span><ul>
+<li><span style="font-size:10pt;">One could write another servlet implementation, inspiring from this default servlet</span></li></ul></li>
+
+<li><span style="font-size:10pt;">init-param contains the parameter r66config which has to point to the xml R66 configuration file </span></li>
+<li><span style="font-size:10pt;">init-param contains the parameter authentClassName which has to point to the Java implementation for the authentication, here simple one is org.waarp.http.protocol.servlet.HttpAuthentDefault </span><ul>
+<li><span style="font-size:10pt;">One could write another authentication implementation, inspiring from this default servlet</span></li></ul></li>
+
+<li><span style="font-size:10pt;">servlet-mapping points to the Java Servlet name, here UploadServlet and its url-pattern </span>
+<ul>
+<li><span style="font-size:10pt;">Note this has to be different than Download, and remember that the configuration of the Application server could prepend an extra url</span> 
+<p>&nbsp;</p></li></ul></li></ul>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p><span style="font-family:Courier New;font-size:10pt;">&lt;servlet&gt; </span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &lt;servlet-name&gt;UploadServlet&lt;/servlet-name&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;&lt;servlet-class&gt;org.waarp.http.protocol.servlet.UploadServlet&lt;/servlet-class&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;&lt;init-param&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp; &nbsp;&lt;param-name&gt;r66config&lt;/param-name&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp; &nbsp;&lt;param-value&gt;/tmp/R66/conf/config-serverA-minimal.xml&lt;/param-value&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;&lt;/init-param&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;&lt;init-param&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp; &nbsp;&lt;param-name&gt;authentClassName&lt;/param-name&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp; &nbsp;&lt;param-value&gt;org.waarp.http.protocol.servlet.HttpAuthentDefault&lt;/param-value&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;&lt;/init-param&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&lt;/servlet&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&lt;servlet-mapping&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;&lt;servlet-name&gt;UploadServlet&lt;/servlet-name&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;&lt;url-pattern&gt;/resumable&lt;/url-pattern&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&lt;/servlet-mapping&gt;</span></p></blockquote>
+<p>&nbsp;</p>
+<p><strong></strong>&nbsp;</p>
+<p><strong><span style="font-size:10pt;">Content of index.html</span></strong></p>
+<p><span style="font-size:10pt;">A prototype file is given. As this is only an example, the user authentication and rule selection is fixed in the javascript part as:</span></p>
+<p>&nbsp;</p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p><span style="font-family:Courier New;font-size:10pt;">&lt;script&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;// Configuration to adapt with real authentication and selection of rule (send) to apply </span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;var user = "test"; </span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;var key = "ef99dfce1fdaa787cef4701368f79cfb"; </span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;var rulename = "rule3"; </span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;var comment = "Web Upload"; </span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;setIdHiddenHash("finalhash"); // Used by compute-hash.js to store the result </span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&lt;/script&gt;</span></p></blockquote>
+<p><a></a>&nbsp;</p>
+<p><span style="font-size:10pt;"><a></a> is the id of an hidden input field, such as:</span></p>
+<p>&nbsp;</p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p><span style="font-family:Courier New;font-size:10pt;">&lt;input type="hidden" name="finalhash" id="finalhash" value=""&gt;</span></p></blockquote>
+<p>&nbsp;</p>
+<p><span style="font-size:10pt;">Therefore, one should adapt this page or service to add a specific authentication system and a way to select a rule accordingly, as to provide a specific comment if any.</span></p>
+<p><span style="font-size:10pt;">The methods used are:</span></p>
+<p>&nbsp;</p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p><span style="font-family:Courier New;font-size:10pt;">GET/POST http(s)://server-url/base-url/resumable</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;body or url arguments:</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;"user": username/servername from Waarp repository </span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; "key": associated key for this user</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;"rulename": rulename from Waarp repository</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;"comment": actual comment to set for this transfer</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;// Below parameters are set by the external javascript</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;"resumableChunkNumber": the current chunk</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;"resumableChunkSize": the size of this chunk</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;"resumableTotalSize": the total size of the file</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;"resumableIdentifier": unique identifier, set using Javascript function uuidv4()</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;"resumableFilename": the filename for the upload</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;"resumableRelativePath": relative path of the file</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;Answer:</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;GET: 404 Transfer or Chunk not found, 200 Transfer chunk found</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;POST: 201 First chunk ok (creation of the transfer), 200 All chunks received</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;Both: 500 Internal error such as wrong authentication or arguments (prevents DDOS)</span></p></blockquote>
+<p>&nbsp;</p>
+<p><span style="font-size:10pt;">One could also change some general options of Resumable.js javascript module:</span></p>
+<p>&nbsp;</p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p><span style="font-family:Courier New;font-size:10pt;">var r = new Resumable({</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;target:'/WaarpHttp/resumable', // Target for Waarp servlet according to Application Web server</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;forceChunkSize: true, // Recommended</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;chunkSize:1*1024*1024, // Might be less but not less than 1024</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;simultaneousUploads:1, // Mandatory</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;testChunks: true, // Not mandatory, one could skip existence of previous chunks</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;throttleProgressCallbacks:1,</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;method: "multipart", // "octet" for url args + chunk in body, "multipart" for standard UPLOAD</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;generateUniqueIdentifier: uuidv4, // Recommended</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;preprocessFile: initSha256, // Recommended</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;query: queryArgs // Recommended</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">});</span></p></blockquote>
+<h3 class="h3">&nbsp;</h3>
+<h3 class="h3"><span style="font-size:10pt;">2.4) Web integration for the Download</span></h3>
+<p><strong></strong>&nbsp;</p>
+<p><strong><span style="font-size:10pt;">Content of web.xml</span></strong></p>
+<ul>
+<li><span style="font-size:10pt;">servlet-class points to the Java Servlet, here org.waarp.http.protocol.servlet.DownloadServlet </span><ul>
+<li><span style="font-size:10pt;">One could write another servlet implementation, inspiring from this default servlet</span></li></ul></li>
+
+<li><span style="font-size:10pt;">init-param contains the parameter r66config which has to point to the xml R66 configuration file </span></li>
+<li><span style="font-size:10pt;">init-param contains the parameter authentClassName which has to point to the Java implementation for the authentication, here simple one is org.waarp.http.protocol.servlet.HttpAuthentDefault </span><ul>
+<li><span style="font-size:10pt;">One could write another authentication implementation, inspiring from this default servlet</span></li></ul></li>
+
+<li><span style="font-size:10pt;">servlet-mapping points to the Java Servlet name, here DownloadServlet and its url-pattern </span>
+<ul>
+<li><span style="font-size:10pt;">Note this has to be different than Upload, and remember that the configuration of the Application server could prepend an extra url</span> 
+<p>&nbsp;</p></li></ul></li></ul>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p><span style="font-family:Courier New;font-size:10pt;">&lt;servlet&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&lt;servlet-name&gt;DownloadServlet&lt;/servlet-name&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&lt;servlet-class&gt;org.waarp.http.protocol.servlet.DownloadServlet&lt;/servlet-class&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&lt;init-param&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;&lt;param-name&gt;r66config&lt;/param-name&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;&lt;param-value&gt;/tmp/R66/conf/config-serverA-minimal.xml&lt;/param-value&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&lt;/init-param&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&lt;init-param&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;&lt;param-name&gt;authentClassName&lt;/param-name&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;&lt;param-value&gt;org.waarp.http.protocol.servlet.HttpAuthentDefault&lt;/param-value&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&lt;/init-param&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&lt;/servlet&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&lt;servlet-mapping&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&lt;servlet-name&gt;DownloadServlet&lt;/servlet-name&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&lt;url-pattern&gt;/download&lt;/url-pattern&gt;</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&lt;/servlet-mapping&gt;</span></p></blockquote>
+<p><strong></strong>&nbsp;</p>
+<p><strong><span style="font-size:10pt;">Content of index.html</span></strong></p>
+<p><span style="font-size:10pt;">This file is not written for Download, since the listing of the available files is out of the responsibility of this module. But mainly, the code is to apply a call such as:</span></p>
+<p>&nbsp;</p>
+<blockquote style="margin-right:0px;" dir="ltr">
+<p><span style="font-family:Courier New;font-size:10pt;">GET/POST http(s)://server-url/base-url/download</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;body or url arguments:</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;"user": username/servername from Waarp repository</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;"key": associated key for this user</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;"rulename": rulename from Waarp repository</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;"comment": actual comment to set for this transfer</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;"identifier": unique identifier, preferably using Javascript function uuidv4()</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;"filename": filename to download (according to rule)</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;Answer:</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;header: "X-Hash-Sha-256": HEX representation of SHA-256 of downloaded file</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;body: the file</span></p>
+<p>&nbsp;</p>
+<p><span style="font-family:Courier New;font-size:10pt;">HEAD http(s)://server-url/base-url/download</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;body or url arguments:</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;"user": username/servername from Waarp repository</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;"key": associated key for this user</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;"rulename": rulename from Waarp repository</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;"comment": actual comment to set for this transfer</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;"identifier": unique identifier, preferably using Javascript function uuidv4()</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;"filename": filename to download (according to rule)</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;Answer:</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp; &nbsp;404 if not found, 202 if still on going, 200 if done</span></p>
+<p><span style="font-family:Courier New;font-size:10pt;">&nbsp;&nbsp;header: "X-Hash-Sha-256": HEX representation of SHA-256 of downloaded file if status 200</span></p></blockquote>
+<p>&nbsp;</p></div>
+<p>&nbsp;</p></div>
+</body>
+</html>
