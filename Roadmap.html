@@ -114,29 +114,21 @@ $( document ).ready(function(){
 <hr />
 
 <h1 class="h1"><em>Last release</em></h1>
-<h1 class="h1">January&nbsp;2020: Waarp R66 3.3.0, Waarp Gateway FTP 3.3.0 (Major versions) : upgrade is highly recommended</h1>
+<h1 class="h1">February&nbsp;2020: Waarp R66 3.3.1, Waarp Gateway FTP 3.3.1 (Minor versions) : upgrade is highly recommended</h1>
 <p><strong><span style="font-size:10pt;color:#FF0000;">From the beginning, each module had its own git repository under Github. In order to facilitate analysis and evolution,&nbsp;from version 3.2,&nbsp;all modules are reassembled into one git repository (</span></strong><a href="javascript:var EffectiveNewWin = window.open('https://github.com/waarp/Waarp-All','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();"><strong><span style="font-size:10pt;color:#FF0000;"><ins>Waarp-All</ins></span></strong></a><strong><span style="font-size:10pt;color:#FF0000;">), while the jar can still be created independently. Moreover, a shaded jar for each independent module, containing all dependencies, is now provided.</span></strong></p>
 <ul>
 <li>
 <h1 class="h1">Waarp R66</h1><ul>
-<li><span style="font-size:10pt;">This versions brings improvements and evolutions. The&nbsp;upgrade is strongly recommended.</span> 
+<li><span style="font-size:10pt;">This versions brings fixes on some regressions. The&nbsp;upgrade is strongly recommended.</span> 
 </li><li>
 <h1 class="h1"><span style="font-size:12px;font-family:verdana, sans-serif;color:rgb(51,51,51);">Changes</span></h1><ul>
-<li><h3 class="h3"><span style="font-size:10pt;">Internals</span></h3><ul>
-<li><span style="font-size:10pt;">Improve reuse of Database DAO model from R66</span></li></ul></li>
-
-
-<li>
-<h3 class="h3"><span style="font-size:10pt;">Improvements</span></h3><ul>
-<li><span style="font-size:10pt;">Add check on changed file for FileMonitor</span></li>
-<li><span style="font-size:10pt;">If no connection, retry is enhanced</span></li>
-<li><span style="font-size:10pt;">Improve&nbsp;output request of transfer</span></li>
-<li><span style="font-size:10pt;">Update of external dependencies</span></li></ul></li>
-
 <li>
 <h3 class="h3"><span style="font-size:10pt;">Bug fixes</span></h3>
 <ul>
-<li><span style="font-size:10pt;">Deadlocks and Memory leaks</span></li></ul></li></ul></li>
+<li><span style="font-size:10pt;">Restore REST V1 API which have regression</span></li>
+<li><span style="font-size:10pt;">Fix SonarQube usage (internal usage)</span></li>
+<li><span style="font-size:10pt;">Upgrade of external dependencies</span></li>
+<li><span style="font-size:10pt;">Package WaarpPassword which was missing in all jar dependency</span></li></ul></li></ul></li>
 </ul></li>
 
 <li>
@@ -145,12 +137,12 @@ $( document ).ready(function(){
 <h2 class="h2"><span style="font-size:10pt;">Changes</span></h2><ul>
 <li>
 <h2 class="h2"><span style="font-size:10pt;">Bug fixes</span></h2><ul>
+<li><span style="font-size:10pt;">Fix SonarQube usage (internal usage)</span></li>
+<li><span style="font-size:10pt;">Package WaarpPassword which was missing in all jar dependency</span></li>
 <li><span style="font-size:10pt;">Update of external dependencies</span></li></ul></li>
 </ul></li>
 </ul></li>
 
-<li><span style="font-size:10pt;"><strong>Waarp Http</strong></span><ul>
-<li><span style="font-size:10pt;">New functionality: Waarp Http prototype support for end users through Browser</span></li></ul></li>
 </ul>
 <p>&nbsp;</p></div>
 <p>&nbsp;</p></div>
