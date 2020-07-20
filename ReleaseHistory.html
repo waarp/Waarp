@@ -85,6 +85,61 @@ $( document ).ready(function(){
 <div style="text-align:left;margin:0px 4px;">
 <h1 class="h1">Release History</h1>
 <div id="Comp2_sys_doctext"><h1 class="h1"><em>History of versions</em></h1>
+<h1 class="h1">July&nbsp;2020: Waarp R66 3.4.0, Waarp Gateway FTP 3.4.0 (Major version) : upgrade is highly recommended</h1>
+<p><strong><span style="font-size:10pt;color:#FF0000;">From the beginning, each module had its own git repository under Github. In order to facilitate analysis and evolution,&nbsp;from version 3.2,&nbsp;all modules are reassembled into one git repository (</span></strong><a href="javascript:var EffectiveNewWin = window.open('https://github.com/waarp/Waarp-All','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();"><strong><span style="font-size:10pt;color:#FF0000;"><ins>Waarp-All</ins></span></strong></a><strong><span style="font-size:10pt;color:#FF0000;">), while the jar can still be created independently. Moreover, a shaded jar for each independent module, containing all dependencies, is now provided.</span></strong></p>
+<ul>
+<li>
+<h1 class="h1">Waarp R66</h1><ul>
+<li><span style="font-size:10pt;">This versions brings fixes on some regressions. The&nbsp;upgrade is strongly recommended. It also brings new functionalities.</span>
+</li><li>
+<h1 class="h1"><span style="font-size:12px;font-family:verdana, sans-serif;color:rgb(51,51,51);">Changes</span></h1><ul>
+<li>
+<h3 class="h3"><span style="font-size:10pt;">New functionalities</span></h3>
+<ul>
+<li><span style="font-size:10pt;">The ICAP Task Type allow to launch a ICAP scan file command</span></li>
+<li><span style="font-size:10pt;">Also available a command line: IcapScanFile</span></li>
+<li><span style="font-size:10pt;">Option follow to address forwarded transfers and still keeping them linked through a unique ID</span></li>
+<li><span style="font-size:10pt;">Add Rest V2 options for FollowId</span></li>
+</ul>
+<h3 class="h3"><span style="font-size:10pt;">Evolutions</span></h3>
+<ul>
+<li><span style="font-size:10pt;">Default network limitation is now set to 100Gb for global limitation and 1Gb for unitary transfer</span></li>
+<li><span style="font-size:10pt;">Ram limitation for Rest and Web services is set to 1GB (instead of 4GB previously)</span></li>
+</ul>
+<h3 class="h3"><span style="font-size:10pt;">Bug fixes</span></h3>
+<ul>
+<li><span style="font-size:10pt;">Regex path filter for FileWatcher</span></li>
+<li><span style="font-size:10pt;">Fix Map manipulation within Transfer Information</span></li>
+<li><span style="font-size:10pt;">Fix client issue some not running</span></li>
+<li><span style="font-size:10pt;">Fix Shaded Jar (all-dependencies)</span></li>
+<li><span style="font-size:10pt;">Limit memory impact (Rest/Web services and Xml manipulation)</span></li>
+<li><span style="font-size:10pt;">Limit CPU and memory usage on Hash computations</span></li>
+<li><span style="font-size:10pt;">Introduce a PrintOnlyWarningLogbackStatusListener to disable info or debug
+startup information on Logback initialization, but not warn or error.
+It enhances the log initialization.</span></li>
+<li><span style="font-size:10pt;">Fix minor cosmetic for tests</span></li>
+<li><span style="font-size:10pt;">Upgrade of external dependencies</span></li>
+</ul></li></ul></li>
+</ul></li>
+
+<li>
+<h1 class="h1">Waarp Gateway FTP</h1><ul>
+<li>
+<h2 class="h2"><span style="font-size:10pt;">Changes</span></h2><ul>
+<li>
+<h2 class="h2"><span style="font-size:10pt;">Bug fixes</span></h2><ul>
+<li><span style="font-size:10pt;">Fix Shaded Jar (all-dependencies)</span></li>
+<li><span style="font-size:10pt;">Ram limitation for Rest and Web services is set to 1GB (instead of 4GB previously)</span></li>
+<li><span style="font-size:10pt;">Introduce a PrintOnlyWarningLogbackStatusListener to disable info or debug
+startup information on Logback initialization, but not warn or error.
+It enhances the log initialization.</span></li>
+<li><span style="font-size:10pt;">Fix minor cosmetic for tests</span></li>
+<li><span style="font-size:10pt;">Update of external dependencies</span></li></ul></li>
+</ul></li>
+</ul></li>
+
+</ul>
+
 <h1 class="h1">June&nbsp;2020: Waarp R66 3.3.4, Waarp Gateway FTP 3.3.4 (Minor versions) : upgrade is highly recommended</h1>
 <p><strong><span style="font-size:10pt;color:#FF0000;">From the beginning, each module had its own git repository under Github. In order to facilitate analysis and evolution,&nbsp;from version 3.2,&nbsp;all modules are reassembled into one git repository (</span></strong><a href="javascript:var EffectiveNewWin = window.open('https://github.com/waarp/Waarp-All','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();"><strong><span style="font-size:10pt;color:#FF0000;"><ins>Waarp-All</ins></span></strong></a><strong><span style="font-size:10pt;color:#FF0000;">), while the jar can still be created independently. Moreover, a shaded jar for each independent module, containing all dependencies, is now provided.</span></strong></p>
 <ul>
