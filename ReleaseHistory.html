@@ -85,6 +85,49 @@ $( document ).ready(function(){
 <div style="text-align:left;margin:0px 4px;">
 <h1 class="h1">Release History</h1>
 <div id="Comp2_sys_doctext"><h1 class="h1"><em>History of versions</em></h1>
+<h1 class="h1">September&nbsp;2020: Waarp R66 3.5.0, Waarp Gateway FTP 3.5.0 (Major version) : upgrade is highly recommended</h1>
+<p><strong><span style="font-size:10pt;color:#FF0000;">From the beginning, each module had its own git repository under Github. In order to facilitate analysis and evolution,&nbsp;from version 3.2,&nbsp;all modules are reassembled into one git repository (</span></strong><a href="javascript:var EffectiveNewWin = window.open('https://github.com/waarp/Waarp-All','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();"><strong><span style="font-size:10pt;color:#FF0000;"><ins>Waarp-All</ins></span></strong></a><strong><span style="font-size:10pt;color:#FF0000;">), while the jar can still be created independently. Moreover, a shaded jar for each independent module, containing all dependencies, is now provided.</span></strong></p>
+<ul>
+<li>
+<h1 class="h1">Waarp R66</h1><ul>
+<li><span style="font-size:10pt;">This versions brings fixes on some regressions. The&nbsp;upgrade is strongly recommended. It also brings new functionalities.</span>
+</li><li>
+<h1 class="h1"><span style="font-size:12px;font-family:verdana, sans-serif;color:rgb(51,51,51);">Changes</span></h1><ul>
+<li>
+<h3 class="h3"><span style="font-size:10pt;">New functionalities</span></h3>
+<ul>
+<li><span style="font-size:10pt;">It is possible to specify network interfaces to use for R66 and HTTP protocols</span></li>
+</ul>
+<h3 class="h3"><span style="font-size:10pt;">Bug fixes</span></h3>
+<ul>
+<li><span style="font-size:10pt;">Out of Memory is greatly limited using at most JVM memory (both Heap and Direct)</span></li>
+<li><span style="font-size:10pt;">Commander could be blocked in certain cases: fixed</span></li>
+<li><span style="font-size:10pt;">XMLRuleDAO takes into account transfer rules, as in FileMonitor without database</span></li>
+<li><span style="font-size:10pt;">Https Admin interface in System has some limitations: fixed</span></li>
+<li><span style="font-size:10pt;">Https Admin interface was broken for transfer listing: fixed</span></li>
+<li><span style="font-size:10pt;">A self-transfer could produce erasing of the Transfer within the database: fixed</span></li>
+<li><span style="font-size:10pt;">Output of commands (csv, json, xml, property based) are back and fixed</span></li>
+<li><span style="font-size:10pt;">EXECOUTPUT is no more raising a class mapping error</span></li>
+<li><span style="font-size:10pt;">Fix bad coding issues</span></li>
+<li><span style="font-size:10pt;">Fix minor cosmetic for tests</span></li>
+<li><span style="font-size:10pt;">Upgrade of external dependencies</span></li>
+</ul></li></ul></li>
+</ul></li>
+
+<li>
+<h1 class="h1">Waarp Gateway FTP</h1><ul>
+<li>
+<h2 class="h2"><span style="font-size:10pt;">Changes</span></h2><ul>
+<li>
+<h2 class="h2"><span style="font-size:10pt;">Bug fixes</span></h2><ul>
+<li><span style="font-size:10pt;">Out of Memory is greatly limited using at most JVM memory (both Heap and Direct)</span></li>
+<li><span style="font-size:10pt;">Fix bad coding issues</span></li>
+<li><span style="font-size:10pt;">Fix minor cosmetic for tests</span></li>
+<li><span style="font-size:10pt;">Update of external dependencies</span></li></ul></li>
+</ul></li>
+</ul></li>
+
+</ul>
 <h1 class="h1">July&nbsp;2020: Waarp R66 3.4.0, Waarp Gateway FTP 3.4.0 (Major version) : upgrade is highly recommended</h1>
 <p><strong><span style="font-size:10pt;color:#FF0000;">From the beginning, each module had its own git repository under Github. In order to facilitate analysis and evolution,&nbsp;from version 3.2,&nbsp;all modules are reassembled into one git repository (</span></strong><a href="javascript:var EffectiveNewWin = window.open('https://github.com/waarp/Waarp-All','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();"><strong><span style="font-size:10pt;color:#FF0000;"><ins>Waarp-All</ins></span></strong></a><strong><span style="font-size:10pt;color:#FF0000;">), while the jar can still be created independently. Moreover, a shaded jar for each independent module, containing all dependencies, is now provided.</span></strong></p>
 <ul>
