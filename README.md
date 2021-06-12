@@ -17,7 +17,7 @@ several protocols and to enable dynamic pre or post action on transfer or other 
 Packages
 --------
 
-See unique package in [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://www.github.com/waarp/Waarp-All) [Waarp-All](http://waarp.github.com/Waarp-All)
+See unique package in [![View on GitHub](http://waarp.github.com/Waarp/res/waarp/octocaticon.png "View on GitHub")](https://github.com/waarp/Waarp-All) [Waarp-All](https://github.com/waarp/Waarp-All)
 
  
 Support
