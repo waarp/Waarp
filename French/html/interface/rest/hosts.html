@@ -1,0 +1,1439 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>/hosts &mdash; Documentation Waarp R66 3.6.0-1</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Recherche" href="../../search.html"/>
+    <link rel="top" title="Documentation Waarp R66 3.6.0-1" href="../../index.html"/>
+        <link rel="up" title="REST" href="index.html"/>
+        <link rel="next" title="/hostconfigs" href="hostconfigs.html"/>
+        <link rel="prev" title="/transfers" href="transfers.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../../index.html" class="icon icon-home"> Waarp R66
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation/index.html">Démarage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/installation.html">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/installation.html#pre-requis">Pré-requis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/installation.html#linux">Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/installation.html#avec-les-packages-systemes">Avec les packages systèmes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/installation.html#avec-les-depots-waarp">Avec les dépôts Waarp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/installation.html#avec-les-archives-autonomes">Avec les archives autonomes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/installation.html#windows">Windows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/installation.html#id1">Avec les archives autonomes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/instance-creation.html">Creation d’instance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/instance-creation.html#principe-generaux">Principe généraux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/instance-creation.html#creation-d-une-instance-linux">Création d’une instance Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/instance-creation.html#creation-de-la-configuration">Création de la configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/instance-creation.html#configuration-de-la-base-de-donnees">Configuration de la base de données</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/instance-creation.html#initialisation-de-la-base-de-donnees">Initialisation de la base de données</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/instance-creation.html#demarrage-du-serveur">Démarrage du serveur</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/instance-creation.html#creation-d-une-instance-windows">Création d’une instance Windows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/instance-creation.html#id2">Création de la configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/instance-creation.html#id3">Configuration de la base de données</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/instance-creation.html#id4">Initialisation de la base de données</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/instance-creation.html#id5">Démarrage du serveur</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/miseajour.html">Mise à jour</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/miseajour.html#pre-requis">Pré-requis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/miseajour.html#avec-les-packages">Avec les packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/miseajour.html#avec-les-archives-autonomes">Avec les archives autonomes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/miseajour.html#avec-les-jars">Avec les jars</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/configuration.html">Configuration Simple</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration.html#principes-generaux">Principes Généraux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration.html#client-xml">client.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration.html#server-xml">server.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration.html#details">Détails</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#identity">Identity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#server">Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#network">Network</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#ssl">SSL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#directory">Directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#db">DB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#extendtaskfactory">ExtendTaskFactory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#pushmonitor">PushMonitor</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration.html#logback-client-server-xml">logback-{client,server}.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration.html#authent-xml">authent.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration.html#rules-xml">rules.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration.html#cryptographie">Cryptographie</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#cryptokey">cryptokey</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#keystore">keystore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#truststore">truststore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#adminstore">adminstore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../installation/configuration.html#restsignkey">restsignkey</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/configuration-sample.html">Exemple de Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration-sample.html#client-xml">client.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration-sample.html#server-xml">server.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration-sample.html#authent-xml">authent.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration-sample.html#rule-xml">rule.xml</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/initialisation.html">Initialisation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/initialisation.html#initialiser-l-instance">Initialiser l’instance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/initialisation.html#lancer-l-instance-serveur">Lancer l’instance serveur</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation/configuration-full.html">Configuration Avancée</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration-full.html#client-xml">client.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration-full.html#server-xml">server.xml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../installation/configuration-full.html#optimisation">Optimisation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../admin/index.html">Administration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../admin/upgrade.html">Mise à jour</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../admin/upgrade.html#avec-les-packages">Avec les packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../admin/upgrade.html#avec-les-archives-autonomes">Avec les archives autonomes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../admin/log.html">Gestion des logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../admin/purge.html">Purge de l’historique des transferts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../admin/purge.html#en-ligne-de-commande">En ligne de commande</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../admin/purge.html#avec-l-api-rest">Avec l’API REST</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage/index.html">Utilisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../usage/filewatcher.html">Waarp R66 FileWatcher</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../usage/filewatcher.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage/filewatcher.html#parametrage">Paramétrage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/filewatcher.html#principe">Principe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/filewatcher.html#configuration-minimale">Configuration minimale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/filewatcher.html#configuration-avancee">Configuration avancée</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/filewatcher.html#exemple-complet">Exemple complet</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage/filewatcher.html#lancement">Lancement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/filewatcher.html#linux">Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/filewatcher.html#windows">Windows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage/icap-configuration.html">Configuration de la tâche ICAP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../usage/icap-configuration.html#mode-operatoire-preconise-pour-l-installation-et-la-configuration">Mode opératoire préconisé pour l’installation et la configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/icap-configuration.html#prerequis">Prérequis :</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/icap-configuration.html#etape-1-permettre-la-connexion-et-l-envoi-d-un-fichier-sain-nomme-fichier">Etape 1 : Permettre la connexion et l’envoi d’un fichier sain (nommé fichier)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/icap-configuration.html#etape-2-permettre-la-connexion-et-l-envoi-d-un-fichier-malsain-de-test">Etape 2 : Permettre la connexion et l’envoi d’un fichier malsain de test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/icap-configuration.html#etape-3-configurer-une-regle-pour-utiliser-ces-parametres">Etape 3 : Configurer une règle pour utiliser ces paramètres</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/icap-configuration.html#options-specifiques">Options spécifiques</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage/monitor-exporter.html">Configuration du Monitoring en mode PUSH HTTP(S) REST ou vers un service Elasticsearch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../usage/monitor-exporter.html#description-generale">Description générale</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../usage/monitor-exporter.html#configuration">Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/monitor-exporter.html#derniere-date-de-verification">Dernière date de vérification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/monitor-exporter.html#cas-particulier-des-clusters">Cas particulier des clusters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/monitor-exporter.html#pour-elasticsearch">Pour Elasticsearch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../usage/monitor-exporter.html#exemple-de-configuration-d-un-logstash">Exemple de configuration d’un Logstash</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Interface Web</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../monitoring.html">Monitoring</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../monitoring.html#accueil">Accueil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../monitoring.html#transferts-passes">Transferts passés</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../monitoring.html#statut-serveur">Statut serveur</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/index.html">Administration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../admin/transfert.html">Transfert</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../admin/transfert.html#lister-les-transferts">Lister les transferts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../admin/transfert.html#controller-les-transferts">Controller les transferts</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../admin/host.html">Moniteur</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../admin/host.html#lister-les-hotes">Lister les hôtes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../admin/host.html#creation-d-un-hote">Création d’un hôte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../admin/host.html#mis-a-jour-d-un-hote">Mis à jour d’un hôte</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../admin/rule.html">Règle</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../admin/rule.html#listing-des-regles">Listing des règles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../admin/rule.html#creation-de-regle">Création de règle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../admin/rule.html#mis-a-jour-de-regle">Mis à jour de règle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../admin/task-list.html">Type de tâche</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../admin/system.html">Système</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">REST</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="general.html">Généralités</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="general.html#authentification-des-requetes">Authentification des requêtes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="general.html#signature-des-requetes">Signature des requêtes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="general.html#horodatage-des-requetes">Horodatage des requêtes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">Gestion de l’historique</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="log.html#export-et-purge-de-l-historique">Export et purge de l’historique</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="transfers.html">/transfers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="transfers.html#get-transfers">GET /transfers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="transfers.html#get-transfers-id">GET /transfers/:id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="transfers.html#post-transfers">POST /transfers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="transfers.html#put-transfers-id">PUT /transfers/:id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="transfers.html#delete-transfers-id">DELETE /transfers/:id</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">/hosts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-hosts">GET /hosts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-hosts-id">GET /hosts/:id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-hosts">POST /hosts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#put-hosts-id">PUT /hosts/:id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-hosts-id">DELETE /hosts/:id</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="hostconfigs.html">/hostconfigs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="hostconfigs.html#get-hostconfigs">GET /hostconfigs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hostconfigs.html#get-hostconfigs-id">GET /hostconfigs/:id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hostconfigs.html#put-hostconfigs-id">PUT /hostconfigs/:id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hostconfigs.html#post-hostconfigs">POST /hostconfigs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="hostconfigs.html#delete-hostconfigs-id">DELETE /hostconfigs/:id</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="configurations.html">/configurations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="configurations.html#get-configurations">GET /configurations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configurations.html#get-configurations-id">GET /configurations/:id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configurations.html#post-configurations">POST /configurations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configurations.html#put-configurations-id">PUT /configurations/:id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="configurations.html#delete-configurations-id">DELETE /configurations/:id</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rules.html">/rules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="rules.html#get-rules">GET /rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rules.html#get-rules-id">GET /rules/:id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rules.html#post-rules">POST /rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rules.html#put-rules-id">PUT /rules/:id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rules.html#delete-rules-id">DELETE /rules/:id</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="info.html">/info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="info.html#get-info">GET /info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="info.html#id1">GET /info</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bandwidth.html">/bandwidth</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="bandwidth.html#get-bandwidth">GET /bandwidth</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bandwidth.html#put-bandwidth">PUT /bandwidth</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="control.html">/control</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="control.html#get-control">GET /control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.html#put-control">PUT /control</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.html#post-control">POST /control</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">/server</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="server.html#get-server">GET /server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="server.html#put-server">PUT /server</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="business.html">/business</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="business.html#get-business">GET /business</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../restv2/index.html">REST v2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../restv2/authentication.html">Authentification des requêtes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/authentication.html#authentification-basique">Authentification Basique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/authentication.html#authentification-hmac">Authentification HMAC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../restv2/signature.html">Signature des requêtes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../restv2/transfers/index.html">Gestion des transferts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/transfers/list.html">Lister les transferts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/transfers/create.html">Ajouter un transfert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/transfers/consult.html">Consulter un transfert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/transfers/stop.html">Arrêter un transfert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/transfers/restart.html">Redémarrer un transfert</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/transfers/cancel.html">Annuler un transfert</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../restv2/hosts/index.html">Gestion des hôtes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/hosts/list.html">Lister les hôtes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/hosts/create.html">Ajouter un hôte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/hosts/consult.html">Consulter un hôte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/hosts/modify.html">Modifier un hôte</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/hosts/delete.html">Supprimer un hôte</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../restv2/rules/index.html">Gestion des règles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/rules/list.html">Lister les règles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/rules/create.html">Ajouter une règle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/rules/consult.html">Consulter une règle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/rules/modify.html">Modifier une règle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/rules/delete.html">Supprimer une règle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../restv2/config/index.html">Gestion de la configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/config/initialize.html">Initialiser la configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/config/consult.html">Consulter la configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/config/modify.html">Modifier la configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/config/delete.html">Supprimer la configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../restv2/limits/index.html">Gestion de la bande passante</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/limits/initialize.html">Modifier les limites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/limits/consult.html">Consulter les limites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/limits/modify.html">Modifier les limites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/limits/delete.html">Supprimer les limites</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../restv2/server/index.html">Commandes serveur</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/server/status.html">Consulter le statut du serveur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/server/deactivate.html">Désactiver le serveur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/server/shutdown.html">Éteindre le serveur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/server/reboot.html">Redémarrer le serveur</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/server/logs.html">Exporter les logs de transferts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/server/import_config.html">Importer la configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/server/export_config.html">Exporter la configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../restv2/filemonitors/index.html">Gestion des FileMonitors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../restv2/filemonitors/list.html">Lister les FileMonitors</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../restv2/index.html#documentation-complete">Documentation complète</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli/index.html">Référence des commandes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cli/server.html">Waarp R66 Server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli/server.html#gestion-du-service">Gestion du service</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/server.html#commande-waarp-r66server-start">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66server</span> <span class="pre">start</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/server.html#commande-waarp-r66server-stop">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66server</span> <span class="pre">stop</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/server.html#commande-waarp-r66server-status">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66server</span> <span class="pre">status</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/server.html#commande-waarp-r66server-restart">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66server</span> <span class="pre">restart</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli/server.html#autres-commandes">Autres commandes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/server.html#commande-waarp-r66server-initdb">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66server</span> <span class="pre">initdb</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/server.html#commande-waarp-r66server-loadauth">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66server</span> <span class="pre">loadauth</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/server.html#commande-waarp-r66server-loadrule">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66server</span> <span class="pre">loadrule</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/server.html#commande-waarp-r66server-loadconf">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66server</span> <span class="pre">loadconf</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli/client.html">Waarp R66 Client</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli/client.html#commandes-de-gestion-des-transferts">Commandes de gestion des transferts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/client.html#commande-waarp-r66client-send">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66client</span> <span class="pre">send</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/client.html#commande-waarp-r66client-asend">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66client</span> <span class="pre">asend</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/client.html#commande-waarp-r66client-msend">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66client</span> <span class="pre">msend</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/client.html#commande-waarp-r66client-masend">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66client</span> <span class="pre">masend</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/client.html#commande-waarp-r66client-transfer">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66client</span> <span class="pre">transfer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/client.html#commande-waarp-r66client-getinfo">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66client</span> <span class="pre">getinfo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/client.html#commande-waarp-r66client-gui">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66client</span> <span class="pre">gui</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli/client.html#autres-commandes">Autres commandes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/client.html#commande-waarp-r66client-initdb">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66client</span> <span class="pre">initdb</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/client.html#commande-waarp-r66client-loadconf">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66client</span> <span class="pre">loadconf</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/client.html#commande-waarp-r66client-log-export">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66client</span> <span class="pre">log-export</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/client.html#commande-waarp-r66client-config-export">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66client</span> <span class="pre">config-export</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../cli/client.html#commande-waarp-r66client-icaptest">Commande <code class="docutils literal notranslate"><span class="pre">waarp-r66client</span> <span class="pre">icaptest</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli/raw.html">Commandes Java brutes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli/raw.html#options-additionnelles-pour-waarp-via-la-jvm">Options additionnelles pour Waarp via la JVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli/raw.html#org-waarp-client-message"><code class="docutils literal notranslate"><span class="pre">org.waarp.client.Message</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli/raw.html#org-waarp-client-businessrequest"><code class="docutils literal notranslate"><span class="pre">org.waarp.client.BusinessRequest</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../cli/sample.html">Exemples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../cli/sample.html#serveur">Serveur</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../cli/sample.html#client">Client</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration-details/index.html">Référence des fichiers de configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration-details/server.html"><code class="docutils literal notranslate"><span class="pre">server.xml</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-identity">Section <code class="docutils literal notranslate"><span class="pre">identity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-server">Section <code class="docutils literal notranslate"><span class="pre">server</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-network">Section <code class="docutils literal notranslate"><span class="pre">network</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-ssl">Section <code class="docutils literal notranslate"><span class="pre">ssl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-directory">Section <code class="docutils literal notranslate"><span class="pre">directory</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-limit">Section <code class="docutils literal notranslate"><span class="pre">limit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-db">Section <code class="docutils literal notranslate"><span class="pre">db</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-rest">Section <code class="docutils literal notranslate"><span class="pre">rest</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-business">Section <code class="docutils literal notranslate"><span class="pre">business</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-roles">Section <code class="docutils literal notranslate"><span class="pre">roles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-aliases">Section <code class="docutils literal notranslate"><span class="pre">aliases</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-extendtaskfactory">Section <code class="docutils literal notranslate"><span class="pre">ExtendTaskFactory</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-pushmonitor">Section <code class="docutils literal notranslate"><span class="pre">pushMonitor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#section-extraoptions">Section <code class="docutils literal notranslate"><span class="pre">ExtraOptions</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/server.html#mise-a-jour-automatique-de-la-base-de-donnees">Mise à jour automatique de la base de données</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/server.html#partage-d-une-meme-base-entre-plusieurs-moniteurs-waarp">Partage d’une même base entre plusieurs moniteurs Waarp</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/server.html#exemple-complet">Exemple complet</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration-details/client.html"><code class="docutils literal notranslate"><span class="pre">client.xml</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/client.html#section-identity">Section <code class="docutils literal notranslate"><span class="pre">identity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/client.html#section-client">Section <code class="docutils literal notranslate"><span class="pre">client</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/client.html#section-ssl">Section <code class="docutils literal notranslate"><span class="pre">ssl</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/client.html#section-directory">Section <code class="docutils literal notranslate"><span class="pre">directory</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/client.html#section-limit">Section <code class="docutils literal notranslate"><span class="pre">limit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/client.html#section-db">Section <code class="docutils literal notranslate"><span class="pre">db</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/client.html#section-extendtaskfactory">Section <code class="docutils literal notranslate"><span class="pre">ExtendTaskFactory</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/client.html#exemple-complet">Exemple complet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/client.html#exemple-complet-minimaliste-pour-empreinte-memoire-minimale">Exemple complet minimaliste pour empreinte mémoire minimale</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration-details/snmp.html"><code class="docutils literal notranslate"><span class="pre">snmpconfig.xml</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/snmp.html#section-config">Section <code class="docutils literal notranslate"><span class="pre">config</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/snmp.html#section-targets">Section <code class="docutils literal notranslate"><span class="pre">targets</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/snmp.html#section-securities">Section <code class="docutils literal notranslate"><span class="pre">securities</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/snmp.html#exemple-complet">Exemple complet</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration-details/rule.html"><code class="docutils literal notranslate"><span class="pre">rule.xml</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration-details/detail-tasks.html">Type de Task</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/detail-tasks.html#format-general-d-une-tache">Format général d’une tâche</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/detail-tasks.html#taches-informatives">Tâches informatives</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#log">LOG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#snmp">SNMP</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/detail-tasks.html#taches-agissant-sur-l-emplacement-du-fichier">Tâches agissant sur l’emplacement du fichier</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#copy">COPY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#copyrename">COPYRENAME</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#move">MOVE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#moverename">MOVERENAME</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#linkrename">LINKRENAME</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#rename">RENAME</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#delete">DELETE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#validfilepath">VALIDFILEPATH</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/detail-tasks.html#taches-agissant-sur-le-fichier">Tâches agissant sur le fichier</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#tar">TAR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#zip">ZIP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#compress">COMPRESS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#transcode">TRANSCODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#unzeroed">UNZEROED</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#chkfile">CHKFILE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#chmod">CHMOD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#icap">ICAP</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/detail-tasks.html#taches-executant-un-sous-traitement">Tâches exécutant un sous-traitement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#exec">EXEC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#execmove">EXECMOVE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#execoutput">EXECOUTPUT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#execjava">EXECJAVA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#restart">RESTART</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/detail-tasks.html#taches-executant-un-transfert">Tâches exécutant un transfert</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#transfer">TRANSFER</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#reschedule">RESCHEDULE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#ftp">FTP</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/detail-tasks.html#taches-agissant-sur-l-emplacement-du-fichier-via-un-stockage-s3">Tâches agissant sur l’emplacement du fichier via un stockage S3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#s3get">S3GET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#s3getdelete">S3GETDELETE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#s3delete">S3DELETE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#s3put">S3PUT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../configuration-details/detail-tasks.html#s3putr66delete">S3PUTR66DELETE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../configuration-details/authent.html"><code class="docutils literal notranslate"><span class="pre">authent.xml</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../configuration-details/authent.html#section-entry">Section <code class="docutils literal notranslate"><span class="pre">entry</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bdd/index.html">Référence de la base de données</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../bdd/referentiels.html">Référentiels</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../bdd/referentiels.html#referentiels-communs">Référentiels communs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../bdd/referentiels.html#updatedinfo"><code class="docutils literal notranslate"><span class="pre">updatedinfo</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../bdd/referentiels.html#table-runner">Table <code class="docutils literal notranslate"><span class="pre">runner</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../bdd/referentiels.html#globalstep-et-globallaststep"><code class="docutils literal notranslate"><span class="pre">globalstep</span></code> et <code class="docutils literal notranslate"><span class="pre">globallaststep</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../bdd/referentiels.html#infostatus-et-stepstatus"><code class="docutils literal notranslate"><span class="pre">infostatus</span></code> et <code class="docutils literal notranslate"><span class="pre">stepstatus</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../changes.html">Liste des changements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#non-publie">Non publié</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-6-0-2021-04-03">Waarp R66 3.6.0 (2021-04-03)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#nouvelles-fonctionnalites">Nouvelles fonctionnalités</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#correctifs">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-5-2-2021-03-03">Waarp R66 3.5.2 (2021-03-03)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id1">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-5-1-2020-09-01">Waarp R66 3.5.1 (2020-09-01)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id2">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-5-0-2020-09-01">Waarp R66 3.5.0 (2020-09-01)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id3">Nouvelles fonctionnalités</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id4">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-4-0-2020-07-17">Waarp R66 3.4.0 (2020-07-17)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id5">Nouvelles fonctionnalités</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#evolutions">Évolutions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id6">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-3-4-2020-06-02">Waarp R66 3.3.4 (2020-06-02)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id7">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-3-3-2020-05-07">Waarp R66 3.3.3 (2020-05-07)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id8">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-3-2-2020-04-21">Waarp R66 3.3.2 (2020-04-21)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id9">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-3-1-2020-02-17">Waarp R66 3.3.1 (2020-02-17)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id10">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-3-0-2020-01-18">Waarp R66 3.3.0 (2020-01-18)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#ameliorations">Améliorations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-2-0-2019-10-25">Waarp R66 3.2.0 (2019-10-25)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#securite">Sécurité</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#nouveautes">Nouveautés</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id11">Améliorations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id12">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-1-0-1-non-publiee">Waarp R66 3.1.0-1 (non publiée)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id13">Sécurité</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id14">Nouveautés</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id15">Améliorations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id16">Correctifs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#depreciations">Dépréciations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-0-12-1-2019-05-10">Waarp R66 3.0.12-1 (2019-05-10)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id17">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-0-11-1-2019-02-20">Waarp R66 3.0.11-1 (2019-02-20)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id18">Correctifs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#packaging">Packaging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-0-10-1-2018-10-08">Waarp R66 3.0.10-1 (2018-10-08)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id19">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-0-9-2-2018-07-16">Waarp R66 3.0.9-2 (2018-07-16)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id20">Correctifs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changes.html#waarp-r66-3-0-9-2018-01-08">Waarp R66 3.0.9 (2018-01-08)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changes.html#id21">Correctifs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <ul>
+            <li class="toctree-l1"><a href="../../genindex.html">Index</a></li>
+            </ul>
+        
+        
+      </div>
+
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Waarp R66</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Interface Web</a> &raquo;</li>
+      
+          <li><a href="index.html">REST</a> &raquo;</li>
+      
+    <li>/hosts</li>
+      <li class="wy-breadcrumbs-aside">
+        
+        
+            <a href="../../_sources/interface/rest/hosts.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+
+<div class="admonition warning">
+  <p class="first admonition-title">Avertissement</p>
+  <p class="last">Cette documentation est en cours d'écriture et peut être 
+  incomplète ou imprécise. Nous travaillons à l'améliorer.</p>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="hosts">
+<h1>/hosts<a class="headerlink" href="#hosts" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="get-hosts">
+<h2>GET /hosts<a class="headerlink" href="#get-hosts" title="Lien permanent vers ce titre">¶</a></h2>
+<blockquote>
+<div><p>Retourne tous les hôtes connus du moniteur</p>
+</div></blockquote>
+<div class="section" id="reponse">
+<h3>Réponse<a class="headerlink" href="#reponse" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="section" id="modele">
+<h4>Modèle<a class="headerlink" href="#modele" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Champs</p></th>
+<th class="head"><p>Type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DbConfiguration</p></td>
+<td><p>Array[DbHostAuth]</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>DbHostAuth</em></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 23%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Champs</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ADDRESS</p></td>
+<td><p>string</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PORT</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISSSL</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>HOSTKEY</p></td>
+<td><p>[binary]</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ADMINROLE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISCLIENT</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISACTIVE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISPROXIFIED</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>UPDATEDINFO</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>HOSTID</p></td>
+<td><p>string</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="exemple">
+<h4>Exemple<a class="headerlink" href="#exemple" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span>
+  <span class="nt">&quot;ADDRESS&quot;</span> <span class="p">:</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;PORT&quot;</span> <span class="p">:</span> <span class="s2">&quot;6666&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ISSSL&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&quot;HOSTKEY&quot;</span> <span class="p">:</span> <span class="s2">&quot;VARBINARY&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ADMINROLE&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;ISCLIENT&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;ISACTIVE&quot;</span> <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;ISPROXIFIED&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;UPDATEDINFO&quot;</span> <span class="p">:</span> <span class="s2">&quot;INTEGER&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;HOSTID&quot;</span> <span class="p">:</span> <span class="s2">&quot;server1&quot;</span>
+<span class="p">},]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="parametres">
+<h3>Paramètres<a class="headerlink" href="#parametres" title="Lien permanent vers ce titre">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Desctiption</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>HOSTID</p></td>
+<td><p>string</p></td>
+<td><p>Host name</p></td>
+</tr>
+<tr class="row-odd"><td><p>ADDRESS</p></td>
+<td><p>string</p></td>
+<td><p>Address of this partner</p></td>
+</tr>
+<tr class="row-even"><td><p>ISSSL</p></td>
+<td><p>bool</p></td>
+<td><p>Is Ssl entry</p></td>
+</tr>
+<tr class="row-odd"><td><p>ISACTIVE</p></td>
+<td><p>bool</p></td>
+<td><p>Is Active entry</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="get-hosts-id">
+<h2>GET /hosts/:id<a class="headerlink" href="#get-hosts-id" title="Lien permanent vers ce titre">¶</a></h2>
+<blockquote>
+<div><p>Retourne l’hôte spécifié</p>
+</div></blockquote>
+<div class="section" id="id1">
+<h3>Réponse<a class="headerlink" href="#id1" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="section" id="id2">
+<h4>Modèle<a class="headerlink" href="#id2" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div><p><em>DbHostAuth</em></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 23%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Champs</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ADDRESS</p></td>
+<td><p>string</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PORT</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISSSL</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>HOSTKEY</p></td>
+<td><p>[binary]</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ADMINROLE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISCLIENT</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISACTIVE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISPROXIFIED</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>UPDATEDINFO</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>HOSTID</p></td>
+<td><p>string</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h4>Exemple<a class="headerlink" href="#id3" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;ADDRESS&quot;</span> <span class="p">:</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;PORT&quot;</span> <span class="p">:</span> <span class="s2">&quot;6666&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ISSSL&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&quot;HOSTKEY&quot;</span> <span class="p">:</span> <span class="s2">&quot;VARBINARY&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ADMINROLE&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;ISCLIENT&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;ISACTIVE&quot;</span> <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;ISPROXIFIED&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;UPDATEDINFO&quot;</span> <span class="p">:</span> <span class="s2">&quot;INTEGER&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;HOSTID&quot;</span> <span class="p">:</span> <span class="s2">&quot;server1&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>Paramètres<a class="headerlink" href="#id4" title="Lien permanent vers ce titre">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Desctiption</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>:id</p></td>
+<td><p>string</p></td>
+<td><p>HostId in URI as hosts/id</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="post-hosts">
+<h2>POST /hosts<a class="headerlink" href="#post-hosts" title="Lien permanent vers ce titre">¶</a></h2>
+<blockquote>
+<div><p>Crée un nouvel hôte</p>
+</div></blockquote>
+<div class="section" id="id5">
+<h3>Réponse<a class="headerlink" href="#id5" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="section" id="id6">
+<h4>Modèle<a class="headerlink" href="#id6" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div><p><em>DbHostAuth</em></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 23%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Champs</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ADDRESS</p></td>
+<td><p>string</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PORT</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISSSL</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>HOSTKEY</p></td>
+<td><p>[binary]</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ADMINROLE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISCLIENT</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISACTIVE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISPROXIFIED</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>UPDATEDINFO</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>HOSTID</p></td>
+<td><p>string</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="id7">
+<h4>Exemple<a class="headerlink" href="#id7" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;ADDRESS&quot;</span> <span class="p">:</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;PORT&quot;</span> <span class="p">:</span> <span class="s2">&quot;6666&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ISSSL&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&quot;HOSTKEY&quot;</span> <span class="p">:</span> <span class="s2">&quot;VARBINARY&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ADMINROLE&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;ISCLIENT&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;ISACTIVE&quot;</span> <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;ISPROXIFIED&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;UPDATEDINFO&quot;</span> <span class="p">:</span> <span class="s2">&quot;INTEGER&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;HOSTID&quot;</span> <span class="p">:</span> <span class="s2">&quot;server1&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="id8">
+<h3>Paramètres<a class="headerlink" href="#id8" title="Lien permanent vers ce titre">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Desctiption</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ADDRESS</p></td>
+<td><p>varchar</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PORT</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISSSL</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>HOSTKEY</p></td>
+<td><p>varbinary</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ADMINROLE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISCLIENT</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISACTIVE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISPROXIFIED</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>UPDATEDINFO</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>HOSTID</p></td>
+<td><p>varchar</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="put-hosts-id">
+<h2>PUT /hosts/:id<a class="headerlink" href="#put-hosts-id" title="Lien permanent vers ce titre">¶</a></h2>
+<blockquote>
+<div><p>Modifie l’hôte spécifié</p>
+</div></blockquote>
+<div class="section" id="id9">
+<h3>Réponse<a class="headerlink" href="#id9" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="section" id="id10">
+<h4>Modèle<a class="headerlink" href="#id10" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div><p><em>DbHostAuth</em></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 23%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Champs</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ADDRESS</p></td>
+<td><p>string</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PORT</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISSSL</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>HOSTKEY</p></td>
+<td><p>[binary]</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ADMINROLE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISCLIENT</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISACTIVE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISPROXIFIED</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>UPDATEDINFO</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>HOSTID</p></td>
+<td><p>string</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="id11">
+<h4>Exemple<a class="headerlink" href="#id11" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;ADDRESS&quot;</span> <span class="p">:</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;PORT&quot;</span> <span class="p">:</span> <span class="s2">&quot;6666&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ISSSL&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&quot;HOSTKEY&quot;</span> <span class="p">:</span> <span class="s2">&quot;VARBINARY&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ADMINROLE&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;ISCLIENT&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;ISACTIVE&quot;</span> <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;ISPROXIFIED&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;UPDATEDINFO&quot;</span> <span class="p">:</span> <span class="s2">&quot;INTEGER&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;HOSTID&quot;</span> <span class="p">:</span> <span class="s2">&quot;server1&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="id12">
+<h3>Paramètres<a class="headerlink" href="#id12" title="Lien permanent vers ce titre">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Desctiption</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>HOSTID</p></td>
+<td><p>varchar</p></td>
+<td><p>HostId in URI as hosts/id</p></td>
+</tr>
+<tr class="row-odd"><td><p>ADDRESS</p></td>
+<td><p>varchar</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PORT</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISSSL</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>HOSTKEY</p></td>
+<td><p>varbinary</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ADMINROLE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISCLIENT</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISACTIVE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISPROXIFIED</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>UPDATEDINFO</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="delete-hosts-id">
+<h2>DELETE /hosts/:id<a class="headerlink" href="#delete-hosts-id" title="Lien permanent vers ce titre">¶</a></h2>
+<blockquote>
+<div><p>Supprime l’hôte spécifié</p>
+</div></blockquote>
+<div class="section" id="id13">
+<h3>Réponse<a class="headerlink" href="#id13" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="section" id="id14">
+<h4>Modèle<a class="headerlink" href="#id14" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div><p><em>DbHostAuth</em></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 23%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Champs</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ADDRESS</p></td>
+<td><p>string</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PORT</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISSSL</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>HOSTKEY</p></td>
+<td><p>[binary]</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ADMINROLE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISCLIENT</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>ISACTIVE</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ISPROXIFIED</p></td>
+<td><p>bit</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>UPDATEDINFO</p></td>
+<td><p>integer</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>HOSTID</p></td>
+<td><p>string</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="id15">
+<h4>Exemple<a class="headerlink" href="#id15" title="Lien permanent vers ce titre">¶</a></h4>
+<blockquote>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;ADDRESS&quot;</span> <span class="p">:</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;PORT&quot;</span> <span class="p">:</span> <span class="s2">&quot;6666&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ISSSL&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&quot;HOSTKEY&quot;</span> <span class="p">:</span> <span class="s2">&quot;VARBINARY&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;ADMINROLE&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;ISCLIENT&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;ISACTIVE&quot;</span> <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;ISPROXIFIED&quot;</span> <span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;UPDATEDINFO&quot;</span> <span class="p">:</span> <span class="s2">&quot;INTEGER&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;HOSTID&quot;</span> <span class="p">:</span> <span class="s2">&quot;server1&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="id16">
+<h3>Paramètres<a class="headerlink" href="#id16" title="Lien permanent vers ce titre">¶</a></h3>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètre</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Desctiption</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>:id</p></td>
+<td><p>varchar</p></td>
+<td><p>HostId in URI as hosts/id</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="hostconfigs.html" class="btn btn-neutral float-right" title="/hostconfigs" accesskey="n">Suivant <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="transfers.html" class="btn btn-neutral" title="/transfers" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Précédent</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Waarp SAS.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'3.6.0-1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -85,6 +85,53 @@ $( document ).ready(function(){
 <div style="text-align:left;margin:0px 4px;">
 <h1 class="h1">Release History</h1>
 <div id="Comp2_sys_doctext"><h1 class="h1"><em>History of versions</em></h1>
+<h1 class="h1">August&nbsp;2021: Waarp R66 3.6.0, Waarp Gateway FTP 3.6.0 (Major version) : upgrade is recommended</h1>
+<p><strong><span style="font-size:10pt;color:#FF0000;">From the beginning, each module had its own git repository under Github. In order to facilitate analysis and evolution,&nbsp;from version 3.2,&nbsp;all modules are reassembled into one git repository (</span></strong><a href="javascript:var EffectiveNewWin = window.open('https://github.com/waarp/Waarp-All','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();"><strong><span style="font-size:10pt;color:#FF0000;"><ins>Waarp-All</ins></span></strong></a><strong><span style="font-size:10pt;color:#FF0000;">), while the jar can still be created independently. Moreover, a shaded jar for each independent module, containing all dependencies, is now provided.</span></strong></p>
+<ul>
+<li>
+<h1 class="h1">Waarp R66</h1><ul>
+<li><span style="font-size:10pt;">This versions brings fixes on some regressions and greatly improves stability and performance. The&nbsp;upgrade is recommended.</span>
+</li><li>
+<h1 class="h1"><span style="font-size:12px;font-family:verdana, sans-serif;color:rgb(51,51,51);">Changes</span></h1><ul>
+<li>
+<h3 class="h3"><span style="font-size:10pt;">New functionalities</span></h3>
+<ul>
+<li><span style="font-size:10pt;">Add S3 support both in Read and Write for R66 File</span></li>
+<li><span style="font-size:10pt;">Add support to extend easily tasks through TaskFactory</span></li>
+<li><span style="font-size:10pt;">Add Remote pushing monitoring (using either HTTP(s) REST external interface or Elasticsearch external interface)</span></li>
+<li><span style="font-size:10pt;">Extension of Waarp R66 Web administration UI to allow to send a file directly from web interface (file must be on server)</span></li>
+<li><span style="font-size:10pt;">Extension of Waarp R66 Web administration UI to allow create or modify a transfer</span></li>
+<li><span style="font-size:10pt;">Extension of Waarp R66 Web administration UI to search transfer through "follow Id"</span></li>
+<li><span style="font-size:10pt;">Add support for dynamic compression using ZSTD efficient algorithm</span></li>
+<li><span style="font-size:10pt;">Checking functionnal support up to Java 16 (usig JRE 11 package)</span></li>
+</ul></li>
+<li>
+<h3 class="h3"><span style="font-size:10pt;">Bug fixes</span></h3>
+<ul>
+<li><span style="font-size:10pt;">Improvements on Threads and Memory usage</span></li>
+<li><span style="font-size:10pt;">Increase MAX RUNLIMIT to 50 000, while default still being 1 000</span></li>
+<li><span style="font-size:10pt;">Dependency changed for Oracle in order to depend on official package (but not included due to licence restriction)</span></li>
+<li><span style="font-size:10pt;">Change to Saxon for XML where possible</span></li>
+<li><span style="font-size:10pt;">Improve SQL (index, requests, cache)</span></li>
+<li><span style="font-size:10pt;">Global performances improvements with a benchmark on a 2 cores giving 192 concurrent transfers/s</span></li>
+<li><span style="font-size:10pt;">Contains new Benchmarks and non regression tests (against 3.5.2 version as reference)</span></li>
+<li><span style="font-size:10pt;">Upgrade of external dependencies</span></li>
+</ul></li>
+</ul></li>
+</ul></li>
+
+<li>
+<h1 class="h1">Waarp Gateway FTP</h1><ul>
+<li>
+<h2 class="h2"><span style="font-size:10pt;">Changes</span></h2><ul>
+<li>
+<h2 class="h2"><span style="font-size:10pt;">Bug fixes</span></h2><ul>
+<li><span style="font-size:10pt;">Improve stability for both Client and Server side</span></li>
+<li><span style="font-size:10pt;">Benchmarks show up to 118 transfer/s using Gateway FTP</span></li>
+<li><span style="font-size:10pt;">Upgrade of external dependencies</span></li>
+</ul></li></ul></li>
+</ul></li>
+
 <h1 class="h1">March&nbsp;2021: Waarp R66 3.5.2, Waarp Gateway FTP 3.5.2 (Minor version) : upgrade is recommended</h1>
 <p><strong><span style="font-size:10pt;color:#FF0000;">From the beginning, each module had its own git repository under Github. In order to facilitate analysis and evolution,&nbsp;from version 3.2,&nbsp;all modules are reassembled into one git repository (</span></strong><a href="javascript:var EffectiveNewWin = window.open('https://github.com/waarp/Waarp-All','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();"><strong><span style="font-size:10pt;color:#FF0000;"><ins>Waarp-All</ins></span></strong></a><strong><span style="font-size:10pt;color:#FF0000;">), while the jar can still be created independently. Moreover, a shaded jar for each independent module, containing all dependencies, is now provided.</span></strong></p>
 <ul>

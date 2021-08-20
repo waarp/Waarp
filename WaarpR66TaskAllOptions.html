@@ -86,6 +86,12 @@ $( document ).ready(function(){
 <a class="btn btn-primary btn-xs" data-toggle="collapse" href="#RENAME" aria-expanded="false" aria-controls="RENAME" title="rename the file (only virtual file, not real one)">RENAME</a>
 <a class="btn btn-primary btn-xs" data-toggle="collapse" href="#DELETE" aria-expanded="false" aria-controls="DELETE" title="delete current file">DELETE</a>
 <a class="btn btn-primary btn-xs" data-toggle="collapse" href="#VALIDFILEPATH" aria-expanded="false" aria-controls="VALIDFILEPATH" title="validate the existence of the current file">VALIDFILEPATH</a>
+<a class="btn btn-primary btn-xs" data-toggle="collapse" href="#ICAP" aria-expanded="false" aria-controls="ICAP" title="Validate the current file against an ICAP server (antivirus)">ICAP</a>
+<a class="btn btn-primary btn-xs" data-toggle="collapse" href="#S3GET" aria-expanded="false" aria-controls="S3GET" title="Replace the current file using remote S3 file">S3GET</a>
+<a class="btn btn-primary btn-xs" data-toggle="collapse" href="#S3DELETE" aria-expanded="false" aria-controls="S3DELETE" title="Delete a remote S3 file">S3DELETE</a>
+<a class="btn btn-primary btn-xs" data-toggle="collapse" href="#S3PUT" aria-expanded="false" aria-controls="S3PUT" title="Put the current file into remote S3">S3PUT</a>
+<a class="btn btn-primary btn-xs" data-toggle="collapse" href="#S3PUTR66DELETE" aria-expanded="false" aria-controls="S3PUTR66DELETE" title="Put the current file into remote S3 and delete current file">S3PUTR66DELETE</a>
+<a class="btn btn-primary btn-xs" data-toggle="collapse" href="#S3GETDELETE" aria-expanded="false" aria-controls="S3GETDELETE" title="Replace the current file using remote S3 file and delete the remote S3 file">S3GETDELETE</a>
 </div><div class="col-md-2"><label>Actions to act on the file</label><br>
 <a class="btn btn-primary btn-xs" data-toggle="collapse" href="#TRANSCODE" aria-expanded="false" aria-controls="TRANSCODE" title="transcode the file to a new coding">TRANSCODE</a>
 <a class="btn btn-primary btn-xs" data-toggle="collapse" href="#TAR" aria-expanded="false" aria-controls="TAR" title="tar a set of files / untar a file to a directory">TAR</a>
@@ -354,6 +360,204 @@ Note: if the file cannot be deleted, only a warning will be thrown.</p>
 </task>
 </xmp></p>
 <p>This will check if the current file is under one of the directories specified, here /path1 or /path2. And it will log out the result of this check.</p>
+  </div>
+</div>
+
+<div class="collapse" id="ICAP">
+  <div class="well">
+<h4>ICAP</h4>
+<p>Test if the current file contains no virus against an ICAP server.</p>
+<ul><li>The paths arguments are obtained from Path transformed according to above dynamic replacements, it is then used as a String Format where Transfer Information is used as input (String.format(Path,Info)).</li>
+<li>The result should be usig the following format:
+<ul>
+<li>-file filename </li>
+<li>-to hostname </li>
+<li>[-port port, default 1344] </li>
+<li>-service name | -model name </li>
+<li>[-previewSize size, default none] </li>
+<li>[-blockSize size, default 8192] </li>
+<li>[-receiveSize size, default 65536] </li>
+<li>[-maxSize size, default MAX_INTEGER] </li>
+<li>[-timeout in_ms, default equiv to 10 min] </li>
+<li>[-keyPreview key -stringPreview string, default none] </li>
+<li>[-key204 key -string204 string, default none] </li>
+<li>[-key200 key -string200 string, default none] </li>
+<li>[-stringHttp string, default none] </li>
+<li>[-logger DEBUG|INFO|WARN|ERROR, default none] </li>
+<li>[-errorMove path | -errorDelete | -sendOnError] </li>
+<li>[-ignoreNetworkError] </li>
+<li>[-ignoreTooBigFileError] </li>
+</ul
+Then if r66send command in case of -sendOnError option is specified, the
+very last option of ICAP must be "--" then followed by usual r66send
+options.<br>
+Format is like r66send command in any order except "-info" which should be
+the last item, and "-copyinfo"
+will copy at first place the original transfer information as the new one,
+while still having the
+possibility to add new informations through "-info":<br>
+"-file filepath -to requestedHost -rule rule [-md5] [-start yyyyMMddHHmmss or
+-delay (delay or +delay)] [-nofollow) [-copyinfo] [-info information]" 
+</li>
+<li>The Delay is ignored</li>
+<li>The file is not marked as moved.</li>
+</ul>
+<p>Example:
+<xmp><task>
+  <type>ICAP</type>
+  <path>-file #TRUEFULLPATH# -to hostname -service name -logger WARN -errorDelete -ignoreNetworkError<br>
+</path>
+  <delay>1</delay>
+</task>
+</xmp></p>
+<p>This will check the current file against the specified ICAP server. If there is an issue (virus), the file will be deleted. If the remote ICAP
+server is not reachable, the network error will be ignored and the file considered as safe however.</p>
+  </div>
+</div>
+
+<div class="collapse" id="S3GET">
+  <div class="well">
+<h4>S3GET</h4>
+<p>Get a remote S3 file that can be used as new current file based on the Path and Transfer Information arguments.</p>
+<ul><li>The arguments are obtained from Path transformed according to above dynamic replacements, it is then used as a String Format where Transfer Information is used as input (String.format(Path,Info)).</li>
+<li>The arguments are:
+<ul>
+<li>-URL url to specify the remote S3 url</li>
+<li>-accessKey access Key for S3 service </li>
+<li>-secretKey secret Key for S3 service </li>
+<li>-bucketName bucket Name where to retrieve the object </li>
+<li>-sourceName source Name from the bucket to select the final Object </li>
+<li>-file final File path (absolute or relative from IN path) </li>
+<li>[-getTags [* or list of tag names comma separated without space]]" </li>
+</ul>
+</li>
+<li>Delay is ignored.</li>
+<li>The file is marked as moved (renamed).</li>
+</ul>
+<p>Example:
+<xmp><task>
+  <type>S3GET</type>
+  <path>-URL https://s3.service/ -accessKey access -secretKey secret -bucketName bucket -sourceName source -file /destPath</path>
+  <delay>0</delay>
+</task>
+</xmp></p>
+<p>This will get the remote designated file using S3 service and store it within /destPath.</p>
+  </div>
+</div>
+
+<div class="collapse" id="S3GETDELETE">
+  <div class="well">
+<h4>S3GETDELETE</h4>
+<p>Get a remote S3 file that can be used as new current file based on the Path and Transfer Information arguments and delete remote file.</p>
+<ul><li>The arguments are obtained from Path transformed according to above dynamic replacements, it is then used as a String Format where Transfer Information is used as input (String.format(Path,Info)).</li>
+<li>The arguments are:
+<ul>
+<li>-URL url to specify the remote S3 url</li>
+<li>-accessKey access Key for S3 service </li>
+<li>-secretKey secret Key for S3 service </li>
+<li>-bucketName bucket Name where to retrieve the object </li>
+<li>-sourceName source Name from the bucket to select the final Object </li>
+<li>-file final File path (absolute or relative from IN path) </li>
+<li>[-getTags [* or list of tag names comma separated without space]]</li>
+</ul>
+</li>
+<li>Delay is ignored.</li>
+<li>The file is marked as moved (renamed).</li>
+</ul>
+<p>Example:
+<xmp><task>
+  <type>S3GETDELETE</type>
+  <path>-URL https://s3.service/ -accessKey access -secretKey secret -bucketName bucket -sourceName source -file /destPath</path>
+  <delay>0</delay>
+</task>
+</xmp></p>
+<p>This will get the remote designated file using S3 service and store it within /destPath, then delete the remote S3 object file.</p>
+  </div>
+</div>
+
+<div class="collapse" id="S3DELETE">
+  <div class="well">
+<h4>S3DELETE</h4>
+<p>Delete a remote S3 file based on the Path and Transfer Information arguments.</p>
+<ul><li>The arguments are obtained from Path transformed according to above dynamic replacements, it is then used as a String Format where Transfer Information is used as input (String.format(Path,Info)).</li>
+<li>The arguments are:
+<ul>
+<li>-URL url to specify the remote S3 url</li>
+<li>-accessKey access Key for S3 service </li>
+<li>-secretKey secret Key for S3 service </li>
+<li>-bucketName bucket Name where to retrieve the object </li>
+<li>-sourceName source Name from the bucket to select the final Object </li>
+</ul>
+</li>
+<li>Delay is ignored.</li>
+<li>The file is untouched.</li>
+</ul>
+<p>Example:
+<xmp><task>
+  <type>S3DELETE</type>
+  <path>-URL https://s3.service/ -accessKey access -secretKey secret -bucketName bucket -sourceName source</path>
+  <delay>0</delay>
+</task>
+</xmp></p>
+<p>This will delete the remote designated file using S3 service.</p>
+  </div>
+</div>
+
+<div class="collapse" id="S3PUT">
+  <div class="well">
+<h4>S3PUT</h4>
+<p>Put the current file as a remote S3 file, based on the Path and Transfer Information arguments.</p>
+<ul><li>The arguments are obtained from Path transformed according to above dynamic replacements, it is then used as a String Format where Transfer Information is used as input (String.format(Path,Info)).</li>
+<li>The arguments are:
+<ul>
+<li>-URL url to specify the remote S3 url</li>
+<li>-accessKey access Key for S3 service </li>
+<li>-secretKey secret Key for S3 service </li>
+<li>-bucketName bucket Name where to retrieve the object </li>
+<li>-targetName source Name from the bucket to select the final Object</li>
+<li>[-setTags 'name:value,...' without space]</li>
+</ul>
+</li>
+<li>Delay is ignored.</li>
+<li>The file is untouched.</li>
+</ul>
+<p>Example:
+<xmp><task>
+  <type>S3PUT</type>
+  <path>-URL https://s3.service/ -accessKey access -secretKey secret -bucketName bucket -targetName target</path>
+  <delay>0</delay>
+</task>
+</xmp></p>
+<p>This will put the current file as a new remote file using S3 service.</p>
+  </div>
+</div>
+
+<div class="collapse" id="S3PUTR66DELETE">
+  <div class="well">
+<h4>S3PUTR66DELETE</h4>
+<p>Put the current file as a remote S3 file, and delete the current file, based on the Path and Transfer Information arguments.</p>
+<ul><li>The arguments are obtained from Path transformed according to above dynamic replacements, it is then used as a String Format where Transfer Information is used as input (String.format(Path,Info)).</li>
+<li>The arguments are:
+<ul>
+<li>-URL url to specify the remote S3 url</li>
+<li>-accessKey access Key for S3 service </li>
+<li>-secretKey secret Key for S3 service </li>
+<li>-bucketName bucket Name where to retrieve the object </li>
+<li>-targetName source Name from the bucket to select the final Object</li>
+<li>[-setTags 'name:value,...' without space]</li>
+</ul>
+</li>
+<li>Delay is ignored.</li>
+<li>The file is deleted.</li>
+</ul>
+<p>Example:
+<xmp><task>
+  <type>S3PUTR66DELETE</type>
+  <path>-URL https://s3.service/ -accessKey access -secretKey secret -bucketName bucket -targetName target</path>
+  <delay>0</delay>
+</task>
+</xmp></p>
+<p>This will put the current file as a new remote file using S3 service, then deleting the current file.</p>
   </div>
 </div>
 
