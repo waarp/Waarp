@@ -96,6 +96,7 @@ $( document ).ready(function(){
 <a class="btn btn-primary btn-xs" data-toggle="collapse" href="#TRANSCODE" aria-expanded="false" aria-controls="TRANSCODE" title="transcode the file to a new coding">TRANSCODE</a>
 <a class="btn btn-primary btn-xs" data-toggle="collapse" href="#TAR" aria-expanded="false" aria-controls="TAR" title="tar a set of files / untar a file to a directory">TAR</a>
 <a class="btn btn-primary btn-xs" data-toggle="collapse" href="#ZIP" aria-expanded="false" aria-controls="ZIP" title="zip a set of files / unzip a file to a directory">ZIP</a>
+<a class="btn btn-primary btn-xs" data-toggle="collapse" href="#COMPRESS" aria-expanded="false" aria-controls="COMPRESS" title="Compress a file / Decompress a file using ZSTD algorithm">COMPRESS</a>
 <a class="btn btn-primary btn-xs" data-toggle="collapse" href="#UNZEROED" aria-expanded="false" aria-controls="UNZEROED" title="check if the file size is zero (0), and if so add one blank character to it to allow transfer">UNZEROED</a>
 <a class="btn btn-primary btn-xs" data-toggle="collapse" href="#CHKFILE" aria-expanded="false" aria-controls="CHKFILE" title="check the File size according to limit specified or to available space under Working and Receive directories">CHKFILE</a>
 <a class="btn btn-primary btn-xs" data-toggle="collapse" href="#CHMOD" aria-expanded="false" aria-controls="CHMOD" title="change the access mode of the file (Read, Write, Execute) for User or All (Java limitation)">CHMOD</a>
@@ -163,7 +164,8 @@ $(this).toggleClass('btn-warning').toggleClass('btn-primary');
 <li><label>#ERRORCODE#</label> : The current error code or '-' (Unknown) if no error occurs until this call</li>
 <li><label>#ERRORSTRCODE#</label> : The current error code message or "Unknown" if no error occurs until this call</li>
 <li><label>#NOWAIT#</label> : Used by Exec type task to specify that the command will be executed in asynchronous mode, without waiting any result from it</li>
-<li><label>#LOCALEXEC#</label> : Used by Exec type task to specify that the command will be executed not locally (within the JVM) but outside using a LocalExec Daemon (specified in the global configuration)</li></ul>
+<li><label>#LOCALEXEC#</label> : Used by Exec type task to specify that the command will be executed not locally (within the JVM) but outside using a LocalExec Daemon (specified in the global configuration)</li>
+</ul>
 <p>For instance, a Path in rule defined as</p>
 <xmp>   some #DATE# some2 #TRANSFERID# some3 #REMOTEHOST# some4</xmp>
 <p>It will give:</p>
@@ -672,6 +674,26 @@ It could also be used as a test of transcode outside R66:
 </task>
 </xmp></p>
 <p>This will launch a "zip/unzip" command of zip file /path/sourcetarfile into directory /path/targetdirectory.</p>
+  </div>
+</div>
+
+<div class="collapse" id="COMPRESS">
+  <div class="well">
+<h4>COMPRESS</h4>
+<p>Compress/Decompress the current file from the argument as source and destination will be as same filename with suffix ".zstd" / ".unzstd" accordingly.</p>
+<ul>
+<li>Delay of 0 = <code>COMPRESS using ZTSD algorithm from sourceFile to sourceFile.zstd</code></li>
+<li>Delay of 1 = <code>DECOMPRESS using ZTSD algorithm from sourceFile to sourceFile.unzstd</code></li>
+<li>The current file is deleted and replaced by the new one if OK.</li>
+</ul>
+<p>Example:
+<xmp><task>
+  <type>COMPRESS</type>
+  <path>ignored</path>
+  <delay>1</delay>
+</task>
+</xmp></p>
+<p>This will launch a "uncompress" command of ZSTD file /path/sourcezstdFile to /path/sourcezstdFile.unzstd .</p>
   </div>
 </div>
 
