@@ -114,23 +114,21 @@ $( document ).ready(function(){
 <hr />
 
 <h1 class="h1"><em>Last release</em></h1>
-<h1 class="h1">October&nbsp;2021: Waarp R66 3.6.1, Waarp Gateway FTP 3.6.1 (Minor version) : due to performance increase, upgrade is recommended</h1>
+<h1 class="h1">July&nbsp;2022: Waarp R66 3.6.2, Waarp Gateway FTP 3.6.2 (Minor version) : fix several issues, upgrade is recommended</h1>
 <p><strong><span style="font-size:10pt;color:#FF0000;">From the beginning, each module had its own git repository under Github. In order to facilitate analysis and evolution,&nbsp;from version 3.2,&nbsp;all modules are reassembled into one git repository (</span></strong><a href="javascript:var EffectiveNewWin = window.open('https://github.com/waarp/Waarp-All','_blank','directories,location,menubar,resizable,scrollbars,status,toolbar'); EffectiveNewWin.focus();"><strong><span style="font-size:10pt;color:#FF0000;"><ins>Waarp-All</ins></span></strong></a><strong><span style="font-size:10pt;color:#FF0000;">), while the jar can still be created independently. Moreover, a shaded jar for each independent module, containing all dependencies, is now provided.</span></strong></p>
 <ul>
 <li>
 <h1 class="h1">Waarp R66</h1><ul>
-<li><span style="font-size:10pt;">This versions brings fixes and greatly improves stability and performance. The&nbsp;upgrade is recommended.</span>
+<li><span style="font-size:10pt;">This versions brings fixes. The&nbsp;upgrade is recommended.</span>
 </li><li>
 <h1 class="h1"><span style="font-size:12px;font-family:verdana, sans-serif;color:rgb(51,51,51);">Changes</span></h1><ul>
 <li>
 <h3 class="h3"><span style="font-size:10pt;">Bug fixes</span></h3>
 <ul>
-<li><span style="font-size:10pt;">Improvements on network mumtiplexing, limiting re-authentication since already done once</span></li>
-<li><span style="font-size:10pt;">Transfer Special Id improvement is done on Database side (startup of sequence is at current epoch time such that there is no more issue on resinstalling or resetting the database). Also another option is proposed, using the -Dopenr66.transfer.guid=1 option, to replace SQL sequence by a GUID, but at the cost of loosing the sequence rendering, useful for human readability. Default is still SQL Sequence and recommended.</span></li>
-<li><span style="font-size:10pt;">Database improvements (MariaDB support for SEQUENCE, index re-optimized)</span></li>
-<li><span style="font-size:10pt;">Final paths for IN, OUT, ... are checked against root of installation, to prevent chroot issue.</span></li>
-<li><span style="font-size:10pt;">Improvements of tests not always passing due to CPU high load on the CI/CD host</span></li>
-<li><span style="font-size:10pt;">Global performances improvements with a benchmark on a 2 cores giving 300 concurrent transfers/s</span></li>
+<li><span style="font-size:10pt;">File Watcher option fixed (taskrunnernodb)</span></li>
+<li><span style="font-size:10pt;">Database issues fix</span></li>
+<li><span style="font-size:10pt;">Fix testing (web)</span></li>
+<li><span style="font-size:10pt;">Fix Elasticsearch client</span></li>
 <li><span style="font-size:10pt;">Upgrade of external dependencies</span></li>
 </ul></li>
 </ul></li>
@@ -142,11 +140,11 @@ $( document ).ready(function(){
 <h2 class="h2"><span style="font-size:10pt;">Changes</span></h2><ul>
 <li>
 <h2 class="h2"><span style="font-size:10pt;">Bug fixes</span></h2><ul>
-<li><span style="font-size:10pt;">Benchmarks show up to 290 transfer/s using Gateway FTP</span></li>
+<li><span style="font-size:10pt;">Support command OPTS before Login</span></li>
+<li><span style="font-size:10pt;">Allow to specify Cipher and Protocols</span></li>
 <li><span style="font-size:10pt;">Upgrade of external dependencies</span></li>
 </ul></li></ul></li>
 </ul></li>
-
 </ul>
 
 <p>&nbsp;</p></div>
